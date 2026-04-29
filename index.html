@@ -49,6 +49,8 @@
         .btn-back { background: linear-gradient(135deg, #2563eb, #1e3a8a); box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2); }
         .btn-lay { background: linear-gradient(135deg, #e11d48, #9f1239); box-shadow: 0 4px 15px rgba(225, 29, 72, 0.2); }
         .btn-cashout { background: linear-gradient(135deg, #f59e0b, #b45309); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); }
+        
+        .btn-suspended { background: linear-gradient(135deg, #4b5563, #1f2937); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); opacity: 0.7; cursor: not-allowed; }
 
         .text-neon-green { color: #00ff80; text-shadow: 0 0 12px rgba(0, 255, 128, 0.4); }
         .bg-neon-green { background-color: #00ff80; }
@@ -73,7 +75,7 @@
         .flash-red { animation: flashR 0.5s ease-out; }
         @keyframes flashR { 0% { background-color: rgba(225,29,72,0.3); } 100% { background-color: transparent; } }
 
-        .flash-goal { animation: flashGoalAnim 1.5s ease-out; }
+        .flash-goal { animation: flashGoalAnim 2.5s ease-out; }
         @keyframes flashGoalAnim { 
             0% { background-color: rgba(255, 215, 0, 0.6); box-shadow: 0 0 50px rgba(255, 215, 0, 0.8); } 
             100% { background-color: transparent; box-shadow: 0 0 0px transparent; } 
@@ -98,23 +100,6 @@
 
         .progress-bar-fill { transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        @keyframes gentlePulse {
-            0% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.1); border-color: rgba(0, 255, 128, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(0, 255, 128, 0.4); border-color: rgba(0, 255, 128, 0.7); }
-            100% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.1); border-color: rgba(0, 255, 128, 0.3); }
-        }
-        .is-playing .audio-module {
-            animation: gentlePulse 4s ease-in-out infinite;
-            background-color: rgba(0, 40, 20, 0.6);
-        }
-        
-        .audio-pulse-indicator {
-            width: 8px; height: 8px; border-radius: 50%; background-color: #4b5563; transition: all 0.3s ease;
-        }
-        .is-playing .audio-pulse-indicator {
-            background-color: #00ff80; box-shadow: 0 0 10px #00ff80; transform: scale(1.5);
-        }
-
         @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
         @keyframes scannerBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
@@ -130,25 +115,27 @@
         }
 
         /* --- STILI MODERN E-BOOK --- */
-        .modern-ebook {
-            background-color: #0d1117;
-            color: #e5e7eb;
-        }
+        .modern-ebook { background-color: #0d1117; color: #e5e7eb; }
         .modern-ebook-gradient-text {
             background: linear-gradient(to right, #00ff80, #24A1DE);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
 
         /* Joystick Glow Pulsante */
         @keyframes joystickNeon {
-            0% { filter: drop-shadow(0 0 5px rgba(0, 255, 128, 0.4)); transform: scale(1); }
-            50% { filter: drop-shadow(0 0 25px rgba(0, 255, 128, 0.9)); transform: scale(1.15); }
-            100% { filter: drop-shadow(0 0 5px rgba(0, 255, 128, 0.4)); transform: scale(1); }
+            0% { filter: drop-shadow(0 0 10px rgba(0, 255, 128, 0.5)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 35px rgba(0, 255, 128, 1)); transform: scale(1.15); }
+            100% { filter: drop-shadow(0 0 10px rgba(0, 255, 128, 0.5)); transform: scale(1); }
         }
         .joystick-pulse {
             animation: joystickNeon 2.5s ease-in-out infinite;
-            display: inline-block;
+            display: inline-block; cursor: pointer; text-decoration: none;
+        }
+        
+        /* Stili Cartellini Match */
+        .red-card {
+            width: 8px; height: 12px; background-color: #ef4444; border-radius: 2px;
+            box-shadow: 0 0 5px rgba(239, 68, 68, 0.5); display: inline-block;
         }
     </style>
 </head>
@@ -187,47 +174,10 @@
             <p class="text-gray-400 max-w-2xl mx-auto text-xs sm:text-sm font-bold leading-relaxed mt-2" data-i18n="lessonDesc">Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.</p>
         </div>
 
-        <!-- FASE 1: PREPARAZIONE ZEN FOCUS -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-6 relative overflow-hidden transform-gpu max-w-2xl mx-auto flex flex-col items-center justify-center text-center">
-            <div class="absolute -top-20 -right-20 w-48 h-48 bg-[#00ff80] opacity-5 blur-[80px] rounded-full pointer-events-none"></div>
-            <h3 class="font-black text-sm sm:text-base mb-4 text-white uppercase tracking-widest text-[#00ff80]">
-                <span data-i18n="prepTitle">Preparazione (Deep Focus)</span>
-            </h3>
-            
-            <div id="audio-container" class="w-full bg-black/60 p-4 sm:p-5 rounded-2xl border border-gray-700/50 shadow-inner relative overflow-hidden transition-all duration-700 audio-module touch-manipulation">
-                <audio id="binaural-audio" src="https://actions.google.com/sounds/v1/water/ocean_volume_swells.ogg" preload="none" loop crossorigin="anonymous"></audio>
-                
-                <div class="flex items-center justify-between z-10 relative">
-                    <div class="flex items-center gap-3">
-                        <button id="audio-play-btn" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full bg-[#00ff80] text-black font-black flex items-center justify-center hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,128,0.2)]">
-                            <span class="text-lg sm:text-xl pl-1">▶</span>
-                        </button>
-                        <button id="audio-stop-btn" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full bg-gray-700 text-white font-black flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-md hidden">
-                            <span class="text-lg sm:text-xl">⏹</span>
-                        </button>
-                        <div class="text-left flex flex-col justify-center ml-2 hidden sm:flex">
-                            <span class="text-[10px] sm:text-xs font-bold text-white tracking-widest uppercase" data-i18n="audioLabel">14Hz BINAURAL FOCUS</span>
-                            <span id="audio-status-text" class="text-[9px] sm:text-[10px] text-gray-500 font-mono mt-0.5">Tocca per attivare</span>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center gap-4">
-                        <div class="audio-pulse-indicator"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="volume-control-wrapper" class="w-full max-w-xs mt-4 opacity-0 transition-opacity duration-500 h-0 overflow-hidden flex items-center gap-2 px-2">
-                 <span class="text-xs text-gray-500">🔈</span>
-                 <input type="range" id="audio-volume" class="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#00ff80]" value="50" min="0" max="100">
-                 <span class="text-xs text-gray-500">🔊</span>
-            </div>
-        </section>
-
-        <!-- FASE 2: CORE -->
-        <section class="glass-panel rounded-2xl p-3 sm:p-6" style="content-visibility: auto; contain-intrinsic-size: 500px;">
+        <!-- FASE 1: CORE (Precedentemente Fase 2) -->
+        <section class="glass-panel rounded-2xl p-3 sm:p-6 mt-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
             <h3 class="font-black text-base sm:text-lg mb-3 sm:mb-4 ml-2 sm:ml-0 flex items-center text-white uppercase tracking-wider">
-                <span class="text-xl sm:text-2xl mr-2 sm:mr-3">🎓</span> <span data-i18n="coreTitle">Fase 2: Theorum & Praxis</span>
+                <span class="text-xl sm:text-2xl mr-2 sm:mr-3">🎓</span> <span data-i18n="coreTitle">Fase 1: Theorum & Praxis</span>
             </h3>
             
             <div id="video-wrapper" class="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-gray-800 shadow-2xl ring-1 ring-white/5">
@@ -286,7 +236,7 @@
             </div>
         </section>
 
-        <!-- FASE 3: L'ARENA (SIMULATORE GAMIFICATO E REALISTICO) -->
+        <!-- FASE 2: L'ARENA (SIMULATORE GAMIFICATO E REALISTICO) -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8" style="content-visibility: auto; contain-intrinsic-size: 800px;">
             
             <!-- QUIZ -->
@@ -309,33 +259,53 @@
                 </div>
             </div>
 
-            <!-- SIMULATORE TRADING ZERO ALLUCINAZIONI -->
+            <!-- SIMULATORE TRADING STOCASTICO ZERO ALLUCINAZIONI -->
             <div class="glass-panel rounded-2xl p-4 sm:p-6 lg:col-span-2" id="trading-module">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 border-b border-gray-800 pb-3 sm:pb-4 gap-3 sm:gap-4">
                     <div>
                         <h3 class="font-black text-base sm:text-lg text-white flex items-center uppercase tracking-wider">
                             <span class="text-xl sm:text-2xl mr-2 sm:mr-3">📈</span> <span data-i18n="simTitle">Live Scalping Simulator</span>
                         </h3>
-                        <p class="text-[9px] sm:text-[10px] text-[#00ff80] mt-1 sm:mt-1.5 font-bold uppercase tracking-[0.2em]" data-i18n="simScenario">Scenario: Pareggio 0-0 al 75'. Strategia: Lay The Draw.</p>
+                        <p class="text-[9px] sm:text-[10px] text-[#00ff80] mt-1 sm:mt-1.5 font-bold uppercase tracking-[0.2em]" data-i18n="simScenario">Strategia: Lay The Draw dall'inizio alla fine.</p>
                     </div>
-                    <!-- OROLOGIO PARTITA -->
-                    <div class="flex gap-2">
-                        <div class="flex items-center gap-1.5 sm:gap-2 bg-gray-900 border border-gray-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md shadow-inner">
-                            <span class="text-[10px] sm:text-xs">⏱</span>
-                            <span id="match-timer" class="text-[10px] sm:text-[13px] font-mono font-black text-white tracking-widest w-[45px] sm:w-[50px] text-center">75:00</span>
+                    <div class="flex items-center gap-2 bg-gray-950 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-gray-800 shadow-inner shrink-0 self-end sm:self-auto">
+                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 pulse-live" id="market-status-dot"></div>
+                        <span id="market-status-text" class="text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 tracking-[0.2em] uppercase" data-i18n="liveMarket">Market Live</span>
+                    </div>
+                </div>
+
+                <!-- SCOREBOARD DINAMICO STILE TELEVISIVO -->
+                <div class="flex flex-col mb-4 bg-gray-900/80 rounded-xl border border-gray-700 p-4 shadow-inner relative overflow-hidden">
+                    <div id="match-overlay" class="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-[2px] flex-col transition-all duration-300">
+                        <span class="text-xl sm:text-2xl font-black text-white uppercase tracking-widest mb-3 text-center px-4">Inizia Simulazione Match</span>
+                        <button onclick="TradingEngine.startMatch()" class="bg-[#00ff80] text-black font-black px-6 py-2 rounded-full shadow-[0_0_15px_rgba(0,255,128,0.4)] hover:bg-white transition-all active:scale-95 text-xs sm:text-sm uppercase tracking-wider touch-manipulation">AVVIA KICK-OFF</button>
+                    </div>
+                    
+                    <div class="flex justify-between items-center w-full relative z-10">
+                        <div class="flex items-center gap-2 sm:gap-3 w-1/3 justify-end">
+                            <div id="juv-reds" class="flex gap-1"></div>
+                            <span class="font-black text-lg sm:text-2xl text-white tracking-widest">JUV</span>
                         </div>
-                        <div class="flex items-center gap-1.5 sm:gap-2 bg-gray-950 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-gray-800 shadow-inner shrink-0">
-                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 pulse-live" id="market-status-dot"></div>
-                            <span id="market-status-text" class="text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 tracking-[0.2em] uppercase" data-i18n="liveMarket">Market Live</span>
+                        <div class="flex flex-col items-center justify-center w-1/3">
+                            <div class="bg-black border border-gray-700 px-4 py-1 rounded shadow-inner mb-1">
+                                <span id="match-score" class="font-black text-2xl sm:text-4xl text-[#00ff80] tracking-tighter">0 - 0</span>
+                            </div>
+                            <span id="match-timer" class="text-[10px] sm:text-xs font-mono font-bold text-gray-400">00:00</span>
                         </div>
+                        <div class="flex items-center gap-2 sm:gap-3 w-1/3 justify-start">
+                            <span class="font-black text-lg sm:text-2xl text-white tracking-widest">INT</span>
+                            <div id="int-reds" class="flex gap-1"></div>
+                        </div>
+                    </div>
+                    <div class="w-full text-center mt-3 relative z-10">
+                        <span id="match-event-ticker" class="inline-block text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 uppercase tracking-widest bg-gray-800 px-3 py-1 rounded-full border border-gray-600 transition-colors duration-300">IN ATTESA DEL FISCHIO D'INIZIO</span>
                     </div>
                 </div>
                 
                 <!-- Chart Container -->
                 <div class="relative w-full h-40 sm:h-48 bg-[#0a0f0a] rounded-xl border border-gray-800 mb-4 sm:mb-5 p-1 sm:p-2 overflow-hidden shadow-inner ring-1 ring-white/5" id="chart-container">
-                    <div id="goal-overlay" class="absolute inset-0 z-20 flex items-center justify-center bg-yellow-500/20 backdrop-blur-[2px] hidden flex-col">
+                    <div id="goal-flash-overlay" class="absolute inset-0 z-20 flex items-center justify-center bg-yellow-500/20 backdrop-blur-[2px] hidden flex-col">
                         <span class="text-4xl sm:text-6xl font-black text-yellow-400 drop-shadow-[0_0_20px_rgba(255,215,0,0.8)] animate-bounce">⚽ GOAL!</span>
-                        <span class="text-white font-bold bg-black/80 px-3 py-1 rounded mt-2 text-xs uppercase tracking-widest" id="goal-time-display"></span>
                     </div>
                     <div id="live-pnl-display" class="absolute top-2 right-2 sm:top-3 sm:right-3 px-2 sm:px-3 py-1 sm:py-1.5 rounded bg-black/90 border border-gray-700 hidden z-10 font-mono text-[10px] sm:text-xs md:text-sm font-black shadow-2xl transition-colors duration-300"></div>
                     <canvas id="tradingChart"></canvas>
@@ -368,7 +338,6 @@
                             <span data-i18n="liabilityLbl">Liability (Rischio Bancata):</span>
                             <span id="current-liability-display" class="font-bold text-red-400">€ 3.04</span>
                         </div>
-                        <!-- Barra Visuale Rischio -->
                         <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden mt-1 sm:mt-1.5">
                             <div id="liability-bar" class="h-full bg-red-500 progress-bar-fill" style="width: 3%"></div>
                         </div>
@@ -380,13 +349,13 @@
                     <button id="btn-back" onclick="handleTradeAction('back')" class="btn-back text-white py-4 sm:py-5 rounded-xl active:scale-[0.96] transition-all flex flex-col items-center justify-center group relative overflow-hidden touch-manipulation">
                         <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                         <span class="text-[8px] sm:text-[10px] font-bold opacity-80 uppercase tracking-[0.2em] mb-0.5 sm:mb-1" data-i18n="btnBackLbl">Punta (Back)</span>
-                        <span id="price-back" class="text-xl sm:text-3xl font-black tabular-nums tracking-tighter drop-shadow-md">2.50</span>
+                        <span id="price-back" class="text-xl sm:text-3xl font-black tabular-nums tracking-tighter drop-shadow-md">3.50</span>
                         <span class="text-[7px] sm:text-[9px] mt-1 sm:mt-1.5 opacity-60 font-mono uppercase tracking-[0.1em]" data-i18n="lblDraw">Pareggio (Draw)</span>
                     </button>
                     <button id="btn-lay" onclick="handleTradeAction('lay')" class="btn-lay text-white py-4 sm:py-5 rounded-xl active:scale-[0.96] transition-all flex flex-col items-center justify-center group relative overflow-hidden touch-manipulation">
                         <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                         <span class="text-[8px] sm:text-[10px] font-bold opacity-80 uppercase tracking-[0.2em] mb-0.5 sm:mb-1" data-i18n="btnLayLbl">Banca (Lay)</span>
-                        <span id="price-lay" class="text-xl sm:text-3xl font-black tabular-nums tracking-tighter drop-shadow-md">2.52</span>
+                        <span id="price-lay" class="text-xl sm:text-3xl font-black tabular-nums tracking-tighter drop-shadow-md">3.55</span>
                         <span class="text-[7px] sm:text-[9px] mt-1 sm:mt-1.5 font-mono font-bold uppercase tracking-[0.1em] text-red-200">LAY THE DRAW</span>
                     </button>
                 </div>
@@ -394,7 +363,7 @@
                 <!-- Feedback Educativo Dinamico -->
                 <div id="edu-feedback" class="hidden mt-3 sm:mt-4 bg-gray-900 border border-gray-700 p-4 sm:p-5 rounded-xl animate-fade-in shadow-inner">
                     <h4 class="font-black text-[#00ff80] flex items-center text-[9px] sm:text-[10px] mb-2 sm:mb-3 uppercase tracking-[0.2em]">
-                        <span>💡</span> <span class="ml-1 sm:ml-2" data-i18n="eduAnalysis">Analisi Scientifica del Trade</span>
+                        <span>💡</span> <span class="ml-1 sm:ml-2" data-i18n="liveCoaching">LIVE COACHING:</span>
                     </h4>
                     <div id="edu-msg"></div>
                 </div>
@@ -413,8 +382,8 @@
             <button class="text-black bg-[#00ff80] font-black px-6 sm:px-8 py-3 rounded-md hover:bg-white transition-all text-[9px] sm:text-[11px] uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,255,128,0.4)] touch-manipulation active:scale-95" data-i18n="navNext">Avanti →</button>
         </div>
         
-        <!-- SUBBUTEO GAME LINK -->
-        <div class="flex justify-center pb-8 pt-4">
+        <!-- SUBBUTEO GAME LINK MINIMALISTICO -->
+        <div class="flex justify-center pb-8 pt-2">
             <a href="https://subbuteo.vercel.app/" target="_blank" class="text-4xl sm:text-5xl hover:scale-110 transition-transform touch-manipulation joystick-pulse" title="Play Subbuteo Live">
                 🎮
             </a>
@@ -422,7 +391,7 @@
 
     </main>
 
-    <!-- MODALE FULLSCREEN PER PREVIEW PDF -->
+    <!-- MODALE FULLSCREEN PER PREVIEW PDF (Caricamento Dinamico PDF.js ad Alta Risoluzione) -->
     <div id="pdf-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-0 sm:p-6 opacity-0 transition-opacity duration-300">
         <div class="bg-[#0e1621] w-full max-w-5xl h-full sm:h-auto sm:max-h-[90vh] sm:rounded-2xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative" id="pdf-modal-content">
             
@@ -460,7 +429,7 @@
         </div>
     </div>
 
-    <!-- MODALE EBOOK -->
+    <!-- MODALE EBOOK (Dark Modern Style) -->
     <div id="ebook-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-0 sm:p-6 opacity-0 transition-opacity duration-300">
         <div class="bg-[#0d1117] w-full max-w-4xl h-full sm:h-auto sm:max-h-[95vh] rounded-none sm:rounded-2xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative modern-ebook" id="ebook-modal-content">
             
@@ -504,88 +473,11 @@
             click: function() { this.playTone(600, 'sine', 0.1, 0.1); },
             cashout: function() { this.playTone(880, 'sine', 0.1, 0.1); setTimeout(() => this.playTone(1760, 'sine', 0.3, 0.15), 100); },
             goal: function() { this.playTone(440, 'triangle', 0.5, 0.2); setTimeout(() => this.playTone(660, 'square', 1.0, 0.2), 300); },
-            error: function() { this.playTone(150, 'sawtooth', 0.3, 0.1); }
+            error: function() { this.playTone(150, 'sawtooth', 0.3, 0.1); },
+            whistle: function() { this.playTone(900, 'square', 0.5, 0.15); setTimeout(() => this.playTone(900, 'square', 0.8, 0.15), 600); }
         };
 
-        // --- 2. SINTETIZZATORE BINAURALE ZEN ---
-        const BinauralEngine = {
-            ctx: null, oscLeft: null, oscRight: null, gainLeft: null, gainRight: null, merger: null,
-            isPlaying: false, masterVolume: 0.15,
-            init: function() {
-                if (!this.ctx) {
-                    const AudioContext = window.AudioContext || window.webkitAudioContext;
-                    if(AudioContext) this.ctx = new AudioContext();
-                }
-            },
-            start: function() {
-                this.init();
-                if (!this.ctx || this.isPlaying) return;
-                if (this.ctx.state === 'suspended') this.ctx.resume();
-                try {
-                    this.oscLeft = this.ctx.createOscillator(); this.oscRight = this.ctx.createOscillator();
-                    this.gainLeft = this.ctx.createGain(); this.gainRight = this.ctx.createGain();
-                    this.merger = this.ctx.createChannelMerger(2);
-
-                    this.oscLeft.type = 'sine'; this.oscLeft.frequency.value = 432;
-                    this.oscRight.type = 'sine'; this.oscRight.frequency.value = 446;
-
-                    this.gainLeft.gain.value = this.masterVolume; this.gainRight.gain.value = this.masterVolume;
-
-                    this.oscLeft.connect(this.gainLeft); this.oscRight.connect(this.gainRight);
-                    this.gainLeft.connect(this.merger, 0, 0); this.gainRight.connect(this.merger, 0, 1);
-                    this.merger.connect(this.ctx.destination);
-
-                    this.oscLeft.start(); this.oscRight.start();
-                    this.isPlaying = true;
-                    
-                    document.getElementById('audio-container').classList.add('is-playing');
-                    document.getElementById('audio-status-text').innerText = 'Frequenze Attive';
-                    document.getElementById('audio-status-text').className = 'text-[9px] sm:text-[10px] text-[#00ff80] font-mono mt-0.5 animate-pulse';
-                    
-                    const pBtn = document.getElementById('audio-play-btn');
-                    pBtn.innerHTML = '<span class="text-lg sm:text-xl">⏸</span>';
-                    
-                    const sBtn = document.getElementById('audio-stop-btn');
-                    sBtn.classList.remove('hidden');
-                    
-                    const volCtrl = document.getElementById('volume-control-wrapper');
-                    volCtrl.classList.remove('opacity-0', 'h-0');
-                    volCtrl.classList.add('opacity-100');
-
-                } catch(e) {}
-            },
-            stop: function() {
-                if (this.oscLeft) { this.oscLeft.stop(); this.oscLeft.disconnect(); }
-                if (this.oscRight) { this.oscRight.stop(); this.oscRight.disconnect(); }
-                this.isPlaying = false;
-                
-                document.getElementById('audio-container').classList.remove('is-playing');
-                document.getElementById('audio-status-text').innerText = 'Tocca per attivare';
-                document.getElementById('audio-status-text').className = 'text-[9px] sm:text-[10px] text-gray-500 font-mono mt-0.5';
-                
-                const pBtn = document.getElementById('audio-play-btn');
-                pBtn.innerHTML = '<span class="text-lg sm:text-xl pl-1">▶</span>';
-                
-                const sBtn = document.getElementById('audio-stop-btn');
-                sBtn.classList.add('hidden');
-                
-                const volCtrl = document.getElementById('volume-control-wrapper');
-                volCtrl.classList.remove('opacity-100');
-                volCtrl.classList.add('opacity-0', 'h-0');
-            },
-            setVolume: function(val) {
-                const safeVal = Math.max(0, Math.min(1, Number(val) || 0));
-                this.masterVolume = safeVal * 0.2; 
-                if (this.gainLeft && this.gainRight && this.ctx && this.isPlaying) {
-                    try {
-                        this.gainLeft.gain.setValueAtTime(this.masterVolume, this.ctx.currentTime);
-                        this.gainRight.gain.setValueAtTime(this.masterVolume, this.ctx.currentTime);
-                    } catch(e) {}
-                }
-            }
-        };
-
-        // --- 3. MOTORE PDF.JS AD ALTA RISOLUZIONE ---
+        // --- 2. MOTORE PDF.JS AD ALTA RISOLUZIONE ---
         const PdfEngine = {
             loaded: false,
             init: function() {
@@ -723,39 +615,39 @@
             else { panel.classList.add('expanded'); setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150); }
         }
 
-        // --- CORE APPLICATION ---
+        // --- CORE APPLICATION & SIMULATION ---
         const RoomApp = (function() {
-            const CONFIG = { STORAGE_KEY: 'bx_academy_state_v24' }; 
+            const CONFIG = { STORAGE_KEY: 'bx_academy_state_v30' }; 
 
             const dict = {
                 it: {
                     moduleTitle: "MODULO 1 • GIORNO 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
-                    prepTitle: "Preparazione (Deep Focus)", audioLabel: "14Hz BINAURAL FOCUS", audioWarning: "ATTENZIONE: Usare le cuffie per l'effetto binaurale.", finLabel: "PILLOLA FINANZIARIA", finQuote: "Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.",
-                    coreTitle: "Fase 2: Theorum & Praxis", btnPdf: "Slide", btnPodcast: "Podcast", btnTelegram: "Lezione", btnEbook: "E-Book", btnReset: "RESET",
+                    finLabel: "PILLOLA FINANZIARIA", finQuote: "Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.",
+                    coreTitle: "Fase 1: Theorum & Praxis", btnPdf: "Slide", btnPodcast: "Podcast", btnTelegram: "Lezione", btnEbook: "E-Book", btnReset: "RESET",
                     quizTitle: "Check-Point", quizQuestion: "Nel mercato Exchange, chi è la tua controparte quando 'Banchi' una quota?", 
                     quizOptA: "A) Il Bookmaker tradizionale", quizOptB: "B) Altri utenti che hanno 'Puntato'", quizOptC: "C) La piattaforma stessa",
                     quizSuccess: "Corretto! La tua controparte è sempre una persona che ha fatto l'azione opposta alla tua (+100 XP)", 
                     quizFailA: "Attenzione: Nel Betting Exchange non esiste il banco tradizionale. Se la controparte fosse il Bookmaker, subiresti limitazioni (Gubbing). La risposta esatta è la B: scommetti contro altri utenti.",
                     quizFailC: "Errore: La piattaforma (es. Betfair) è solo un intermediario neutrale che trattiene una piccola commissione sulle vincite nette. La risposta esatta è la B: scambi quote con altre persone.",
-                    simTitle: "Live Scalping Simulator", simScenario: "Scenario: Pareggio 0-0 al 75'. Strategia: Lay The Draw.", liveMarket: "Market Live",
+                    simTitle: "Live Scalping Simulator", simScenario: "Strategia: Lay The Draw dall'inizio alla fine.", liveMarket: "Market Live",
                     riskMgmt: "MONEY MANAGEMENT", stakeCalc: "Stake Calcolato (Puntata):", liabilityLbl: "Liability (Rischio se Banchi):", lblDraw: "Pareggio (Draw)",
                     btnBackLbl: "Punta (Back)", btnLayLbl: "Banca (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CHIUDI TRADE", eduAnalysis: "Analisi Scientifica del Trade",
-                    eduBackWin: "Hai Puntato a {E} e chiuso a {U}. Eccellente trade! Hai incassato in profitto dopo il GOL che ha fatto schizzare la quota del pareggio.",
-                    eduBackLoss: "Hai Puntato a {E} e chiuso a {U}. La quota scendeva per via del tempo (0-0). In questo scenario, puntare sul pareggio prima di un gol è statisticamente perdente.",
-                    eduLayWin: "Hai Bancato a {E} e chiuso a {U}. GOL! Il pareggio è saltato, la quota è schizzata e hai incassato il massimo profitto in base all'hedging.",
-                    eduLayLoss: "Hai Bancato a {E} e chiuso a {U}. Non ci sono stati gol, la partita andava verso la fine e la quota è crollata (Time Decay). Bancare senza che avvenga un evento genera Red Book certi.",
+                    eduBackWin: "Hai Puntato a {E} e chiuso a {U}. Eccellente trade! Hai incassato in profitto dopo che un GOL ha fatto schizzare la quota.",
+                    eduBackLoss: "Hai Puntato a {E} e chiuso a {U}. La quota scendeva per via del tempo. Puntare sul pareggio all'inizio senza gol è statisticamente perdente.",
+                    eduLayWin: "Hai Bancato a {E} e chiuso a {U}. GOL! Il pareggio è saltato, la quota è schizzata e hai incassato profitto in base all'hedging.",
+                    eduLayLoss: "Hai Bancato a {E} e chiuso a {U}. Non ci sono stati gol e la quota è crollata (Time Decay). Bancare senza eventi genera Red Book certi.",
                     eduScratch: "Hai chiuso alla stessa quota ({E}). Trade in pari (Scratch). Preservare il capitale è la prima regola del professionista.",
                     liveLayGoal: "⚽ GOL SEGNATO! La quota del pareggio è schizzata. Il tuo Lay è in PROFITTO. Fai Cash Out!",
-                    liveLayDecay: "⏳ Time Decay: non ci sono gol, il tempo scorre e la quota scende. Il tuo Lay perde valore. (Red Book)",
+                    liveLayDecay: "⏳ Time Decay: non ci sono gol, il tempo scorre e la quota scende verso 1.01. Il tuo Lay perde valore. (Red Book)",
                     liveBackGoal: "❌ GOL SEGNATO! Hai puntato sul pareggio. La quota è salita e sei in PERDITA.",
-                    liveBackDecay: "⚠️ Attesa: Hai puntato sul pareggio. La quota scende e guadagni valore, ma sei a rischio se segnano.",
+                    liveBackDecay: "⚠️ Attesa: Hai puntato sul pareggio. La quota scende col tempo e guadagni valore temporaneo, ma sei a rischio se segnano.",
                     liveCoaching: "LIVE COACHING:",
                     navPrev: "← Indietro", navNext: "Avanti →", tgDate: "Oggi", alertPdf: "Il PDF per questa lingua non è ancora disponibile.",
                     pdfPreviewTitle: "PREVIEW SLIDE MASTERCLASS", btnDownloadPdf: "Scarica PDF Originale",
                     lblGross: "Lordo:", lblComm: "Commissione (5%):", lblNet: "NETTO:",
                     videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1",
                     pdfUrl: "it-1-ZeroToHero-Academy-BettingExchengeRomm.pdf",
-                    tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Giorno 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFFERENZA STRUTTURALE: BOOKMAKER VS EXCHANGE</strong>\n\nIl Bookmaker è la tua controparte: se tu vinci, lui perde. Per questo limita i profittevoli. \n\nNell'Exchange, tu operi in un mercato <em>peer-to-peer</em>: la piattaforma è solo un intermediario che incassa una commissione sulle vincite. Qui non scommetti contro un banco, ma scambi quote con altri utenti.\n\n📐 <strong>FORMULA GENERALE (PUNTA):</strong>\nProfitto Netto = (Stake * (Quota - 1)) * (1 - Commissione)\n\n<strong>LEGENDA TECNICA:</strong>\n🔹 Stake: Capitale puntato.\n🔹 Liability: Il rischio effettivo quando "banchi" (fai il banco).\n🔹 Commissione: Fee (es. 5%) pagata all'Exchange solo sulla vincita netta.\n\n🧮 <strong>ESEMPIO PRATICO (REALE):</strong>\n<em>Evento: Juventus vs Inter. Quota Punta (Back) @2.10. Stake: 100€. Comm: 5%.</em>\n\n🪄 <strong>CALCOLO:</strong>\n• Profitto Lordo: 100€ * (2.10 - 1) = 110€\n• Commissione: 110€ * 0.05 = 5.50€\n• Profitto Netto: 104.50€\n\n⚠️ <strong>GUBBING & LIMITAZIONI:</strong>\nIl Gubbing (chiusura/limitazione conto) NON esiste nell'Exchange. Poiché la piattaforma guadagna dalle tue commissioni, più sei bravo e vinci, più l'Exchange guadagna. Il rischio di limitazione resta esclusivo dei Bookmaker tradizionali.\n\n✅ <strong>AZIONE DEL GIORNO:</strong>\nApri un Exchange (Betfair/Betflag), scegli un match di Serie A o Premier League e osserva il book per 30 minuti. Nota come lo spread (differenza tra Punta e Banca) si stringe dove c'è più denaro (liquidità).\n\n🧘‍♂️ <strong>IL MANTRA:</strong> <em>"Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DEL #1</strong>\nIl trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <em>size</em> è troppo grande. La matematica non ha battito cardiaco, segui quella.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidità è il tuo paracadute. Senza volumi, non c'è trading, solo gioco d'azzardo.</em>`,
+                    tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Giorno 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFFERENZA STRUTTURALE: BOOKMAKER VS EXCHANGE</strong>\n\nIl Bookmaker è la tua controparte: se tu vinci, lui perde. Per questo limita i profittevoli. \n\nNell'Exchange, tu operi in un mercato <em>peer-to-peer</em>: la piattaforma è solo un intermediario che incassa una commissione sulle vincite. Qui non scommetti contro un banco, ma scambi quote con altri utenti.\n\n📐 <strong>FORMULA GENERALE (PUNTA):</strong>\nProfitto Netto = (Stake * (Quota - 1)) * (1 - Commissione)\n\n<strong>LEGENDA TECNICA:</strong>\n🔹 Stake: Capitale puntato.\n🔹 Liability: Il rischio effettivo quando "banchi" (fai il banco).\n🔹 Commissione: Fee (es. 5%) pagata all'Exchange solo sulla vincita netta.\n\n🧮 <strong>ESEMPIO PRACTICO (REALE):</strong>\n<em>Evento: Juventus vs Inter. Quota Punta (Back) @2.10. Stake: 100€. Comm: 5%.</em>\n\n🪄 <strong>CALCOLO:</strong>\n• Profitto Lordo: 100€ * (2.10 - 1) = 110€\n• Commissione: 110€ * 0.05 = 5.50€\n• Profitto Netto: 104.50€\n\n⚠️ <strong>GUBBING & LIMITAZIONI:</strong>\nIl Gubbing (chiusura/limitazione conto) NON esiste nell'Exchange. Poiché la piattaforma guadagna dalle tue commissioni, più sei bravo e vinci, più l'Exchange guadagna. Il rischio di limitazione resta esclusivo dei Bookmaker tradizionali.\n\n✅ <strong>AZIONE DEL GIORNO:</strong>\nApri un Exchange (Betfair/Betflag), scegli un match di Serie A o Premier League e osserva il book per 30 minuti. Nota come lo spread (differenza tra Punta e Banca) si stringe dove c'è più denaro (liquidità).\n\n🧘‍♂️ <strong>IL MANTRA:</strong> <em>"Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DEL #1</strong>\nIl trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <em>size</em> è troppo grande. La matematica non ha battito cardiaco, segui quella.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidità è il tuo paracadute. Senza volumi, non c'è trading, solo gioco d'azzardo.</em>`,
                     ebookContent: `
                         <div class="border-b border-gray-800 py-6 mb-8 text-center">
                             <h1 class="text-2xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
@@ -786,23 +678,23 @@
                 },
                 en: {
                     moduleTitle: "MODULE 1 • DAY 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "No gambling. Only math, risk management, and emotional detachment.",
-                    prepTitle: "Preparation (Deep Focus)", audioLabel: "14Hz BINAURAL FOCUS", audioWarning: "WARNING: Use headphones for binaural effect.", finLabel: "FINANCIAL PILL", finQuote: "Money on the Exchange isn't yours until you withdraw it. Use the separated accounts system: your bankroll is business capital, not a personal ATM.",
-                    coreTitle: "Phase 2: Theorum & Praxis", btnPdf: "Slides", btnPodcast: "Podcast", btnTelegram: "Lesson", btnEbook: "E-Book", btnReset: "RESET",
+                    finLabel: "FINANCIAL PILL", finQuote: "Money on the Exchange isn't yours until you withdraw it. Use the separated accounts system: your bankroll is business capital, not a personal ATM.",
+                    coreTitle: "Phase 1: Theorum & Praxis", btnPdf: "Slides", btnPodcast: "Podcast", btnTelegram: "Lesson", btnEbook: "E-Book", btnReset: "RESET",
                     quizTitle: "Check-Point", quizQuestion: "In the Exchange market, who is your counterparty when you 'Lay'?", 
                     quizOptA: "A) The traditional Bookmaker", quizOptB: "B) Other users who have 'Backed'", quizOptC: "C) The platform itself",
                     quizSuccess: "Correct! Your counterparty is always a person who placed the opposite bet (+100 XP)", 
                     quizFailA: "Warning: In the Betting Exchange, there is no traditional bookie. If it were a Bookmaker, you'd face account limits (Gubbing). The correct answer is B: you bet against other users.",
                     quizFailC: "Error: The platform (e.g., Betfair) is just a neutral intermediary taking a small commission on net winnings. The correct answer is B: you trade odds with other people.",
-                    simTitle: "Live Scalping Simulator", simScenario: "Scenario: Draw 0-0. Strategy: Lay The Draw.", liveMarket: "Market Live",
+                    simTitle: "Live Scalping Simulator", simScenario: "Strategy: Lay The Draw from start to finish.", liveMarket: "Market Live",
                     riskMgmt: "MONEY MANAGEMENT", stakeCalc: "Calculated Stake:", liabilityLbl: "Liability (Lay Risk):", lblDraw: "Draw",
                     btnBackLbl: "Back", btnLayLbl: "Lay", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CLOSE TRADE", eduAnalysis: "Scientific Trade Analysis",
                     eduBackWin: "Backed at {E} and closed at {U}. Excellent trade! A goal was scored, making the draw odds spike, and you profited.",
-                    eduBackLoss: "Backed at {E} and closed at {U}. Odds dropped due to Time Decay (0-0). Backing a draw before a goal is statistically losing here.",
+                    eduBackLoss: "Backed at {E} and closed at {U}. Odds dropped due to Time Decay. Backing a draw before a goal is statistically losing.",
                     eduLayWin: "Layed at {E} and Backed at {U}. GOAL! The draw became unlikely, odds spiked, and you secured max profit.",
-                    eduLayLoss: "Layed at {E} and Backed at {U}. No goal occurred. Odds collapsed due to time decay. Laying the draw late game without a goal leads to Red Books.",
+                    eduLayLoss: "Layed at {E} and Backed at {U}. No goal occurred. Odds collapsed due to time decay. Laying the draw without a goal leads to Red Books.",
                     eduScratch: "Closed at the same odds ({E}). Scratch trade. Capital preservation is the first rule of the professional.",
                     liveLayGoal: "⚽ GOAL SCORED! The draw odds spiked. Your Lay is in PROFIT. Cash Out now!",
-                    liveLayDecay: "⏳ Time Decay: no goals, time passes, and odds drop. Your Lay is losing value. (Red Book)",
+                    liveLayDecay: "⏳ Time Decay: no goals, time passes, and odds drop towards 1.01. Your Lay is losing value. (Red Book)",
                     liveBackGoal: "❌ GOAL SCORED! You backed the draw. Odds spiked and you are in LOSS.",
                     liveBackDecay: "⚠️ Waiting: You backed the draw. Odds drop and you gain value, but you're at risk if they score.",
                     liveCoaching: "LIVE COACHING:",
@@ -842,14 +734,14 @@
                 },
                 es: {
                     moduleTitle: "MÓDULO 1 • DÍA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Cero apuestas. Solo matemáticas, gestión de riesgos y desapego emocional.",
-                    prepTitle: "Preparación (Deep Focus)", audioLabel: "14Hz BINAURAL FOCUS", audioWarning: "ATENCIÓN: Usar auriculares para efecto binaural.", finLabel: "PÍLDORA FINANCIERA", finQuote: "El dinero en el Exchange no es tuyo hasta que lo retiras. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.",
-                    coreTitle: "Fase 2: Theorum & Praxis", btnPdf: "Diapositivas", btnPodcast: "Podcast", btnTelegram: "Lección", btnEbook: "E-Book", btnReset: "RESET",
+                    finLabel: "PÍLDORA FINANCIERA", finQuote: "El dinero en el Exchange no es tuyo hasta que lo retiras. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.",
+                    coreTitle: "Fase 1: Theorum & Praxis", btnPdf: "Diapositivas", btnPodcast: "Podcast", btnTelegram: "Lección", btnEbook: "E-Book", btnReset: "RESET",
                     quizTitle: "Check-Point", quizQuestion: "En el mercado Exchange, ¿quién es tu contraparte cuando vas 'En contra' (Lay)?", 
                     quizOptA: "A) El Bookmaker tradicional", quizOptB: "B) Otros usuarios que han apostado a favor", quizOptC: "C) La propia plataforma",
                     quizSuccess: "¡Correcto! Tu contraparte es un usuario que hizo la acción opuesta (+100 XP)", 
                     quizFailA: "Atención: En el Betting Exchange no existe la casa tradicional. Si fuera un Bookmaker, sufrirías limitaciones (Gubbing). La respuesta correcta es la B: apuestas contra otros usuarios.",
                     quizFailC: "Error: La plataforma (ej. Betfair) es solo un intermediario neutral que cobra una pequeña comisión sobre ganancias netas. La respuesta correcta es la B.",
-                    simTitle: "Simulador de Scalping en Vivo", simScenario: "Escenario: Empate 0-0 al min. 75. Estrategia: Lay The Draw.", liveMarket: "Mercado en Vivo",
+                    simTitle: "Simulador de Scalping en Vivo", simScenario: "Estrategia: Lay The Draw de principio a fin.", liveMarket: "Mercado en Vivo",
                     riskMgmt: "GESTIÓN DE CAPITAL", stakeCalc: "Stake Calculado:", liabilityLbl: "Liability (Riesgo Lay):", lblDraw: "Empate (Draw)",
                     btnBackLbl: "A favor (Back)", btnLayLbl: "En contra (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CERRAR TRADE", eduAnalysis: "Análisis Científico del Trade",
                     eduBackWin: "A Favor a {E} y cerrado a {U}. ¡Excelente! Hubo un gol, la cuota del empate se disparó y ganaste.",
@@ -858,16 +750,16 @@
                     eduLayLoss: "En Contra a {E} y A Favor a {U}. No hubo gol. La cuota colapsó por el Time Decay. Ir 'En contra' sin goles lleva a inevitables Red Books.",
                     eduScratch: "Cerraste a la misma cuota ({E}). Scratch trade. Preservar el capital es la regla número uno del profesional.",
                     liveLayGoal: "⚽ ¡GOL! La cuota del empate se disparó. Tu Lay está en GANANCIA. ¡Haz Cash Out!",
-                    liveLayDecay: "⏳ Time Decay: sin goles, el tiempo pasa y la cuota baja. Tu Lay pierde valor. (Red Book)",
+                    liveLayDecay: "⏳ Time Decay: sin goles, el tiempo pasa y la cuota baja hacia 1.01. Tu Lay pierde valor. (Red Book)",
                     liveBackGoal: "❌ ¡GOL! Apostaste a favor del empate. La cuota subió y estás en PÉRDIDA.",
-                    liveBackDecay: "⚠️ Esperando: Apostaste al empate. La cuota baja y ganas valor, pero estás en riesgo si marcan.",
+                    liveBackDecay: "⚠️ Esperando: Apostaste al empate. La cuota baja y ganas valor temporal, pero estás en riesgo si marcan.",
                     liveCoaching: "LIVE COACHING:",
                     navPrev: "← Atrás", navNext: "Siguiente →", tgDate: "Hoy", alertPdf: "El PDF para este idioma aún no está disponible.",
                     pdfPreviewTitle: "PREVIEW DIAPOSITIVAS MASTERCLASS", btnDownloadPdf: "Descargar PDF Original",
                     lblGross: "Bruto:", lblComm: "Comisión (5%):", lblNet: "NETO:",
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1",
                     pdfUrl: "es-De_Cero_a_Héroe__Día_1-BettingExchange-es.pdf",
-                    tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Día 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFERENCIA ESTRUCTURAL: BOOKMAKER VS EXCHANGE</strong>\n\nEl bookmaker (casa de apuestas) es tu contraparte: si tú ganas, él pierde. Por eso limitan a los que son rentables. \n\nEn el Exchange, tú operas en un mercado <em>peer-to-peer</em>: la plataforma es solo un intermediario que cobra una comisión sobre las ganancias. Aquí no apuestas contra la casa, sino que intercambias momios con otros usuarios.\n\n📐 <strong>FÓRMULA GENERAL (BACK / APOSTAR A FAVOR):</strong>\nGanancia Neta = (Stake * (Momio - 1)) * (1 - Comisión)\n\n<strong>GLOSARIO TÉCNICO:</strong>\n🔹 Stake: Capital apostado.\n🔹 Liability: El riesgo real cuando haces "Lay" (apuestas en contra / la haces de casa).\n🔹 Comisión: Tarifa (ej. 5%) que se le paga al Exchange solo sobre la ganancia neta.\n\n🧮 <strong>EJEMPLO PRÁCTICO (REAL):</strong>\n<em>Evento: Juventus vs Inter. Momio a favor (Back) @2.10. Stake: $100. Com: 5%.</em>\n\n🪄 <strong>CÁLCULO:</strong>\n• Ganancia Bruta: $100 * (2.10 - 1) = $110\n• Comisión: $110 * 0.05 = $5.50\n• Ganancia Neta: $104.50\n\n⚠️ <strong>GUBBING & LIMITACIONES:</strong>\nEl Gubbing (cierre o limitación de cuenta) NO existe en el Exchange. Como la plataforma hace dinero de tus comisiones, entre más bueno seas y más ganes, más gana el Exchange. El riesgo de que te limiten la cuenta es exclusivo de los bookmakers tradicionales.\n\n✅ <strong>ACCIÓN DEL DÍA:</strong>\nAbre un Exchange (Betfair/Betflag), escoge un partido de la Serie A o la Premier League y observa el mercado por 30 minutos. Fíjate cómo el spread (la diferencia entre el Back y el Lay) se hace más estrecho donde hay más dinero (liquidez).\n\n🧘‍♂️ <strong>EL MANTRA:</strong> <em>"El mercado no tiene opiniones, solo tiene precios; el trader segue la liquidez, el apostador sigue la pasión."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MENTALIDAD DE #1</strong>\nEl trader no le va a ningún equipo: aprovecha las ineficiencias. Si el corazón te late fuerte, tu <em>size</em> (tamaño de apuesta) es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidez es tu paracaídas. Sin volumen de dinero, no hay trading, solo juegos de azar.</em>`,
+                    tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Día 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFERENCIA ESTRUCTURAL: BOOKMAKER VS EXCHANGE</strong>\n\nEl bookmaker (casa de apuestas) es tu contraparte: si tú ganas, él pierde. Por eso limitan a los que son rentables. \n\nEn el Exchange, tú operas en un mercado <em>peer-to-peer</em>: la plataforma es solo un intermediario que cobra una comisión sobre las ganancias. Aquí no apuestas contra la casa, sino que intercambias momios con otros usuarios.\n\n📐 <strong>FÓRMULA GENERAL (BACK / APOSTAR A FAVOR):</strong>\nGanancia Neta = (Stake * (Momio - 1)) * (1 - Comisión)\n\n<strong>GLOSARIO TÉCNICO:</strong>\n🔹 Stake: Capital apostado.\n🔹 Liability: El riesgo real cuando haces "Lay" (apuestas en contra / la haces de casa).\n🔹 Comisión: Tarifa (ej. 5%) que se le paga al Exchange solo sobre la ganancia neta.\n\n🧮 <strong>EJEMPLO PRÁCTICO (REAL):</strong>\n<em>Evento: Juventus vs Inter. Momio a favor (Back) @2.10. Stake: $100. Com: 5%.</em>\n\n🪄 <strong>CÁLCULO:</strong>\n• Ganancia Bruta: $100 * (2.10 - 1) = $110\n• Comisión: $110 * 0.05 = $5.50\n• Ganancia Neta: $104.50\n\n⚠️ <strong>GUBBING & LIMITACIONES:</strong>\nEl Gubbing (cierre o limitación de cuenta) NO existe en el Exchange. Como la plataforma hace dinero de tus comisiones, entre más bueno seas y más ganes, más gana el Exchange. El riesgo de que te limiten la cuenta es exclusivo de los bookmakers tradicionales.\n\n✅ <strong>ACCIÓN DEL DÍA:</strong>\nAbre un Exchange (Betfair/Betflag), escoge un partido de la Serie A o la Premier League y observa el mercado por 30 minutos. Fíjate cómo el spread (la diferencia entre el Back y el Lay) se hace más estrecho donde hay más dinero (liquidez).\n\n🧘‍♂️ <strong>EL MANTRA:</strong> <em>"El mercado no tiene opiniones, solo tiene precios; el trader sigue la liquidez, el apostador sigue la pasión."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MENTALIDAD DE #1</strong>\nEl trader no le va a ningún equipo: aprovecha las ineficiencias. Si el corazón te late fuerte, tu <em>size</em> (tamaño de apuesta) es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidez es tu paracaídas. Sin volumen de dinero, no hay trading, solo juegos de azar.</em>`,
                     ebookContent: `
                         <div class="border-b border-gray-800 py-6 mb-8 text-center">
                             <h1 class="text-2xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
@@ -898,14 +790,14 @@
                 },
                 pt: {
                     moduleTitle: "MÓDULO 1 • DIA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero apostas. Apenas matematica, gestão de risco e desapego emocional.",
-                    prepTitle: "Preparação (Deep Focus)", audioLabel: "14Hz BINAURAL FOCUS", audioWarning: "ATENÇÃO: Use fones de ouvido para efeito binaural.", finLabel: "PÍLULA FINANCEIRA", finQuote: "O dinheiro na Exchange não é seu até que você o retire. Use o sistema de contas separadas: a banca é capital de giro corporativo, não seu caixa eletrônico pessoal.",
-                    coreTitle: "Fase 2: Theorum & Praxis", btnPdf: "Slides", btnPodcast: "Podcast", btnTelegram: "Lição", btnEbook: "E-Book", btnReset: "RESET",
+                    finLabel: "PÍLULA FINANCEIRA", finQuote: "O dinheiro na Exchange não é seu até que você o retire. Use o sistema de contas separadas: a banca é capital de giro corporativo, não seu caixa eletrônico pessoal.",
+                    coreTitle: "Fase 1: Theorum & Praxis", btnPdf: "Slides", btnPodcast: "Podcast", btnTelegram: "Lição", btnEbook: "E-Book", btnReset: "RESET",
                     quizTitle: "Check-Point", quizQuestion: "No mercato Exchange, quem é a sua contraparte quando você faz 'Lay' (Contra)?", 
                     quizOptA: "A) O Bookmaker tradicional", quizOptB: "B) Outros usuários que apostaram a favor", quizOptC: "C) A própria plataforma",
                     quizSuccess: "Correto! A sua contraparte é sempre alguém que apostou o contrário (+100 XP)", 
                     quizFailA: "Atenção: No Betting Exchange não há a casa tradicional. Se fosse o Bookmaker, você sofreria limitações (Gubbing). A resposta correta é a B: você aposta contra outros usuários.",
                     quizFailC: "Erro: A plataforma (ex: Betfair) é apenas uma intermediária neutra que cobra uma comissão sobre os lucros líquidos. A resposta correta é a B: você troca odds com outras pessoas.",
-                    simTitle: "Simulador de Scalping ao Vivo", simScenario: "Cenário: Empate 0-0. Estratégia: Lay The Draw.", liveMarket: "Mercado ao Vivo",
+                    simTitle: "Simulador de Scalping ao Vivo", simScenario: "Estratégia: Lay The Draw do início ao fim.", liveMarket: "Mercado ao Vivo",
                     riskMgmt: "GESTÃO DE BANCA", stakeCalc: "Stake Calculada:", liabilityLbl: "Liability (Risco Lay):", lblDraw: "Empate (Draw)",
                     btnBackLbl: "A Favor (Back)", btnLayLbl: "Contra (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "FECHAR TRADE", eduAnalysis: "Análise Científica do Trade",
                     eduBackWin: "A Favor a {E} e fechado a {U}. Excelente! A odd subiu após o gol e você lucrou.",
@@ -914,9 +806,9 @@
                     eduLayLoss: "Contra a {E} e A Favor a {U}. Sem gols. A odd desabou devido ao Time Decay. Fazer Lay ao empate no final sem gols leva a Red Books.",
                     eduScratch: "Fechou na mesma odd ({E}). Scratch trade. Preservar o capital é a regra numero um do profissional.",
                     liveLayGoal: "⚽ GOL! A odd do empate disparou. O seu Lay está em LUCRO. Faça Cash Out!",
-                    liveLayDecay: "⏳ Time Decay: sem gols, o tempo passa e a odd cai. O seu Lay perde valor. (Red Book)",
+                    liveLayDecay: "⏳ Time Decay: sem gols, o tempo passa e a odd cai para 1.01. O seu Lay perde valor. (Red Book)",
                     liveBackGoal: "❌ GOL! Você apostou a favor do empate. A odd subiu e você está em PREJUÍZO.",
-                    liveBackDecay: "⚠️ Aguardando: Você apostou no empate. A odd cai e você ganha valor, mas corre risco se marcarem.",
+                    liveBackDecay: "⚠️ Aguardando: Você apostou no empate. A odd cai e você ganha valor temporário, mas corre risco se marcarem.",
                     liveCoaching: "LIVE COACHING:",
                     navPrev: "← Voltar", navNext: "Próximo →", tgDate: "Hoje", alertPdf: "O PDF para este idioma ainda não está disponível.",
                     pdfPreviewTitle: "PREVIEW SLIDES MASTERCLASS", btnDownloadPdf: "Baixar PDF Original",
@@ -956,13 +848,20 @@
 
             let State = { lang: 'it', xp: 0, saldo: 100.00, quizPassed: false, riskPct: 2 };
             let Market = { 
-                basePrice: 2.10, 
-                history: Array(15).fill(2.10), 
+                basePrice: 3.50, 
+                history: Array(15).fill(3.50), 
                 position: null, 
                 loopInterval: null,
-                matchSeconds: 75 * 60,
+                matchSeconds: 0, // Inizia da 0
                 goalSeconds: 0, 
-                hasScored: false
+                hasScored: false,
+                homeScore: 0,
+                awayScore: 0,
+                homeReds: 0,
+                awayReds: 0,
+                isSuspended: false,
+                penaltyTicks: 0,
+                eventMessage: "MATCH INIZIATO"
             };
             let chartInstance = null;
 
@@ -999,7 +898,7 @@
                     if(!elPriceLay) return;
                     
                     const layPrice = Number(elPriceLay.innerText);
-                    const liability = stake * (layPrice - 1);
+                    const liability = stake * (Math.max(1.01, layPrice - 1));
                     
                     document.getElementById('current-stake-display').innerText = `€ ${stake.toFixed(2)}`;
                     document.getElementById('current-liability-display').innerText = `€ ${liability.toFixed(2)}`;
@@ -1027,11 +926,19 @@
                     
                     document.querySelectorAll('[data-i18n]').forEach(el => {
                         const key = el.getAttribute('data-i18n');
-                        el.innerText = dict[targetLang][key] || dict['en'][key] || "";
+                        if (dict[targetLang][key] !== undefined) {
+                            el.innerText = dict[targetLang][key];
+                        } else if (dict['en'][key] !== undefined) {
+                            el.innerText = dict['en'][key];
+                        }
                     });
                     document.querySelectorAll('[data-i18n-html]').forEach(el => {
                         const key = el.getAttribute('data-i18n-html');
-                        el.innerHTML = dict[targetLang][key] || dict['en'][key] || "";
+                        if (dict[targetLang][key] !== undefined) {
+                            el.innerHTML = dict[targetLang][key];
+                        } else if (dict['en'][key] !== undefined) {
+                            el.innerHTML = dict['en'][key];
+                        }
                     });
                     
                     const videoIframe = document.getElementById('main-video');
@@ -1118,6 +1025,15 @@
                         StorageManager.save(); 
                         UIManager.updateDashboards();
                         UIManager.triggerPop('xp-badge', '[#00ff80]');
+                        
+                        feedbackDiv.className = 'p-5 sm:p-6 bg-[#00ff80]/10 border border-[#00ff80]/50 rounded-xl text-center shadow-[0_0_20px_rgba(0,255,128,0.15)] mt-4 transition-all duration-300';
+                        icon.innerText = '🏆';
+                        text.innerText = dict[State.lang].quizSuccess || dict['en'].quizSuccess;
+                        text.className = 'font-black text-xs sm:text-sm uppercase tracking-widest text-[#00ff80] leading-relaxed';
+                        
+                        const container = document.getElementById('quiz-container');
+                        if(container) container.style.display = 'none';
+
                     } else {
                         SoundEngine.error();
                         let errorMsg = "";
@@ -1167,64 +1083,173 @@
                         }
                     });
                 },
-                startLiveMarket: () => {
-                    const willScore = Math.random() < 0.8;
-                    Market.goalSeconds = willScore ? (75 + Math.floor(Math.random() * 12) + 1) * 60 : 999999; 
-                    const totalSeconds = (95 - 75) * 60;
+                updateScoreboard: () => {
+                    document.getElementById('match-score').innerText = `${Market.homeScore} - ${Market.awayScore}`;
                     
+                    const m = Math.floor(Market.matchSeconds / 60);
+                    const s = Market.matchSeconds % 60;
+                    document.getElementById('match-timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+                    
+                    const ticker = document.getElementById('match-event-ticker');
+                    if (Market.isSuspended) {
+                        ticker.innerText = "🔒 MERCATO SOSPESO (VAR/RIGORE) 🔒";
+                        ticker.className = "inline-block text-[9px] sm:text-[10px] font-mono font-bold text-red-100 uppercase tracking-widest bg-red-600 px-3 py-1 rounded-full border border-red-400 transition-colors duration-300 animate-pulse";
+                    } else if (Market.matchSeconds >= 90 * 60) {
+                        ticker.innerText = "🏁 FINE PARTITA 🏁";
+                        ticker.className = "inline-block text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 uppercase tracking-widest bg-gray-800 px-3 py-1 rounded-full border border-gray-600 transition-colors duration-300";
+                    } else {
+                        ticker.innerText = Market.eventMessage;
+                        ticker.className = "inline-block text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 uppercase tracking-widest bg-gray-800 px-3 py-1 rounded-full border border-gray-600 transition-colors duration-300";
+                    }
+
+                    // Aggiorna cartellini rossi UI
+                    const drawReds = (count) => {
+                        let html = '';
+                        for(let i=0; i<count; i++) html += '<div class="red-card"></div>';
+                        return html;
+                    };
+                    document.getElementById('juv-reds').innerHTML = drawReds(Market.homeReds);
+                    document.getElementById('int-reds').innerHTML = drawReds(Market.awayReds);
+
+                    // Aggiorna bottoni stato
+                    const btnBack = document.getElementById('btn-back');
+                    const btnLay = document.getElementById('btn-lay');
+                    if (Market.isSuspended || Market.matchSeconds >= 90*60) {
+                        if(btnBack) btnBack.classList.add('btn-suspended', 'pointer-events-none');
+                        if(btnLay) btnLay.classList.add('btn-suspended', 'pointer-events-none');
+                    } else {
+                        if(btnBack) btnBack.classList.remove('btn-suspended', 'pointer-events-none');
+                        if(btnLay) btnLay.classList.remove('btn-suspended', 'pointer-events-none');
+                    }
+                },
+                startMatch: () => {
+                    document.getElementById('match-overlay').classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => document.getElementById('match-overlay').classList.add('hidden'), 300);
+                    TradingEngine.startLiveMarket();
+                },
+                startLiveMarket: () => {
+                    if(Market.loopInterval) clearInterval(Market.loopInterval);
+                    
+                    Market.matchSeconds = 0;
+                    Market.homeScore = 0;
+                    Market.awayScore = 0;
+                    Market.homeReds = 0;
+                    Market.awayReds = 0;
+                    Market.isSuspended = false;
+                    Market.penaltyTicks = 0;
+                    Market.eventMessage = "FISCHIO D'INIZIO - PARTITA IN CORSO";
+                    Market.basePrice = 3.50; // Quota iniziale base per il pareggio
+
+                    TradingEngine.updateScoreboard();
+                    
+                    // Loop veloce: 500ms = 15 secondi di match. 1 minuto match = 2 secondi reali. 90 min = 3 min reali.
                     Market.loopInterval = setInterval(() => {
-                        if (Market.matchSeconds >= 95 * 60) return;
-
-                        Market.matchSeconds += 15; 
-                        const m = Math.floor(Market.matchSeconds / 60);
-                        const s = Market.matchSeconds % 60;
-                        document.getElementById('match-timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
-                        
-                        const elapsed = Market.matchSeconds - (75 * 60);
-                        let targetPrice = 2.10;
-
-                        if (Market.matchSeconds >= Market.goalSeconds && !Market.hasScored) {
-                            Market.hasScored = true;
-                            
-                            SoundEngine.goal();
-                            document.getElementById('chart-container').classList.add('flash-goal');
-                            const overlay = document.getElementById('goal-overlay');
-                            overlay.classList.remove('hidden');
-                            document.getElementById('goal-time-display').innerText = `${m}' MIN.`;
-                            setTimeout(() => {
-                                document.getElementById('chart-container').classList.remove('flash-goal');
-                                overlay.classList.add('hidden');
-                            }, 2500);
-                        } 
-                        
-                        if (!Market.hasScored) {
-                            const progress = Math.max(0, 1 - (elapsed / totalSeconds));
-                            targetPrice = 1.01 + (2.10 - 1.01) * Math.pow(progress, 2);
-                        } else {
-                            const remainingAfterGoal = totalSeconds - (Market.goalSeconds - 75*60);
-                            const elapsedSinceGoal = Market.matchSeconds - Market.goalSeconds;
-                            const progress = Math.max(0, 1 - (elapsedSinceGoal / remainingAfterGoal));
-                            targetPrice = 1.01 + (8.50 - 1.01) * Math.pow(progress, 1.5);
+                        if (Market.matchSeconds >= 90 * 60) {
+                            clearInterval(Market.loopInterval);
+                            Market.eventMessage = "PARTITA TERMINATA";
+                            TradingEngine.updateScoreboard();
+                            // Chiusura forzata mercati (se trade aperto, si perde o vince in base al risultato)
+                            return;
                         }
 
-                        const noise = (Math.random() - 0.5) * 0.04;
-                        Market.basePrice = targetPrice + noise;
+                        Market.matchSeconds += 15; 
+                        let targetPrice = Market.basePrice;
+                        
+                        // Event Engine
+                        if (!Market.isSuspended) {
+                            const rand = Math.random();
+                            if (rand < 0.005) { 
+                                // Rigore / VAR
+                                Market.isSuspended = true;
+                                Market.penaltyTicks = 6; // Sospeso per ~3 secondi
+                                Market.eventMessage = "⚠️ VAR: POSSIBILE RIGORE...";
+                                SoundEngine.error(); 
+                            } else if (rand < 0.015) { 
+                                // Cartellino Rosso
+                                const isHome = Math.random() > 0.5;
+                                if(isHome && Market.homeReds < 3) Market.homeReds++;
+                                else if (!isHome && Market.awayReds < 3) Market.awayReds++;
+                                Market.eventMessage = `🟥 CARTELLINO ROSSO (${isHome ? 'JUV' : 'INT'})`;
+                            } else if (rand < 0.02) {
+                                // Gol improvviso da azione (rara)
+                                const isHome = Math.random() > 0.5;
+                                if(isHome) Market.homeScore++; else Market.awayScore++;
+                                Market.hasScored = true;
+                                Market.eventMessage = `⚽ GOAL! Vantaggio ${isHome ? 'JUV' : 'INT'}`;
+                                TradingEngine.triggerGoalUI();
+                            } else {
+                                Market.eventMessage = "Match in corso...";
+                            }
+                        } else {
+                            Market.penaltyTicks--;
+                            if (Market.penaltyTicks <= 0) {
+                                Market.isSuspended = false;
+                                if (Math.random() < 0.75) { 
+                                    // Rigore segnato
+                                    const isHome = Math.random() > 0.5;
+                                    if(isHome) Market.homeScore++; else Market.awayScore++;
+                                    Market.hasScored = true;
+                                    Market.eventMessage = "⚽ GOAL SU RIGORE!";
+                                    TradingEngine.triggerGoalUI();
+                                } else {
+                                    Market.eventMessage = "❌ RIGORE FALLITO O VAR ANNULLATO";
+                                }
+                            }
+                        }
+
+                        // Odds Engine (Zero Allucinazioni, calcolo matematico)
+                        const scoreDiff = Math.abs(Market.homeScore - Market.awayScore);
+                        const timeElapsed = Market.matchSeconds / (90 * 60); 
+                        const timeRemaining = 1 - timeElapsed;
+
+                        if (scoreDiff === 0) {
+                            // Pareggio in corso: Quota scende esponenenzialmente verso 1.01
+                            const initialDraw = 3.50; // Se 0-0
+                            // Se 1-1 la base è un po' più bassa, ma per semplicità teniamo il modello fluido
+                            targetPrice = 1.01 + (initialDraw - 1.01) * Math.pow(timeRemaining, 1.5);
+                        } else if (scoreDiff === 1) {
+                            // Differenza di 1 rete: Pareggio possibile ma sempre più difficile col passare del tempo
+                            targetPrice = 4.0 + (10.0 * timeElapsed);
+                        } else if (scoreDiff >= 2) {
+                            // Differenza ampia: Pareggio molto improbabile
+                            targetPrice = 15.0 + (80.0 * timeElapsed);
+                        }
+                        
+                        // Noise per simulare il tick reale
+                        if (!Market.isSuspended) {
+                            const noise = (Math.random() - 0.5) * (targetPrice * 0.04); 
+                            Market.basePrice = targetPrice + noise;
+                        }
+
                         if(Market.basePrice < 1.01) Market.basePrice = 1.01;
+                        if(Market.basePrice > 100) Market.basePrice = 100.00; // Cap visuale per la demo
                         
                         Market.history.shift();
                         Market.history.push(Number(Market.basePrice.toFixed(2)));
-                        chartInstance.update();
                         
-                        const bP = Market.history[Market.history.length - 1];
-                        document.getElementById('price-back').innerText = bP.toFixed(2);
-                        document.getElementById('price-lay').innerText = (bP + 0.02).toFixed(2);
+                        TradingEngine.updateScoreboard();
+
+                        if (Market.isSuspended) {
+                            document.getElementById('price-back').innerText = '🔒';
+                            document.getElementById('price-lay').innerText = '🔒';
+                        } else {
+                            chartInstance.update('none'); // Update veloce senza animazioni pesanti
+                            const bP = Market.history[Market.history.length - 1];
+                            document.getElementById('price-back').innerText = bP.toFixed(2);
+                            document.getElementById('price-lay').innerText = (bP + 0.02).toFixed(2);
+                        }
                         
-                        RiskManager.updateCalculations(); 
+                        if (!Market.position) RiskManager.updateCalculations(); 
                         if (Market.position) {
                             TradingEngine.updateLivePnL();
                             TradingEngine.updateLiveEducationalFeedback();
                         }
-                    }, 600);
+                    }, 500);
+                },
+                triggerGoalUI: () => {
+                    SoundEngine.goal();
+                    document.getElementById('chart-container').classList.add('flash-goal');
+                    setTimeout(() => document.getElementById('chart-container').classList.remove('flash-goal'), 2500);
                 },
                 updateLiveEducationalFeedback: () => {
                     const eduBox = document.getElementById('edu-feedback');
@@ -1234,8 +1259,17 @@
                     let message = "";
                     let colorClass = "text-[#00ff80]";
                     
+                    // Ottieni il profitto attuale per guidare il feedback
+                    const bP = Number(document.getElementById('price-back').innerText);
+                    const lP = Number(document.getElementById('price-lay').innerText);
+                    const activeStake = Market.position.stake;
+                    
+                    if(isNaN(bP) || isNaN(lP)) return; // Salta se suspended (lucchetto)
+                    
+                    let rawProfit = (Market.position.type === 'back') ? activeStake * ((Market.position.entryPrice / lP) - 1) : activeStake * (1 - (Market.position.entryPrice / bP));
+                    
                     if (Market.position.type === 'lay') {
-                        if (Market.hasScored) {
+                        if (rawProfit > 0) {
                             message = dict[State.lang].liveLayGoal || dict['en'].liveLayGoal;
                             colorClass = "text-[#00ff80]";
                         } else {
@@ -1243,7 +1277,7 @@
                             colorClass = "text-yellow-400";
                         }
                     } else {
-                        if (Market.hasScored) {
+                        if (rawProfit < 0) {
                             message = dict[State.lang].liveBackGoal || dict['en'].liveBackGoal;
                             colorClass = "text-red-400";
                         } else {
@@ -1257,6 +1291,7 @@
                 },
                 handleAction: (actionType) => {
                     SoundEngine.click();
+                    if (Market.isSuspended || Market.matchSeconds >= 90*60) return;
                     if (Market.position) return;
                     
                     const disp = getDisponibilita();
@@ -1279,6 +1314,11 @@
 
                     Market.position = { type: actionType, entryPrice: actionType === 'back' ? bP : lP, stake: currentStake, cost: cost };
                     
+                    const remainingBankroll = State.saldo - cost;
+                    document.getElementById('available-bankroll-display').innerText = `Disp: € ${remainingBankroll.toFixed(2)}`;
+                    document.getElementById('available-bankroll-display').classList.add('text-gray-500', 'bg-transparent', 'border-gray-700');
+                    document.getElementById('available-bankroll-display').classList.remove('text-[#00ff80]', 'bg-[#00ff80]/10');
+
                     document.getElementById('btn-back').classList.add('hidden');
                     document.getElementById('btn-lay').classList.add('hidden');
                     document.getElementById('risk-mgmt-panel').classList.add('opacity-50', 'pointer-events-none'); 
@@ -1294,7 +1334,10 @@
                     UIManager.updateDashboards();
                 },
                 updateLivePnL: () => {
-                    const bP = Number(document.getElementById('price-back').innerText);
+                    const elBack = document.getElementById('price-back');
+                    if(elBack.innerText === '🔒') return; // Mercato sospeso, PNL non calcolabile esatto in questo tick
+                    
+                    const bP = Number(elBack.innerText);
                     const lP = Number(document.getElementById('price-lay').innerText);
                     const activeStake = Market.position.stake;
                     
@@ -1319,7 +1362,14 @@
                     setTimeout(() => floatingEl.remove(), 1500);
                 },
                 closePosition: () => {
-                    const bP = Number(document.getElementById('price-back').innerText);
+                    const elBack = document.getElementById('price-back');
+                    if (elBack.innerText === '🔒' || Market.isSuspended) {
+                        SoundEngine.error();
+                        alert("Impossibile fare Cash Out! Mercato Sospeso (VAR/Rigore). Attendere.");
+                        return;
+                    }
+                    
+                    const bP = Number(elBack.innerText);
                     const lP = Number(document.getElementById('price-lay').innerText);
                     const ePS = Market.position.entryPrice.toFixed(2);
                     const activeStake = Market.position.stake;
@@ -1357,12 +1407,17 @@
 
                     TradingEngine.showFloatingPnL(netProfit);
 
+                    document.getElementById('available-bankroll-display').classList.remove('text-gray-500', 'bg-transparent', 'border-gray-700');
+                    document.getElementById('available-bankroll-display').classList.add('text-[#00ff80]', 'bg-[#00ff80]/10', 'border-[#00ff80]/20');
+
                     const eduBox = document.getElementById('edu-feedback');
                     const eduMsg = document.getElementById('edu-msg');
                     
-                    let msgKey = netRounded === 0 ? 'eduScratch' : (Market.position?.type === 'back' ? (netRounded > 0 ? 'eduBackWin' : 'eduBackLoss') : (netRounded > 0 ? 'eduLayWin' : 'eduLayLoss'));
-                    // FIX: type non c'è più su Market.position (è null). Uso rawProfit per determinare fallback
-                    msgKey = netRounded === 0 ? 'eduScratch' : (netRounded > 0 ? 'eduLayWin' : 'eduLayLoss');
+                    // Deduce il tipo di vittoria basata sul movimento di mercato e posizione
+                    let msgKey = 'eduScratch';
+                    if (netRounded > 0) msgKey = Market.position?.type === 'back' ? 'eduBackWin' : 'eduLayWin';
+                    else if (netRounded < 0) msgKey = Market.position?.type === 'back' ? 'eduBackLoss' : 'eduLayLoss';
+                    
                     let feedbackStr = (dict[State.lang][msgKey] || dict['en'][msgKey]).replace('{E}', ePS).replace('{U}', exitS);
                     
                     const lblGross = dict[State.lang].lblGross || dict['en'].lblGross;
@@ -1414,52 +1469,7 @@
                     UIManager.setLanguage(initialLang);
                     UIManager.updateDashboards();
                     TradingEngine.initChart();
-                    TradingEngine.startLiveMarket();
-                    
-                    const audioContainer = document.getElementById('audio-container');
-                    const playBtn = document.getElementById('audio-play-btn');
-                    const stopBtn = document.getElementById('audio-stop-btn');
-                    const audio = document.getElementById('binaural-audio');
-                    
-                    const handlePlayPause = (e) => {
-                        e.stopPropagation();
-                        SoundEngine.click();
-                        if(SoundEngine.ctx && SoundEngine.ctx.state === 'suspended') SoundEngine.ctx.resume();
-                        if(BinauralEngine.ctx && BinauralEngine.ctx.state === 'suspended') BinauralEngine.ctx.resume();
-
-                        if (audio.paused) {
-                            audio.play().catch(err=>{});
-                            BinauralEngine.start();
-                        } else {
-                            if(!event.target.closest('#volume-control-wrapper')) {
-                                audio.pause();
-                                BinauralEngine.stop();
-                            }
-                        }
-                        
-                        if(!window.audioVolumeInited) {
-                             const volumeInput = document.getElementById('audio-volume');
-                             if(volumeInput && audio) {
-                                 volumeInput.oninput = (e) => {
-                                     const val = e.target.value/100;
-                                     audio.volume = val;
-                                     BinauralEngine.setVolume(val);
-                                 };
-                             }
-                             window.audioVolumeInited = true;
-                        }
-                    };
-
-                    const handleStop = (e) => {
-                        e.stopPropagation();
-                        SoundEngine.click();
-                        audio.pause();
-                        audio.currentTime = 0;
-                        BinauralEngine.stop();
-                    };
-
-                    if(playBtn) playBtn.addEventListener('click', handlePlayPause);
-                    if(stopBtn) stopBtn.addEventListener('click', handleStop);
+                    // Il mercato live non parte subito, attende il pulsante "AVVIA KICK-OFF" per massima esperienza didattica
                     
                     document.getElementById('lang-switcher').addEventListener('change', (e) => {
                         SoundEngine.click();
@@ -1468,7 +1478,6 @@
                     
                     const unlockAudio = () => {
                         SoundEngine.init(); 
-                        BinauralEngine.init();
                         document.body.removeEventListener('click', unlockAudio);
                         document.body.removeEventListener('touchstart', unlockAudio);
                     };
@@ -1495,8 +1504,15 @@
                         if(eduBox) eduBox.classList.add('hidden');
                     }
                     
+                    document.getElementById('available-bankroll-display').classList.remove('text-gray-500', 'bg-transparent', 'border-gray-700');
+                    document.getElementById('available-bankroll-display').classList.add('text-[#00ff80]', 'bg-[#00ff80]/10', 'border-[#00ff80]/20');
+                    
+                    // Riavvia il match
+                    TradingEngine.startLiveMarket();
+                    
                     StorageManager.save();
                     UIManager.updateDashboards();
+                    RiskManager.updateCalculations();
                     UIManager.triggerPop('bankroll-badge', '[#00ff80]');
                 }
             };
@@ -1515,6 +1531,34 @@
         window.openEbookModal = openEbookModal;
         window.closeEbookModal = closeEbookModal;
         window.closePdfModal = closePdfModal;
+        window.TradingEngine = { startMatch: () => { SoundEngine.click(); RoomApp._startMatch(); } };
+        // Expose start match
+        RoomApp._startMatch = () => {
+             document.getElementById('match-overlay').classList.add('opacity-0', 'pointer-events-none');
+             setTimeout(() => document.getElementById('match-overlay').classList.add('hidden'), 300);
+             // Use interval to trigger inner function
+             document.getElementById('btn-risk-2').click(); // trigger a risk update
+             // We can't easily access the inner TradingEngine from here without exposing it.
+             // Given the architecture, we will simulate a click on a hidden button to start it or expose it properly.
+             // Actually, startLiveMarket is called via the overlay button. Let's make it reachable.
+        };
+    </script>
+    
+    <!-- Fix Scope for Start Match -->
+    <script>
+        // Overwrite the overlay button onclick to use the internal engine via a custom event
+        document.addEventListener('DOMContentLoaded', () => {
+             const btn = document.querySelector('#match-overlay button');
+             if(btn) {
+                 btn.onclick = (e) => {
+                     e.preventDefault();
+                     document.getElementById('match-overlay').classList.add('opacity-0', 'pointer-events-none');
+                     setTimeout(() => document.getElementById('match-overlay').classList.add('hidden'), 300);
+                     // Simulate resetBankroll which calls startLiveMarket internally
+                     window.resetBankroll();
+                 };
+             }
+        });
     </script>
 </body>
 </html>
