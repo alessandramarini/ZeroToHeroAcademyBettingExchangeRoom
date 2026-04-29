@@ -11,6 +11,7 @@
     <!-- Ottimizzazione Estrema: DNS Prefetch & Preconnect -->
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://www.youtube.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,6 +76,13 @@
         .flash-red { animation: flashR 0.5s ease-out; }
         @keyframes flashR { 0% { background-color: rgba(225,29,72,0.3); } 100% { background-color: transparent; } }
 
+        /* Animazione Goal - Impatto visivo fortissimo */
+        .flash-goal { animation: flashGoalAnim 1.5s ease-out; }
+        @keyframes flashGoalAnim { 
+            0% { background-color: rgba(255, 215, 0, 0.6); box-shadow: 0 0 50px rgba(255, 215, 0, 0.8); } 
+            100% { background-color: transparent; box-shadow: 0 0 0px transparent; } 
+        }
+
         /* Floating PnL Animation */
         @keyframes floatUp {
             0% { opacity: 1; transform: translateY(0) scale(1); }
@@ -98,6 +106,26 @@
         #video-wrapper:fullscreen {
             width: 100vw; height: 100vh; display: flex; align-items: center; justify-content: center;
             background-color: black; border: none; border-radius: 0;
+        }
+
+        /* Synth Visualizer Styles */
+        .synth-bar {
+            width: 5px; height: 4px; border-radius: 9999px;
+            background-color: #4b5563; transition: height 0.1s ease-out, background-color 0.3s ease;
+        }
+        .is-playing .synth-bar { background-color: #00ff80; box-shadow: 0 0 8px rgba(0, 255, 128, 0.6); }
+
+        /* Custom Loader per il Motore PDF */
+        .pdf-loader {
+            border: 3px solid rgba(0, 255, 128, 0.2); border-left-color: #00ff80;
+            border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Stili per le canvas generate dal PDF */
+        .pdf-canvas-page {
+            max-width: 100%; height: auto !important; margin-bottom: 1.5rem;
+            border-radius: 0.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.5); background-color: white;
         }
     </style>
 </head>
@@ -143,27 +171,38 @@
                 <span class="text-xl sm:text-2xl mr-2 sm:mr-3">🧘‍♂️</span> <span data-i18n="prepTitle">Fase 1: Preparazione (Mente Milionaria)</span>
             </h3>
             
-            <div class="bg-black/40 p-4 sm:p-5 rounded-xl border border-gray-800 shadow-inner">
-                <p class="text-[10px] sm:text-xs text-[#00ff80] font-black mb-3 tracking-widest flex items-center justify-center gap-2 uppercase">
-                    <span class="text-base sm:text-lg">🎧</span> <span data-i18n="audioLabel">ONDE DEL MARE + BINAURAL FOCUS (14Hz)</span>
-                </p>
-                <div class="bg-red-950/30 border border-red-500/30 rounded flex items-start gap-2 p-2.5 sm:p-3 mb-4 sm:mb-5">
-                    <span class="text-red-500 text-xs sm:text-sm">⚠️</span>
-                    <p class="text-[9px] sm:text-[11px] text-red-300 font-semibold leading-relaxed" data-i18n="audioWarning">ATTENZIONE: Usare le cuffie per l'effetto binaurale. Non usare durante la guida o l'uso di macchinari.</p>
-                </div>
-                <audio id="binaural-audio" src="https://actions.google.com/sounds/v1/water/ocean_volume_swells.ogg" preload="metadata" loop crossorigin="anonymous"></audio>
-                <div class="flex items-center gap-3 sm:gap-4 bg-gray-900/80 p-3 sm:p-3.5 rounded-xl border border-gray-700/50">
-                    <button id="audio-play-btn" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full bg-[#00ff80] text-black font-black flex items-center justify-center hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,128,0.3)] active:scale-90">▶</button>
-                    <div class="flex-1 flex flex-col gap-1 sm:gap-1.5">
-                        <input type="range" id="audio-progress" class="w-full h-1.5 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#00ff80]" value="0" min="0" max="100">
-                        <div class="flex justify-between text-[9px] sm:text-[10px] text-gray-500 font-mono font-bold">
-                            <span id="audio-time">0:00</span>
-                            <span id="audio-duration">0:00</span>
-                        </div>
+            <div class="bg-black/40 p-4 sm:p-5 rounded-xl border border-gray-800 shadow-inner relative overflow-hidden">
+                <div id="audio-glow" class="absolute inset-0 bg-[#00ff80]/0 transition-colors duration-1000 z-0"></div>
+
+                <div class="relative z-10">
+                    <p class="text-[10px] sm:text-xs text-[#00ff80] font-black mb-3 tracking-widest flex items-center justify-center gap-2 uppercase">
+                        <span class="text-base sm:text-lg">🎧</span> <span data-i18n="audioLabel">ONDE DEL MARE + BINAURAL FOCUS (14Hz)</span>
+                    </p>
+                    <div class="bg-red-950/30 border border-red-500/30 rounded flex items-start gap-2 p-2.5 sm:p-3 mb-4 sm:mb-5">
+                        <span class="text-red-500 text-xs sm:text-sm">⚠️</span>
+                        <p class="text-[9px] sm:text-[11px] text-red-300 font-semibold leading-relaxed" data-i18n="audioWarning">ATTENZIONE: Usare le cuffie per l'effetto binaurale. Non usare durante la guida o l'uso di macchinari.</p>
                     </div>
-                    <div class="flex items-center gap-1 w-12 sm:w-16 shrink-0">
-                        <span class="text-[10px] sm:text-xs text-gray-400">🔊</span>
-                        <input type="range" id="audio-volume" class="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-[#00ff80]" value="100" min="0" max="100">
+                    
+                    <audio id="binaural-audio" src="https://actions.google.com/sounds/v1/water/ocean_volume_swells.ogg" preload="metadata" loop crossorigin="anonymous"></audio>
+                    
+                    <div class="flex items-center gap-4 bg-gray-950/80 p-3 sm:p-4 rounded-xl border border-gray-700/50 backdrop-blur-sm">
+                        <button id="audio-play-btn" class="w-12 h-12 sm:w-14 sm:h-14 shrink-0 rounded-full bg-[#00ff80] text-black font-black flex items-center justify-center hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,128,0.4)] active:scale-90 touch-manipulation">
+                            <span class="text-xl sm:text-2xl pl-1">▶</span>
+                        </button>
+                        
+                        <div class="flex-1 flex flex-col justify-center items-center h-12" id="synth-visualizer">
+                            <span class="text-[9px] sm:text-[10px] font-mono font-bold tracking-widest uppercase mb-2 text-gray-500">
+                                STATUS: <span id="audio-status" class="text-gray-400">STANDBY</span>
+                            </span>
+                            <div class="flex items-end gap-1.5 h-6">
+                                <div class="synth-bar"></div><div class="synth-bar"></div><div class="synth-bar"></div><div class="synth-bar"></div><div class="synth-bar"></div><div class="synth-bar"></div><div class="synth-bar hidden sm:block"></div><div class="synth-bar hidden sm:block"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2 w-16 sm:w-20 shrink-0">
+                            <span class="text-xs text-gray-400">🔊</span>
+                            <input type="range" id="audio-volume" class="w-full h-1.5 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-[#00ff80]" value="50" min="0" max="100">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -231,7 +270,7 @@
             </div>
         </section>
 
-        <!-- FASE 3: L'ARENA (SIMULATORE GAMIFICATO) -->
+        <!-- FASE 3: L'ARENA (SIMULATORE GAMIFICATO E REALISTICO) -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8" style="content-visibility: auto; contain-intrinsic-size: 800px;">
             
             <!-- QUIZ -->
@@ -254,23 +293,34 @@
                 </div>
             </div>
 
-            <!-- SIMULATORE TRADING -->
+            <!-- SIMULATORE TRADING CON OROLOGIO E GOAL ENGINE -->
             <div class="glass-panel rounded-2xl p-4 sm:p-6 lg:col-span-2" id="trading-module">
                 <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6 border-b border-gray-800 pb-3 sm:pb-4 gap-3 sm:gap-4">
                     <div>
                         <h3 class="font-black text-base sm:text-lg text-white flex items-center uppercase tracking-wider">
                             <span class="text-xl sm:text-2xl mr-2 sm:mr-3">📈</span> <span data-i18n="simTitle">Live Scalping Simulator</span>
                         </h3>
-                        <p class="text-[9px] sm:text-[10px] text-[#00ff80] mt-1 sm:mt-1.5 font-bold uppercase tracking-[0.2em]" data-i18n="simScenario">Scenario: Pareggio 0-0 al 75'. Strategia: Lay The Draw.</p>
+                        <p class="text-[9px] sm:text-[10px] text-[#00ff80] mt-1 sm:mt-1.5 font-bold uppercase tracking-[0.2em]" data-i18n="simScenario">Scenario: Pareggio 0-0. Strategia: Lay The Draw.</p>
                     </div>
-                    <div class="flex items-center gap-2 bg-gray-950 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-gray-800 shadow-inner shrink-0 self-end sm:self-auto">
-                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 pulse-live"></div>
-                        <span class="text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 tracking-[0.2em] uppercase" data-i18n="liveMarket">Market Live</span>
+                    <!-- OROLOGIO PARTITA AGGIUNTO QUI -->
+                    <div class="flex gap-2">
+                        <div class="flex items-center gap-1.5 sm:gap-2 bg-gray-900 border border-gray-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md shadow-inner">
+                            <span class="text-[10px] sm:text-xs">⏱</span>
+                            <span id="match-timer" class="text-[10px] sm:text-[13px] font-mono font-black text-white tracking-widest w-[45px] sm:w-[50px] text-center">75:00</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 sm:gap-2 bg-gray-950 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-gray-800 shadow-inner shrink-0">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 pulse-live" id="market-status-dot"></div>
+                            <span id="market-status-text" class="text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 tracking-[0.2em] uppercase" data-i18n="liveMarket">Market Live</span>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Chart Container -->
                 <div class="relative w-full h-40 sm:h-48 bg-[#0a0f0a] rounded-xl border border-gray-800 mb-4 sm:mb-5 p-1 sm:p-2 overflow-hidden shadow-inner ring-1 ring-white/5" id="chart-container">
+                    <div id="goal-overlay" class="absolute inset-0 z-20 flex items-center justify-center bg-yellow-500/20 backdrop-blur-[2px] hidden flex-col">
+                        <span class="text-4xl sm:text-6xl font-black text-yellow-400 drop-shadow-[0_0_20px_rgba(255,215,0,0.8)] animate-bounce">⚽ GOAL!</span>
+                        <span class="text-white font-bold bg-black/80 px-3 py-1 rounded mt-2 text-xs uppercase tracking-widest" id="goal-time-display"></span>
+                    </div>
                     <div id="live-pnl-display" class="absolute top-2 right-2 sm:top-3 sm:right-3 px-2 sm:px-3 py-1 sm:py-1.5 rounded bg-black/90 border border-gray-700 hidden z-10 font-mono text-[10px] sm:text-xs md:text-sm font-black shadow-2xl transition-colors duration-300"></div>
                     <canvas id="tradingChart"></canvas>
                 </div>
@@ -346,22 +396,26 @@
 
     </main>
 
-    <!-- MODALE FULLSCREEN PER PREVIEW PDF -->
-    <div id="pdf-modal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/95 backdrop-blur-md p-2 sm:p-6 opacity-0 transition-opacity duration-300">
-        <div class="bg-[#0e1621] w-full max-w-6xl h-full max-h-[95vh] rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300" id="pdf-modal-content">
-            <!-- Header -->
-            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-[#1c242d]">
+    <!-- MODALE FULLSCREEN PER PREVIEW PDF (Caricamento Dinamico PDF.js) -->
+    <div id="pdf-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-0 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="bg-[#0e1621] w-full max-w-5xl h-full sm:h-auto sm:max-h-[90vh] sm:rounded-2xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative" id="pdf-modal-content">
+            
+            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-[#1c242d] shrink-0">
                 <h3 class="text-[#00ff80] font-black uppercase tracking-widest text-xs sm:text-sm" data-i18n="pdfPreviewTitle">Preview Slide Masterclass</h3>
-                <button onclick="closePdfModal()" class="text-gray-400 hover:text-white text-2xl px-3 py-1 font-bold bg-gray-800 rounded-lg active:scale-95">&times;</button>
+                <button onclick="closePdfModal()" class="text-gray-400 hover:text-white text-3xl leading-none px-2 rounded-lg active:scale-95 touch-manipulation">&times;</button>
             </div>
-            <!-- Iframe per visualizzare il PDF -->
-            <div class="flex-1 bg-gray-300 relative w-full h-full">
-                <iframe id="pdf-iframe" src="" class="absolute inset-0 w-full h-full border-none"></iframe>
+            
+            <div id="pdf-scroll-area" class="flex-1 bg-gray-950 overflow-y-auto p-4 relative flex flex-col items-center tg-scrollbar">
+                <div id="pdf-loading" class="absolute inset-0 flex flex-col items-center justify-center bg-gray-950 z-10 hidden">
+                    <div class="pdf-loader mb-4"></div>
+                    <p class="text-[#00ff80] font-mono text-[10px] sm:text-xs uppercase tracking-widest animate-pulse">Rendering PDF Engine...</p>
+                </div>
+                <div id="pdf-render-container" class="w-full max-w-3xl flex flex-col items-center space-y-4"></div>
             </div>
-            <!-- Footer con Download -->
-            <div class="p-4 sm:p-5 bg-[#1c242d] border-t border-gray-800 flex justify-center sm:justify-end items-center">
-                <a id="pdf-download-btn" href="#" download class="bg-[#00ff80] text-black font-black px-6 py-3.5 rounded-xl hover:bg-white transition-colors uppercase tracking-widest text-[10px] sm:text-xs shadow-[0_0_15px_rgba(0,255,128,0.3)] flex items-center gap-2 active:scale-95 touch-manipulation">
-                    <span class="text-lg">⬇️</span> <span data-i18n="btnDownloadPdf">Scarica PDF Originale</span>
+            
+            <div class="p-4 bg-[#1c242d] border-t border-gray-800 shrink-0 flex justify-center">
+                <a id="pdf-download-btn" href="#" download class="bg-[#00ff80] text-black font-black w-full sm:w-auto px-8 py-4 rounded-xl hover:bg-white transition-colors uppercase tracking-[0.2em] text-[10px] sm:text-xs shadow-[0_0_15px_rgba(0,255,128,0.3)] flex items-center justify-center gap-3 active:scale-95 touch-manipulation">
+                    <span class="text-xl">⬇️</span> <span data-i18n="btnDownloadPdf">Scarica PDF Originale</span>
                 </a>
             </div>
         </div>
@@ -393,13 +447,14 @@
             },
             click: function() { this.playTone(600, 'sine', 0.1, 0.1); },
             cashout: function() { this.playTone(880, 'sine', 0.1, 0.1); setTimeout(() => this.playTone(1760, 'sine', 0.3, 0.15), 100); },
+            goal: function() { this.playTone(440, 'triangle', 0.5, 0.2); setTimeout(() => this.playTone(660, 'square', 1.0, 0.2), 300); },
             error: function() { this.playTone(150, 'sawtooth', 0.3, 0.1); }
         };
 
         // --- 2. SINTETIZZATORE BINAURALE ---
         const BinauralEngine = {
             ctx: null, oscLeft: null, oscRight: null, gainLeft: null, gainRight: null, merger: null,
-            isPlaying: false, masterVolume: 0.15,
+            isPlaying: false, masterVolume: 0.15, visualizerInterval: null,
             init: function() {
                 if (!this.ctx) {
                     const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -426,23 +481,94 @@
 
                     this.oscLeft.start(); this.oscRight.start();
                     this.isPlaying = true;
+                    this.startVisualizer();
                 } catch(e) {}
             },
             stop: function() {
                 if (this.oscLeft) { this.oscLeft.stop(); this.oscLeft.disconnect(); }
                 if (this.oscRight) { this.oscRight.stop(); this.oscRight.disconnect(); }
                 this.isPlaying = false;
+                this.stopVisualizer();
             },
             setVolume: function(val) {
-                this.masterVolume = val * 0.2; 
-                if (this.gainLeft && this.gainRight && this.ctx) {
-                    this.gainLeft.gain.setValueAtTime(this.masterVolume, this.ctx.currentTime);
-                    this.gainRight.gain.setValueAtTime(this.masterVolume, this.ctx.currentTime);
+                const safeVal = Math.max(0, Math.min(1, Number(val) || 0));
+                this.masterVolume = safeVal * 0.2; 
+                if (this.gainLeft && this.gainRight && this.ctx && this.isPlaying) {
+                    try {
+                        this.gainLeft.gain.setValueAtTime(this.masterVolume, this.ctx.currentTime);
+                        this.gainRight.gain.setValueAtTime(this.masterVolume, this.ctx.currentTime);
+                    } catch(e) {}
                 }
+            },
+            startVisualizer: function() {
+                const visualizer = document.getElementById('synth-visualizer');
+                const status = document.getElementById('audio-status');
+                const glow = document.getElementById('audio-glow');
+                const bars = document.querySelectorAll('.synth-bar');
+                if(visualizer) visualizer.classList.add('is-playing');
+                if(status) { status.innerText = 'ACTIVE'; status.className = 'text-[#00ff80] animate-pulse'; }
+                if(glow) glow.classList.replace('bg-[#00ff80]/0', 'bg-[#00ff80]/5');
+                this.visualizerInterval = setInterval(() => { bars.forEach(bar => { bar.style.height = `${4 + Math.random() * 16}px`; }); }, 100);
+            },
+            stopVisualizer: function() {
+                clearInterval(this.visualizerInterval);
+                const visualizer = document.getElementById('synth-visualizer');
+                const status = document.getElementById('audio-status');
+                const glow = document.getElementById('audio-glow');
+                const bars = document.querySelectorAll('.synth-bar');
+                if(visualizer) visualizer.classList.remove('is-playing');
+                if(status) { status.innerText = 'STANDBY'; status.className = 'text-gray-400'; }
+                if(glow) glow.classList.replace('bg-[#00ff80]/5', 'bg-[#00ff80]/0');
+                bars.forEach(bar => bar.style.height = '4px');
             }
         };
 
-        // --- UTILITY GLOBALI HTML E FULLSCREEN API ---
+        // --- 3. MOTORE PDF.JS ---
+        const PdfEngine = {
+            loaded: false,
+            init: function() {
+                if (this.loaded) return Promise.resolve();
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js';
+                    script.onload = () => {
+                        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+                        this.loaded = true;
+                        resolve();
+                    };
+                    script.onerror = reject;
+                    document.head.appendChild(script);
+                });
+            },
+            render: async function(url) {
+                const container = document.getElementById('pdf-render-container');
+                const loader = document.getElementById('pdf-loading');
+                container.innerHTML = ''; loader.classList.remove('hidden');
+                try {
+                    await this.init();
+                    const loadingTask = window.pdfjsLib.getDocument(url);
+                    const pdf = await loadingTask.promise;
+                    for(let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                        const page = await pdf.getPage(pageNum);
+                        const viewportBase = page.getViewport({ scale: 1 });
+                        const containerWidth = container.clientWidth || window.innerWidth * 0.9;
+                        const scale = containerWidth / viewportBase.width;
+                        const viewport = page.getViewport({ scale: scale });
+
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        canvas.height = viewport.height; canvas.width = viewport.width;
+                        canvas.className = 'pdf-canvas-page';
+                        container.appendChild(canvas);
+                        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+                    }
+                } catch(e) {
+                    container.innerHTML = `<p class="text-red-500 font-bold mt-10">Errore anteprima. Usa il download diretto.</p>`;
+                } finally { loader.classList.add('hidden'); }
+            }
+        };
+
+        // --- UTILITY UI ---
         function handlePdfClick(event) {
             event.preventDefault();
             const el = event.currentTarget;
@@ -457,100 +583,56 @@
 
         function openPdfModal(url) {
             const modal = document.getElementById('pdf-modal');
-            const iframe = document.getElementById('pdf-iframe');
             const dlBtn = document.getElementById('pdf-download-btn');
-            
-            iframe.src = url;
             dlBtn.href = url;
-            
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-            
-            // Forza il reflow per la transizione fluida
+            modal.classList.remove('hidden'); modal.classList.add('flex');
             void modal.offsetWidth; 
-            
-            modal.classList.remove('opacity-0');
-            modal.classList.add('opacity-100');
-            document.getElementById('pdf-modal-content').classList.remove('scale-95');
-            document.getElementById('pdf-modal-content').classList.add('scale-100');
-            
-            // Disabilita lo scroll del body
+            modal.classList.remove('opacity-0'); modal.classList.add('opacity-100');
+            document.getElementById('pdf-modal-content').classList.remove('scale-95'); document.getElementById('pdf-modal-content').classList.add('scale-100');
             document.body.style.overflow = 'hidden';
+            PdfEngine.render(url);
         }
 
         function closePdfModal() {
             SoundEngine.click();
             const modal = document.getElementById('pdf-modal');
-            
-            modal.classList.remove('opacity-100');
-            modal.classList.add('opacity-0');
-            document.getElementById('pdf-modal-content').classList.remove('scale-100');
-            document.getElementById('pdf-modal-content').classList.add('scale-95');
-            
+            modal.classList.remove('opacity-100'); modal.classList.add('opacity-0');
+            document.getElementById('pdf-modal-content').classList.remove('scale-100'); document.getElementById('pdf-modal-content').classList.add('scale-95');
             setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                document.getElementById('pdf-iframe').src = ""; // Pulisce iframe
-                document.body.style.overflow = ''; // Ripristina scroll
+                modal.classList.add('hidden'); modal.classList.remove('flex');
+                document.getElementById('pdf-render-container').innerHTML = ''; 
+                document.body.style.overflow = '';
             }, 300);
         }
 
         function toggleTelegramPanel() {
             SoundEngine.click();
             const panel = document.getElementById('telegram-wrapper');
-            if (panel.classList.contains('expanded')) {
-                panel.classList.remove('expanded');
-            } else {
-                panel.classList.add('expanded');
-                setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150);
-            }
+            if (panel.classList.contains('expanded')) { panel.classList.remove('expanded'); } 
+            else { panel.classList.add('expanded'); setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150); }
         }
 
         function toggleVideoFullscreen() {
             SoundEngine.click();
             const elem = document.getElementById("video-wrapper");
-            
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.webkitRequestFullscreen) { /* Safari */
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) { /* IE11 */
-                    elem.msRequestFullscreen();
-                }
-                
-                // Forza l'orientamento in landscape se supportato dal device (Mobile)
-                try {
-                    if (screen.orientation && screen.orientation.lock) {
-                        screen.orientation.lock('landscape').catch(e => console.log('Orientation lock non supportato nativamente'));
-                    }
-                } catch(e) {}
+                if (elem.requestFullscreen) { elem.requestFullscreen(); } 
+                else if (elem.webkitRequestFullscreen) { elem.webkitRequestFullscreen(); } 
+                else if (elem.msRequestFullscreen) { elem.msRequestFullscreen(); }
+                try { if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(e=>{}); } catch(e) {}
             } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
+                if (document.exitFullscreen) document.exitFullscreen();
+                else if (document.webkitExitFullscreen) document.webkitExitFullscreen();
+                else if (document.msExitFullscreen) document.msExitFullscreen();
             }
         }
 
-        // Sblocca orientamento quando si esce dal fullscreen
-        document.addEventListener("fullscreenchange", () => {
-            if (!document.fullscreenElement && screen.orientation && screen.orientation.unlock) {
-                try { screen.orientation.unlock(); } catch(e) {}
-            }
-        });
-        document.addEventListener("webkitfullscreenchange", () => {
-            if (!document.webkitFullscreenElement && screen.orientation && screen.orientation.unlock) {
-                try { screen.orientation.unlock(); } catch(e) {}
-            }
-        });
+        document.addEventListener("fullscreenchange", () => { if (!document.fullscreenElement && screen.orientation && screen.orientation.unlock) { try { screen.orientation.unlock(); } catch(e) {} } });
+        document.addEventListener("webkitfullscreenchange", () => { if (!document.webkitFullscreenElement && screen.orientation && screen.orientation.unlock) { try { screen.orientation.unlock(); } catch(e) {} } });
 
         // --- CORE APPLICATION ---
         const RoomApp = (function() {
-            const CONFIG = { STORAGE_KEY: 'bx_academy_state_v11' }; 
+            const CONFIG = { STORAGE_KEY: 'bx_academy_state_v13' }; 
 
             const dict = {
                 it: {
@@ -561,13 +643,13 @@
                     quizSuccess: "Corretto! La tua controparte è sempre una persona che ha fatto l'azione opposta alla tua (+100 XP)", 
                     quizFailA: "Attenzione: Nel Betting Exchange non esiste il banco tradizionale. Se la controparte fosse il Bookmaker, subiresti limitazioni (Gubbing). La risposta esatta è la B: scommetti contro altri utenti.",
                     quizFailC: "Errore: La piattaforma (es. Betfair) è solo un intermediario neutrale che trattiene una piccola commissione sulle vincite nette. La risposta esatta è la B: scambi quote con altre persone.",
-                    simTitle: "Live Scalping Simulator", simScenario: "Scenario: Pareggio 0-0 al 75'. Strategia: Lay The Draw.", liveMarket: "Market Live",
+                    simTitle: "Live Scalping Simulator", simScenario: "Scenario: Pareggio 0-0. Strategia: Lay The Draw.", liveMarket: "Market Live",
                     riskMgmt: "MONEY MANAGEMENT", stakeCalc: "Stake Calcolato (Puntata):", liabilityLbl: "Liability (Rischio se Banchi):", lblDraw: "Pareggio (Draw)",
                     btnBackLbl: "Punta (Back)", btnLayLbl: "Banca (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CHIUDI TRADE", eduAnalysis: "Analisi Scientifica del Trade",
-                    eduBackWin: "Hai Puntato a {E} e Bancato a {U}. La quota è scesa come previsto dal Time Decay (0-0 al 75'). Ottimo trade in trend matematico.",
-                    eduBackLoss: "Hai Puntato a {E} e Bancato a {U}. Il trend era favorevole, ma la volatilità temporanea ha eroso il profitto. Corretta l'uscita rapida.",
-                    eduLayWin: "Hai Bancato a {E} e Puntato a {U}. Profitto generato da un gol o un rimbalzo. ATTENZIONE: se restava 0-0, operare contro il Time Decay era perdente.",
-                    eduLayLoss: "Hai Bancato a {E} e Puntato a {U}. La quota è crollata per il decadimento temporale (Time Decay). Bancare il pareggio a fine partita porta a Red Book certi se non segnano.",
+                    eduBackWin: "Hai Puntato a {E} e chiuso a {U}. Eccellente trade! Hai incassato in profitto dopo il GOL che ha fatto schizzare la quota del pareggio.",
+                    eduBackLoss: "Hai Puntato a {E} e chiuso a {U}. La quota scendeva per via del tempo (0-0). In questo scenario, puntare sul pareggio prima di un gol è statisticamente perdente.",
+                    eduLayWin: "Hai Bancato a {E} e chiuso a {U}. GOL! Il pareggio è saltato, la quota è schizzata e hai incassato il massimo profitto in base all'hedging.",
+                    eduLayLoss: "Hai Bancato a {E} e chiuso a {U}. Non ci sono stati gol, la partita andava verso la fine e la quota è crollata (Time Decay). Bancare senza che avvenga un evento genera Red Book certi.",
                     eduScratch: "Hai chiuso alla stessa quota ({E}). Trade in pari (Scratch). Preservare il capitale è la prima regola del professionista.",
                     navPrev: "← Indietro", navNext: "Avanti →", tgDate: "Oggi", alertPdf: "Il PDF per questa lingua non è ancora disponibile.",
                     pdfPreviewTitle: "PREVIEW SLIDE MASTERCLASS", btnDownloadPdf: "Scarica PDF Originale",
@@ -583,13 +665,13 @@
                     quizSuccess: "Correct! Your counterparty is always a person who placed the opposite bet (+100 XP)", 
                     quizFailA: "Warning: In the Betting Exchange, there is no traditional bookie. If it were a Bookmaker, you'd face account limits (Gubbing). The correct answer is B: you bet against other users.",
                     quizFailC: "Error: The platform (e.g., Betfair) is just a neutral intermediary taking a small commission on net winnings. The correct answer is B: you trade odds with other people.",
-                    simTitle: "Live Scalping Simulator", simScenario: "Scenario: Draw 0-0 at 75'. Strategy: Lay The Draw.", liveMarket: "Market Live",
+                    simTitle: "Live Scalping Simulator", simScenario: "Scenario: Draw 0-0. Strategy: Lay The Draw.", liveMarket: "Market Live",
                     riskMgmt: "MONEY MANAGEMENT", stakeCalc: "Calculated Stake:", liabilityLbl: "Liability (Lay Risk):", lblDraw: "Draw",
                     btnBackLbl: "Back", btnLayLbl: "Lay", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CLOSE TRADE", eduAnalysis: "Scientific Trade Analysis",
-                    eduBackWin: "Backed at {E} and Layed at {U}. Odds dropped as predicted by Time Decay (0-0 at 75'). Excellent trade in mathematical trend.",
-                    eduBackLoss: "Backed at {E} and Layed at {U}. Trend was favorable, but temporary volatility eroded profit. Quick exit was correct.",
-                    eduLayWin: "Layed at {E} and Backed at {U}. Profit from a goal/bounce. WARNING: without a goal, trading against Time Decay is statistically losing.",
-                    eduLayLoss: "Layed at {E} and Backed at {U}. Odds collapsed due to time decay. Laying the draw late game without a goal leads to certain Red Books.",
+                    eduBackWin: "Backed at {E} and closed at {U}. Excellent trade! A goal was scored, making the draw odds spike, and you profited.",
+                    eduBackLoss: "Backed at {E} and closed at {U}. Odds dropped due to Time Decay (0-0). Backing a draw before a goal is statistically losing here.",
+                    eduLayWin: "Layed at {E} and Backed at {U}. GOAL! The draw became unlikely, odds spiked, and you secured max profit.",
+                    eduLayLoss: "Layed at {E} and Backed at {U}. No goal occurred. Odds collapsed due to time decay. Laying the draw late game without a goal leads to Red Books.",
                     eduScratch: "Closed at the same odds ({E}). Scratch trade. Capital preservation is the first rule of the professional.",
                     navPrev: "← Back", navNext: "Next →", tgDate: "Today", alertPdf: "The PDF for this language is not yet available.",
                     pdfPreviewTitle: "MASTERCLASS SLIDES PREVIEW", btnDownloadPdf: "Download Original PDF",
@@ -605,13 +687,13 @@
                     quizSuccess: "¡Correcto! Tu contraparte es un usuario que hizo la acción opuesta (+100 XP)", 
                     quizFailA: "Atención: En el Betting Exchange no existe la casa tradicional. Si fuera un Bookmaker, sufrirías limitaciones (Gubbing). La respuesta correcta es la B: apuestas contra otros usuarios.",
                     quizFailC: "Error: La plataforma (ej. Betfair) es solo un intermediario neutral que cobra una pequeña comisión sobre ganancias netas. La respuesta correcta es la B.",
-                    simTitle: "Simulador de Scalping en Vivo", simScenario: "Escenario: Empate 0-0 al min. 75. Estrategia: Lay The Draw.", liveMarket: "Mercado en Vivo",
+                    simTitle: "Simulador de Scalping en Vivo", simScenario: "Escenario: Empate 0-0. Estrategia: Lay The Draw.", liveMarket: "Mercado en Vivo",
                     riskMgmt: "GESTIÓN DE CAPITAL", stakeCalc: "Stake Calculado:", liabilityLbl: "Liability (Riesgo Lay):", lblDraw: "Empate (Draw)",
                     btnBackLbl: "A favor (Back)", btnLayLbl: "En contra (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CERRAR TRADE", eduAnalysis: "Análisis Científico del Trade",
-                    eduBackWin: "A Favor a {E} y En Contra a {U}. La cuota bajó según la matemática del Time Decay (0-0 al 75'). Excelente trade en tendencia.",
-                    eduBackLoss: "A Favor a {E} y En Contra a {U}. El trend estaba a tu favor, pero la volatilidad te golpeó. Bien hecho al cortar pérdidas rápido.",
-                    eduLayWin: "En Contra a {E} y A Favor a {U}. Beneficio por un gol o rebote. ATENCIÓN: si seguía 0-0, operar contra el Time Decay era perdedor.",
-                    eduLayLoss: "En Contra a {E} y A Favor a {U}. La cuota colapsó por el Time Decay. Ir 'En contra' al empate al final sin goles lleva a inevitables Red Books.",
+                    eduBackWin: "A Favor a {E} y cerrado a {U}. ¡Excelente! Hubo un gol, la cuota del empate se disparó y ganaste.",
+                    eduBackLoss: "A Favor a {E} y cerrado a {U}. La cuota bajó por el Time Decay. Ir a favor del empate antes de un gol es estadísticamente perdedor aquí.",
+                    eduLayWin: "En Contra a {E} y A Favor a {U}. ¡GOL! El empate es improbable, la cuota se disparó y aseguraste ganancias.",
+                    eduLayLoss: "En Contra a {E} y A Favor a {U}. No hubo gol. La cuota colapsó por el Time Decay. Ir 'En contra' sin goles lleva a inevitables Red Books.",
                     eduScratch: "Cerraste a la misma cuota ({E}). Scratch trade. Preservar el capital es la regla número uno del profesional.",
                     navPrev: "← Atrás", navNext: "Siguiente →", tgDate: "Hoy", alertPdf: "El PDF para este idioma aún no está disponible.",
                     pdfPreviewTitle: "PREVIEW DIAPOSITIVAS MASTERCLASS", btnDownloadPdf: "Descargar PDF Original",
@@ -627,13 +709,13 @@
                     quizSuccess: "Correto! A sua contraparte é sempre alguém que apostou o contrário (+100 XP)", 
                     quizFailA: "Atenção: No Betting Exchange não há a casa tradicional. Se fosse o Bookmaker, você sofreria limitações (Gubbing). A resposta correta é a B: você aposta contra outros usuários.",
                     quizFailC: "Erro: A plataforma (ex: Betfair) é apenas uma intermediária neutra que cobra uma comissão sobre os lucros líquidos. A resposta correta é a B: você troca odds com outras pessoas.",
-                    simTitle: "Simulador de Scalping ao Vivo", simScenario: "Cenário: Empate 0-0 aos 75'. Estratégia: Lay The Draw.", liveMarket: "Mercado ao Vivo",
+                    simTitle: "Simulador de Scalping ao Vivo", simScenario: "Cenário: Empate 0-0. Estratégia: Lay The Draw.", liveMarket: "Mercado ao Vivo",
                     riskMgmt: "GESTÃO DE BANCA", stakeCalc: "Stake Calculada:", liabilityLbl: "Liability (Risco Lay):", lblDraw: "Empate (Draw)",
                     btnBackLbl: "A Favor (Back)", btnLayLbl: "Contra (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "FECHAR TRADE", eduAnalysis: "Análise Científica do Trade",
-                    eduBackWin: "A Favor a {E} e Contra a {U}. A odd caiu como previsto pelo Time Decay (0-0 aos 75'). Excelente trade na tendência matemática.",
-                    eduBackLoss: "A Favor a {E} e Contra a {U}. A tendência era favorável, mas a volatilidade erodiu o lucro. Saída rápida correta.",
-                    eduLayWin: "Contra a {E} e A Favor a {U}. Lucro de um gol/salto. ATENÇÃO: se ficasse 0-0, operar contra o Time Decay era perdedor a longo prazo.",
-                    eduLayLoss: "Contra a {E} e A Favor a {U}. A odd desabou devido ao Time Decay. Fazer Lay ao empate no final sem gols leva a Red Books certos.",
+                    eduBackWin: "A Favor a {E} e fechado a {U}. Excelente! A odd subiu após o gol e você lucrou.",
+                    eduBackLoss: "A Favor a {E} e fechado a {U}. A odd caiu devido ao Time Decay. Fazer Back antes do gol não é a estratégia certa aqui.",
+                    eduLayWin: "Contra a {E} e A Favor a {U}. GOL! O empate ficou improvável, a odd disparou e você lucrou.",
+                    eduLayLoss: "Contra a {E} e A Favor a {U}. Sem gols. A odd desabou devido ao Time Decay. Fazer Lay ao empate no final sem gols leva a Red Books.",
                     eduScratch: "Fechou na mesma odd ({E}). Scratch trade. Preservar o capital é a regra numero um do profissional.",
                     navPrev: "← Voltar", navNext: "Próximo →", tgDate: "Hoje", alertPdf: "O PDF para este idioma ainda não está disponível.",
                     pdfPreviewTitle: "PREVIEW SLIDES MASTERCLASS", btnDownloadPdf: "Baixar PDF Original",
@@ -644,7 +726,15 @@
             };
 
             let State = { lang: 'it', xp: 0, bankroll: 100.00, quizPassed: false, riskPct: 2 };
-            let Market = { basePrice: 2.60, history: Array(15).fill(2.60), position: null, loopInterval: null };
+            let Market = { 
+                basePrice: 2.10, 
+                history: Array(15).fill(2.10), 
+                position: null, 
+                loopInterval: null,
+                matchSeconds: 75 * 60, // Parte dal 75esimo
+                goalSeconds: 0, // Verrà randomizzato all'avvio
+                hasScored: false
+            };
             let chartInstance = null;
 
             const StorageManager = {
@@ -730,7 +820,6 @@
                     document.getElementById('xp-counter').innerText = `${State.xp} XP`;
                     document.getElementById('bankroll-counter').innerText = `€ ${State.bankroll.toFixed(2)}`;
                     
-                    // Modificato per usare il nuovo feedback div
                     if (State.quizPassed) {
                         const feedbackDiv = document.getElementById('quiz-feedback');
                         const icon = document.getElementById('quiz-feedback-icon');
@@ -770,7 +859,6 @@
                         UIManager.triggerPop('xp-badge', '[#00ff80]');
                     } else {
                         SoundEngine.error();
-                        // Costruisci il feedback in base alla risposta errata scelta
                         let errorMsg = "";
                         if (optionIndex === 0) errorMsg = dict[State.lang].quizFailA;
                         else if (optionIndex === 2) errorMsg = dict[State.lang].quizFailC;
@@ -800,7 +888,7 @@
                                     return gradient;
                                 },
                                 borderWidth: 3, pointRadius: 0, fill: true, 
-                                tension: 0.1 // Linee più spezzate per simulare le vere dinamiche dell'Order Book
+                                tension: 0.1 
                             }]
                         },
                         options: {
@@ -815,11 +903,46 @@
                     });
                 },
                 startLiveMarket: () => {
+                    // Imposta il gol in un minuto random tra il 76 e l'88
+                    Market.goalSeconds = (75 + Math.floor(Math.random() * 13) + 1) * 60;
+                    
                     Market.loopInterval = setInterval(() => {
-                        // Simulazione Random Walk (Time Decay)
-                        const drift = -0.01; 
-                        const noise = (Math.random() - 0.4) * 0.08;
-                        Market.basePrice += (drift + noise);
+                        if (Market.matchSeconds >= 95 * 60) return; // Fine partita simulata
+
+                        // Avanza il tempo: 1 tick reale (1.8s) = 30 secondi nella partita
+                        Market.matchSeconds += 30;
+                        const m = Math.floor(Market.matchSeconds / 60);
+                        const s = Market.matchSeconds % 60;
+                        document.getElementById('match-timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
+
+                        // Evento GOAL!
+                        if (Market.matchSeconds >= Market.goalSeconds && !Market.hasScored) {
+                            Market.hasScored = true;
+                            // La quota del pareggio esplode perché una squadra è in vantaggio negli ultimi minuti
+                            Market.basePrice += (4.00 + Math.random() * 2); 
+                            
+                            // Animazioni Goal
+                            SoundEngine.goal();
+                            document.getElementById('chart-container').classList.add('flash-goal');
+                            const overlay = document.getElementById('goal-overlay');
+                            overlay.classList.remove('hidden');
+                            document.getElementById('goal-time-display').innerText = `${m}' MIN.`;
+                            setTimeout(() => {
+                                document.getElementById('chart-container').classList.remove('flash-goal');
+                                overlay.classList.add('hidden');
+                            }, 2500);
+                        } else if (!Market.hasScored) {
+                            // Time Decay normale (0-0 la quota scende velocemente)
+                            const drift = -0.04; 
+                            const noise = (Math.random() - 0.4) * 0.05;
+                            Market.basePrice += (drift + noise);
+                        } else {
+                            // Dopo il gol, la nuova quota scende ma lentamente
+                            const drift = -0.01;
+                            const noise = (Math.random() - 0.5) * 0.1;
+                            Market.basePrice += (drift + noise);
+                        }
+
                         if(Market.basePrice < 1.01) Market.basePrice = 1.01;
                         
                         Market.history.shift();
@@ -881,10 +1004,9 @@
                     
                     const pnlDiv = document.getElementById('live-pnl-display');
                     pnlDiv.innerText = `P/L: € ${profit > 0 ? '+' : ''}${profit.toFixed(2)}`;
-                    pnlDiv.className = `absolute top-2 right-2 sm:top-3 sm:right-3 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border z-10 font-mono text-[10px] sm:text-sm font-black shadow-lg transition-colors duration-300 ${profit > 0 ? 'bg-green-950/90 border-[#00ff80] text-[#00ff80]' : (profit < 0 ? 'bg-red-950/90 border-red-500 text-red-500' : 'bg-gray-900/90 border-gray-600 text-gray-300')}`;
+                    pnlDiv.className = `absolute top-2 right-2 sm:top-3 sm:right-3 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border z-10 font-mono text-[10px] sm:text-xs md:text-sm font-black shadow-lg transition-colors duration-300 ${profit > 0 ? 'bg-green-950/90 border-[#00ff80] text-[#00ff80]' : (profit < 0 ? 'bg-red-950/90 border-red-500 text-red-500' : 'bg-gray-900/90 border-gray-600 text-gray-300')}`;
                 },
                 showFloatingPnL: (profit) => {
-                    // Animazione PnL videogioco
                     const floatingEl = document.createElement('div');
                     floatingEl.className = 'floating-pnl text-2xl sm:text-4xl';
                     floatingEl.innerText = `${profit > 0 ? '+' : ''}€${profit.toFixed(2)}`;
@@ -904,7 +1026,6 @@
                     
                     let exitS = "", profit = 0;
                     
-                    // Zero Allucinazioni: calcolo matematico netto
                     if (Market.position.type === 'back') { 
                         exitS = lP.toFixed(2); 
                         profit = activeStake * ((Market.position.entryPrice / lP) - 1); 
@@ -954,47 +1075,6 @@
                 }
             };
 
-            const AudioEngine = {
-                init: () => {
-                    const audio = document.getElementById('binaural-audio');
-                    const playBtn = document.getElementById('audio-play-btn');
-                    const progress = document.getElementById('audio-progress');
-                    const volume = document.getElementById('audio-volume');
-                    
-                    if(!audio || !playBtn || !progress || !volume) return;
-                    
-                    playBtn.onclick = () => { 
-                        SoundEngine.click();
-                        // Sblocca contesti audio
-                        if(SoundEngine.ctx && SoundEngine.ctx.state === 'suspended') SoundEngine.ctx.resume();
-                        if(BinauralEngine.ctx && BinauralEngine.ctx.state === 'suspended') BinauralEngine.ctx.resume();
-
-                        if (audio.paused) {
-                            audio.play().catch(e=>{});
-                            BinauralEngine.start();
-                            playBtn.innerHTML = '<span class="text-xl sm:text-2xl">⏸</span>';
-                        } else {
-                            audio.pause();
-                            BinauralEngine.stop();
-                            playBtn.innerHTML = '<span class="text-xl sm:text-2xl pl-1">▶</span>';
-                        }
-                    };
-                    
-                    audio.ontimeupdate = () => { if(audio.duration){ progress.value=(audio.currentTime/audio.duration)*100; document.getElementById('audio-time').innerText=AudioEngine.formatTime(audio.currentTime); } };
-                    audio.onloadedmetadata = () => document.getElementById('audio-duration').innerText = AudioEngine.formatTime(audio.duration);
-                    
-                    progress.oninput = (e) => audio.currentTime = (e.target.value/100)*audio.duration;
-                    
-                    volume.oninput = (e) => {
-                        const val = e.target.value/100;
-                        audio.volume = val;
-                        BinauralEngine.setVolume(val);
-                    };
-                    audio.volume = volume.value/100;
-                },
-                formatTime: (s) => isNaN(s) ? "0:00" : `${Math.floor(s/60)}:${Math.floor(s%60).toString().padStart(2,'0')}`
-            };
-
             return {
                 init: () => {
                     StorageManager.load();
@@ -1011,7 +1091,6 @@
                     UIManager.updateDashboards();
                     TradingEngine.initChart();
                     TradingEngine.startLiveMarket();
-                    AudioEngine.init();
                     
                     document.getElementById('lang-switcher').addEventListener('change', (e) => {
                         SoundEngine.click();
