@@ -129,24 +129,30 @@
             background-color: white; transition: opacity 0.5s ease-in-out;
         }
 
-        /* --- STILI HARVARD EBOOK --- */
-        .book-paper {
-            background-color: #fcfaf2; /* Avorio accademico */
-            color: #2b2b2b;
-            font-family: "Georgia", "Cambria", "Times New Roman", serif;
+        /* --- STILI MODERN E-BOOK --- */
+        .modern-ebook {
+            background-color: #0d1117;
+            color: #e5e7eb;
         }
-        .book-paper::before {
-            content: ""; position: absolute; inset: 0; pointer-events: none;
-            background-image: url('https://www.transparenttextures.com/patterns/cream-paper.png');
-            opacity: 0.5; mix-blend-mode: multiply;
+        .modern-ebook-gradient-text {
+            background: linear-gradient(to right, #00ff80, #24A1DE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .drop-cap::first-letter {
-            font-size: 3.5rem; float: left; line-height: 0.8; 
-            margin-right: 0.15em; font-weight: 900; color: #1a1a1a;
+
+        /* Joystick Glow Pulsante */
+        @keyframes joystickNeon {
+            0% { filter: drop-shadow(0 0 5px rgba(0, 255, 128, 0.4)); transform: scale(1); }
+            50% { filter: drop-shadow(0 0 25px rgba(0, 255, 128, 0.9)); transform: scale(1.15); }
+            100% { filter: drop-shadow(0 0 5px rgba(0, 255, 128, 0.4)); transform: scale(1); }
+        }
+        .joystick-pulse {
+            animation: joystickNeon 2.5s ease-in-out infinite;
+            display: inline-block;
         }
     </style>
 </head>
-<body class="text-gray-200 pb-16 sm:pb-24 selection:bg-green-500 selection:text-white antialiased relative">
+<body class="text-gray-200 pb-12 selection:bg-green-500 selection:text-white antialiased relative">
 
     <header class="sticky top-0 z-40 glass-panel border-b-0 border-t-0 border-x-0 border-b border-[#00ff80]/20 px-3 sm:px-4 py-3 flex justify-between items-center transform-gpu">
         <div class="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
@@ -187,7 +193,7 @@
                 <span data-i18n="prepTitle">Preparazione (Deep Focus)</span>
             </h3>
             
-            <div id="audio-container" class="w-full bg-black/60 p-4 sm:p-5 rounded-2xl border border-gray-700/50 shadow-inner relative overflow-hidden transition-all duration-700 audio-module cursor-pointer touch-manipulation">
+            <div id="audio-container" class="w-full bg-black/60 p-4 sm:p-5 rounded-2xl border border-gray-700/50 shadow-inner relative overflow-hidden transition-all duration-700 audio-module touch-manipulation">
                 <audio id="binaural-audio" src="https://actions.google.com/sounds/v1/water/ocean_volume_swells.ogg" preload="none" loop crossorigin="anonymous"></audio>
                 
                 <div class="flex items-center justify-between z-10 relative">
@@ -195,7 +201,10 @@
                         <button id="audio-play-btn" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full bg-[#00ff80] text-black font-black flex items-center justify-center hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,128,0.2)] pointer-events-none">
                             <span class="text-lg sm:text-xl pl-1">▶</span>
                         </button>
-                        <div class="text-left flex flex-col justify-center">
+                        <button id="audio-stop-btn" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full bg-gray-700 text-white font-black flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-md hidden pointer-events-none">
+                            <span class="text-lg sm:text-xl">⏹</span>
+                        </button>
+                        <div class="text-left flex flex-col justify-center ml-2 hidden sm:flex">
                             <span class="text-[10px] sm:text-xs font-bold text-white tracking-widest uppercase" data-i18n="audioLabel">14Hz BINAURAL FOCUS</span>
                             <span id="audio-status-text" class="text-[9px] sm:text-[10px] text-gray-500 font-mono mt-0.5">Tocca per attivare</span>
                         </div>
@@ -221,7 +230,7 @@
             </h3>
             
             <div id="video-wrapper" class="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-gray-800 shadow-2xl ring-1 ring-white/5">
-                <iframe id="main-video" class="absolute top-0 left-0 w-full h-full" src="about:blank" data-src="https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe id="main-video" class="absolute top-0 left-0 w-full h-full" src="https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1" data-src="https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mt-3 sm:mt-4">
@@ -306,7 +315,7 @@
                         <h3 class="font-black text-base sm:text-lg text-white flex items-center uppercase tracking-wider">
                             <span class="text-xl sm:text-2xl mr-2 sm:mr-3">📈</span> <span data-i18n="simTitle">Live Scalping Simulator</span>
                         </h3>
-                        <p class="text-[9px] sm:text-[10px] text-[#00ff80] mt-1 sm:mt-1.5 font-bold uppercase tracking-[0.2em]" data-i18n="simScenario">Scenario: Pareggio 0-0 al 75'. Strategia: Lay The Draw.</p>
+                        <p class="text-[9px] sm:text-[10px] text-[#00ff80] mt-1 sm:mt-1.5 font-bold uppercase tracking-[0.2em]" data-i18n="simScenario">Scenario: Pareggio 0-0. Strategia: Lay The Draw.</p>
                     </div>
                     <!-- OROLOGIO PARTITA -->
                     <div class="flex gap-2">
@@ -338,7 +347,7 @@
                             <span>⚙️</span> <span data-i18n="riskMgmt">Money Management</span>
                         </h4>
                         <div class="flex items-center gap-2">
-                            <button onclick="resetBankroll()" class="text-[8px] sm:text-[9px] text-gray-400 hover:text-white border border-gray-600 hover:border-gray-400 px-2 py-0.5 sm:py-1 rounded transition-colors active:scale-95 touch-manipulation" data-i18n="btnReset">RESET</button>
+                            <button onclick="resetBankroll()" class="text-[8px] sm:text-[9px] text-gray-400 hover:text-white border border-gray-600 hover:border-[#00ff80] px-2 py-0.5 sm:py-1 rounded transition-colors active:scale-95 touch-manipulation" data-i18n="btnReset">RESET</button>
                             <span class="text-[9px] sm:text-[10px] text-[#00ff80] font-mono font-bold bg-[#00ff80]/10 px-1.5 sm:px-2 py-0.5 sm:py-1 rounded" id="available-bankroll-display">Disp: € 100.00</span>
                         </div>
                     </div>
@@ -391,7 +400,7 @@
             </div>
         </section>
         
-        <!-- FASE FINALE: PILLOLA FINANZIARIA SPOSTATA IN FONDO -->
+        <!-- FASE FINALE: PILLOLA FINANZIARIA -->
         <section class="glass-panel rounded-2xl p-5 sm:p-6 relative overflow-hidden transform-gpu border-t-4 border-t-[#00ff80]" style="content-visibility: auto;">
             <p class="text-[9px] sm:text-[10px] text-[#00ff80] font-black mb-2 sm:mb-3 tracking-[0.2em] uppercase text-center md:text-left" data-i18n="finLabel">PILLOLA FINANZIARIA</p>
             <p class="text-xs sm:text-sm md:text-base text-gray-300 font-medium italic leading-relaxed text-center md:text-left">"<span data-i18n="finQuote">Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.</span>"</p>
@@ -403,11 +412,10 @@
             <button class="text-black bg-[#00ff80] font-black px-6 sm:px-8 py-3 rounded-md hover:bg-white transition-all text-[9px] sm:text-[11px] uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,255,128,0.4)] touch-manipulation active:scale-95" data-i18n="navNext">Avanti →</button>
         </div>
         
-        <!-- SUBBUTEO GAME LINK -->
-        <div class="flex justify-center pb-8">
-            <a href="https://subbuteo.vercel.app/" target="_blank" class="flex items-center gap-3 bg-[#00ff80] text-black font-black px-8 py-4 rounded-full shadow-[0_0_25px_rgba(0,255,128,0.5)] hover:bg-white transition-all hover:scale-105 active:scale-95 touch-manipulation group" style="animation: gentlePulse 4s infinite;">
-                <span class="text-2xl drop-shadow-md group-hover:scale-110 transition-transform">🎮</span>
-                <span class="uppercase tracking-[0.2em] text-xs sm:text-sm">Subbuteo Live</span>
+        <!-- SUBBUTEO GAME LINK MINIMALISTICO -->
+        <div class="flex justify-center pb-8 pt-4">
+            <a href="https://subbuteo.vercel.app/" target="_blank" class="text-4xl sm:text-5xl hover:scale-110 transition-transform touch-manipulation joystick-pulse" title="Play Subbuteo Live">
+                🎮
             </a>
         </div>
 
@@ -451,17 +459,17 @@
         </div>
     </div>
 
-    <!-- MODALE EBOOK (Harvard Style) -->
+    <!-- MODALE EBOOK (Dark Modern Style) -->
     <div id="ebook-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-0 sm:p-6 opacity-0 transition-opacity duration-300">
-        <div class="w-full max-w-4xl h-full sm:h-auto sm:max-h-[95vh] rounded-none sm:rounded-md border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative book-paper" id="ebook-modal-content">
+        <div class="bg-[#0d1117] w-full max-w-4xl h-full sm:h-auto sm:max-h-[95vh] rounded-none sm:rounded-2xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative modern-ebook" id="ebook-modal-content">
             
-            <div class="flex justify-between items-center p-3 border-b border-gray-300 shrink-0 bg-[#f4f1ea]">
-                <h3 class="text-gray-800 font-bold uppercase tracking-widest text-xs sm:text-sm font-sans" data-i18n="btnEbook">E-Book</h3>
-                <button onclick="closeEbookModal()" class="text-gray-600 hover:text-black text-2xl leading-none px-3 font-sans active:scale-95 touch-manipulation">&times;</button>
+            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-[#0d1117] shrink-0">
+                <h3 class="text-[#00ff80] font-black uppercase tracking-widest text-xs sm:text-sm" data-i18n="btnEbook">E-Book</h3>
+                <button onclick="closeEbookModal()" class="text-gray-400 hover:text-white text-3xl leading-none px-2 rounded-lg active:scale-95 touch-manipulation">&times;</button>
             </div>
             
-            <div class="flex-1 overflow-y-auto p-6 sm:p-12 relative flex flex-col items-center tg-scrollbar">
-                <div class="w-full max-w-2xl" data-i18n-html="ebookContent">
+            <div class="flex-1 overflow-y-auto p-6 sm:p-10 relative flex flex-col items-center tg-scrollbar bg-[#0d1117]">
+                <div class="w-full max-w-2xl" id="ebook-content-container" data-i18n-html="ebookContent">
                     <!-- E-Book Content Injected Here -->
                 </div>
             </div>
@@ -498,10 +506,10 @@
             error: function() { this.playTone(150, 'sawtooth', 0.3, 0.1); }
         };
 
-        // --- 2. SINTETIZZATORE BINAURALE ---
+        // --- 2. SINTETIZZATORE BINAURALE ZEN ---
         const BinauralEngine = {
             ctx: null, oscLeft: null, oscRight: null, gainLeft: null, gainRight: null, merger: null,
-            isPlaying: false, masterVolume: 0.15, visualizerInterval: null,
+            isPlaying: false, masterVolume: 0.15,
             init: function() {
                 if (!this.ctx) {
                     const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -528,14 +536,43 @@
 
                     this.oscLeft.start(); this.oscRight.start();
                     this.isPlaying = true;
-                    this.startVisualizer();
+                    
+                    document.getElementById('audio-container').classList.add('is-playing');
+                    document.getElementById('audio-status-text').innerText = 'Frequenze Attive';
+                    document.getElementById('audio-status-text').className = 'text-[9px] sm:text-[10px] text-[#00ff80] font-mono mt-0.5 animate-pulse';
+                    
+                    const pBtn = document.getElementById('audio-play-btn');
+                    pBtn.innerHTML = '<span class="text-lg sm:text-xl">⏸</span>';
+                    pBtn.classList.remove('pointer-events-none');
+                    
+                    const sBtn = document.getElementById('audio-stop-btn');
+                    sBtn.classList.remove('hidden', 'pointer-events-none');
+                    
+                    const volCtrl = document.getElementById('volume-control-wrapper');
+                    volCtrl.classList.remove('opacity-0');
+                    volCtrl.classList.add('opacity-100');
+
                 } catch(e) {}
             },
             stop: function() {
                 if (this.oscLeft) { this.oscLeft.stop(); this.oscLeft.disconnect(); }
                 if (this.oscRight) { this.oscRight.stop(); this.oscRight.disconnect(); }
                 this.isPlaying = false;
-                this.stopVisualizer();
+                
+                document.getElementById('audio-container').classList.remove('is-playing');
+                document.getElementById('audio-status-text').innerText = 'Tocca per attivare';
+                document.getElementById('audio-status-text').className = 'text-[9px] sm:text-[10px] text-gray-500 font-mono mt-0.5';
+                
+                const pBtn = document.getElementById('audio-play-btn');
+                pBtn.innerHTML = '<span class="text-lg sm:text-xl pl-1">▶</span>';
+                pBtn.classList.add('pointer-events-none');
+                
+                const sBtn = document.getElementById('audio-stop-btn');
+                sBtn.classList.add('hidden', 'pointer-events-none');
+                
+                const volCtrl = document.getElementById('volume-control-wrapper');
+                volCtrl.classList.remove('opacity-100');
+                volCtrl.classList.add('opacity-0');
             },
             setVolume: function(val) {
                 const safeVal = Math.max(0, Math.min(1, Number(val) || 0));
@@ -546,27 +583,6 @@
                         this.gainRight.gain.setValueAtTime(this.masterVolume, this.ctx.currentTime);
                     } catch(e) {}
                 }
-            },
-            startVisualizer: function() {
-                const visualizer = document.getElementById('synth-visualizer');
-                const status = document.getElementById('audio-status');
-                const glow = document.getElementById('audio-glow');
-                const bars = document.querySelectorAll('.synth-bar');
-                if(visualizer) visualizer.classList.add('is-playing');
-                if(status) { status.innerText = 'ACTIVE'; status.className = 'text-[#00ff80] animate-pulse'; }
-                if(glow) glow.classList.replace('bg-[#00ff80]/0', 'bg-[#00ff80]/5');
-                this.visualizerInterval = setInterval(() => { bars.forEach(bar => { bar.style.height = `${4 + Math.random() * 16}px`; }); }, 100);
-            },
-            stopVisualizer: function() {
-                clearInterval(this.visualizerInterval);
-                const visualizer = document.getElementById('synth-visualizer');
-                const status = document.getElementById('audio-status');
-                const glow = document.getElementById('audio-glow');
-                const bars = document.querySelectorAll('.synth-bar');
-                if(visualizer) visualizer.classList.remove('is-playing');
-                if(status) { status.innerText = 'STANDBY'; status.className = 'text-gray-400'; }
-                if(glow) glow.classList.replace('bg-[#00ff80]/5', 'bg-[#00ff80]/0');
-                bars.forEach(bar => bar.style.height = '4px');
             }
         };
 
@@ -598,8 +614,8 @@
                     const loadingTask = window.pdfjsLib.getDocument(url);
                     const pdf = await loadingTask.promise;
                     
-                    const PIXEL_RATIO = window.devicePixelRatio || 2;
-                    const RENDERING_SCALE = 2.5; 
+                    const PIXEL_RATIO = Math.max(window.devicePixelRatio || 1, 2);
+                    const RENDERING_SCALE = 3; 
                     
                     for(let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
                         const page = await pdf.getPage(pageNum);
@@ -615,6 +631,9 @@
                         
                         canvas.height = viewport.height; 
                         canvas.width = viewport.width;
+                        
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.imageSmoothingQuality = 'high';
                         
                         canvas.style.width = '100%';
                         canvas.style.maxWidth = `${containerWidth}px`;
@@ -708,7 +727,7 @@
 
         // --- CORE APPLICATION ---
         const RoomApp = (function() {
-            const CONFIG = { STORAGE_KEY: 'bx_academy_state_v19' }; 
+            const CONFIG = { STORAGE_KEY: 'bx_academy_state_v22' }; 
 
             const dict = {
                 it: {
@@ -734,29 +753,29 @@
                     pdfUrl: "it-1-ZeroToHero-Academy-BettingExchengeRomm.pdf",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Giorno 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFFERENZA STRUTTURALE: BOOKMAKER VS EXCHANGE</strong>\n\nIl Bookmaker è la tua controparte: se tu vinci, lui perde. Per questo limita i profittevoli. \n\nNell'Exchange, tu operi in un mercato <em>peer-to-peer</em>: la piattaforma è solo un intermediario che incassa una commissione sulle vincite. Qui non scommetti contro un banco, ma scambi quote con altri utenti.\n\n📐 <strong>FORMULA GENERALE (PUNTA):</strong>\nProfitto Netto = (Stake * (Quota - 1)) * (1 - Commissione)\n\n<strong>LEGENDA TECNICA:</strong>\n🔹 Stake: Capitale puntato.\n🔹 Liability: Il rischio effettivo quando "banchi" (fai il banco).\n🔹 Commissione: Fee (es. 5%) pagata all'Exchange solo sulla vincita netta.\n\n🧮 <strong>ESEMPIO PRATICO (REALE):</strong>\n<em>Evento: Juventus vs Inter. Quota Punta (Back) @2.10. Stake: 100€. Comm: 5%.</em>\n\n🪄 <strong>CALCOLO:</strong>\n• Profitto Lordo: 100€ * (2.10 - 1) = 110€\n• Commissione: 110€ * 0.05 = 5.50€\n• Profitto Netto: 104.50€\n\n⚠️ <strong>GUBBING & LIMITAZIONI:</strong>\nIl Gubbing (chiusura/limitazione conto) NON esiste nell'Exchange. Poiché la piattaforma guadagna dalle tue commissioni, più sei bravo e vinci, più l'Exchange guadagna. Il rischio di limitazione resta esclusivo dei Bookmaker tradizionali.\n\n✅ <strong>AZIONE DEL GIORNO:</strong>\nApri un Exchange (Betfair/Betflag), scegli un match di Serie A o Premier League e osserva il book per 30 minuti. Nota come lo spread (differenza tra Punta e Banca) si stringe dove c'è più denaro (liquidità).\n\n🧘‍♂️ <strong>IL MANTRA:</strong> <em>"Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DEL #1</strong>\nIl trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <em>size</em> è troppo grande. La matematica non ha battito cardiaco, segui quella.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidità è il tuo paracadute. Senza volumi, non c'è trading, solo gioco d'azzardo.</em>`,
                     ebookContent: `
-                        <div class="border-b-2 border-t-2 border-black py-4 sm:py-6 mb-6 sm:mb-10 text-center">
-                            <h1 class="text-xl sm:text-3xl font-black uppercase tracking-widest text-[#1a1a1a]">Zero to Hero Academy</h1>
-                            <h2 class="text-xs sm:text-sm italic text-gray-600 mt-2 font-serif">Giorno 1: Differenza Strutturale</h2>
+                        <div class="border-b border-gray-800 py-6 mb-8 text-center">
+                            <h1 class="text-2xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
+                            <h2 class="text-xs sm:text-sm text-gray-400 mt-3 font-mono tracking-widest uppercase">Giorno 1: Differenza Strutturale</h2>
                         </div>
-                        <p class="drop-cap text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">Il Bookmaker tradizionale agisce come tua controparte diretta: se tu vinci, lui perde. Questo genera un conflitto di interessi intrinseco, motivo per cui i giocatori profittevoli vengono sistematicamente limitati (pratica nota come <em>Gubbing</em>).</p>
-                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">Nell'Exchange, al contrario, si opera in un mercato <em>peer-to-peer</em>. La piattaforma funge da intermediario neutrale, trattenendo una piccola commissione unicamente sulle vincite nette. In questo ecosistema, non si scommette contro un banco, ma si scambiano quote direttamente con altri utenti globali.</p>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">Il Bookmaker tradizionale agisce come tua controparte diretta: se tu vinci, lui perde. Questo genera un conflitto di interessi intrinseco, motivo per cui i giocatori profittevoli vengono sistematicamente limitati (pratica nota come <span class="text-[#24A1DE] font-bold">Gubbing</span>).</p>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">Nell'Exchange, al contrario, si opera in un mercato <span class="text-[#00ff80] font-bold">peer-to-peer</span>. La piattaforma funge da intermediario neutrale, trattenendo una piccola commissione unicamente sulle vincite nette. In questo ecosistema, non si scommette contro un banco, ma si scambiano quote direttamente con altri utenti globali.</p>
                         
-                        <h3 class="text-lg sm:text-xl font-bold mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-[#1a1a1a]">La Formula Generale (Punta)</h3>
-                        <div class="text-center font-mono text-xs sm:text-sm bg-gray-200 p-4 sm:p-6 rounded mb-6 sm:mb-8 border border-gray-300 shadow-inner">
-                            Profitto Netto = [ Stake × (Quota - 1) ] × (1 - Commissione)
+                        <div class="bg-gray-900 border border-gray-700 p-6 rounded-xl shadow-lg mb-8">
+                             <h3 class="text-lg font-black text-[#00ff80] mb-3 uppercase tracking-wider text-center">La Formula (Punta)</h3>
+                             <p class="font-mono text-center text-xs sm:text-sm text-white">Profitto Netto = [ Stake × (Quota - 1) ] × (1 - Commissione)</p>
                         </div>
                         
-                        <h4 class="text-md sm:text-lg font-bold mt-6 sm:mt-8 mb-3 text-[#1a1a1a]">Legenda Tecnica</h4>
-                        <ul class="list-disc pl-5 sm:pl-8 mb-6 sm:mb-8 space-y-2 text-sm sm:text-base text-justify">
-                            <li><strong>Stake:</strong> Il capitale puntato e immesso a mercato.</li>
-                            <li><strong>Liability:</strong> Il rischio effettivo e reale quando si assume il ruolo di creatore del mercato ("bancando" una quota).</li>
-                            <li><strong>Commissione:</strong> La <em>fee</em> (es. 5%) pagata all'Exchange, applicata esclusivamente in caso di vincita netta.</li>
+                        <h4 class="text-md sm:text-lg font-bold mt-6 sm:mt-8 mb-4 text-white uppercase tracking-widest border-l-4 border-[#24A1DE] pl-3">Legenda Tecnica</h4>
+                        <ul class="list-none mb-6 sm:mb-8 space-y-4 text-sm sm:text-base text-justify">
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Stake:</strong> Il capitale puntato e immesso a mercato.</li>
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Liability:</strong> Il rischio effettivo e reale quando si assume il ruolo di creatore del mercato ("bancando" una quota).</li>
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Commissione:</strong> La <em>fee</em> (es. 5%) pagata all'Exchange, applicata esclusivamente in caso di vincita netta.</li>
                         </ul>
 
-                        <h3 class="text-lg sm:text-xl font-bold mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-[#1a1a1a]">Mindset del Trader</h3>
-                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">Il trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <em>size</em> è troppo grande. La matematica non ha battito cardiaco, devi seguire quella.</p>
+                        <h3 class="text-lg sm:text-xl font-black mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-white">Mindset del Trader</h3>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">Il trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <span class="text-[#24A1DE]">size</span> è troppo grande. La matematica non ha battito cardiaco, devi seguire quella.</p>
 
-                        <div class="border-l-4 border-black pl-4 sm:pl-6 my-8 sm:my-10 italic text-gray-700 text-sm sm:text-base text-justify font-serif">
+                        <div class="bg-black/50 border border-[#00ff80]/50 p-6 rounded-xl my-8 sm:my-10 italic text-gray-400 text-sm sm:text-base text-center font-mono shadow-[0_0_15px_rgba(0,255,128,0.1)]">
                             "Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo. La liquidità è il tuo paracadute: senza volumi non vi è trading, ma solo azzardo."
                         </div>
                     `
@@ -784,29 +803,29 @@
                     pdfUrl: "en-1-ZERO_TO_HERO__Academy-BettingExchangeRoom.pdf",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Day 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>STRUCTURAL DIFFERENCE: BOOKMAKER VS EXCHANGE</strong>\n\nThe Bookmaker is your counterparty: if you win, they lose. This is why they limit profitable players. \n\nIn an Exchange, you operate in a <em>peer-to-peer</em> market: the platform is merely an intermediary charging a commission on winnings. Here, you aren't betting against "the house", but swapping odds with other users.\n\n📐 <strong>GENERAL FORMULA (BACKING):</strong>\nNet Profit = (Stake * (Odds - 1)) * (1 - Commission)\n\n<strong>TECHNICAL KEY:</strong>\n🔹 Stake: The capital placed.\n🔹 Liability: The actual risk when you "Lay" (act as the bookie).\n🔹 Commission: Fee (e.g. 5%) paid only on net winnings.\n\n🧮 <strong>PRACTICAL EXAMPLE:</strong>\n<em>Event: Juventus vs Inter. Back Odds @2.10. Stake: £100. Comm: 5%.</em>\n\n🪄 <strong>CALCULATION:</strong>\n• Gross Profit: £100 * (2.10 - 1) = £110\n• Commission: £110 * 0.05 = £5.50\n• Net Profit: £104.50\n\n⚠️ <strong>GUBBING & LIMITATIONS:</strong>\nGubbing (account restriction) DOES NOT exist in the Exchange. Since the platform profits from your commissions, the more you win, the more they earn. Account limits are a problem exclusive to traditional Bookmakers.\n\n✅ <strong>ACTION OF THE DAY:</strong>\nOpen an Exchange (Betfair/Betflag), pick a Serie A or Premier League match and observe the Order Book for 30 minutes. Notice how the Spread (gap between Back and Lay) narrows where there is more Liquidity.\n\n🧘‍♂️ <strong>THE MANTRA:</strong> <em>"The market has no opinions, only prices; the trader follows the liquidity, the punter follows the team."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET OF THE #1</strong>\nThe trader doesn't support a team: they exploit inefficiency. If your heart is racing, your size is too big. Mathematics doesn't have a heartbeat—follow the math.\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>Liquidity is your parachute. Without volume, there is no trading, only gambling.</em>`,
                     ebookContent: `
-                        <div class="border-b-2 border-t-2 border-black py-4 sm:py-6 mb-6 sm:mb-10 text-center">
-                            <h1 class="text-xl sm:text-3xl font-black uppercase tracking-widest text-[#1a1a1a]">Zero to Hero Academy</h1>
-                            <h2 class="text-xs sm:text-sm italic text-gray-600 mt-2 font-serif">Day 1: Structural Difference</h2>
+                        <div class="border-b border-gray-800 py-6 mb-8 text-center">
+                            <h1 class="text-2xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
+                            <h2 class="text-xs sm:text-sm text-gray-400 mt-3 font-mono tracking-widest uppercase">Day 1: Structural Difference</h2>
                         </div>
-                        <p class="drop-cap text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">The traditional Bookmaker acts as your direct counterparty: if you win, they lose. This creates an inherent conflict of interest, which is why profitable players are systematically restricted (a practice known as <em>Gubbing</em>).</p>
-                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">In the Betting Exchange, conversely, you operate in a <em>peer-to-peer</em> market. The platform acts solely as a neutral intermediary, taking a small commission only on net winnings. In this ecosystem, you do not bet against a house, but trade odds directly with other global users.</p>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">The traditional Bookmaker acts as your direct counterparty: if you win, they lose. This creates an inherent conflict of interest, which is why profitable players are systematically restricted (a practice known as <span class="text-[#24A1DE] font-bold">Gubbing</span>).</p>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">In the Betting Exchange, conversely, you operate in a <span class="text-[#00ff80] font-bold">peer-to-peer</span> market. The platform acts solely as a neutral intermediary, taking a small commission only on net winnings. In this ecosystem, you do not bet against a house, but trade odds directly with other global users.</p>
                         
-                        <h3 class="text-lg sm:text-xl font-bold mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-[#1a1a1a]">The General Formula (Back)</h3>
-                        <div class="text-center font-mono text-xs sm:text-sm bg-gray-200 p-4 sm:p-6 rounded mb-6 sm:mb-8 border border-gray-300 shadow-inner">
-                            Net Profit = [ Stake × (Odds - 1) ] × (1 - Commission)
+                        <div class="bg-gray-900 border border-gray-700 p-6 rounded-xl shadow-lg mb-8">
+                             <h3 class="text-lg font-black text-[#00ff80] mb-3 uppercase tracking-wider text-center">The Formula (Back)</h3>
+                             <p class="font-mono text-center text-xs sm:text-sm text-white">Net Profit = [ Stake × (Odds - 1) ] × (1 - Commission)</p>
                         </div>
                         
-                        <h4 class="text-md sm:text-lg font-bold mt-6 sm:mt-8 mb-3 text-[#1a1a1a]">Technical Key</h4>
-                        <ul class="list-disc pl-5 sm:pl-8 mb-6 sm:mb-8 space-y-2 text-sm sm:text-base text-justify">
-                            <li><strong>Stake:</strong> The capital placed into the market.</li>
-                            <li><strong>Liability:</strong> The actual risk when you assume the role of a market maker (by "Laying" an outcome).</li>
-                            <li><strong>Commission:</strong> The fee (e.g., 5%) paid to the Exchange, applied exclusively on net winnings.</li>
+                        <h4 class="text-md sm:text-lg font-bold mt-6 sm:mt-8 mb-4 text-white uppercase tracking-widest border-l-4 border-[#24A1DE] pl-3">Technical Key</h4>
+                        <ul class="list-none mb-6 sm:mb-8 space-y-4 text-sm sm:text-base text-justify">
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Stake:</strong> The capital placed into the market.</li>
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Liability:</strong> The actual risk when you assume the role of a market maker (by "Laying" an outcome).</li>
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Commission:</strong> The fee (e.g., 5%) paid to the Exchange, applied exclusively on net winnings.</li>
                         </ul>
 
-                        <h3 class="text-lg sm:text-xl font-bold mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-[#1a1a1a]">Trader's Mindset</h3>
-                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">The trader doesn't support a team: they exploit inefficiency. If your heart is racing, your <em>size</em> is too big. Mathematics doesn't have a heartbeat—follow the math.</p>
+                        <h3 class="text-lg sm:text-xl font-black mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-white">Trader's Mindset</h3>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">The trader doesn't support a team: they exploit inefficiency. If your heart is racing, your <span class="text-[#24A1DE]">size</span> is too big. Mathematics doesn't have a heartbeat—follow the math.</p>
 
-                        <div class="border-l-4 border-black pl-4 sm:pl-6 my-8 sm:my-10 italic text-gray-700 text-sm sm:text-base text-justify font-serif">
+                        <div class="bg-black/50 border border-[#00ff80]/50 p-6 rounded-xl my-8 sm:my-10 italic text-gray-400 text-sm sm:text-base text-center font-mono shadow-[0_0_15px_rgba(0,255,128,0.1)]">
                             "The market has no opinions, only prices; the trader follows the liquidity, the punter follows the team. Liquidity is your parachute: without volumes there is no trading, only gambling."
                         </div>
                     `
@@ -834,29 +853,29 @@
                     pdfUrl: "es-De_Cero_a_Héroe__Día_1-BettingExchange-es.pdf",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Día 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFERENCIA ESTRUCTURAL: BOOKMAKER VS EXCHANGE</strong>\n\nEl bookmaker (casa de apuestas) es tu contraparte: si tú ganas, él pierde. Por eso limitan a los que son rentables. \n\nEn el Exchange, tú operas en un mercado <em>peer-to-peer</em>: la plataforma es solo un intermediario que cobra una comisión sobre las ganancias. Aquí no apuestas contra la casa, sino que intercambias momios con otros usuarios.\n\n📐 <strong>FÓRMULA GENERAL (BACK / APOSTAR A FAVOR):</strong>\nGanancia Neta = (Stake * (Momio - 1)) * (1 - Comisión)\n\n<strong>GLOSARIO TÉCNICO:</strong>\n🔹 Stake: Capital apostado.\n🔹 Liability: El riesgo real cuando haces "Lay" (apuestas en contra / la haces de casa).\n🔹 Comisión: Tarifa (ej. 5%) que se le paga al Exchange solo sobre la ganancia neta.\n\n🧮 <strong>EJEMPLO PRÁCTICO (REAL):</strong>\n<em>Evento: Juventus vs Inter. Momio a favor (Back) @2.10. Stake: $100. Com: 5%.</em>\n\n🪄 <strong>CÁLCULO:</strong>\n• Ganancia Bruta: $100 * (2.10 - 1) = $110\n• Comisión: $110 * 0.05 = $5.50\n• Ganancia Neta: $104.50\n\n⚠️ <strong>GUBBING & LIMITACIONES:</strong>\nEl Gubbing (cierre o limitación de cuenta) NO existe en el Exchange. Como la plataforma hace dinero de tus comisiones, entre más bueno seas y más ganes, más gana el Exchange. El riesgo de que te limiten la cuenta es exclusivo de los bookmakers tradicionales.\n\n✅ <strong>ACCIÓN DEL DÍA:</strong>\nAbre un Exchange (Betfair/Betflag), escoge un partido de la Serie A o la Premier League y observa el mercado por 30 minutos. Fíjate cómo el spread (la diferencia entre el Back y el Lay) se hace más estrecho donde hay más dinero (liquidez).\n\n🧘‍♂️ <strong>EL MANTRA:</strong> <em>"El mercado no tiene opiniones, solo tiene precios; el trader sigue la liquidez, el apostador sigue la pasión."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MENTALIDAD DE #1</strong>\nEl trader no le va a ningún equipo: aprovecha las ineficiencias. Si el corazón te late fuerte, tu <em>size</em> (tamaño de apuesta) es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidez es tu paracaídas. Sin volumen de dinero, no hay trading, solo juegos de azar.</em>`,
                     ebookContent: `
-                        <div class="border-b-2 border-t-2 border-black py-4 sm:py-6 mb-6 sm:mb-10 text-center">
-                            <h1 class="text-xl sm:text-3xl font-black uppercase tracking-widest text-[#1a1a1a]">Zero to Hero Academy</h1>
-                            <h2 class="text-xs sm:text-sm italic text-gray-600 mt-2 font-serif">Día 1: Diferencia Estructural</h2>
+                        <div class="border-b border-gray-800 py-6 mb-8 text-center">
+                            <h1 class="text-2xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
+                            <h2 class="text-xs sm:text-sm text-gray-400 mt-3 font-mono tracking-widest uppercase">Día 1: Diferencia Estructural</h2>
                         </div>
-                        <p class="drop-cap text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">El Bookmaker tradicional actúa como tu contraparte directa: si ganas, ellos pierden. Esto genera un conflicto de intereses inherente, razón por la cual los jugadores rentables son sistemáticamente limitados (práctica conocida como <em>Gubbing</em>).</p>
-                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">En el Betting Exchange, por el contrario, operas en un mercado <em>peer-to-peer</em>. La plataforma funciona como un intermediario neutral, cobrando una pequeña comisión únicamente sobre las ganancias netas. En este ecosistema no apuestas contra la casa, sino que intercambias cuotas directamente con otros usuarios globales.</p>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">El Bookmaker tradicional actúa como tu contraparte directa: si ganas, ellos pierden. Esto genera un conflicto de intereses inherente, razón por la cual los jugadores rentables son sistemáticamente limitados (práctica conocida como <span class="text-[#24A1DE] font-bold">Gubbing</span>).</p>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">En el Betting Exchange, por el contrario, operas en un mercado <span class="text-[#00ff80] font-bold">peer-to-peer</span>. La plataforma funciona como un intermediario neutral, cobrando una pequeña comisión únicamente sobre las ganancias netas. En este ecosistema no apuestas contra la casa, sino que intercambias cuotas directamente con otros usuarios globales.</p>
                         
-                        <h3 class="text-lg sm:text-xl font-bold mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-[#1a1a1a]">La Fórmula General (Back)</h3>
-                        <div class="text-center font-mono text-xs sm:text-sm bg-gray-200 p-4 sm:p-6 rounded mb-6 sm:mb-8 border border-gray-300 shadow-inner">
-                            Ganancia Neta = [ Stake × (Cuota - 1) ] × (1 - Comisión)
+                        <div class="bg-gray-900 border border-gray-700 p-6 rounded-xl shadow-lg mb-8">
+                             <h3 class="text-lg font-black text-[#00ff80] mb-3 uppercase tracking-wider text-center">La Fórmula (Back)</h3>
+                             <p class="font-mono text-center text-xs sm:text-sm text-white">Ganancia Neta = [ Stake × (Cuota - 1) ] × (1 - Comisión)</p>
                         </div>
                         
-                        <h4 class="text-md sm:text-lg font-bold mt-6 sm:mt-8 mb-3 text-[#1a1a1a]">Glosario Técnico</h4>
-                        <ul class="list-disc pl-5 sm:pl-8 mb-6 sm:mb-8 space-y-2 text-sm sm:text-base text-justify">
-                            <li><strong>Stake:</strong> El capital arriesgado en el mercado.</li>
-                            <li><strong>Liability:</strong> El riesgo real y efectivo cuando asumes el rol de creador de mercado ("Laying" o apostando en contra).</li>
-                            <li><strong>Comisión:</strong> La tarifa (ej. 5%) pagada al Exchange, aplicada exclusivamente sobre las ganancias netas.</li>
+                        <h4 class="text-md sm:text-lg font-bold mt-6 sm:mt-8 mb-4 text-white uppercase tracking-widest border-l-4 border-[#24A1DE] pl-3">Glosario Técnico</h4>
+                        <ul class="list-none mb-6 sm:mb-8 space-y-4 text-sm sm:text-base text-justify">
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Stake:</strong> El capital arriesgado en el mercado.</li>
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Liability:</strong> El riesgo real y efectivo cuando asumes el rol de creador de mercado ("Laying" o apostando en contra).</li>
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Comisión:</strong> La tarifa (ej. 5%) pagada al Exchange, aplicada exclusivamente sobre las ganancias netas.</li>
                         </ul>
 
-                        <h3 class="text-lg sm:text-xl font-bold mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-[#1a1a1a]">Mentalidad del Trader</h3>
-                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">El trader no es fanático de ningún equipo: aprovecha las ineficiencias. Si el corazón te late rápido, tu <em>size</em> es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.</p>
+                        <h3 class="text-lg sm:text-xl font-black mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-white">Mentalidad del Trader</h3>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">El trader no es fanático de ningún equipo: aprovecha las ineficiencias. Si el corazón te late rápido, tu <span class="text-[#24A1DE]">size</span> es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.</p>
 
-                        <div class="border-l-4 border-black pl-4 sm:pl-6 my-8 sm:my-10 italic text-gray-700 text-sm sm:text-base text-justify font-serif">
+                        <div class="bg-black/50 border border-[#00ff80]/50 p-6 rounded-xl my-8 sm:my-10 italic text-gray-400 text-sm sm:text-base text-center font-mono shadow-[0_0_15px_rgba(0,255,128,0.1)]">
                             "El mercado no tiene opiniones, solo tiene precios; el trader sigue la liquidez, el apostador sigue la pasión. La liquidez es tu paracaídas: sin volumen de dinero no hay trading, solo azar."
                         </div>
                     `
@@ -884,29 +903,29 @@
                     pdfUrl: "PT-1-ZERO_TO_HERO__Academy-BettingExchangeRoom.pdf",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Dia 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFERENÇA ESTRUTURAL: CASA DE APOSTAS VS EXCHANGE</strong>\n\nA Casa de Apostas (Bookmaker) é sua contraparte: se você ganha, eles perdem. É por isso que eles limitam jogadores lucrativos. \n\nNo Exchange, você opera em um mercado <em>peer-to-peer</em> (ponto a ponto): a plataforma é apenas uma intermediária que cobra uma comissão sobre os lucros. Aqui, você não aposta contra "a casa", mas troca odds com outros usuários.\n\n📐 <strong>FÓRMULA GERAL (BACK - A FAVOR):</strong>\nLucro Líquido = (Stake * (Odds - 1)) * (1 - Comissão)\n\n<strong>CHAVE TÉCNICA:</strong>\n🔹 Stake: O capital investido.\n🔹 Responsabilidade (Liability): O risco real quando você faz um "Lay" (age como a casa).\n🔹 Comissão: Taxa (ex: 5%) paga apenas sobre os lucros líquidos.\n\n🧮 <strong>EXEMPLO PRÁCTICO (REAL):</strong>\n<em>Evento: Juventus vs Inter. Odds Back @2.10. Stake: R$100. Comissão: 5%.</em>\n\n🪄 <strong>CÁLCULO:</strong>\n• Lucro Bruto: R$100 * (2.10 - 1) = R$110\n• Comissão: R$110 * 0.05 = R$5.50\n• Lucro Líquido: R$104.50\n\n⚠️ <strong>LIMITAÇÃO (GUBBING):</strong>\nO "Gubbing" (restrição de conta) NÃO existe no Exchange. Como a plataforma lucra com suas comissões, quanto mais você ganha, mais eles faturam. Limites de conta são um problema exclusivo das Casas de Apostas tradicionais.\n\n✅ <strong>AÇÃO DO DIA:</strong>\nAbra um Exchange (Betfair/Betdaq), escolha um jogo da Série A ou Premier League e observe o Order Book (Livro de Ofertas) por 30 minutos. Note como o Spread (diferença entre o Back e o Lay) diminui onde há mais Liquidez.\n\nO MANTRA: "O mercado não tem opiniões, apenas preços; o trader segue a liquidez, o apostador segue o time."\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DO #1</strong>\nO trader não torce para um time: ele explora a ineficiência. Se o seu coração está acelerado, o seu stake está alto demais. A matemática não tem batimentos cardíacos — siga a matemática.\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>Liquidez é o seu paraquedas. Sem volume não há trading, apenas aposta comum.</em>`,
                     ebookContent: `
-                        <div class="border-b-2 border-t-2 border-black py-4 sm:py-6 mb-6 sm:mb-10 text-center">
-                            <h1 class="text-xl sm:text-3xl font-black uppercase tracking-widest text-[#1a1a1a]">Zero to Hero Academy</h1>
-                            <h2 class="text-xs sm:text-sm italic text-gray-600 mt-2 font-serif">Dia 1: Diferença Estrutural</h2>
+                        <div class="border-b border-gray-800 py-6 mb-8 text-center">
+                            <h1 class="text-2xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
+                            <h2 class="text-xs sm:text-sm text-gray-400 mt-3 font-mono tracking-widest uppercase">Dia 1: Diferença Estrutural</h2>
                         </div>
-                        <p class="drop-cap text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">A Casa de Apostas (Bookmaker) tradicional atua como sua contraparte direta: se você ganha, eles perdem. Isto cria um conflito de interesses inerente, razão pela qual os jogadores lucrativos são sistematicamente limitados (prática conhecida como <em>Gubbing</em>).</p>
-                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">Na Betting Exchange, inversamente, você opera num mercado <em>peer-to-peer</em>. A plataforma funciona apenas como uma intermediária neutra, cobrando uma pequena comissão apenas sobre os lucros líquidos. Neste ecossistema, não aposta contra a casa, mas troca odds diretamente com outros utilizadores globais.</p>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">A Casa de Apostas (Bookmaker) tradicional atua como sua contraparte direta: se você ganha, eles perdem. Isto cria um conflito de interesses inerente, razão pela qual os jogadores lucrativos são sistematicamente limitados (prática conhecida como <span class="text-[#24A1DE] font-bold">Gubbing</span>).</p>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">Na Betting Exchange, inversamente, você opera num mercado <span class="text-[#00ff80] font-bold">peer-to-peer</span>. A plataforma funciona apenas como uma intermediária neutra, cobrando uma pequena comissão apenas sobre os lucros líquidos. Neste ecossistema, não aposta contra a casa, mas troca odds diretamente com outros utilizadores globais.</p>
                         
-                        <h3 class="text-lg sm:text-xl font-bold mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-[#1a1a1a]">A Fórmula Geral (Back)</h3>
-                        <div class="text-center font-mono text-xs sm:text-sm bg-gray-200 p-4 sm:p-6 rounded mb-6 sm:mb-8 border border-gray-300 shadow-inner">
-                            Lucro Líquido = [ Stake × (Odds - 1) ] × (1 - Comissão)
+                        <div class="bg-gray-900 border border-gray-700 p-6 rounded-xl shadow-lg mb-8">
+                             <h3 class="text-lg font-black text-[#00ff80] mb-3 uppercase tracking-wider text-center">A Fórmula (Back)</h3>
+                             <p class="font-mono text-center text-xs sm:text-sm text-white">Lucro Líquido = [ Stake × (Odds - 1) ] × (1 - Comissão)</p>
                         </div>
                         
-                        <h4 class="text-md sm:text-lg font-bold mt-6 sm:mt-8 mb-3 text-[#1a1a1a]">Chave Técnica</h4>
-                        <ul class="list-disc pl-5 sm:pl-8 mb-6 sm:mb-8 space-y-2 text-sm sm:text-base text-justify">
-                            <li><strong>Stake:</strong> O capital investido no mercado.</li>
-                            <li><strong>Responsabilidade (Liability):</strong> O risco real quando você assume o papel de criador de mercado ("Laying" ou apostando contra).</li>
-                            <li><strong>Comissão:</strong> A taxa (ex. 5%) paga à Exchange, aplicada exclusivamente sobre os lucros líquidos.</li>
+                        <h4 class="text-md sm:text-lg font-bold mt-6 sm:mt-8 mb-4 text-white uppercase tracking-widest border-l-4 border-[#24A1DE] pl-3">Chave Técnica</h4>
+                        <ul class="list-none mb-6 sm:mb-8 space-y-4 text-sm sm:text-base text-justify">
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Stake:</strong> O capital investido no mercado.</li>
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Responsabilidade (Liability):</strong> O risco real quando você assume o papel de criador de mercado ("Laying" ou apostando contra).</li>
+                            <li class="bg-gray-800/50 p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Comissão:</strong> A taxa (ex. 5%) paga à Exchange, aplicada exclusivamente sobre os lucros líquidos.</li>
                         </ul>
 
-                        <h3 class="text-lg sm:text-xl font-bold mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-[#1a1a1a]">Mindset do Trader</h3>
-                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base">O trader não torce por uma equipe: ele explora a ineficiência. Se o seu coração está acelerado, a sua <em>size</em> é demasiado grande. A matemática não tem batimentos cardíacos — siga a matemática.</p>
+                        <h3 class="text-lg sm:text-xl font-black mt-8 sm:mt-12 mb-4 text-center uppercase tracking-wider text-white">Mindset do Trader</h3>
+                        <p class="text-justify leading-relaxed mb-6 sm:mb-8 text-sm sm:text-base text-gray-300">O trader não torce por uma equipe: ele explora a ineficiência. Se o seu coração está acelerado, a sua <span class="text-[#24A1DE]">size</span> é demasiado grande. A matemática não tem batimentos cardíacos — siga a matemática.</p>
 
-                        <div class="border-l-4 border-black pl-4 sm:pl-6 my-8 sm:my-10 italic text-gray-700 text-sm sm:text-base text-justify font-serif">
+                        <div class="bg-black/50 border border-[#00ff80]/50 p-6 rounded-xl my-8 sm:my-10 italic text-gray-400 text-sm sm:text-base text-center font-mono shadow-[0_0_15px_rgba(0,255,128,0.1)]">
                             "O mercado não tem opiniões, apenas preços; o trader segue a liquidez, o apostador segue o time. A liquidez é o seu paraquedas: sem volumes não há trading, apenas aposta comum."
                         </div>
                     `
@@ -966,32 +985,34 @@
 
             const UIManager = {
                 setLanguage: (lang) => {
-                    if (!dict[lang]) return;
-                    State.lang = lang;
-                    document.documentElement.lang = lang;
-                    document.getElementById('lang-switcher').value = lang;
+                    const targetLang = dict[lang] ? lang : 'en';
+                    State.lang = targetLang;
+                    document.documentElement.lang = targetLang;
+                    document.getElementById('lang-switcher').value = targetLang;
                     
                     document.querySelectorAll('[data-i18n]').forEach(el => {
                         const key = el.getAttribute('data-i18n');
-                        if (dict[lang][key]) el.innerText = dict[lang][key];
+                        el.innerText = dict[targetLang][key] || dict['en'][key] || "";
                     });
                     document.querySelectorAll('[data-i18n-html]').forEach(el => {
                         const key = el.getAttribute('data-i18n-html');
-                        if (dict[lang][key]) el.innerHTML = dict[lang][key];
+                        el.innerHTML = dict[targetLang][key] || dict['en'][key] || "";
                     });
                     
                     const videoIframe = document.getElementById('main-video');
                     if (videoIframe) {
-                        videoIframe.setAttribute('data-src', dict[lang].videoUrl);
-                        if(videoIframe.src !== "about:blank") videoIframe.src = dict[lang].videoUrl;
+                        const vUrl = dict[targetLang].videoUrl || dict['en'].videoUrl;
+                        if(videoIframe.src !== vUrl) videoIframe.src = vUrl;
                     }
                     
                     const pdfLink = document.getElementById('btn-pdf-link');
-                    if (pdfLink && dict[lang].pdfUrl) {
-                        pdfLink.href = dict[lang].pdfUrl;
-                        if(dict[lang].pdfUrl === "#") {
+                    if (pdfLink) {
+                        const pUrl = dict[targetLang].pdfUrl || dict['en'].pdfUrl;
+                        const alertMsg = dict[targetLang].alertPdf || dict['en'].alertPdf;
+                        pdfLink.href = pUrl;
+                        if(pUrl === "#") {
                              pdfLink.setAttribute('data-disabled', 'true');
-                             pdfLink.setAttribute('data-alert-msg', dict[lang].alertPdf);
+                             pdfLink.setAttribute('data-alert-msg', alertMsg);
                              pdfLink.style.opacity = "0.4";
                         } else {
                              pdfLink.removeAttribute('data-disabled');
@@ -1002,9 +1023,15 @@
                     const btnCashOutSub = document.getElementById('btn-cashout-sub');
                     const btnCashOutLbl = document.getElementById('btn-cashout-lbl');
                     if (btnCashOutSub && btnCashOutLbl) {
-                        btnCashOutLbl.innerText = dict[lang].btnCashOutLbl;
-                        btnCashOutSub.innerText = dict[lang].btnCashoutSub;
+                        btnCashOutLbl.innerText = dict[targetLang].btnCashOutLbl || dict['en'].btnCashOutLbl;
+                        btnCashOutSub.innerText = dict[targetLang].btnCashOutSub || dict['en'].btnCashOutSub;
                     }
+                    
+                    const ebookContainer = document.getElementById('ebook-content-container');
+                    if(ebookContainer) {
+                        ebookContainer.innerHTML = dict[targetLang].ebookContent || dict['en'].ebookContent;
+                    }
+                    
                     StorageManager.save();
                 },
                 updateDashboards: () => {
@@ -1019,7 +1046,7 @@
                         feedbackDiv.classList.remove('hidden');
                         feedbackDiv.className = 'p-5 sm:p-6 bg-[#00ff80]/10 border border-[#00ff80]/50 rounded-xl text-center shadow-[0_0_20px_rgba(0,255,128,0.15)] mt-4 transition-all duration-300';
                         icon.innerText = '🏆';
-                        text.innerText = dict[State.lang].quizSuccess;
+                        text.innerText = dict[State.lang].quizSuccess || dict['en'].quizSuccess;
                         text.className = 'font-black text-xs sm:text-sm uppercase tracking-widest text-[#00ff80] leading-relaxed';
                     }
                     RiskManager.setRisk(State.riskPct);
@@ -1051,14 +1078,14 @@
                         
                         feedbackDiv.className = 'p-5 sm:p-6 bg-[#00ff80]/10 border border-[#00ff80]/50 rounded-xl text-center shadow-[0_0_20px_rgba(0,255,128,0.15)] mt-4 transition-all duration-300';
                         icon.innerText = '🏆';
-                        text.innerText = dict[State.lang].quizSuccess;
+                        text.innerText = dict[State.lang].quizSuccess || dict['en'].quizSuccess;
                         text.className = 'font-black text-xs sm:text-sm uppercase tracking-widest text-[#00ff80] leading-relaxed';
 
                     } else {
                         SoundEngine.error();
                         let errorMsg = "";
-                        if (optionIndex === 0) errorMsg = dict[State.lang].quizFailA;
-                        else if (optionIndex === 2) errorMsg = dict[State.lang].quizFailC;
+                        if (optionIndex === 0) errorMsg = dict[State.lang].quizFailA || dict['en'].quizFailA;
+                        else if (optionIndex === 2) errorMsg = dict[State.lang].quizFailC || dict['en'].quizFailC;
                         
                         feedbackDiv.className = 'p-5 sm:p-6 bg-red-900/30 border border-red-500/50 rounded-xl text-center shadow-[0_0_20px_rgba(239,68,68,0.15)] mt-4 transition-all duration-300';
                         icon.innerText = '⚠️';
@@ -1100,22 +1127,23 @@
                     });
                 },
                 startLiveMarket: () => {
-                    Market.goalSeconds = (75 + 8) * 60; 
+                    const willScore = Math.random() < 0.8;
+                    Market.goalSeconds = willScore ? (75 + Math.floor(Math.random() * 12) + 1) * 60 : 999999; 
                     const totalSeconds = (95 - 75) * 60;
                     
                     Market.loopInterval = setInterval(() => {
                         if (Market.matchSeconds >= 95 * 60) return;
 
-                        Market.matchSeconds += 30; 
+                        Market.matchSeconds += 20; 
                         const m = Math.floor(Market.matchSeconds / 60);
                         const s = Market.matchSeconds % 60;
                         document.getElementById('match-timer').innerText = `${m}:${s < 10 ? '0' : ''}${s}`;
                         
                         const elapsed = Market.matchSeconds - (75 * 60);
+                        let targetPrice = 2.10;
 
                         if (Market.matchSeconds >= Market.goalSeconds && !Market.hasScored) {
                             Market.hasScored = true;
-                            Market.basePrice = 8.50; 
                             
                             SoundEngine.goal();
                             document.getElementById('chart-container').classList.add('flash-goal');
@@ -1126,29 +1154,65 @@
                                 document.getElementById('chart-container').classList.remove('flash-goal');
                                 overlay.classList.add('hidden');
                             }, 2500);
-                        } else if (!Market.hasScored) {
+                        } 
+                        
+                        if (!Market.hasScored) {
                             const progress = Math.max(0, 1 - (elapsed / totalSeconds));
-                            Market.basePrice = 1.01 + (2.10 - 1.01) * Math.pow(progress, 1.5);
+                            targetPrice = 1.01 + (2.10 - 1.01) * Math.pow(progress, 2);
                         } else {
                             const remainingAfterGoal = totalSeconds - (Market.goalSeconds - 75*60);
                             const elapsedSinceGoal = Market.matchSeconds - Market.goalSeconds;
                             const progress = Math.max(0, 1 - (elapsedSinceGoal / remainingAfterGoal));
-                            Market.basePrice = 1.01 + (8.50 - 1.01) * Math.pow(progress, 1.5);
+                            targetPrice = 1.01 + (8.50 - 1.01) * Math.pow(progress, 1.5);
                         }
 
+                        const noise = (Math.random() - 0.5) * 0.06;
+                        Market.basePrice = targetPrice + noise;
                         if(Market.basePrice < 1.01) Market.basePrice = 1.01;
                         
                         Market.history.shift();
                         Market.history.push(Number(Market.basePrice.toFixed(2)));
-                        chartInstance.update();
+                        chartInstance.data.datasets[0].data = [...Market.history];
+                        chartInstance.update('none');
                         
                         const bP = Market.history[Market.history.length - 1];
                         document.getElementById('price-back').innerText = bP.toFixed(2);
                         document.getElementById('price-lay').innerText = (bP + 0.02).toFixed(2);
                         
                         if (!Market.position) RiskManager.updateCalculations(); 
-                        if (Market.position) TradingEngine.updateLivePnL();
-                    }, 1800);
+                        if (Market.position) {
+                            TradingEngine.updateLivePnL();
+                            TradingEngine.updateLiveEducationalFeedback();
+                        }
+                    }, 1200);
+                },
+                updateLiveEducationalFeedback: () => {
+                    const eduBox = document.getElementById('edu-feedback');
+                    const eduMsg = document.getElementById('edu-msg');
+                    eduBox.classList.remove('hidden');
+                    
+                    let message = "";
+                    let colorClass = "text-[#00ff80]";
+                    
+                    if (Market.position.type === 'lay') {
+                        if (Market.hasScored) {
+                            message = "⚽ GOL SEGNATO! La quota del pareggio è schizzata in alto. Il tuo Lay è in PROFITTO. Chiudi il trade (Cash Out) per incassare!";
+                            colorClass = "text-[#00ff80]";
+                        } else {
+                            message = "⏳ Time Decay: non ci sono gol, il tempo scorre e la quota scende. Il valore del tuo Lay sta diminuendo. (Red Book)";
+                            colorClass = "text-yellow-400";
+                        }
+                    } else {
+                        if (Market.hasScored) {
+                            message = "❌ GOL SEGNATO! Hai puntato sul pareggio, ma ora è improbabile. La quota è salita e sei in PERDITA.";
+                            colorClass = "text-red-400";
+                        } else {
+                            message = "⚠️ Attesa: Hai puntato sul pareggio. La quota scende, ma senza il triplice fischio sei a rischio se segnano.";
+                            colorClass = "text-yellow-400";
+                        }
+                    }
+                    
+                    eduMsg.innerHTML = `<span class="font-bold ${colorClass} text-xs sm:text-sm block mb-1 uppercase tracking-widest">LIVE COACHING:</span> <span class="text-[11px] sm:text-sm text-gray-300">${message}</span>`;
                 },
                 handleAction: (actionType) => {
                     SoundEngine.click();
@@ -1184,7 +1248,7 @@
                     const btnCashOut = document.createElement('button');
                     btnCashOut.id = 'btn-cashout';
                     btnCashOut.className = 'btn-cashout text-white font-black py-4 sm:py-5 rounded-2xl active:scale-[0.96] transition-all flex flex-col items-center justify-center col-span-2 shadow-[0_0_20px_rgba(245,158,11,0.4)] touch-manipulation';
-                    btnCashOut.innerHTML = `<span id="btn-cashout-lbl" class="text-[9px] sm:text-[10px] font-bold opacity-70 uppercase tracking-[0.2em] mb-1">${dict[State.lang].btnCashOutLbl}</span><span id="btn-cashout-sub" class="text-xl sm:text-2xl mt-1">${dict[State.lang].btnCashoutSub}</span>`;
+                    btnCashOut.innerHTML = `<span id="btn-cashout-lbl" class="text-[9px] sm:text-[10px] font-bold opacity-70 uppercase tracking-[0.2em] mb-1">${dict[State.lang].btnCashOutLbl || dict['en'].btnCashOutLbl}</span><span id="btn-cashout-sub" class="text-xl sm:text-2xl mt-1">${dict[State.lang].btnCashOutSub || dict['en'].btnCashOutSub}</span>`;
                     btnCashOut.onclick = TradingEngine.closePosition;
                     document.getElementById('trading-buttons-container').appendChild(btnCashOut);
                     document.getElementById('live-pnl-display').classList.remove('hidden');
@@ -1198,7 +1262,8 @@
                     let netProfit = rawProfit > 0 ? rawProfit * 0.95 : rawProfit;
                     
                     const pnlDiv = document.getElementById('live-pnl-display');
-                    pnlDiv.innerText = `${dict[State.lang].lblNet} € ${netProfit > 0 ? '+' : ''}${netProfit.toFixed(2)}`;
+                    const lblNet = dict[State.lang].lblNet || dict['en'].lblNet;
+                    pnlDiv.innerText = `${lblNet} € ${netProfit > 0 ? '+' : ''}${netProfit.toFixed(2)}`;
                     pnlDiv.className = `absolute top-2 right-2 sm:top-3 sm:right-3 px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border z-10 font-mono text-[10px] sm:text-xs md:text-sm font-black shadow-lg transition-colors duration-300 ${netProfit > 0 ? 'bg-green-950/90 border-[#00ff80] text-[#00ff80]' : (netProfit < 0 ? 'bg-red-950/90 border-red-500 text-red-500' : 'bg-gray-900/90 border-gray-600 text-gray-300')}`;
                 },
                 showFloatingPnL: (netProfit) => {
@@ -1257,20 +1322,24 @@
                     const eduMsg = document.getElementById('edu-msg');
                     
                     let msgKey = netRounded === 0 ? 'eduScratch' : (Market.position.type === 'back' ? (netRounded > 0 ? 'eduBackWin' : 'eduBackLoss') : (netRounded > 0 ? 'eduLayWin' : 'eduLayLoss'));
-                    let feedbackStr = dict[State.lang][msgKey].replace('{E}', ePS).replace('{U}', exitS);
+                    let feedbackStr = (dict[State.lang][msgKey] || dict['en'][msgKey]).replace('{E}', ePS).replace('{U}', exitS);
+                    
+                    const lblGross = dict[State.lang].lblGross || dict['en'].lblGross;
+                    const lblComm = dict[State.lang].lblComm || dict['en'].lblComm;
+                    const lblNet = dict[State.lang].lblNet || dict['en'].lblNet;
                     
                     let breakdownHtml = '';
                     if (rawProfit > 0) {
                         breakdownHtml = `
                         <div class="bg-black/60 rounded-lg p-3 sm:p-4 mb-3 border border-gray-700 font-mono text-xs sm:text-sm text-left shadow-inner">
-                            <div class="flex justify-between text-gray-300 mb-1"><span>${dict[State.lang].lblGross}</span> <span>+€${rawProfit.toFixed(2)}</span></div>
-                            <div class="flex justify-between text-yellow-400 border-b border-gray-700 pb-2 mb-2"><span>${dict[State.lang].lblComm}</span> <span>-€${commission.toFixed(2)}</span></div>
-                            <div class="flex justify-between text-[#00ff80] font-black text-sm sm:text-base"><span>${dict[State.lang].lblNet}</span> <span>+€${netProfit.toFixed(2)}</span></div>
+                            <div class="flex justify-between text-gray-300 mb-1"><span>${lblGross}</span> <span>+€${rawProfit.toFixed(2)}</span></div>
+                            <div class="flex justify-between text-yellow-400 border-b border-gray-700 pb-2 mb-2"><span>${lblComm}</span> <span>-€${commission.toFixed(2)}</span></div>
+                            <div class="flex justify-between text-[#00ff80] font-black text-sm sm:text-base"><span>${lblNet}</span> <span>+€${netProfit.toFixed(2)}</span></div>
                         </div>`;
                     } else {
                         breakdownHtml = `
                         <div class="bg-black/60 rounded-lg p-3 sm:p-4 mb-3 border border-gray-700 font-mono text-xs sm:text-sm text-left shadow-inner">
-                            <div class="flex justify-between ${netRounded < 0 ? 'text-red-500' : 'text-gray-300'} font-black text-sm sm:text-base"><span>${dict[State.lang].lblNet}</span> <span>${netRounded < 0 ? '-' : ''}€${Math.abs(netProfit).toFixed(2)}</span></div>
+                            <div class="flex justify-between ${netRounded < 0 ? 'text-red-500' : 'text-gray-300'} font-black text-sm sm:text-base"><span>${lblNet}</span> <span>${netRounded < 0 ? '-' : ''}€${Math.abs(netProfit).toFixed(2)}</span></div>
                         </div>`;
                     }
                     
@@ -1305,34 +1374,54 @@
                     TradingEngine.initChart();
                     TradingEngine.startLiveMarket();
                     
-                    document.getElementById('audio-container').addEventListener('click', (event) => {
-                        const audio = document.getElementById('binaural-audio');
-                        const playBtn = document.getElementById('audio-play-btn');
-                        
+                    // Controlli audio integrati nel div (funziona il pulsante play ma anche il pulsante stop separato)
+                    const audioContainer = document.getElementById('audio-container');
+                    const playBtn = document.getElementById('audio-play-btn');
+                    const stopBtn = document.getElementById('audio-stop-btn');
+                    const audio = document.getElementById('binaural-audio');
+                    
+                    const handlePlayPause = (e) => {
+                        e.stopPropagation();
                         SoundEngine.click();
                         if(SoundEngine.ctx && SoundEngine.ctx.state === 'suspended') SoundEngine.ctx.resume();
                         if(BinauralEngine.ctx && BinauralEngine.ctx.state === 'suspended') BinauralEngine.ctx.resume();
 
                         if (audio.paused) {
-                            audio.play().catch(e=>{});
+                            audio.play().catch(err=>{});
                             BinauralEngine.start();
+                            playBtn.innerHTML = '<span class="text-lg sm:text-xl">⏸</span>';
+                            stopBtn.classList.remove('hidden', 'pointer-events-none');
                         } else {
-                            if(!event.target.closest('#volume-control-wrapper')) {
-                                audio.pause();
-                                BinauralEngine.stop();
-                            }
+                            audio.pause();
+                            BinauralEngine.stop();
+                            playBtn.innerHTML = '<span class="text-lg sm:text-xl pl-1">▶</span>';
                         }
-                        
-                        if(!window.audioVolumeInited) {
-                             const volumeInput = document.getElementById('audio-volume');
+                    };
+
+                    const handleStop = (e) => {
+                        e.stopPropagation();
+                        SoundEngine.click();
+                        audio.pause();
+                        audio.currentTime = 0;
+                        BinauralEngine.stop();
+                        playBtn.innerHTML = '<span class="text-lg sm:text-xl pl-1">▶</span>';
+                        stopBtn.classList.add('hidden', 'pointer-events-none');
+                    };
+
+                    if(playBtn) playBtn.addEventListener('click', handlePlayPause);
+                    if(stopBtn) stopBtn.addEventListener('click', handleStop);
+
+                    if(!window.audioVolumeInited) {
+                         const volumeInput = document.getElementById('audio-volume');
+                         if(volumeInput && audio) {
                              volumeInput.oninput = (e) => {
                                  const val = e.target.value/100;
                                  audio.volume = val;
                                  BinauralEngine.setVolume(val);
                              };
-                             window.audioVolumeInited = true;
-                        }
-                    });
+                         }
+                         window.audioVolumeInited = true;
+                    }
                     
                     document.getElementById('lang-switcher').addEventListener('change', (e) => {
                         SoundEngine.click();
@@ -1363,7 +1452,13 @@
                         document.getElementById('btn-lay').classList.remove('hidden');
                         document.getElementById('risk-mgmt-panel').classList.remove('opacity-50', 'pointer-events-none');
                         document.getElementById('live-pnl-display').classList.add('hidden');
+                        
+                        const eduBox = document.getElementById('edu-feedback');
+                        if(eduBox) eduBox.classList.add('hidden');
                     }
+                    
+                    document.getElementById('available-bankroll-display').classList.remove('text-gray-500', 'bg-transparent', 'border-gray-700');
+                    document.getElementById('available-bankroll-display').classList.add('text-[#00ff80]', 'bg-[#00ff80]/10', 'border-[#00ff80]/20');
                     
                     StorageManager.save();
                     UIManager.updateDashboards();
@@ -1383,6 +1478,9 @@
         window.handleTradeAction = RoomApp.handleTrade;
         window.setRisk = RoomApp.setRisk;
         window.resetBankroll = RoomApp.resetBankroll;
+        window.openEbookModal = openEbookModal;
+        window.closeEbookModal = closeEbookModal;
+        window.closePdfModal = closePdfModal;
     </script>
 </body>
 </html>
