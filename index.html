@@ -101,23 +101,6 @@
 
         .progress-bar-fill { transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
 
-        @keyframes gentlePulse {
-            0% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.1); border-color: rgba(0, 255, 128, 0.3); }
-            50% { box-shadow: 0 0 25px rgba(0, 255, 128, 0.4); border-color: rgba(0, 255, 128, 0.7); }
-            100% { box-shadow: 0 0 10px rgba(0, 255, 128, 0.1); border-color: rgba(0, 255, 128, 0.3); }
-        }
-        .is-playing .audio-module {
-            animation: gentlePulse 4s ease-in-out infinite;
-            background-color: rgba(0, 40, 20, 0.6);
-        }
-        
-        .audio-pulse-indicator {
-            width: 8px; height: 8px; border-radius: 50%; background-color: #4b5563; transition: all 0.3s ease;
-        }
-        .is-playing .audio-pulse-indicator {
-            background-color: #00ff80; box-shadow: 0 0 10px #00ff80; transform: scale(1.5);
-        }
-
         @keyframes spin-slow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         @keyframes spin-reverse { 0% { transform: rotate(360deg); } 100% { transform: rotate(0deg); } }
         @keyframes scannerBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(200%); } }
@@ -192,47 +175,10 @@
             <p class="text-gray-400 max-w-2xl mx-auto text-xs sm:text-sm font-bold leading-relaxed mt-2" data-i18n="lessonDesc">Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.</p>
         </div>
 
-        <!-- FASE 1: PREPARAZIONE ZEN FOCUS -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-6 relative overflow-hidden transform-gpu max-w-2xl mx-auto flex flex-col items-center justify-center text-center">
-            <div class="absolute -top-20 -right-20 w-48 h-48 bg-[#00ff80] opacity-5 blur-[80px] rounded-full pointer-events-none"></div>
-            <h3 class="font-black text-sm sm:text-base mb-4 text-white uppercase tracking-widest text-[#00ff80]">
-                <span data-i18n="prepTitle">Preparazione (Deep Focus)</span>
-            </h3>
-            
-            <div id="audio-container" class="w-full bg-black/60 p-4 sm:p-5 rounded-2xl border border-gray-700/50 shadow-inner relative overflow-hidden transition-all duration-700 audio-module touch-manipulation">
-                <audio id="binaural-audio" src="https://actions.google.com/sounds/v1/water/ocean_volume_swells.ogg" preload="none" loop crossorigin="anonymous"></audio>
-                
-                <div class="flex items-center justify-between z-10 relative">
-                    <div class="flex items-center gap-3">
-                        <button id="audio-play-btn" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full bg-[#00ff80] text-black font-black flex items-center justify-center hover:bg-white transition-all shadow-[0_0_15px_rgba(0,255,128,0.2)]">
-                            <span class="text-lg sm:text-xl pl-1">▶</span>
-                        </button>
-                        <button id="audio-stop-btn" class="w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-full bg-gray-700 text-white font-black flex items-center justify-center hover:bg-red-500 hover:text-white transition-all shadow-md hidden">
-                            <span class="text-lg sm:text-xl">⏹</span>
-                        </button>
-                        <div class="text-left flex flex-col justify-center ml-2 hidden sm:flex">
-                            <span class="text-[10px] sm:text-xs font-bold text-white tracking-widest uppercase" data-i18n="audioLabel">14Hz BINAURAL FOCUS</span>
-                            <span id="audio-status-text" class="text-[9px] sm:text-[10px] text-gray-500 font-mono mt-0.5">Tocca per attivare</span>
-                        </div>
-                    </div>
-                    
-                    <div class="flex items-center gap-4">
-                        <div class="audio-pulse-indicator"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div id="volume-control-wrapper" class="w-full max-w-xs mt-4 opacity-0 transition-opacity duration-500 h-0 overflow-hidden flex items-center gap-2 px-2">
-                 <span class="text-xs text-gray-500">🔈</span>
-                 <input type="range" id="audio-volume" class="w-full h-1 bg-gray-800 rounded-lg appearance-none cursor-pointer accent-[#00ff80]" value="50" min="0" max="100">
-                 <span class="text-xs text-gray-500">🔊</span>
-            </div>
-        </section>
-
-        <!-- FASE 2: CORE -->
-        <section class="glass-panel rounded-2xl p-3 sm:p-6" style="content-visibility: auto; contain-intrinsic-size: 500px;">
+        <!-- FASE 1: CORE -->
+        <section class="glass-panel rounded-2xl p-3 sm:p-6 mt-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
             <h3 class="font-black text-base sm:text-lg mb-3 sm:mb-4 ml-2 sm:ml-0 flex items-center text-white uppercase tracking-wider">
-                <span class="text-xl sm:text-2xl mr-2 sm:mr-3">🎓</span> <span data-i18n="coreTitle">Fase 2: Theorum & Praxis</span>
+                <span class="text-xl sm:text-2xl mr-2 sm:mr-3">🎓</span> <span data-i18n="coreTitle">Fase 1: Theorum & Praxis</span>
             </h3>
             
             <!-- Video Loader Iperveloce (Lazy Facade) -->
@@ -303,7 +249,7 @@
             </div>
         </section>
 
-        <!-- FASE 3: L'ARENA (SIMULATORE GAMIFICATO E REALISTICO) -->
+        <!-- FASE 2: L'ARENA (SIMULATORE GAMIFICATO E REALISTICO) -->
         <section class="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8" style="content-visibility: auto; contain-intrinsic-size: 800px;">
             
             <!-- QUIZ -->
@@ -333,12 +279,17 @@
                         <h3 class="font-black text-base sm:text-lg text-white flex items-center uppercase tracking-wider">
                             <span class="text-xl sm:text-2xl mr-2 sm:mr-3">📈</span> <span data-i18n="simTitle">Live Scalping Simulator</span>
                         </h3>
-                        <p class="text-[9px] sm:text-[10px] text-[#00ff80] mt-1 sm:mt-1.5 font-bold uppercase tracking-[0.2em]" data-i18n="simScenario">Strategia: Lay The Draw dall'inizio alla fine.</p>
                     </div>
-                    
-                    <div class="flex items-center gap-2 bg-gray-950 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-gray-800 shadow-inner shrink-0 self-end sm:self-auto">
-                        <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 pulse-live" id="market-status-dot"></div>
-                        <span id="market-status-text" class="text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 tracking-[0.2em] uppercase" data-i18n="liveMarket">Market Live</span>
+                    <!-- OROLOGIO PARTITA -->
+                    <div class="flex gap-2">
+                        <div class="flex items-center gap-1.5 sm:gap-2 bg-gray-900 border border-gray-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md shadow-inner">
+                            <span class="text-[10px] sm:text-xs">⏱</span>
+                            <span id="match-timer" class="text-[10px] sm:text-[13px] font-mono font-black text-white tracking-widest w-[45px] sm:w-[50px] text-center">00:00</span>
+                        </div>
+                        <div class="flex items-center gap-1.5 sm:gap-2 bg-gray-950 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-md border border-gray-800 shadow-inner shrink-0">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-red-500 pulse-live" id="market-status-dot"></div>
+                            <span id="market-status-text" class="text-[9px] sm:text-[10px] font-mono font-bold text-gray-300 tracking-[0.2em] uppercase" data-i18n="liveMarket">Market Live</span>
+                        </div>
                     </div>
                 </div>
 
@@ -346,7 +297,7 @@
                 <div class="flex flex-col mb-4 bg-gray-900/80 rounded-xl border border-gray-700 p-4 shadow-inner relative overflow-hidden">
                     <div id="match-overlay" class="absolute inset-0 z-20 flex items-center justify-center bg-black/80 backdrop-blur-[2px] flex-col transition-all duration-300">
                         <span class="text-xl sm:text-2xl font-black text-white uppercase tracking-widest mb-3 text-center px-4" data-i18n="simStartOverlay">Inizia Simulazione Match</span>
-                        <button onclick="startMatch()" class="bg-[#00ff80] text-black font-black px-6 py-2 rounded-full shadow-[0_0_15px_rgba(0,255,128,0.4)] hover:bg-white transition-all active:scale-95 text-xs sm:text-sm uppercase tracking-wider touch-manipulation" data-i18n="btnStartMatch">AVVIA KICK-OFF</button>
+                        <button onclick="startMatchAction()" class="bg-[#00ff80] text-black font-black px-6 py-2 rounded-full shadow-[0_0_15px_rgba(0,255,128,0.4)] hover:bg-white transition-all active:scale-95 text-xs sm:text-sm uppercase tracking-wider touch-manipulation" data-i18n="btnStartMatch">AVVIA KICK-OFF</button>
                     </div>
                     
                     <div class="flex justify-between items-center w-full relative z-10">
@@ -358,7 +309,6 @@
                             <div class="bg-black border border-gray-700 px-4 py-1 rounded shadow-inner mb-1">
                                 <span id="match-score" class="font-black text-2xl sm:text-4xl text-[#00ff80] tracking-tighter">0 - 0</span>
                             </div>
-                            <span id="match-timer" class="text-[10px] sm:text-xs font-mono font-bold text-gray-400">00:00</span>
                         </div>
                         <div class="flex items-center gap-2 sm:gap-3 w-1/3 justify-start">
                             <span class="font-black text-lg sm:text-2xl text-white tracking-widest">INT</span>
@@ -374,6 +324,7 @@
                 <div class="relative w-full h-40 sm:h-48 bg-[#0a0f0a] rounded-xl border border-gray-800 mb-4 sm:mb-5 p-1 sm:p-2 overflow-hidden shadow-inner ring-1 ring-white/5" id="chart-container">
                     <div id="goal-flash-overlay" class="absolute inset-0 z-20 flex items-center justify-center bg-yellow-500/20 backdrop-blur-[2px] hidden flex-col">
                         <span class="text-4xl sm:text-6xl font-black text-yellow-400 drop-shadow-[0_0_20px_rgba(255,215,0,0.8)] animate-bounce">⚽ GOAL!</span>
+                        <span class="text-white font-bold bg-black/80 px-3 py-1 rounded mt-2 text-xs uppercase tracking-widest" id="goal-time-display"></span>
                     </div>
                     <div id="live-pnl-display" class="absolute top-2 right-2 sm:top-3 sm:right-3 px-2 sm:px-3 py-1 sm:py-1.5 rounded bg-black/90 border border-gray-700 hidden z-10 font-mono text-[10px] sm:text-xs md:text-sm font-black shadow-2xl transition-colors duration-300"></div>
                     <canvas id="tradingChart"></canvas>
@@ -541,7 +492,8 @@
             click: function() { this.playTone(600, 'sine', 0.1, 0.1); },
             cashout: function() { this.playTone(880, 'sine', 0.1, 0.1); setTimeout(() => this.playTone(1760, 'sine', 0.3, 0.15), 100); },
             goal: function() { this.playTone(440, 'triangle', 0.5, 0.2); setTimeout(() => this.playTone(660, 'square', 1.0, 0.2), 300); },
-            error: function() { this.playTone(150, 'sawtooth', 0.3, 0.1); }
+            error: function() { this.playTone(150, 'sawtooth', 0.3, 0.1); },
+            whistle: function() { this.playTone(900, 'square', 0.5, 0.15); setTimeout(() => this.playTone(900, 'square', 0.8, 0.15), 600); }
         };
 
         // --- 2. MOTORE PDF.JS AD ALTA RISOLUZIONE ---
@@ -698,7 +650,7 @@
 
         // --- CORE APPLICATION & SIMULATION ---
         const RoomApp = (function() {
-            const CONFIG = { STORAGE_KEY: 'bx_academy_state_v31' }; 
+            const CONFIG = { STORAGE_KEY: 'bx_academy_state_v34' }; 
 
             const dict = {
                 it: {
@@ -710,7 +662,7 @@
                     quizSuccess: "Corretto! La tua controparte è sempre una persona che ha fatto l'azione opposta alla tua (+100 XP)", 
                     quizFailA: "Attenzione: Nel Betting Exchange non esiste il banco tradizionale. Se la controparte fosse il Bookmaker, subiresti limitazioni (Gubbing). La risposta esatta è la B: scommetti contro altri utenti.",
                     quizFailC: "Errore: La piattaforma (es. Betfair) è solo un intermediario neutrale che trattiene una piccola commissione sulle vincite nette. La risposta esatta è la B: scambi quote con altre persone.",
-                    simTitle: "Live Scalping Simulator", simScenario: "Strategia: Lay The Draw dall'inizio alla fine.", liveMarket: "Market Live",
+                    simTitle: "Live Scalping Simulator", liveMarket: "Market Live",
                     simStartOverlay: "Inizia Simulazione Match", btnStartMatch: "AVVIA KICK-OFF",
                     riskMgmt: "MONEY MANAGEMENT", stakeCalc: "Stake Calcolato (Puntata):", liabilityLbl: "Liability (Rischio se Banchi):", lblDraw: "Pareggio (Draw)",
                     btnBackLbl: "Punta (Back)", btnLayLbl: "Banca (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CHIUDI TRADE", eduAnalysis: "Analisi Scientifica del Trade",
@@ -768,7 +720,7 @@
                     quizSuccess: "Correct! Your counterparty is always a person who placed the opposite bet (+100 XP)", 
                     quizFailA: "Warning: In the Betting Exchange, there is no traditional bookie. If it were a Bookmaker, you'd face account limits (Gubbing). The correct answer is B: you bet against other users.",
                     quizFailC: "Error: The platform (e.g., Betfair) is just a neutral intermediary taking a small commission on net winnings. The correct answer is B: you trade odds with other people.",
-                    simTitle: "Live Scalping Simulator", simScenario: "Strategy: Lay The Draw from start to finish.", liveMarket: "Market Live",
+                    simTitle: "Live Scalping Simulator", liveMarket: "Market Live",
                     simStartOverlay: "Start Match Simulation", btnStartMatch: "START KICK-OFF",
                     riskMgmt: "MONEY MANAGEMENT", stakeCalc: "Calculated Stake:", liabilityLbl: "Liability (Lay Risk):", lblDraw: "Draw",
                     btnBackLbl: "Back", btnLayLbl: "Lay", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CLOSE TRADE", eduAnalysis: "Scientific Trade Analysis",
@@ -826,7 +778,7 @@
                     quizSuccess: "¡Correcto! Tu contraparte es un usuario que hizo la acción opuesta (+100 XP)", 
                     quizFailA: "Atención: En el Betting Exchange no existe la casa tradicional. Si fuera un Bookmaker, sufrirías limitaciones (Gubbing). La respuesta correcta es la B: apuestas contra otros usuarios.",
                     quizFailC: "Error: La plataforma (ej. Betfair) es solo un intermediario neutral que cobra una pequeña comisión sobre ganancias netas. La respuesta correcta es la B.",
-                    simTitle: "Simulador de Scalping en Vivo", simScenario: "Estrategia: Lay The Draw de principio a fin.", liveMarket: "Mercado en Vivo",
+                    simTitle: "Simulador de Scalping en Vivo", liveMarket: "Mercado en Vivo",
                     simStartOverlay: "Iniciar Simulación de Partido", btnStartMatch: "INICIAR KICK-OFF",
                     riskMgmt: "GESTIÓN DE CAPITAL", stakeCalc: "Stake Calculado:", liabilityLbl: "Liability (Riesgo Lay):", lblDraw: "Empate (Draw)",
                     btnBackLbl: "A favor (Back)", btnLayLbl: "En contra (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CERRAR TRADE", eduAnalysis: "Análisis Científico del Trade",
@@ -884,7 +836,7 @@
                     quizSuccess: "Correto! A sua contraparte é sempre alguém que apostou o contrário (+100 XP)", 
                     quizFailA: "Atenção: No Betting Exchange não há a casa tradicional. Se fosse o Bookmaker, você sofreria limitações (Gubbing). A resposta correta é a B: você aposta contra outros usuários.",
                     quizFailC: "Erro: A plataforma (ex: Betfair) é apenas uma intermediária neutra que cobra uma comissão sobre os lucros líquidos. A resposta correta é a B: você troca odds com outras pessoas.",
-                    simTitle: "Simulador de Scalping ao Vivo", simScenario: "Estratégia: Lay The Draw do início ao fim.", liveMarket: "Mercado ao Vivo",
+                    simTitle: "Simulador de Scalping ao Vivo", liveMarket: "Mercado ao Vivo",
                     simStartOverlay: "Iniciar Simulação da Partida", btnStartMatch: "INICIAR KICK-OFF",
                     riskMgmt: "GESTÃO DE BANCA", stakeCalc: "Stake Calculada:", liabilityLbl: "Liability (Risco Lay):", lblDraw: "Empate (Draw)",
                     btnBackLbl: "A Favor (Back)", btnLayLbl: "Contra (Lay)", btnCashOutLbl: "CASH OUT", btnCashoutSub: "FECHAR TRADE", eduAnalysis: "Análise Científica do Trade",
@@ -1039,7 +991,6 @@
                         videoIframe.setAttribute('data-src', vUrl);
                         videoThumb.src = vThumb;
                         
-                        // Ferma il video se in riproduzione cambiando lingua
                         videoIframe.classList.add('hidden');
                         videoIframe.src = "about:blank"; 
                         const wrapper = document.getElementById('video-wrapper');
@@ -1220,12 +1171,7 @@
                         if(btnLay) btnLay.classList.remove('btn-suspended', 'pointer-events-none');
                     }
                 },
-                startMatch: () => {
-                    document.getElementById('match-overlay').classList.add('opacity-0', 'pointer-events-none');
-                    setTimeout(() => document.getElementById('match-overlay').classList.add('hidden'), 300);
-                    TradingEngine.startLiveMarket();
-                },
-                startLiveMarket: () => {
+                startLiveMarket: (isReset = false) => {
                     if(Market.loopInterval) clearInterval(Market.loopInterval);
                     
                     Market.matchSeconds = 0;
@@ -1235,11 +1181,27 @@
                     Market.awayReds = 0;
                     Market.isSuspended = false;
                     Market.penaltyTicks = 0;
-                    Market.eventMessage = "FISCHIO D'INIZIO - PARTITA IN CORSO";
+                    Market.eventMessage = "IN ATTESA DEL FISCHIO D'INIZIO";
                     Market.basePrice = 3.50; 
+                    
+                    if(isReset) {
+                        Market.history = Array(15).fill(3.50);
+                        if(chartInstance) {
+                            chartInstance.data.datasets[0].data = Market.history;
+                            chartInstance.update();
+                        }
+                        TradingEngine.updateScoreboard();
+                        return; // Ferma qui se è solo un reset
+                    }
 
+                    Market.eventMessage = "FISCHIO D'INIZIO - PARTITA IN CORSO";
                     TradingEngine.updateScoreboard();
                     
+                    const willScore = Math.random() < 0.8;
+                    Market.goalSeconds = willScore ? Math.floor(Math.random() * 85) * 60 : 999999; 
+                    const totalSeconds = 90 * 60;
+                    
+                    // Loop Veloce (600ms per frame)
                     Market.loopInterval = setInterval(() => {
                         if (Market.matchSeconds >= 90 * 60) {
                             clearInterval(Market.loopInterval);
@@ -1289,7 +1251,7 @@
                         }
 
                         const scoreDiff = Math.abs(Market.homeScore - Market.awayScore);
-                        const timeElapsed = Market.matchSeconds / (90 * 60); 
+                        const timeElapsed = Market.matchSeconds / totalSeconds; 
                         const timeRemaining = 1 - timeElapsed;
 
                         if (scoreDiff === 0) {
@@ -1329,7 +1291,7 @@
                             TradingEngine.updateLivePnL();
                             TradingEngine.updateLiveEducationalFeedback();
                         }
-                    }, 500);
+                    }, 600);
                 },
                 triggerGoalUI: () => {
                     SoundEngine.goal();
@@ -1566,7 +1528,46 @@
                 },
                 triggerQuiz: Gamification.checkQuiz,
                 handleTrade: TradingEngine.handleAction,
-                setRisk: RiskManager.setRisk
+                setRisk: RiskManager.setRisk,
+                startMatchAction: () => {
+                    SoundEngine.click();
+                    setTimeout(() => SoundEngine.whistle(), 300);
+                    
+                    document.getElementById('match-overlay').classList.add('opacity-0', 'pointer-events-none');
+                    setTimeout(() => document.getElementById('match-overlay').classList.add('hidden'), 300);
+                    
+                    TradingEngine.startLiveMarket();
+                },
+                resetBankroll: () => {
+                    SoundEngine.click();
+                    State.saldo = 100.00;
+                    
+                    if (Market.loopInterval) clearInterval(Market.loopInterval);
+                    
+                    Market.position = null;
+                    const btnCashout = document.getElementById('btn-cashout');
+                    if(btnCashout) btnCashout.remove();
+                    document.getElementById('btn-back').classList.remove('hidden', 'btn-suspended', 'pointer-events-none');
+                    document.getElementById('btn-lay').classList.remove('hidden', 'btn-suspended', 'pointer-events-none');
+                    document.getElementById('risk-mgmt-panel').classList.remove('opacity-50', 'pointer-events-none');
+                    document.getElementById('live-pnl-display').classList.add('hidden');
+                    
+                    const eduBox = document.getElementById('edu-feedback');
+                    if(eduBox) eduBox.classList.add('hidden');
+                    
+                    document.getElementById('available-bankroll-display').classList.remove('text-gray-500', 'bg-transparent', 'border-gray-700');
+                    document.getElementById('available-bankroll-display').classList.add('text-[#00ff80]', 'bg-[#00ff80]/10', 'border-[#00ff80]/20');
+                    
+                    TradingEngine.startLiveMarket(true);
+                    
+                    const overlay = document.getElementById('match-overlay');
+                    overlay.classList.remove('hidden', 'opacity-0', 'pointer-events-none');
+                    
+                    StorageManager.save();
+                    UIManager.updateDashboards();
+                    RiskManager.updateCalculations();
+                    UIManager.triggerPop('bankroll-badge', '[#00ff80]');
+                }
             };
         })();
 
@@ -1579,44 +1580,11 @@
         window.checkAnswer = RoomApp.triggerQuiz;
         window.handleTradeAction = RoomApp.handleTrade;
         window.setRisk = RoomApp.setRisk;
-        window.resetBankroll = () => {
-             SoundEngine.click();
-             RoomApp.init(); 
-             // We use a safe reset mechanism for simplicity here
-             localStorage.removeItem('bx_academy_state_v31');
-             location.reload();
-        };
+        window.startMatchAction = RoomApp.startMatchAction;
+        window.resetBankroll = RoomApp.resetBankroll;
         window.openEbookModal = openEbookModal;
         window.closeEbookModal = closeEbookModal;
         window.closePdfModal = closePdfModal;
-        
-        window.startMatch = () => {
-             SoundEngine.click();
-             document.getElementById('match-overlay').classList.add('opacity-0', 'pointer-events-none');
-             setTimeout(() => document.getElementById('match-overlay').classList.add('hidden'), 300);
-             
-             // Usa il dispatch event in the correct scope per non avere allucinazioni
-             document.getElementById('btn-risk-2').click(); 
-        };
-    </script>
-    
-    <!-- Avvio Sicuro Match Engine -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-             const btn = document.querySelector('#match-overlay button');
-             if(btn) {
-                 btn.onclick = (e) => {
-                     e.preventDefault();
-                     SoundEngine.click();
-                     document.getElementById('match-overlay').classList.add('opacity-0', 'pointer-events-none');
-                     setTimeout(() => document.getElementById('match-overlay').classList.add('hidden'), 300);
-                     // Il reset richiama in modo pulito il riavvio della simulazione
-                     if(window.resetBankroll) {
-                         // Fallback in case of module scoping
-                     }
-                 };
-             }
-        });
     </script>
 </body>
 </html>
