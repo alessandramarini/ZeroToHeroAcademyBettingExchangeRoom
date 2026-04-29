@@ -147,7 +147,8 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-                <a href="#" class="flex items-center justify-center p-4 bg-black/50 hover:bg-black/80 border border-gray-700 rounded-xl transition-all active:scale-95 group">
+                <!-- Aggiunto l'id 'btn-pdf-link' e target='_blank' per aprire in una nuova scheda -->
+                <a id="btn-pdf-link" href="#" target="_blank" class="flex items-center justify-center p-4 bg-black/50 hover:bg-black/80 border border-gray-700 rounded-xl transition-all active:scale-95 group">
                     <span class="text-2xl mr-3 group-hover:scale-110 transition-transform">📄</span>
                     <span class="font-bold text-sm" data-i18n="btnPdf">Slide Masterclass</span>
                 </a>
@@ -280,6 +281,7 @@
                     eduScratch: "Hai chiuso alla stessa quota ({E}). Trade in pari (Scratch). Preservare il capitale è la prima regola del professionista.",
                     navPrev: "← Indietro", navNext: "Avanti →", tgDate: "Oggi",
                     videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1",
+                    pdfUrl: "it-1-ZeroToHero-Academy-BettingExchengeRomm.pdf",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Giorno 1/30]
 ▬▬▬▬▬▬▬▬▬▬▬▬▬
 
@@ -334,6 +336,7 @@ Il trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <em>
                     eduScratch: "Closed at the same odds ({E}). Scratch trade. Capital preservation is the first rule of the professional.",
                     navPrev: "← Back", navNext: "Next →", tgDate: "Today",
                     videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1",
+                    pdfUrl: "en-1-ZERO_TO_HERO__Academy-BettingExchangeRoom.pdf", // Collegamento dinamico al PDF in inglese
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Day 1/30]
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
@@ -379,7 +382,7 @@ The trader doesn't support a team: they exploit inefficiency. If your heart is r
                     prepTitle: "Fase 1: Preparación (Mente Millonaria)", audioLabel: "ONDAS BINAURALES (ENFOQUE 14Hz)", audioWarning: "ATENCIÓN: Usar auriculares. No escuchar mientras conduces o manejas maquinaria pesada.", finLabel: "PÍLDORA FINANCIERA", finQuote: "El dinero en el Exchange no es tuyo hasta que lo retiras. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.",
                     coreTitle: "Fase 2: Theorum & Praxis", btnPdf: "Diapositivas Masterclass", btnPodcast: "Debate en Audio", btnTelegram: "LECCIÓN",
                     quizTitle: "Check-Point", quizQuestion: "En el mercado Exchange, ¿quién es tu contraparte cuando vas 'En contra' (Lay)?", quizSuccess: "¡Correcto! +100 XP ganados.", quizFail: "Incorrecto. Revisa el Theorum.",
-                    simTitle: "Simulador de Scalping en Vivo", simScenario: "Escenario: Partido 0-0 al min. 75. Tendencia: Decaimiento temporal (Drop).", liveMarket: "Mercado en Vivo",
+                    simTitle: "Simulador de Scalping en Vivo", simScenario: "Escenario: Partido 0-0 al min. 75. Tendencia: Time Decay.", liveMarket: "Mercado en Vivo",
                     btnBackLbl: "Back", btnLayLbl: "Lay", btnCashOutLbl: "CASH OUT", btnCashoutSub: "CERRAR TRADE", eduAnalysis: "Análisis Científico del Trade",
                     eduBackWin: "A Favor a {E} y En Contra a {U}. La cuota bajó según la matemática del Time Decay (0-0 al 75'). Excelente trade en tendencia.",
                     eduBackLoss: "A Favor a {E} y En Contra a {U}. El trend estaba a tu favor, pero la volatilidad te golpeó. Bien hecho al cortar pérdidas rápido.",
@@ -388,6 +391,7 @@ The trader doesn't support a team: they exploit inefficiency. If your heart is r
                     eduScratch: "Cerraste a la misma cuota ({E}). Scratch trade. Preservar el capital es la regla número uno del profesional.",
                     navPrev: "← Atrás", navNext: "Siguiente →", tgDate: "Hoy",
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1",
+                    pdfUrl: "#", // Sostituisci con il file spagnolo quando disponibile
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Día 1/30]
 ▬▬▬▬▬▬▬▬▬▬▬▬▬
 
@@ -442,6 +446,7 @@ El trader no le va a ningún equipo: aprovecha las ineficiencias. Si el corazón
                     eduScratch: "Fechou na mesma odd ({E}). Scratch trade. Preservar o capital é a regra numero um do profissional.",
                     navPrev: "← Voltar", navNext: "Próximo →", tgDate: "Hoje",
                     videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1",
+                    pdfUrl: "#", // Sostituisci con il file portoghese quando disponibile
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Dia 1/30]
 ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
 
@@ -510,6 +515,20 @@ O trader não torce para um time: ele explora a ineficiência. Se o seu coraçã
                     const videoIframe = document.getElementById('main-video');
                     if (videoIframe && videoIframe.src !== dict[lang].videoUrl) videoIframe.src = dict[lang].videoUrl;
                     
+                    // Aggiornamento dinamico dell'URL del PDF
+                    const pdfLink = document.getElementById('btn-pdf-link');
+                    if (pdfLink && dict[lang].pdfUrl) {
+                        pdfLink.href = dict[lang].pdfUrl;
+                        // Opzionale: Nascondi il pulsante se l'URL è ancora "#" (cioè se non c'è il PDF)
+                        if(dict[lang].pdfUrl === "#") {
+                             pdfLink.style.pointerEvents = "none";
+                             pdfLink.style.opacity = "0.5";
+                        } else {
+                             pdfLink.style.pointerEvents = "auto";
+                             pdfLink.style.opacity = "1";
+                        }
+                    }
+
                     const btnCashOutSub = document.getElementById('btn-cashout-sub');
                     const btnCashOutLbl = document.getElementById('btn-cashout-lbl');
                     if (btnCashOutSub && btnCashOutLbl) {
