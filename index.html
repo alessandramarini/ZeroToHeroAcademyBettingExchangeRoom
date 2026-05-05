@@ -12,8 +12,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap"></noscript>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap"></noscript>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -47,8 +47,9 @@
         ::-webkit-scrollbar-track { background: rgba(0,0,0,0.5); }
         ::-webkit-scrollbar-thumb { background: #00ff80; border-radius: 10px; }
         .tg-scrollbar::-webkit-scrollbar { width: 3px; }
-        .tg-scrollbar::-webkit-scrollbar-track { background: #0e1621; }
-        .tg-scrollbar::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 4px; }
+        .tg-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .tg-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,255,128,0.3); border-radius: 4px; }
+        .tg-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(0,255,128,0.6); }
 
         @keyframes pulse-sub {
             0% { color: #ef4444; box-shadow: 0 0 20px rgba(239, 68, 68, 0.3); border-color: rgba(239, 68, 68, 0.6); background-color: rgba(20,5,5,0.9); }
@@ -59,9 +60,6 @@
 
         .telegram-panel-container { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out, margin-top 0.4s ease-out; margin-top: 0; }
         .telegram-panel-container.expanded { max-height: 1000px; opacity: 1; margin-top: 1rem; overflow: visible; }
-
-        .modern-ebook { background-color: #0d1117; color: #e5e7eb; }
-        .modern-ebook-gradient-text { background: linear-gradient(to right, #00ff80, #24A1DE); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         @keyframes joystickNeon {
             0% { filter: drop-shadow(0 0 10px rgba(0, 255, 128, 0.5)); transform: scale(1); }
@@ -75,24 +73,30 @@
 
         /* HD Football Pitch Pattern CSS */
         .football-pitch-bg {
-            background-color: #2b7a2b;
-            background-image: repeating-linear-gradient(
-                to right,
-                rgba(255, 255, 255, 0.03),
-                rgba(255, 255, 255, 0.03) 10%,
-                rgba(0, 0, 0, 0.05) 10%,
-                rgba(0, 0, 0, 0.05) 20%
-            );
+            background: 
+                repeating-linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.03) 0%,
+                    rgba(255, 255, 255, 0.03) 8%,
+                    rgba(0, 0, 0, 0.04) 8%,
+                    rgba(0, 0, 0, 0.04) 16%
+                ),
+                linear-gradient(to bottom, #1b5e20, #0a330a);
         }
 
-        .cta-pulse-ring {
-            animation: ringPulse 2s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
-        }
+        .cta-pulse-ring { animation: ringPulse 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
         @keyframes ringPulse {
-            0% { box-shadow: 0 0 0 0 rgba(0, 255, 128, 0.6); }
-            70% { box-shadow: 0 0 0 20px rgba(0, 255, 128, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 255, 128, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 128, 0.6), 0 0 30px rgba(0, 255, 128, 0.5); }
+            70% { box-shadow: 0 0 0 25px rgba(0, 255, 128, 0), 0 0 30px rgba(0, 255, 128, 0.5); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 128, 0), 0 0 30px rgba(0, 255, 128, 0.5); }
         }
+
+        /* E-Book Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
 </head>
 <body class="text-gray-200 pb-12 selection:bg-green-500 selection:text-white antialiased relative">
@@ -132,7 +136,7 @@
         <!-- FASE 1: LEZIONE & RISORSE -->
         <section class="glass-panel rounded-2xl p-2 sm:p-6 mt-4 sm:mt-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
             <h3 class="font-black text-sm sm:text-lg mb-2 sm:mb-4 ml-2 sm:ml-0 flex items-center text-white uppercase tracking-wider">
-                <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-[#00ff80]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-[#00ff80]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                 <span data-i18n="coreTitle">Fase 1: Theorum & Praxis</span>
             </h3>
             
@@ -191,7 +195,7 @@
             </div>
         </section>
 
-        <!-- FASE 2: QUIZ 5 STEP (Spostato Sopra) -->
+        <!-- FASE 2: QUIZ 5 STEP -->
         <section class="glass-panel rounded-2xl p-3 sm:p-6 lg:col-span-1 h-fit mt-4 sm:mt-8 relative overflow-hidden" id="quiz-section">
             <h3 class="font-black text-sm sm:text-lg mb-2 sm:mb-5 text-white flex items-center tracking-wider uppercase">
                 <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -202,12 +206,12 @@
                 <div class="flex justify-between items-center mb-2">
                     <div class="bg-gray-800 text-gray-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Domanda <span id="quiz-step-current">1</span> di 5</div>
                     <div class="flex gap-1" id="quiz-dots">
-                        <!-- Punti progresso generati da JS -->
+                        <!-- Punti progresso -->
                     </div>
                 </div>
                 <p id="quiz-question-text" class="text-xs sm:text-base text-white font-bold leading-relaxed mb-4 border-l-2 border-[#00ff80] pl-3"></p>
                 <div id="quiz-options-container" class="space-y-2 sm:space-y-3 mt-2 sm:mt-4">
-                    <!-- Bottoni opzioni generati da JS -->
+                    <!-- Bottoni opzioni -->
                 </div>
             </div>
             
@@ -300,36 +304,42 @@
                 </div>
 
                 <!-- Football Pitch -->
-                <div class="relative w-full h-40 sm:h-72 football-pitch-bg overflow-hidden flex items-center justify-center">
+                <div class="relative w-full football-pitch-bg overflow-hidden shadow-[inset_0_0_50px_rgba(0,0,0,0.8)] border-t border-[#333]" style="aspect-ratio: 16/9;">
                     
-                    <!-- SVG Pitch Lines -->
-                    <svg viewBox="0 0 800 400" class="absolute inset-0 w-full h-full opacity-60" preserveAspectRatio="none">
-                        <rect x="20" y="20" width="760" height="360" fill="none" stroke="white" stroke-width="3" />
-                        <line x1="400" y1="20" x2="400" y2="380" stroke="white" stroke-width="3" />
-                        <circle cx="400" cy="200" r="60" fill="none" stroke="white" stroke-width="3" />
-                        <circle cx="400" cy="200" r="4" fill="white" />
-                        <rect x="20" y="80" width="120" height="240" fill="none" stroke="white" stroke-width="3" />
-                        <rect x="20" y="140" width="40" height="120" fill="none" stroke="white" stroke-width="3" />
-                        <circle cx="100" cy="200" r="4" fill="white" />
-                        <path d="M 140 160 A 60 60 0 0 1 140 240" fill="none" stroke="white" stroke-width="3" />
-                        <rect x="660" y="80" width="120" height="240" fill="none" stroke="white" stroke-width="3" />
-                        <rect x="740" y="140" width="40" height="120" fill="none" stroke="white" stroke-width="3" />
-                        <circle cx="700" cy="200" r="4" fill="white" />
-                        <path d="M 660 160 A 60 60 0 0 0 660 240" fill="none" stroke="white" stroke-width="3" />
+                    <!-- HD SVG Field Lines -->
+                    <svg viewBox="0 0 1000 562.5" class="absolute inset-0 w-full h-full drop-shadow-md" preserveAspectRatio="xMidYMid slice">
+                        <g stroke="rgba(255,255,255,0.65)" stroke-width="4" fill="none">
+                            <rect x="25" y="25" width="950" height="512.5" />
+                            <line x1="500" y1="25" x2="500" y2="537.5" />
+                            <circle cx="500" cy="281.25" r="80" />
+                            <circle cx="500" cy="281.25" r="4" fill="rgba(255,255,255,0.65)" />
+                            
+                            <rect x="25" y="111.25" width="160" height="340" />
+                            <rect x="25" y="196.25" width="55" height="170" />
+                            <circle cx="130" cy="281.25" r="4" fill="rgba(255,255,255,0.65)" />
+                            <path d="M 185 201.25 A 80 80 0 0 1 185 361.25" />
+
+                            <rect x="815" y="111.25" width="160" height="340" />
+                            <rect x="920" y="196.25" width="55" height="170" />
+                            <circle cx="870" cy="281.25" r="4" fill="rgba(255,255,255,0.65)" />
+                            <path d="M 815 201.25 A 80 80 0 0 0 815 361.25" />
+                        </g>
                     </svg>
 
-                    <!-- Soccer Ball Center -->
-                    <div class="absolute w-5 h-5 sm:w-8 sm:h-8 bg-white rounded-full flex items-center justify-center shadow-[0_4px_10px_rgba(0,0,0,0.6)]">
-                        <svg viewBox="0 0 24 24" class="w-full h-full text-black opacity-80" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-1.63.49-3.15 1.33-4.41l3.52 3.52c-.08.28-.13.58-.13.89 0 1.93 1.57 3.5 3.5 3.5s3.5-1.57 3.5-3.5c0-.31-.05-.61-.13-.89l3.52-3.52C19.51 8.85 20 10.37 20 12c0 4.41-3.59 8-8 8z"/></svg>
-                    </div>
+                    <!-- OVERLAY GRADIENT FOR READABILITY -->
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-black/10 backdrop-blur-[2px] transition-all duration-500 group-hover:from-black/95 group-hover:via-black/50 group-hover:backdrop-blur-[4px] z-20"></div>
                     
-                    <!-- OVERLAY CALL TO ACTION -->
-                    <div class="absolute inset-0 bg-black/60 backdrop-blur-[3px] flex flex-col items-center justify-center transition-all duration-500 group-hover:bg-black/80 z-20">
-                        <div class="w-20 h-20 sm:w-28 sm:h-28 bg-[#00ff80] rounded-full flex items-center justify-center mb-4 sm:mb-6 shadow-[0_0_40px_rgba(0,255,128,0.7)] group-hover:scale-110 transition-transform cta-pulse-ring">
-                            <span class="text-black text-4xl sm:text-6xl ml-2 sm:ml-3">▶</span>
+                    <!-- ELEGANT CENTER PLAY BUTTON -->
+                    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-30">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 cta-pulse-ring relative bg-[#00ff80]/10 border-2 border-[#00ff80]/50 backdrop-blur-md shadow-[0_0_30px_rgba(0,255,128,0.5)] cursor-pointer">
+                            <svg class="w-8 h-8 sm:w-12 sm:h-12 text-[#00ff80] ml-1 sm:ml-2 drop-shadow-[0_0_15px_rgba(0,255,128,1)]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
-                        <span class="text-white font-black text-xl sm:text-4xl uppercase tracking-[0.15em] drop-shadow-lg text-center px-4" data-i18n="demoTitleCTA">AVVIA IL SIMULATORE</span>
-                        <span class="text-[#00ff80] font-bold text-[10px] sm:text-sm mt-3 bg-black/80 px-6 sm:px-8 py-2 sm:py-2.5 rounded-full border border-[#00ff80]/40 shadow-xl uppercase tracking-widest" data-i18n="demoSubCTA">Clicca per aprire la Demo Interattiva</span>
+                    </div>
+
+                    <!-- CTA TEXT AT BOTTOM -->
+                    <div class="absolute bottom-4 sm:bottom-6 left-0 right-0 z-30 flex flex-col items-center px-4 transform transition-transform duration-500 group-hover:-translate-y-2">
+                        <span class="text-white font-black text-lg sm:text-3xl uppercase tracking-[0.2em] drop-shadow-2xl text-center" data-i18n="demoTitleCTA">AVVIA IL SIMULATORE</span>
+                        <span class="text-[#00ff80] font-bold text-[9px] sm:text-xs mt-2 bg-black/80 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full border border-gray-600/50 shadow-2xl uppercase tracking-widest text-center" data-i18n="demoSubCTA">Clicca per aprire la Demo Interattiva</span>
                     </div>
                 </div>
             </a>
@@ -368,14 +378,16 @@
     </main>
 
     <!-- MODALE EBOOK -->
-    <div id="ebook-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-0 sm:p-6 opacity-0 transition-opacity duration-300">
-        <div class="bg-[#0d1117] w-full max-w-4xl h-full sm:h-auto sm:max-h-[95vh] rounded-none sm:rounded-2xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative modern-ebook" id="ebook-modal-content">
-            <div class="flex justify-between items-center p-3 sm:p-4 border-b border-gray-800 bg-[#0d1117] shrink-0">
-                <h3 class="text-[#00ff80] font-black uppercase tracking-widest text-[10px] sm:text-sm" data-i18n="btnEbook">E-Book</h3>
-                <button onclick="closeEbookModal()" class="text-gray-400 hover:text-white text-2xl sm:text-3xl leading-none px-2 rounded-lg active:scale-95 touch-manipulation">&times;</button>
+    <div id="ebook-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-0 sm:p-4 md:p-6 opacity-0 transition-opacity duration-300">
+        <div class="bg-[#050a05] w-full max-w-4xl h-full sm:h-auto sm:max-h-[95vh] rounded-none sm:rounded-2xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative modern-ebook" id="ebook-modal-content">
+            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-[#050a05] shrink-0 z-10">
+                <h3 class="text-[#00ff80] font-black uppercase tracking-widest text-[10px] sm:text-sm flex items-center gap-2">
+                    <span class="text-lg">📖</span> <span data-i18n="btnEbook">E-Book</span>
+                </h3>
+                <button onclick="closeEbookModal()" class="text-gray-400 hover:text-white text-3xl leading-none px-2 rounded-lg active:scale-95 touch-manipulation">&times;</button>
             </div>
-            <div class="flex-1 overflow-y-auto p-4 sm:p-10 relative flex flex-col items-center tg-scrollbar bg-[#0d1117]">
-                <div class="w-full max-w-2xl" id="ebook-content-container" data-i18n-html="ebookContent"></div>
+            <div class="flex-1 overflow-y-auto relative flex flex-col items-center tg-scrollbar bg-[#050a05]">
+                <div class="w-full max-w-3xl p-4 sm:p-8" id="ebook-content-container" data-i18n-html="ebookContent"></div>
             </div>
         </div>
     </div>
@@ -387,12 +399,31 @@
                 <h3 class="text-[#00ff80] font-black uppercase tracking-widest text-sm flex items-center gap-2">📻 Podcast</h3>
                 <button onclick="closePodcastModal()" class="text-gray-400 hover:text-white text-3xl leading-none px-2 rounded-lg active:scale-95 touch-manipulation">&times;</button>
             </div>
-            <div class="p-6 flex flex-col items-center text-center">
-                <div id="podcast-loading" class="w-8 h-8 rounded-full border-2 border-t-2 loader-spin mb-4"></div>
-                <img id="podcast-cover" src="https://ui-avatars.com/api/?name=Podcast&background=141b22&color=00ff80" class="w-32 h-32 rounded-xl shadow-lg mb-4 hidden object-cover border border-gray-700">
-                <h4 id="podcast-title" class="text-white font-bold text-sm mb-6 w-full truncate">Caricamento episodio...</h4>
-                <audio id="podcast-audio" controls class="w-full h-10 outline-none hidden"></audio>
-                <div id="podcast-error" class="text-red-400 text-xs hidden">Errore nel caricamento del feed RSS.</div>
+            <div class="p-6 flex flex-col items-center text-center w-full">
+                <!-- Contenitore RSS Standard -->
+                <div id="podcast-standard-container" class="flex-col items-center w-full flex">
+                    <div id="podcast-loading" class="w-8 h-8 rounded-full border-2 border-t-2 loader-spin mb-4"></div>
+                    <img id="podcast-cover" src="https://ui-avatars.com/api/?name=Podcast&background=141b22&color=00ff80" class="w-32 h-32 rounded-xl shadow-lg mb-4 hidden object-cover border border-gray-700">
+                    <h4 id="podcast-title" class="text-white font-bold text-sm mb-6 w-full truncate">Caricamento episodio...</h4>
+                    <audio id="podcast-audio" controls class="w-full h-10 outline-none hidden"></audio>
+                    <div id="podcast-error" class="text-red-400 text-xs hidden">Errore nel caricamento del feed RSS.</div>
+                </div>
+                <!-- Contenitore Spotify per Inglese -->
+                <div id="podcast-iframe-container" class="w-full hidden justify-center">
+                    <iframe src="https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/en---1-Zero-to-Hero-Academy-e3itlbr/a-ackraqe" height="102px" width="100%" frameborder="0" scrolling="no" class="max-w-[400px] rounded-xl border border-gray-700 shadow-lg bg-[#282828]"></iframe>
+                </div>
+                <!-- Contenitore Spotify per Portoghese -->
+                <div id="podcast-iframe-container-pt" class="w-full hidden justify-center">
+                    <iframe src="https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/pt-1-Zero-to-Hero-Academy-e3iu53i/a-ackrebp" height="102px" width="100%" frameborder="0" scrolling="no" class="max-w-[400px] rounded-xl border border-gray-700 shadow-lg bg-[#282828]"></iframe>
+                </div>
+                <!-- Contenitore Spotify per Spagnolo -->
+                <div id="podcast-iframe-container-es" class="w-full hidden justify-center">
+                    <iframe src="https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/es-1-Zero-to-Hero-Academy-e3iu4me/a-ackrdqm" height="102px" width="100%" frameborder="0" scrolling="no" class="max-w-[400px] rounded-xl border border-gray-700 shadow-lg bg-[#282828]"></iframe>
+                </div>
+                <!-- Contenitore Spotify per Italiano -->
+                <div id="podcast-iframe-container-it" class="w-full hidden justify-center">
+                    <iframe src="https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/giorno-1-Zero-to-Hero-Academy-e3itmmb/a-ackqpt1" height="102px" width="100%" frameborder="0" scrolling="no" class="max-w-[400px] rounded-xl border border-gray-700 shadow-lg bg-[#282828]"></iframe>
+                </div>
             </div>
         </div>
     </div>
@@ -463,26 +494,55 @@
             modal.classList.remove('opacity-0'); modal.classList.add('opacity-100');
             document.getElementById('podcast-modal-content').classList.remove('scale-95'); document.getElementById('podcast-modal-content').classList.add('scale-100');
             
-            const audioEl = document.getElementById('podcast-audio');
-            const titleEl = document.getElementById('podcast-title');
-            const coverEl = document.getElementById('podcast-cover');
-            const loadEl = document.getElementById('podcast-loading');
+            const currentLang = document.documentElement.lang;
+            const stdContainer = document.getElementById('podcast-standard-container');
+            const iframeContainerEN = document.getElementById('podcast-iframe-container');
+            const iframeContainerPT = document.getElementById('podcast-iframe-container-pt');
+            const iframeContainerES = document.getElementById('podcast-iframe-container-es');
+            const iframeContainerIT = document.getElementById('podcast-iframe-container-it');
             
-            if(!audioEl.src || audioEl.src === window.location.href) {
-                fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fanchor.fm%2Fs%2F11240e29c%2Fpodcast%2Frss')
-                .then(res => res.json())
-                .then(data => {
-                    loadEl.classList.add('hidden');
-                    if(data.status === 'ok' && data.items.length > 0) {
-                        titleEl.innerText = data.items[0].title;
-                        audioEl.src = data.items[0].enclosure.link;
-                        audioEl.classList.remove('hidden');
-                        if(data.feed.image) { coverEl.src = data.feed.image; coverEl.classList.remove('hidden'); }
-                    }
-                }).catch(err => {
-                    loadEl.classList.add('hidden');
-                    titleEl.innerText = 'Impossibile caricare il feed.';
-                });
+            const hideAllPodcasts = () => {
+                stdContainer.classList.add('hidden'); stdContainer.classList.remove('flex');
+                iframeContainerEN.classList.add('hidden'); iframeContainerEN.classList.remove('flex');
+                iframeContainerPT.classList.add('hidden'); iframeContainerPT.classList.remove('flex');
+                iframeContainerES.classList.add('hidden'); iframeContainerES.classList.remove('flex');
+                iframeContainerIT.classList.add('hidden'); iframeContainerIT.classList.remove('flex');
+            };
+
+            hideAllPodcasts();
+            
+            if (currentLang === 'en') {
+                iframeContainerEN.classList.remove('hidden'); iframeContainerEN.classList.add('flex');
+            } else if (currentLang === 'pt') {
+                iframeContainerPT.classList.remove('hidden'); iframeContainerPT.classList.add('flex');
+            } else if (currentLang === 'es') {
+                iframeContainerES.classList.remove('hidden'); iframeContainerES.classList.add('flex');
+            } else if (currentLang === 'it') {
+                iframeContainerIT.classList.remove('hidden'); iframeContainerIT.classList.add('flex');
+            } else {
+                stdContainer.classList.remove('hidden'); stdContainer.classList.add('flex');
+
+                const audioEl = document.getElementById('podcast-audio');
+                const titleEl = document.getElementById('podcast-title');
+                const coverEl = document.getElementById('podcast-cover');
+                const loadEl = document.getElementById('podcast-loading');
+                
+                if(!audioEl.src || audioEl.src === window.location.href) {
+                    fetch('https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fanchor.fm%2Fs%2F11240e29c%2Fpodcast%2Frss')
+                    .then(res => res.json())
+                    .then(data => {
+                        loadEl.classList.add('hidden');
+                        if(data.status === 'ok' && data.items.length > 0) {
+                            titleEl.innerText = data.items[0].title;
+                            audioEl.src = data.items[0].enclosure.link;
+                            audioEl.classList.remove('hidden');
+                            if(data.feed.image) { coverEl.src = data.feed.image; coverEl.classList.remove('hidden'); }
+                        }
+                    }).catch(err => {
+                        loadEl.classList.add('hidden');
+                        titleEl.innerText = 'Impossibile caricare il feed.';
+                    });
+                }
             }
         }
 
@@ -490,6 +550,21 @@
             SoundEngine.click();
             const modal = document.getElementById('podcast-modal');
             document.getElementById('podcast-audio').pause(); 
+            
+            const resetIframeSrc = (selector) => {
+                const iframe = document.querySelector(selector);
+                if (iframe) {
+                    const tempSrc = iframe.src;
+                    iframe.src = '';
+                    iframe.src = tempSrc;
+                }
+            };
+
+            resetIframeSrc('#podcast-iframe-container iframe');
+            resetIframeSrc('#podcast-iframe-container-pt iframe');
+            resetIframeSrc('#podcast-iframe-container-es iframe');
+            resetIframeSrc('#podcast-iframe-container-it iframe');
+
             modal.classList.remove('opacity-100'); modal.classList.add('opacity-0');
             document.getElementById('podcast-modal-content').classList.remove('scale-100'); document.getElementById('podcast-modal-content').classList.add('scale-95');
             setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 300);
@@ -512,9 +587,8 @@
 
         const RoomApp = (function() {
             const CONFIG = { STORAGE_KEY: 'bx_academy_demo_hd' }; 
-            const footerLogoHTML = `<div class="mt-12 text-center border-t border-gray-800 pt-6"><img src="logo%20sfondo%20nero%20betting%20exchange%20room.jpeg" class="w-10 h-10 mx-auto rounded-full opacity-50 grayscale" alt="Global Exchange Academy"></div>`;
+            const footerLogoHTML = `<div class="mt-12 text-center pt-8"><img src="logo%20sfondo%20nero%20betting%20exchange%20room.jpeg" class="w-12 h-12 mx-auto rounded-full opacity-30 grayscale mix-blend-screen" alt="Global Exchange Academy"></div>`;
 
-            // Quiz Dictionary
             const quizzesData = {
                 it: [
                     { q: "Nel mercato Exchange, chi è la tua controparte quando 'Banchi' una quota?", opts: ["Il Bookmaker tradizionale", "Altri utenti che hanno 'Puntato'", "La piattaforma stessa"], correct: 1, successMsg: "Esatto! Scommetti sempre contro una persona fisica.", failMsg: "Errore. Non è il bookmaker né la piattaforma. Riprova." },
@@ -557,32 +631,72 @@
                     videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Giorno 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFFERENZA STRUTTURALE: BOOKMAKER VS EXCHANGE</strong>\n\nIl Bookmaker è la tua controparte: se tu vinci, lui perde. Per questo limita i profittevoli. \n\nNell'Exchange, tu operi in un mercato <em>peer-to-peer</em>: la piattaforma è solo un intermediario che incassa una commissione sulle vincite. Qui non scommetti contro un banco, ma scambi quote con altri utenti.\n\n📐 <strong>FORMULA GENERALE (PUNTA):</strong>\nProfitto Netto = (Stake * (Quota - 1)) * (1 - Commissione)\n\n<strong>LEGENDA TECNICA:</strong>\n🔹 Stake: Capitale puntato.\n🔹 Liability: Il rischio effettivo quando "banchi" (fai il banco).\n🔹 Commissione: Fee (es. 5%) pagata all'Exchange solo sulla vincita netta.\n\n🧮 <strong>ESEMPIO PRACTICO (REALE):</strong>\n<em>Evento: Juventus vs Inter. Quota Punta (Back) @2.10. Stake: 100€. Comm: 5%.</em>\n\n🪄 <strong>CALCOLO:</strong>\n• Profitto Lordo: 100€ * (2.10 - 1) = 110€\n• Commissione: 110€ * 0.05 = 5.50€\n• Profitto Netto: 104.50€\n\n⚠️ <strong>GUBBING & LIMITAZIONI:</strong>\nIl Gubbing (chiusura/limitazione conto) NON esiste nell'Exchange. Poiché la piattaforma guadagna dalle tue commissioni, più sei bravo e vinci, più l'Exchange guadagna. Il rischio di limitazione resta esclusivo dei Bookmaker tradizionali.\n\n✅ <strong>AZIONE DEL GIORNO:</strong>\nApri un Exchange (Betfair/Betflag), scegli un match di Serie A o Premier League e osserva il book per 30 minuti. Nota come lo spread (differenza tra Punta e Banca) si stringe dove c'è più denaro (liquidità).\n\n🧘‍♂️ <strong>IL MANTRA:</strong> <em>"Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DEL #1</strong>\nIl trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <em>size</em> è troppo grande. La matematica non ha battito cardiaco, segui quella.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidità è il tuo paracadute. Senza volumi, non c'è trading, solo gioco d'azzardo.</em>`,
                     ebookContent: `
-                        <div class="border-b border-gray-800 py-4 sm:py-6 mb-4 sm:mb-8 text-center">
-                            <h1 class="text-xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
-                            <h2 class="text-[10px] sm:text-sm text-gray-400 mt-2 font-mono tracking-widest uppercase">Giorno 1: Differenza Strutturale</h2>
-                        </div>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">Il Bookmaker tradizionale agisce come tua controparte diretta: se tu vinci, lui perde. Questo genera un conflitto di interessi intrinseco, motivo per cui i giocatori profittevoli vengono sistematicamente limitati (pratica nota come <span class="text-[#24A1DE] font-bold">Gubbing</span>).</p>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">Nell'Exchange, al contrario, si opera in un mercato <span class="text-[#00ff80] font-bold">peer-to-peer</span>. La piattaforma funge da intermediario neutrale, trattenendo una piccola commissione unicamente sulle vincite nette. In questo ecosistema, non si scommette contro un banco, ma si scambiano quote direttamente con altri utenti globali.</p>
-                        
-                        <div class="bg-gray-900 border border-gray-700 p-4 sm:p-6 rounded-xl shadow-lg mb-6 sm:mb-8">
-                             <h3 class="text-sm sm:text-lg font-black text-[#00ff80] mb-2 sm:mb-3 uppercase tracking-wider text-center">La Formula (Punta)</h3>
-                             <p class="font-mono text-center text-[10px] sm:text-sm text-white">Profitto Netto = [ Stake × (Quota - 1) ] × (1 - Commissione)</p>
-                        </div>
-                        
-                        <h4 class="text-sm sm:text-lg font-bold mt-4 sm:mt-8 mb-3 sm:mb-4 text-white uppercase tracking-widest border-l-4 border-[#24A1DE] pl-3">Legenda Tecnica</h4>
-                        <ul class="list-none mb-6 sm:mb-8 space-y-3 sm:space-y-4 text-xs sm:text-base text-justify">
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Stake:</strong> Il capitale puntato e immesso a mercato.</li>
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Liability:</strong> Il rischio effettivo e reale quando si assume il ruolo di creatore del mercato ("bancando" una quota).</li>
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Commissione:</strong> La <em>fee</em> (es. 5%) pagata all'Exchange, applicata esclusivamente in caso di vincita netta.</li>
-                        </ul>
+                        <div class="animate-fade-in-up">
+                            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 p-6 sm:p-10 mb-8 sm:mb-12 shadow-[0_0_30px_rgba(0,255,128,0.1)] text-center">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00ff80] to-transparent opacity-50"></div>
+                                <span class="inline-block py-1 px-3 rounded-full bg-[#00ff80]/10 text-[#00ff80] border border-[#00ff80]/20 font-mono text-[9px] sm:text-xs tracking-widest uppercase mb-4">Giorno 1</span>
+                                <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white mb-2 drop-shadow-md">Differenza <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00ff80] to-[#00b359]">Strutturale</span></h1>
+                                <p class="text-[#24A1DE] font-bold text-xs sm:text-sm tracking-widest uppercase">Bookmaker vs Exchange</p>
+                            </div>
 
-                        <h3 class="text-base sm:text-xl font-black mt-6 sm:mt-12 mb-3 sm:mb-4 text-center uppercase tracking-wider text-white">Mindset del Trader</h3>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">Il trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <span class="text-[#24A1DE]">size</span> è troppo grande. La matematica non ha battito cardiaco, devi seguire quella.</p>
+                            <div class="space-y-4 sm:space-y-6 text-gray-300 text-xs sm:text-base leading-relaxed sm:leading-loose">
+                                <p>Il Bookmaker tradizionale agisce come tua controparte diretta: se tu vinci, lui perde. Questo genera un conflitto di interessi intrinseco, motivo per cui i giocatori profittevoli vengono sistematicamente limitati (pratica nota come <span class="text-[#24A1DE] font-bold bg-[#24A1DE]/10 px-1.5 py-0.5 rounded">Gubbing</span>).</p>
+                                <p>Nell'Exchange, al contrario, si opera in un mercato <span class="text-[#00ff80] font-bold bg-[#00ff80]/10 px-1.5 py-0.5 rounded">peer-to-peer</span>. La piattaforma funge da intermediario neutrale, trattenendo una piccola commissione unicamente sulle vincite nette. In questo ecosistema, non si scommette contro un banco, ma si scambiano quote direttamente con altri utenti globali.</p>
+                            </div>
 
-                        <div class="bg-black/50 border border-[#00ff80]/50 p-4 sm:p-6 rounded-xl my-6 sm:my-10 italic text-gray-400 text-xs sm:text-base text-center font-mono shadow-[0_0_15px_rgba(0,255,128,0.1)]">
-                            "Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo. La liquidità è il tuo paracadute: senza volumi non vi è trading, ma solo azzardo."
+                            <div class="my-10 relative p-[1px] rounded-2xl bg-gradient-to-b from-[#00ff80]/40 via-[#00ff80]/5 to-transparent">
+                                <div class="bg-[#050a05] rounded-xl p-5 sm:p-8 flex flex-col items-center justify-center">
+                                    <div class="w-10 h-10 rounded-full bg-[#00ff80]/10 flex items-center justify-center mb-3 border border-[#00ff80]/30 shadow-[0_0_15px_rgba(0,255,128,0.2)]">
+                                        <span class="text-lg">🧮</span>
+                                    </div>
+                                    <h3 class="font-black text-white text-sm sm:text-lg tracking-widest uppercase mb-4">La Formula (Punta)</h3>
+                                    <div class="bg-[#0a140f] border border-[#00ff80]/20 px-4 py-3 rounded-lg shadow-inner w-full text-center overflow-x-auto">
+                                        <code class="text-[#00ff80] font-mono font-bold text-xs sm:text-[15px] whitespace-nowrap">Netto = [ Stake × (Quota - 1) ] × (1 - Comm.)</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-10">
+                                <h4 class="flex items-center text-white font-black text-sm sm:text-lg uppercase tracking-widest mb-6">
+                                    <span class="w-1.5 h-6 bg-[#24A1DE] mr-3 rounded-sm shadow-[0_0_10px_rgba(36,161,222,0.5)]"></span> Legenda Tecnica
+                                </h4>
+                                <div class="grid grid-cols-1 gap-3 sm:gap-4">
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#00ff80]/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-[#00ff80]/10 flex items-center justify-center shrink-0 mr-4 border border-[#00ff80]/20 text-[14px]">💰</div>
+                                        <div>
+                                            <strong class="text-[#00ff80] block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Stake</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Il capitale puntato e immesso a mercato.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-red-500/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mr-4 border border-red-500/20 text-[14px]">⚖️</div>
+                                        <div>
+                                            <strong class="text-red-400 block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Liability</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Il rischio effettivo e reale quando si assume il ruolo di creatore del mercato ("bancando").</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#24A1DE]/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-[#24A1DE]/10 flex items-center justify-center shrink-0 mr-4 border border-[#24A1DE]/20 text-[14px]">📊</div>
+                                        <div>
+                                            <strong class="text-[#24A1DE] block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Commissione</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">La fee (es. 5%) pagata all'Exchange, applicata esclusivamente in caso di vincita netta.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-base sm:text-xl font-black mt-10 mb-4 text-center uppercase tracking-widest text-white">Mindset del Trader</h3>
+                            <p class="text-justify leading-relaxed mb-8 text-xs sm:text-base text-gray-300">Il trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <span class="text-[#24A1DE] font-bold">size</span> è troppo grande. La matematica non ha battito cardiaco, devi seguire quella.</p>
+
+                            <blockquote class="relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 my-8 shadow-2xl overflow-hidden">
+                                <div class="absolute -top-4 -right-4 text-7xl text-[#00ff80]/10 font-serif leading-none">"</div>
+                                <p class="text-gray-300 italic text-xs sm:text-base leading-relaxed font-medium relative z-10 text-center">
+                                    Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo.<br><br>
+                                    <span class="text-[#00ff80] font-bold">La liquidità è il tuo paracadute: senza volumi non vi è trading, ma solo azzardo.</span>
+                                </p>
+                            </blockquote>
+                            ${footerLogoHTML}
                         </div>
-                        ${footerLogoHTML}
                     `
                 },
                 en: {
@@ -595,32 +709,72 @@
                     videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Day 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>STRUCTURAL DIFFERENCE: BOOKMAKER VS EXCHANGE</strong>\n\nThe Bookmaker is your counterparty: if you win, they lose. This is why they limit profitable players. \n\nIn an Exchange, you operate in a <em>peer-to-peer</em> market: the platform is merely an intermediary charging a commission on winnings. Here, you aren't betting against "the house", but swapping odds with other users.\n\n📐 <strong>GENERAL FORMULA (BACKING):</strong>\nNet Profit = (Stake * (Odds - 1)) * (1 - Commission)\n\n<strong>TECHNICAL KEY:</strong>\n🔹 Stake: The capital placed.\n🔹 Liability: The actual risk when you "Lay" (act as the bookie).\n🔹 Commission: Fee (e.g. 5%) paid only on net winnings.\n\n🧮 <strong>PRACTICAL EXAMPLE:</strong>\n<em>Event: Juventus vs Inter. Back Odds @2.10. Stake: £100. Comm: 5%.</em>\n\n🪄 <strong>CALCULATION:</strong>\n• Gross Profit: £100 * (2.10 - 1) = £110\n• Commission: £110 * 0.05 = £5.50\n• Net Profit: £104.50\n\n⚠️ <strong>GUBBING & LIMITATIONS:</strong>\nGubbing (account restriction) DOES NOT exist in the Exchange. Since the platform profits from your commissions, the more you win, the more they earn. Account limits are a problem exclusive to traditional Bookmakers.\n\n✅ <strong>ACTION OF THE DAY:</strong>\nOpen an Exchange (Betfair/Betflag), pick a Serie A or Premier League match and observe the Order Book for 30 minutes. Notice how the Spread (gap between Back and Lay) narrows where there is more Liquidity.\n\n🧘‍♂️ <strong>THE MANTRA:</strong> <em>"The market has no opinions, only prices; the trader follows the liquidity, the punter follows the team."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET OF THE #1</strong>\nThe trader doesn't support a team: they exploit inefficiency. If your heart is racing, your size is too big. Mathematics doesn't have a heartbeat—follow the math.\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>Liquidity is your parachute. Without volume, there is no trading, only gambling.</em>`,
                     ebookContent: `
-                        <div class="border-b border-gray-800 py-4 sm:py-6 mb-4 sm:mb-8 text-center">
-                            <h1 class="text-xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
-                            <h2 class="text-[10px] sm:text-sm text-gray-400 mt-2 font-mono tracking-widest uppercase">Day 1: Structural Difference</h2>
-                        </div>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">The traditional Bookmaker acts as your direct counterparty: if you win, they lose. This creates an inherent conflict of interest, which is why profitable players are systematically restricted (a practice known as <span class="text-[#24A1DE] font-bold">Gubbing</span>).</p>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">In the Betting Exchange, conversely, you operate in a <span class="text-[#00ff80] font-bold">peer-to-peer</span> market. The platform acts solely as a neutral intermediary, taking a small commission only on net winnings. In this ecosystem, you do not bet against a house, but trade odds directly with other global users.</p>
-                        
-                        <div class="bg-gray-900 border border-gray-700 p-4 sm:p-6 rounded-xl shadow-lg mb-6 sm:mb-8">
-                             <h3 class="text-sm sm:text-lg font-black text-[#00ff80] mb-2 sm:mb-3 uppercase tracking-wider text-center">The Formula (Back)</h3>
-                             <p class="font-mono text-center text-[10px] sm:text-sm text-white">Net Profit = [ Stake × (Odds - 1) ] × (1 - Commission)</p>
-                        </div>
-                        
-                        <h4 class="text-sm sm:text-lg font-bold mt-4 sm:mt-8 mb-3 sm:mb-4 text-white uppercase tracking-widest border-l-4 border-[#24A1DE] pl-3">Technical Key</h4>
-                        <ul class="list-none mb-6 sm:mb-8 space-y-3 sm:space-y-4 text-xs sm:text-base text-justify">
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Stake:</strong> The capital placed into the market.</li>
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Liability:</strong> The actual risk when you assume the role of a market maker (by "Laying" an outcome).</li>
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Commission:</strong> The fee (e.g., 5%) paid to the Exchange, applied exclusively on net winnings.</li>
-                        </ul>
+                        <div class="animate-fade-in-up">
+                            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 p-6 sm:p-10 mb-8 sm:mb-12 shadow-[0_0_30px_rgba(0,255,128,0.1)] text-center">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00ff80] to-transparent opacity-50"></div>
+                                <span class="inline-block py-1 px-3 rounded-full bg-[#00ff80]/10 text-[#00ff80] border border-[#00ff80]/20 font-mono text-[9px] sm:text-xs tracking-widest uppercase mb-4">Day 1</span>
+                                <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white mb-2 drop-shadow-md">Structural <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00ff80] to-[#00b359]">Difference</span></h1>
+                                <p class="text-[#24A1DE] font-bold text-xs sm:text-sm tracking-widest uppercase">Bookmaker vs Exchange</p>
+                            </div>
 
-                        <h3 class="text-base sm:text-xl font-black mt-6 sm:mt-12 mb-3 sm:mb-4 text-center uppercase tracking-wider text-white">Trader's Mindset</h3>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">The trader doesn't support a team: they exploit inefficiency. If your heart is racing, your <span class="text-[#24A1DE]">size</span> is too big. Mathematics doesn't have a heartbeat—follow the math.</p>
+                            <div class="space-y-4 sm:space-y-6 text-gray-300 text-xs sm:text-base leading-relaxed sm:leading-loose">
+                                <p>The traditional Bookmaker acts as your direct counterparty: if you win, they lose. This creates an inherent conflict of interest, which is why profitable players are systematically restricted (a practice known as <span class="text-[#24A1DE] font-bold bg-[#24A1DE]/10 px-1.5 py-0.5 rounded">Gubbing</span>).</p>
+                                <p>In the Betting Exchange, conversely, you operate in a <span class="text-[#00ff80] font-bold bg-[#00ff80]/10 px-1.5 py-0.5 rounded">peer-to-peer</span> market. The platform acts solely as a neutral intermediary, taking a small commission only on net winnings. In this ecosystem, you do not bet against a house, but trade odds directly with other global users.</p>
+                            </div>
 
-                        <div class="bg-black/50 border border-[#00ff80]/50 p-4 sm:p-6 rounded-xl my-6 sm:my-10 italic text-gray-400 text-xs sm:text-base text-center font-mono shadow-[0_0_15px_rgba(0,255,128,0.1)]">
-                            "The market has no opinions, only prices; the trader follows the liquidity, the punter follows the team. Liquidity is your parachute: without volumes there is no trading, only gambling."
+                            <div class="my-10 relative p-[1px] rounded-2xl bg-gradient-to-b from-[#00ff80]/40 via-[#00ff80]/5 to-transparent">
+                                <div class="bg-[#050a05] rounded-xl p-5 sm:p-8 flex flex-col items-center justify-center">
+                                    <div class="w-10 h-10 rounded-full bg-[#00ff80]/10 flex items-center justify-center mb-3 border border-[#00ff80]/30 shadow-[0_0_15px_rgba(0,255,128,0.2)]">
+                                        <span class="text-lg">🧮</span>
+                                    </div>
+                                    <h3 class="font-black text-white text-sm sm:text-lg tracking-widest uppercase mb-4">The Formula (Back)</h3>
+                                    <div class="bg-[#0a140f] border border-[#00ff80]/20 px-4 py-3 rounded-lg shadow-inner w-full text-center overflow-x-auto">
+                                        <code class="text-[#00ff80] font-mono font-bold text-xs sm:text-[15px] whitespace-nowrap">Net = [ Stake × (Odds - 1) ] × (1 - Comm.)</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-10">
+                                <h4 class="flex items-center text-white font-black text-sm sm:text-lg uppercase tracking-widest mb-6">
+                                    <span class="w-1.5 h-6 bg-[#24A1DE] mr-3 rounded-sm shadow-[0_0_10px_rgba(36,161,222,0.5)]"></span> Technical Key
+                                </h4>
+                                <div class="grid grid-cols-1 gap-3 sm:gap-4">
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#00ff80]/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-[#00ff80]/10 flex items-center justify-center shrink-0 mr-4 border border-[#00ff80]/20 text-[14px]">💰</div>
+                                        <div>
+                                            <strong class="text-[#00ff80] block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Stake</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">The capital placed into the market.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-red-500/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mr-4 border border-red-500/20 text-[14px]">⚖️</div>
+                                        <div>
+                                            <strong class="text-red-400 block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Liability</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">The actual risk and blocked capital when assuming the role of market maker (by "Laying").</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#24A1DE]/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-[#24A1DE]/10 flex items-center justify-center shrink-0 mr-4 border border-[#24A1DE]/20 text-[14px]">📊</div>
+                                        <div>
+                                            <strong class="text-[#24A1DE] block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Commission</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">The fee (e.g., 5%) paid to the Exchange, applied exclusively on net winnings.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-base sm:text-xl font-black mt-10 mb-4 text-center uppercase tracking-widest text-white">Trader's Mindset</h3>
+                            <p class="text-justify leading-relaxed mb-8 text-xs sm:text-base text-gray-300">The trader doesn't support a team: they exploit inefficiency. If your heart is racing, your <span class="text-[#24A1DE] font-bold">size</span> is too big. Mathematics doesn't have a heartbeat—follow the math.</p>
+
+                            <blockquote class="relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 my-8 shadow-2xl overflow-hidden">
+                                <div class="absolute -top-4 -right-4 text-7xl text-[#00ff80]/10 font-serif leading-none">"</div>
+                                <p class="text-gray-300 italic text-xs sm:text-base leading-relaxed font-medium relative z-10 text-center">
+                                    The market has no opinions, only prices; the trader follows the liquidity, the punter follows the team.<br><br>
+                                    <span class="text-[#00ff80] font-bold">Liquidity is your parachute: without volumes there is no trading, only gambling.</span>
+                                </p>
+                            </blockquote>
+                            ${footerLogoHTML}
                         </div>
-                        ${footerLogoHTML}
                     `
                 },
                 es: {
@@ -633,32 +787,72 @@
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Día 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFERENCIA ESTRUCTURAL: BOOKMAKER VS EXCHANGE</strong>\n\nEl Bookmaker es tu contraparte: si tú ganas, él pierde. Por eso limitan a los que son rentables. \n\nEn el Exchange, tú operas en un mercado <em>peer-to-peer</em>: la plataforma es solo un intermediario que cobra una comisión sobre las ganancias. Aquí no apuestas contra un banco, sino que intercambias cuotas con otros usuarios.\n\n📐 <strong>FÓRMULA GENERAL (BACK):</strong>\nBeneficio Neto = (Stake * (Cuota - 1)) * (1 - Comisión)\n\n<strong>LEYENDA TÉCNICA:</strong>\n🔹 Stake: Capital apostado.\n🔹 Liability: El riesgo efectivo cuando haces "Lay" (haces de banco).\n🔹 Comisión: Tarifa (ej. 5%) pagada al Exchange solo sobre la ganancia neta.\n\n🧮 <strong>EJEMPLO PRÁCTICO (REAL):</strong>\n<em>Evento: Juventus vs Inter. Cuota Back @2.10. Stake: 100€. Com: 5%.</em>\n\n🪄 <strong>CÁLCULO:</strong>\n• Beneficio Bruto: 100€ * (2.10 - 1) = 110€\n• Comisión: 110€ * 0.05 = 5.50€\n• Beneficio Neto: 104.50€\n\n⚠️ <strong>GUBBING & LIMITACIONES:</strong>\nEl Gubbing (cierre/limitación de cuenta) NO existe en el Exchange. Como la plataforma gana de tus comisiones, cuanto más bueno seas y ganes, más gana el Exchange. El riesgo de limitación es exclusivo de los Bookmakers tradicionales.\n\n✅ <strong>ACCIÓN DEL DÍA:</strong>\nAbre un Exchange (Betfair/Betflag), elige un partido de Serie A o Premier League y observa el Order Book por 30 minutos. Nota cómo el Spread (diferencia entre Back y Lay) se estrecha donde hay más dinero (Liquididad).\n\n🧘‍♂️ <strong>EL MANTRA:</strong> <em>"El mercado no tiene opiniones, solo tiene precios; el trader sigue la liquidez, el apostador sigue la afición."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DEL #1</strong>\nEl trader no es un aficionado: explota la ineficiencia. Si el corazón te late fuerte, tu <em>size</em> es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidez es tu paracaídas. Sin volúmenes, no hay trading, solo juego de azar.</em>`,
                     ebookContent: `
-                        <div class="border-b border-gray-800 py-4 sm:py-6 mb-4 sm:mb-8 text-center">
-                            <h1 class="text-xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
-                            <h2 class="text-[10px] sm:text-sm text-gray-400 mt-2 font-mono tracking-widest uppercase">Día 1: Diferencia Estructural</h2>
-                        </div>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">El Bookmaker tradicional actúa como tu contraparte directa: si ganas, ellos pierden. Esto genera un conflicto de intereses inherente, razón por la cual los jugadores rentables son sistemáticamente limitados (práctica conocida como <span class="text-[#24A1DE] font-bold">Gubbing</span>).</p>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">En el Betting Exchange, por el contrario, operas en un mercado <span class="text-[#00ff80] font-bold">peer-to-peer</span>. La plataforma funciona como un intermediario neutral, cobrando una pequeña comisión únicamente sobre las ganancias netas. En este ecosistema no apuestas contra la casa, sino que intercambias cuotas directamente con otros usuarios globales.</p>
-                        
-                        <div class="bg-gray-900 border border-gray-700 p-4 sm:p-6 rounded-xl shadow-lg mb-6 sm:mb-8">
-                             <h3 class="text-sm sm:text-lg font-black text-[#00ff80] mb-2 sm:mb-3 uppercase tracking-wider text-center">La Fórmula (Back)</h3>
-                             <p class="font-mono text-center text-[10px] sm:text-sm text-white">Ganancia Neta = [ Stake × (Cuota - 1) ] × (1 - Comisión)</p>
-                        </div>
-                        
-                        <h4 class="text-sm sm:text-lg font-bold mt-4 sm:mt-8 mb-3 sm:mb-4 text-white uppercase tracking-widest border-l-4 border-[#24A1DE] pl-3">Glosario Técnico</h4>
-                        <ul class="list-none mb-6 sm:mb-8 space-y-3 sm:space-y-4 text-xs sm:text-base text-justify">
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Stake:</strong> El capital arriesgado en el mercado.</li>
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Liability:</strong> El riesgo real y efectivo cuando asumes el rol de creador de mercado ("Laying" o apostando en contra).</li>
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Comisión:</strong> La tarifa (ej. 5%) pagada al Exchange, aplicada exclusivamente sobre las ganancias netas.</li>
-                        </ul>
+                        <div class="animate-fade-in-up">
+                            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 p-6 sm:p-10 mb-8 sm:mb-12 shadow-[0_0_30px_rgba(0,255,128,0.1)] text-center">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00ff80] to-transparent opacity-50"></div>
+                                <span class="inline-block py-1 px-3 rounded-full bg-[#00ff80]/10 text-[#00ff80] border border-[#00ff80]/20 font-mono text-[9px] sm:text-xs tracking-widest uppercase mb-4">Día 1</span>
+                                <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white mb-2 drop-shadow-md">Diferencia <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00ff80] to-[#00b359]">Estructural</span></h1>
+                                <p class="text-[#24A1DE] font-bold text-xs sm:text-sm tracking-widest uppercase">Bookmaker vs Exchange</p>
+                            </div>
 
-                        <h3 class="text-base sm:text-xl font-black mt-6 sm:mt-12 mb-3 sm:mb-4 text-center uppercase tracking-wider text-white">Mentalidad del Trader</h3>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">El trader no es fanático de ningún equipo: aprovecha las ineficiencias. Si el corazón te late rápido, tu <span class="text-[#24A1DE]">size</span> es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.</p>
+                            <div class="space-y-4 sm:space-y-6 text-gray-300 text-xs sm:text-base leading-relaxed sm:leading-loose">
+                                <p>El Bookmaker tradicional actúa como tu contraparte directa: si ganas, ellos pierden. Esto genera un conflicto de intereses inherente, razón por la cual los jugadores rentables son sistemáticamente limitados (práctica conocida como <span class="text-[#24A1DE] font-bold bg-[#24A1DE]/10 px-1.5 py-0.5 rounded">Gubbing</span>).</p>
+                                <p>En el Betting Exchange, por el contrario, operas en un mercado <span class="text-[#00ff80] font-bold bg-[#00ff80]/10 px-1.5 py-0.5 rounded">peer-to-peer</span>. La plataforma funciona como un intermediario neutral, cobrando una pequeña comisión únicamente sobre las ganancias netas. En este ecosistema no apuestas contra la casa, sino que intercambias cuotas directamente con otros usuarios globales.</p>
+                            </div>
 
-                        <div class="bg-black/50 border border-[#00ff80]/50 p-4 sm:p-6 rounded-xl my-6 sm:my-10 italic text-gray-400 text-xs sm:text-base text-center font-mono shadow-[0_0_15px_rgba(0,255,128,0.1)]">
-                            "El mercado no tiene opiniones, solo tiene precios; el trader sigue la liquidez, el apostador sigue la pasión. La liquidez es tu paracaídas: sin volumen en el Order Book no hay trading, solo azar."
+                            <div class="my-10 relative p-[1px] rounded-2xl bg-gradient-to-b from-[#00ff80]/40 via-[#00ff80]/5 to-transparent">
+                                <div class="bg-[#050a05] rounded-xl p-5 sm:p-8 flex flex-col items-center justify-center">
+                                    <div class="w-10 h-10 rounded-full bg-[#00ff80]/10 flex items-center justify-center mb-3 border border-[#00ff80]/30 shadow-[0_0_15px_rgba(0,255,128,0.2)]">
+                                        <span class="text-lg">🧮</span>
+                                    </div>
+                                    <h3 class="font-black text-white text-sm sm:text-lg tracking-widest uppercase mb-4">La Fórmula (Back)</h3>
+                                    <div class="bg-[#0a140f] border border-[#00ff80]/20 px-4 py-3 rounded-lg shadow-inner w-full text-center overflow-x-auto">
+                                        <code class="text-[#00ff80] font-mono font-bold text-xs sm:text-[15px] whitespace-nowrap">Neto = [ Stake × (Cuota - 1) ] × (1 - Com.)</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-10">
+                                <h4 class="flex items-center text-white font-black text-sm sm:text-lg uppercase tracking-widest mb-6">
+                                    <span class="w-1.5 h-6 bg-[#24A1DE] mr-3 rounded-sm shadow-[0_0_10px_rgba(36,161,222,0.5)]"></span> Glosario Técnico
+                                </h4>
+                                <div class="grid grid-cols-1 gap-3 sm:gap-4">
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#00ff80]/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-[#00ff80]/10 flex items-center justify-center shrink-0 mr-4 border border-[#00ff80]/20 text-[14px]">💰</div>
+                                        <div>
+                                            <strong class="text-[#00ff80] block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Stake</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">El capital arriesgado en el mercado.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-red-500/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mr-4 border border-red-500/20 text-[14px]">⚖️</div>
+                                        <div>
+                                            <strong class="text-red-400 block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Liability</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">El riesgo real y efectivo cuando asumes el rol de creador de mercado ("Laying" o apostando en contra).</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#24A1DE]/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-[#24A1DE]/10 flex items-center justify-center shrink-0 mr-4 border border-[#24A1DE]/20 text-[14px]">📊</div>
+                                        <div>
+                                            <strong class="text-[#24A1DE] block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Comisión</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">La tarifa (ej. 5%) pagada al Exchange, aplicada exclusivamente sobre las ganancias netas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-base sm:text-xl font-black mt-10 mb-4 text-center uppercase tracking-widest text-white">Mentalidad del Trader</h3>
+                            <p class="text-justify leading-relaxed mb-8 text-xs sm:text-base text-gray-300">El trader no es fanático de ningún equipo: aprovecha las ineficiencias. Si el corazón te late rápido, tu <span class="text-[#24A1DE] font-bold">size</span> es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.</p>
+
+                            <blockquote class="relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 my-8 shadow-2xl overflow-hidden">
+                                <div class="absolute -top-4 -right-4 text-7xl text-[#00ff80]/10 font-serif leading-none">"</div>
+                                <p class="text-gray-300 italic text-xs sm:text-base leading-relaxed font-medium relative z-10 text-center">
+                                    El mercado no tiene opiniones, solo tiene precios; el trader sigue la liquidez, el apostador sigue la pasión.<br><br>
+                                    <span class="text-[#00ff80] font-bold">La liquidez es tu paracaídas: sin volumen en el Order Book no hay trading, solo azar.</span>
+                                </p>
+                            </blockquote>
+                            ${footerLogoHTML}
                         </div>
-                        ${footerLogoHTML}
                     `
                 },
                 pt: {
@@ -671,32 +865,72 @@
                     videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
                     tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Dia 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFERENÇA ESTRUTURAL: CASA DE APOSTAS VS EXCHANGE</strong>\n\nA Casa de Apostas (Bookmaker) é sua contraparte: se você ganha, eles perdem. É por isso que eles limitam jogadores lucrativos. \n\nNo Exchange, você opera em um mercado <em>peer-to-peer</em> (ponto a ponto): a plataforma é apenas uma intermediária que cobra uma comissão sobre os lucros. Aqui, você não aposta contra "a casa", mas troca odds com outros usuários.\n\n📐 <strong>FÓRMULA GERAL (BACK):</strong>\nLucro Líquido = (Stake * (Odds - 1)) * (1 - Comissão)\n\n<strong>CHAVE TÉCNICA:</strong>\n🔹 Stake: O capital investido.\n🔹 Liability (Responsabilidade): O risco real quando você faz um "Lay" (age como a casa).\n🔹 Comissão: Taxa (ex: 5%) paga apenas sobre os lucros líquidos.\n\n🧮 <strong>EXEMPLO PRÁCTICO (REAL):</strong>\n<em>Evento: Juventus vs Inter. Odds Back @2.10. Stake: 100€. Comissão: 5%.</em>\n\n🪄 <strong>CÁLCULO:</strong>\n• Lucro Bruto: 100€ * (2.10 - 1) = 110€\n• Comissão: 110€ * 0.05 = 5.50€\n• Lucro Líquido: 104.50€\n\n⚠️ <strong>LIMITAÇÃO (GUBBING):</strong>\nO "Gubbing" (restrição de conta) NÃO existe no Exchange. Como a plataforma lucra com suas comissões, quanto mais você ganha, mais eles faturam. Limites de conta são um problema exclusivo das Casas de Apostas tradicionais.\n\n✅ <strong>AÇÃO DO DIA:</strong>\nAbra um Exchange (Betfair/Betdaq), escolha um jogo da Série A ou Premier League e observe o Order Book (Livro de Ofertas) por 30 minutos. Note como o Spread (diferença entre o Back e o Lay) diminui onde há mais Liquidez.\n\n🧘‍♂️ <strong>O MANTRA:</strong> "O mercado não tem opiniões, apenas preços; o trader segue a liquidez, o apostador segue o time."\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DO #1</strong>\nO trader não torce para um time: ele explora a ineficiência. Se o seu coração está acelerado, o seu stake está alto demais. A matemática não tem batimentos cardíacos — siga a matemática.\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>Liquidez é o seu paraquedas. Sem volume não há trading, apenas aposta comum.</em>`,
                     ebookContent: `
-                        <div class="border-b border-gray-800 py-4 sm:py-6 mb-4 sm:mb-8 text-center">
-                            <h1 class="text-xl sm:text-4xl font-black uppercase tracking-widest modern-ebook-gradient-text">Zero to Hero Academy</h1>
-                            <h2 class="text-[10px] sm:text-sm text-gray-400 mt-2 font-mono tracking-widest uppercase">Dia 1: Diferença Estrutural</h2>
-                        </div>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">A Casa de Apostas (Bookmaker) tradicional atua como sua contraparte direta: se você ganha, eles perdem. Isto cria um conflito de interesses inerente, razão pela qual os jogadores lucrativos são sistematicamente limitados (prática conhecida como <span class="text-[#24A1DE] font-bold">Gubbing</span>).</p>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">Na Betting Exchange, inversamente, você opera num mercado <span class="text-[#00ff80] font-bold">peer-to-peer</span>. A plataforma funciona apenas como uma intermediária neutra, cobrando uma pequena comissão apenas sobre os lucros líquidos. Neste ecossistema, não aposta contra a casa, mas troca odds diretamente com outros utilizadores globais.</p>
-                        
-                        <div class="bg-gray-900 border border-gray-700 p-4 sm:p-6 rounded-xl shadow-lg mb-6 sm:mb-8">
-                             <h3 class="text-sm sm:text-lg font-black text-[#00ff80] mb-2 sm:mb-3 uppercase tracking-wider text-center">A Fórmula (Back)</h3>
-                             <p class="font-mono text-center text-[10px] sm:text-sm text-white">Lucro Líquido = [ Stake × (Odds - 1) ] × (1 - Comissão)</p>
-                        </div>
-                        
-                        <h4 class="text-sm sm:text-lg font-bold mt-4 sm:mt-8 mb-3 sm:mb-4 text-white uppercase tracking-widest border-l-4 border-[#24A1DE] pl-3">Chave Técnica</h4>
-                        <ul class="list-none mb-6 sm:mb-8 space-y-3 sm:space-y-4 text-xs sm:text-base text-justify">
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Stake:</strong> O capital investido no mercado.</li>
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Liability (Responsabilidade):</strong> O risco real quando você assume o papel de criador de mercado ("Laying" ou apostando contra).</li>
-                            <li class="bg-gray-800/50 p-3 sm:p-4 rounded-lg border border-gray-700"><strong class="text-[#00ff80]">Comissão:</strong> A taxa (ex. 5%) paga à Exchange, aplicada exclusivamente sobre os lucros líquidos.</li>
-                        </ul>
+                        <div class="animate-fade-in-up">
+                            <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 p-6 sm:p-10 mb-8 sm:mb-12 shadow-[0_0_30px_rgba(0,255,128,0.1)] text-center">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#00ff80] to-transparent opacity-50"></div>
+                                <span class="inline-block py-1 px-3 rounded-full bg-[#00ff80]/10 text-[#00ff80] border border-[#00ff80]/20 font-mono text-[9px] sm:text-xs tracking-widest uppercase mb-4">Dia 1</span>
+                                <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tighter text-white mb-2 drop-shadow-md">Diferença <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#00ff80] to-[#00b359]">Estrutural</span></h1>
+                                <p class="text-[#24A1DE] font-bold text-xs sm:text-sm tracking-widest uppercase">Casa de Apostas vs Exchange</p>
+                            </div>
 
-                        <h3 class="text-base sm:text-xl font-black mt-6 sm:mt-12 mb-3 sm:mb-4 text-center uppercase tracking-wider text-white">Mindset do Trader</h3>
-                        <p class="text-justify leading-relaxed mb-4 sm:mb-8 text-xs sm:text-base text-gray-300">O trader não torce por uma equipe: ele explora a ineficiência. Se o seu coração está acelerado, a sua <span class="text-[#24A1DE]">size</span> é demasiado grande. A matemática não tem batimentos cardíacos — siga a matemática.</p>
+                            <div class="space-y-4 sm:space-y-6 text-gray-300 text-xs sm:text-base leading-relaxed sm:leading-loose">
+                                <p>A Casa de Apostas (Bookmaker) tradicional atua como sua contraparte direta: se você ganha, eles perdem. Isto cria um conflito de interesses inerente, razão pela qual os jogadores lucrativos são sistematicamente limitados (prática conhecida como <span class="text-[#24A1DE] font-bold bg-[#24A1DE]/10 px-1.5 py-0.5 rounded">Gubbing</span>).</p>
+                                <p>Na Betting Exchange, inversamente, você opera num mercado <span class="text-[#00ff80] font-bold bg-[#00ff80]/10 px-1.5 py-0.5 rounded">peer-to-peer</span>. A plataforma funciona apenas como uma intermediária neutra, cobrando uma pequena comissão apenas sobre os lucros líquidos. Neste ecossistema, não aposta contra a casa, mas troca odds diretamente com outros utilizadores globais.</p>
+                            </div>
 
-                        <div class="bg-black/50 border border-[#00ff80]/50 p-4 sm:p-6 rounded-xl my-6 sm:my-10 italic text-gray-400 text-xs sm:text-base text-center font-mono shadow-[0_0_15px_rgba(0,255,128,0.1)]">
-                            "O mercado não tem opiniões, apenas preços; o trader segue a liquidez, o apostador segue o time. A liquidez é o seu paraquedas: sem volumes não há trading, apenas aposta comum."
+                            <div class="my-10 relative p-[1px] rounded-2xl bg-gradient-to-b from-[#00ff80]/40 via-[#00ff80]/5 to-transparent">
+                                <div class="bg-[#050a05] rounded-xl p-5 sm:p-8 flex flex-col items-center justify-center">
+                                    <div class="w-10 h-10 rounded-full bg-[#00ff80]/10 flex items-center justify-center mb-3 border border-[#00ff80]/30 shadow-[0_0_15px_rgba(0,255,128,0.2)]">
+                                        <span class="text-lg">🧮</span>
+                                    </div>
+                                    <h3 class="font-black text-white text-sm sm:text-lg tracking-widest uppercase mb-4">A Fórmula (Back)</h3>
+                                    <div class="bg-[#0a140f] border border-[#00ff80]/20 px-4 py-3 rounded-lg shadow-inner w-full text-center overflow-x-auto">
+                                        <code class="text-[#00ff80] font-mono font-bold text-xs sm:text-[15px] whitespace-nowrap">Líquido = [ Stake × (Odds - 1) ] × (1 - Com.)</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-10">
+                                <h4 class="flex items-center text-white font-black text-sm sm:text-lg uppercase tracking-widest mb-6">
+                                    <span class="w-1.5 h-6 bg-[#24A1DE] mr-3 rounded-sm shadow-[0_0_10px_rgba(36,161,222,0.5)]"></span> Chave Técnica
+                                </h4>
+                                <div class="grid grid-cols-1 gap-3 sm:gap-4">
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#00ff80]/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-[#00ff80]/10 flex items-center justify-center shrink-0 mr-4 border border-[#00ff80]/20 text-[14px]">💰</div>
+                                        <div>
+                                            <strong class="text-[#00ff80] block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Stake</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">O capital investido no mercado.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-red-500/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mr-4 border border-red-500/20 text-[14px]">⚖️</div>
+                                        <div>
+                                            <strong class="text-red-400 block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Liability</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">O risco real quando você assume o papel de criador de mercado ("Laying" ou apostando contra).</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-start p-4 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#24A1DE]/30 transition-colors duration-300">
+                                        <div class="w-8 h-8 rounded-full bg-[#24A1DE]/10 flex items-center justify-center shrink-0 mr-4 border border-[#24A1DE]/20 text-[14px]">📊</div>
+                                        <div>
+                                            <strong class="text-[#24A1DE] block text-[10px] sm:text-xs uppercase tracking-widest mb-1">Comissão</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">A taxa (ex. 5%) paga à Exchange, aplicada exclusivamente sobre os lucros líquidos.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-base sm:text-xl font-black mt-10 mb-4 text-center uppercase tracking-widest text-white">Mindset do Trader</h3>
+                            <p class="text-justify leading-relaxed mb-8 text-xs sm:text-base text-gray-300">O trader não torce por uma equipe: ele explora a ineficiência. Se o seu coração está acelerado, a sua <span class="text-[#24A1DE] font-bold">size</span> é demasiado grande. A matemática não tem batimentos cardíacos — siga a matemática.</p>
+
+                            <blockquote class="relative p-6 sm:p-8 rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 my-8 shadow-2xl overflow-hidden">
+                                <div class="absolute -top-4 -right-4 text-7xl text-[#00ff80]/10 font-serif leading-none">"</div>
+                                <p class="text-gray-300 italic text-xs sm:text-base leading-relaxed font-medium relative z-10 text-center">
+                                    O mercado não tem opiniões, apenas preços; o trader segue a liquidez, o apostador segue o time.<br><br>
+                                    <span class="text-[#00ff80] font-bold">A liquidez é o seu paraquedas: sem volumes não há trading, apenas aposta comum.</span>
+                                </p>
+                            </blockquote>
+                            ${footerLogoHTML}
                         </div>
-                        ${footerLogoHTML}
                     `
                 }
             };
@@ -734,7 +968,7 @@
                     const ebookContainer = document.getElementById('ebook-content-container');
                     if(ebookContainer) ebookContainer.innerHTML = dict[targetLang].ebookContent || dict['en'].ebookContent;
 
-                    Gamification.renderQuiz(); // Aggiorna la lingua del quiz
+                    Gamification.renderQuiz();
 
                     try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ lang: State.lang, xp: State.xp, currentQuizStep: State.currentQuizStep, quizCompleted: State.quizCompleted })); } catch(e){}
                 },
@@ -756,7 +990,6 @@
                     const qData = quizzesData[State.lang][State.currentQuizStep];
                     document.getElementById('quiz-step-current').innerText = State.currentQuizStep + 1;
                     
-                    // Render Dots
                     let dotsHtml = '';
                     for(let i=0; i<5; i++) {
                         dotsHtml += `<div class="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full ${i < State.currentQuizStep ? 'bg-[#00ff80]' : (i === State.currentQuizStep ? 'bg-yellow-400 border border-yellow-200' : 'bg-gray-700')}"></div>`;
@@ -791,7 +1024,6 @@
                         State.xp += 100;
                         UIManager.updateDashboards();
                         
-                        // Disable buttons
                         const btns = document.getElementById('quiz-options-container').querySelectorAll('button');
                         btns.forEach(b => b.classList.add('pointer-events-none', 'opacity-50'));
                         
