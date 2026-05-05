@@ -68,17 +68,18 @@
         }
         .joystick-pulse { animation: joystickNeon 2.5s ease-in-out infinite; display: inline-block; cursor: pointer; text-decoration: none; }
 
-        /* HD Football Pitch Pattern CSS */
+        /* HD Football Pitch Pattern CSS - Semplificato per Massima Nitidezza */
         .football-pitch-bg {
-            background: 
+            background-color: #123812; /* Verde scuro di base */
+            background-image: 
                 repeating-linear-gradient(
                     90deg,
-                    rgba(255, 255, 255, 0.02) 0%,
-                    rgba(255, 255, 255, 0.02) 10%,
-                    rgba(0, 0, 0, 0.06) 10%,
-                    rgba(0, 0, 0, 0.06) 20%
-                ),
-                linear-gradient(to bottom, #184d18, #0a240a);
+                    transparent,
+                    transparent 10%,
+                    rgba(0, 0, 0, 0.15) 10%,
+                    rgba(0, 0, 0, 0.15) 20%
+                );
+            background-size: 100% 100%;
         }
 
         .cta-pulse-ring { animation: ringPulse 2.5s cubic-bezier(0.2, 0.8, 0.2, 1) infinite; }
@@ -218,12 +219,17 @@
             </div>
 
             <!-- Schermata completamento Quiz -->
-            <div id="quiz-completed-screen" class="hidden flex-col items-center justify-center py-6 text-center">
+            <div id="quiz-completed-screen" class="hidden flex-col items-center justify-center py-6 text-center transition-all duration-500">
                 <div class="w-16 h-16 bg-[#00ff80]/20 rounded-full flex items-center justify-center mb-4 border border-[#00ff80]">
                     <span class="text-3xl">🎯</span>
                 </div>
                 <h4 class="text-[#00ff80] font-black text-lg sm:text-xl uppercase tracking-widest mb-2">Check-Point Superato!</h4>
-                <p class="text-gray-300 text-sm font-medium">Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.</p>
+                <p class="text-gray-300 text-sm font-medium mb-6">Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.</p>
+                
+                <!-- Pulsante Ripeti Test -->
+                <button onclick="resetQuiz()" class="bg-gray-800/80 hover:bg-gray-700 text-white border border-gray-600 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all shadow-md hover:shadow-lg active:scale-95 flex items-center gap-2 group">
+                    <span class="group-hover:-rotate-180 transition-transform duration-500">🔄</span> <span data-i18n="btnRetryQuiz">Ripeti il test</span>
+                </button>
             </div>
         </section>
 
@@ -300,12 +306,13 @@
                     <div class="h-1 sm:h-1.5 w-[48%] bg-[#333] rounded-full"></div>
                 </div>
 
-                <!-- Football Pitch (Perfect 16:9, Non-blurry, Centered Play) -->
+                <!-- Football Pitch (Perfect 16:9, Non-blurry, Centered Play, SUPER NITIDO) -->
                 <div class="relative w-full football-pitch-bg overflow-hidden shadow-[inset_0_0_60px_rgba(0,0,0,0.9)] border-t border-[#333]" style="aspect-ratio: 16/9;">
                     
-                    <!-- HD SVG Field Lines (1600x900 base for sharp scaling) -->
-                    <svg viewBox="0 0 1600 900" class="absolute inset-0 w-full h-full drop-shadow-[0_2px_4px_rgba(0,0,0,0.6)]" preserveAspectRatio="xMidYMid meet">
-                        <g stroke="rgba(255,255,255,0.7)" stroke-width="5" fill="none">
+                    <!-- HD SVG Field Lines (1600x900 base, shape-rendering crisp) -->
+                    <svg viewBox="0 0 1600 900" class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision" style="filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.7));">
+                        <!-- Utilizzo un bianco quasi puro e spessore aumentato per massima nitidezza sui display ad alta risoluzione -->
+                        <g stroke="#ffffff" stroke-opacity="0.85" stroke-width="6" fill="none">
                             <!-- Outer Boundary -->
                             <rect x="40" y="40" width="1520" height="820" />
                             <!-- Center Line -->
@@ -317,7 +324,7 @@
                             <!-- Left Goal Area -->
                             <rect x="40" y="325" width="90" height="250" />
                             <!-- Left Penalty Spot -->
-                            <circle cx="180" cy="450" r="6" fill="rgba(255,255,255,0.7)" />
+                            <circle cx="200" cy="450" r="6" fill="#ffffff" fill-opacity="0.85" stroke="none" />
                             <!-- Left Arc -->
                             <path d="M 320 340 A 140 140 0 0 1 320 560" />
                             
@@ -326,7 +333,7 @@
                             <!-- Right Goal Area -->
                             <rect x="1470" y="325" width="90" height="250" />
                             <!-- Right Penalty Spot -->
-                            <circle cx="1420" cy="450" r="6" fill="rgba(255,255,255,0.7)" />
+                            <circle cx="1400" cy="450" r="6" fill="#ffffff" fill-opacity="0.85" stroke="none" />
                             <!-- Right Arc -->
                             <path d="M 1280 340 A 140 140 0 0 0 1280 560" />
                         </g>
@@ -607,7 +614,7 @@
                     moduleTitle: "MODULO 1 • GIORNO 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
                     finLabel: "PILLOLA FINANZIARIA", finQuote: "Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.",
                     coreTitle: "Fase 1: Theorum & Praxis", demoTitle: "Fase 3: Simulatore Trading", demoTitleCTA: "AVVIA IL SIMULATORE", demoSubCTA: "Clicca per aprire la Demo Interattiva",
-                    btnPodcast: "Podcast", btnTelegram: "Lezione", btnEbook: "E-Book", quizTitle: "Fase 2: Check-Point",
+                    btnPodcast: "Podcast", btnTelegram: "Lezione", btnEbook: "E-Book", quizTitle: "Fase 2: Check-Point", btnRetryQuiz: "Ripeti il test",
                     navNextLesson: "PROSSIMA LEZIONE", tgDate: "Oggi", subNotActive: "ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE",
                     btnTelegramRoom: "ENTRA NELLA SALA SEGNALI",
                     videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg",
@@ -685,7 +692,7 @@
                     moduleTitle: "MODULE 1 • DAY 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "No gambling. Only math, risk management, and emotional detachment.",
                     finLabel: "FINANCIAL PILL", finQuote: "Money on the Exchange isn't yours until you withdraw it. Use the separated accounts system: your bankroll is business capital, not a personal ATM.",
                     coreTitle: "Phase 1: Theorum & Praxis", demoTitle: "Phase 3: Trading Simulator", demoTitleCTA: "START SIMULATOR", demoSubCTA: "Click here to enter the Arena",
-                    btnPodcast: "Podcast", btnTelegram: "Lesson", btnEbook: "E-Book", quizTitle: "Phase 2: Check-Point",
+                    btnPodcast: "Podcast", btnTelegram: "Lesson", btnEbook: "E-Book", quizTitle: "Phase 2: Check-Point", btnRetryQuiz: "Retry Test",
                     navNextLesson: "NEXT LESSON", tgDate: "Today", subNotActive: "SUBSCRIPTION NOT ACTIVE! CONTACT YOUR REFERENT",
                     btnTelegramRoom: "JOIN THE SIGNALS ROOM",
                     videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
@@ -763,7 +770,7 @@
                     moduleTitle: "MÓDULO 1 • DÍA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Cero apuestas. Solo matemáticas, gestión del riesgo y desapego emocional.",
                     finLabel: "PÍLDORA FINANCIERA", finQuote: "El dinero en el Exchange no es tuyo hasta que lo retiras haciendo Cash Out. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.",
                     coreTitle: "Fase 1: Theorum & Praxis", demoTitle: "Fase 3: Simulador de Trading", demoTitleCTA: "INICIAR SIMULADOR", demoSubCTA: "Haz clic para abrir la Demo Interactiva",
-                    btnPodcast: "Podcast", btnTelegram: "Lección", btnEbook: "E-Book", quizTitle: "Fase 2: Check-Point",
+                    btnPodcast: "Podcast", btnTelegram: "Lección", btnEbook: "E-Book", quizTitle: "Fase 2: Check-Point", btnRetryQuiz: "Repetir Test",
                     navNextLesson: "PRÓXIMA LECCIÓN", tgDate: "Hoy", subNotActive: "¡SUSCRIPCIÓN NO ACTIVA! CONTACTA A TU REFERENTE",
                     btnTelegramRoom: "ÚNETE A LA SALA DE SEÑALES",
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
@@ -841,7 +848,7 @@
                     moduleTitle: "MÓDULO 1 • DIA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero apostas. Apenas matemática, gestão de risco e desapego emocional.",
                     finLabel: "PÍLULA FINANCEIRA", finQuote: "O dinheiro na Exchange não é seu até que você faça o Cash Out. Use o sistema de contas separadas: o bankroll é capital de giro corporativo, não o seu multibanco pessoal.",
                     coreTitle: "Fase 1: Theorum & Praxis", demoTitle: "Fase 3: Simulador de Scalping", demoTitleCTA: "INICIAR SIMULADOR", demoSubCTA: "Clique aqui para entrar na Arena Interactiva",
-                    btnPodcast: "Podcast", btnTelegram: "Lição", btnEbook: "E-Book", quizTitle: "Fase 2: Ponto de Controle",
+                    btnPodcast: "Podcast", btnTelegram: "Lição", btnEbook: "E-Book", quizTitle: "Fase 2: Ponto de Controle", btnRetryQuiz: "Repetir Teste",
                     navNextLesson: "PRÓXIMA LIÇÃO", tgDate: "Hoje", subNotActive: "ASSINATURA INATIVA! CONTATE SEU REFERENTE",
                     btnTelegramRoom: "ENTRE NA SALA DE SINAIS",
                     videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
@@ -969,6 +976,10 @@
                         document.getElementById('quiz-completed-screen').classList.remove('hidden');
                         document.getElementById('quiz-completed-screen').classList.add('flex');
                         return;
+                    } else {
+                        document.getElementById('quiz-completed-screen').classList.add('hidden');
+                        document.getElementById('quiz-completed-screen').classList.remove('flex');
+                        document.getElementById('quiz-container').classList.remove('hidden');
                     }
 
                     const qData = quizzesData[State.lang][State.currentQuizStep];
@@ -1030,6 +1041,23 @@
                         text.className = 'font-bold text-[9px] sm:text-sm text-red-300 leading-relaxed max-w-lg mx-auto';
                     }
                 }
+            };
+
+            window.resetQuiz = function() {
+                SoundEngine.click();
+                State.currentQuizStep = 0;
+                State.quizCompleted = false;
+                
+                // Sottraiamo gli XP guadagnati durante il quiz per non farli accumulare all'infinito ripetendolo. (5 domande x 100 XP = 500 XP)
+                if (State.xp >= 500) {
+                    State.xp -= 500;
+                } else {
+                    State.xp = 0;
+                }
+                UIManager.updateDashboards();
+                Gamification.renderQuiz();
+
+                try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ lang: State.lang, xp: State.xp, currentQuizStep: State.currentQuizStep, quizCompleted: State.quizCompleted })); } catch(e){}
             };
 
             return {
