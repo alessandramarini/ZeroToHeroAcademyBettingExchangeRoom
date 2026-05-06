@@ -7,11 +7,16 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Room AI | Global Exchange Academy</title>
+    <meta name="description" content="Academy interattiva per il Betting Exchange. Impara la matematica e la gestione del rischio.">
 
+    <!-- Ottimizzazione DNS e connessioni per Vercel/GitHub Pages (Caricamenti fulminei) -->
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://creators.spotify.com" crossorigin>
+    <link rel="preconnect" href="https://www.youtube.com" crossorigin>
     
+    <!-- Caricamento asincrono e ottimizzato dei font -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap"></noscript>
 
@@ -28,6 +33,7 @@
             background-attachment: fixed;
             background-position: center;
             -webkit-tap-highlight-color: transparent;
+            text-rendering: optimizeLegibility;
         }
 
         .glass-panel {
@@ -58,7 +64,7 @@
         }
         .sub-warning { animation: pulse-sub 3s infinite ease-in-out; border: 1px solid; transition: all 0.3s ease; }
 
-        .telegram-panel-container { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease-out, margin-top 0.4s ease-out; margin-top: 0; }
+        .telegram-panel-container { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out, margin-top 0.3s ease-out; margin-top: 0; will-change: max-height, opacity; }
         .telegram-panel-container.expanded { max-height: 1000px; opacity: 1; margin-top: 1rem; overflow: visible; }
 
         @keyframes joystickNeon {
@@ -66,11 +72,10 @@
             50% { filter: drop-shadow(0 0 35px rgba(0, 255, 128, 1)); transform: scale(1.15); }
             100% { filter: drop-shadow(0 0 10px rgba(0, 255, 128, 0.5)); transform: scale(1); }
         }
-        .joystick-pulse { animation: joystickNeon 2.5s ease-in-out infinite; display: inline-block; cursor: pointer; text-decoration: none; }
+        .joystick-pulse { animation: joystickNeon 2.5s ease-in-out infinite; display: inline-block; cursor: pointer; text-decoration: none; will-change: transform, filter; }
 
-        /* HD Football Pitch Pattern CSS - Semplificato per Massima Nitidezza */
         .football-pitch-bg {
-            background-color: #123812; /* Verde scuro di base */
+            background-color: #123812;
             background-image: 
                 repeating-linear-gradient(
                     90deg,
@@ -89,12 +94,11 @@
             100% { box-shadow: 0 0 0 0 rgba(0, 255, 128, 0), inset 0 0 15px rgba(0, 255, 128, 0.3); }
         }
 
-        /* E-Book Animations */
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
 </head>
 <body class="text-gray-200 pb-12 selection:bg-green-500 selection:text-white antialiased relative">
@@ -125,7 +129,7 @@
 
     <main class="max-w-5xl mx-auto px-2 sm:px-4 mt-4 sm:mt-8 space-y-4 sm:space-y-8">
 
-        <div class="text-center space-y-1 sm:space-y-2 animate-fade-in px-2">
+        <div class="text-center space-y-1 sm:space-y-2 px-2 animate-fade-in-up">
             <p class="text-[#00ff80] font-black text-[10px] sm:text-xs md:text-sm tracking-[0.3em] uppercase drop-shadow-lg" data-i18n="moduleTitle">MODULO 1 • GIORNO 1/30</p>
             <h2 class="text-2xl sm:text-4xl md:text-6xl font-black text-white uppercase tracking-tighter leading-tight" data-i18n="lessonTitle">ZERO TO HERO academy</h2>
             <p class="text-gray-400 max-w-2xl mx-auto text-[10px] sm:text-sm font-bold leading-relaxed mt-1 sm:mt-2" data-i18n="lessonDesc">Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.</p>
@@ -139,12 +143,13 @@
             </h3>
             
             <div id="video-wrapper" class="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-gray-800 shadow-xl ring-1 ring-white/5 cursor-pointer group" onclick="playMainVideo()">
-                <img id="video-thumbnail" src="https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Video Preview">
+                <img id="video-thumbnail" src="https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Video Preview" loading="lazy">
                 <div class="play-btn-overlay absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                     <div class="w-12 h-12 sm:w-20 sm:h-20 bg-red-600/90 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(225,29,72,0.6)] group-hover:scale-110 transition-transform backdrop-blur-sm">
                         <span class="text-white text-xl sm:text-3xl ml-1 drop-shadow-md">▶</span>
                     </div>
                 </div>
+                <!-- Il src viene popolato solo al click per massimizzare la velocità della pagina -->
                 <iframe id="main-video" class="absolute inset-0 w-full h-full hidden" src="about:blank" data-src="https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             
@@ -169,7 +174,7 @@
                 <div class="rounded-xl overflow-hidden shadow-2xl border border-gray-800 mt-2 sm:mt-4">
                     <div class="bg-[#1c242d] px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between shadow-md relative z-20">
                         <div class="flex items-center gap-2 sm:gap-3">
-                            <img src="logo-tondo.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=BE+R&background=050a05&color=00ff80'" class="w-7 h-7 sm:w-10 sm:h-10 rounded-full object-cover border border-[#24A1DE]/30">
+                            <img src="logo-tondo.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=BE+R&background=050a05&color=00ff80'" class="w-7 h-7 sm:w-10 sm:h-10 rounded-full object-cover border border-[#24A1DE]/30" loading="lazy">
                             <div>
                                 <h4 class="text-white font-bold text-[10px] sm:text-[13px] leading-tight tracking-tight uppercase">BETTING EXCHANGE ROOM</h4>
                                 <span class="text-[#24A1DE] text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.2em]">Official Channel</span>
@@ -203,14 +208,10 @@
             <div id="quiz-container" class="space-y-3 sm:space-y-4 relative z-10">
                 <div class="flex justify-between items-center mb-2">
                     <div class="bg-gray-800 text-gray-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Domanda <span id="quiz-step-current">1</span> di 5</div>
-                    <div class="flex gap-1" id="quiz-dots">
-                        <!-- Punti progresso -->
-                    </div>
+                    <div class="flex gap-1" id="quiz-dots"></div>
                 </div>
                 <p id="quiz-question-text" class="text-xs sm:text-base text-white font-bold leading-relaxed mb-4 border-l-2 border-[#00ff80] pl-3"></p>
-                <div id="quiz-options-container" class="space-y-2 sm:space-y-3 mt-2 sm:mt-4">
-                    <!-- Bottoni opzioni -->
-                </div>
+                <div id="quiz-options-container" class="space-y-2 sm:space-y-3 mt-2 sm:mt-4"></div>
             </div>
             
             <div id="quiz-feedback" class="hidden p-3 sm:p-6 rounded-xl text-center shadow-[0_0_20px_rgba(0,0,0,0.5)] mt-3 sm:mt-4 transition-all duration-300">
@@ -225,25 +226,21 @@
                 </div>
                 <h4 class="text-[#00ff80] font-black text-lg sm:text-xl uppercase tracking-widest mb-2">Check-Point Superato!</h4>
                 <p class="text-gray-300 text-sm font-medium mb-6">Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.</p>
-                
-                <!-- Pulsante Ripeti Test -->
                 <button onclick="resetQuiz()" class="bg-gray-800/80 hover:bg-gray-700 text-white border border-gray-600 px-5 py-2.5 rounded-lg text-xs font-bold uppercase tracking-widest transition-all shadow-md hover:shadow-lg active:scale-95 flex items-center gap-2 group">
                     <span class="group-hover:-rotate-180 transition-transform duration-500">🔄</span> <span data-i18n="btnRetryQuiz">Ripeti il test</span>
                 </button>
             </div>
         </section>
 
-        <!-- FASE 3: BANNER SIMULATORE AD ALTA DEFINIZIONE (HIGH-DEF HTML/CSS) -->
+        <!-- FASE 3: BANNER SIMULATORE AD ALTA DEFINIZIONE -->
         <section class="glass-panel rounded-2xl p-2 sm:p-6 mt-4 sm:mt-8" style="content-visibility: auto;">
             <h3 class="font-black text-sm sm:text-lg mb-4 ml-2 sm:ml-0 flex items-center text-white uppercase tracking-wider">
                 <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-[#00ff80]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
                 <span data-i18n="demoTitle">Fase 3: Simulatore Trading</span>
             </h3>
 
-            <!-- Interfaccia Alta Definizione -->
             <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="block group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] border border-[#333] hover:border-[#00ff80] transition-all duration-300 transform hover:-translate-y-1 cursor-pointer bg-[#121212]" onclick="SoundEngine.click()">
                 
-                <!-- Top Header -->
                 <div class="bg-[#0a0a0a] p-3 sm:p-4 flex justify-between items-center border-b border-[#2a2a2a]">
                     <div class="flex items-center gap-2 sm:gap-3">
                         <div class="w-7 h-7 sm:w-11 sm:h-11 rounded-full border-[1.5px] sm:border-2 border-white flex items-center justify-center overflow-hidden">
@@ -265,7 +262,6 @@
                     </div>
                 </div>
 
-                <!-- Match Scoreboard -->
                 <div class="bg-[#161616] p-4 sm:p-6 border-b border-[#2a2a2a] flex items-center gap-4 sm:gap-8">
                     <div class="flex flex-col items-center">
                         <div class="border-[1.5px] border-gray-400 rounded px-1 mb-1 shadow-sm">
@@ -288,17 +284,16 @@
                     
                     <div class="flex flex-col gap-2.5 sm:gap-4 justify-center pl-2">
                         <div class="flex items-center gap-2 sm:gap-4">
-                            <img src="https://flagcdn.com/w40/ar.png" class="w-5 sm:w-7 h-auto rounded-sm shadow-sm" alt="AR">
+                            <img src="https://flagcdn.com/w40/ar.png" class="w-5 sm:w-7 h-auto rounded-sm shadow-sm" alt="AR" loading="lazy">
                             <span class="text-white font-bold text-sm sm:text-xl leading-none tracking-tight">Argentina</span>
                         </div>
                         <div class="flex items-center gap-2 sm:gap-4">
-                            <img src="https://flagcdn.com/w40/fr.png" class="w-5 sm:w-7 h-auto rounded-sm shadow-sm border border-gray-600" alt="FR">
+                            <img src="https://flagcdn.com/w40/fr.png" class="w-5 sm:w-7 h-auto rounded-sm shadow-sm border border-gray-600" alt="FR" loading="lazy">
                             <span class="text-white font-bold text-sm sm:text-xl leading-none tracking-tight">Francia</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Match Progress Bar -->
                 <div class="w-full bg-[#111] px-4 py-2 sm:py-3 border-b border-[#2a2a2a] flex items-center gap-2">
                     <div class="h-1 sm:h-1.5 w-[48%] bg-[#333] rounded-full overflow-hidden">
                         <div class="h-full bg-[#00ff80] w-[2%] shadow-[0_0_5px_#00ff80]"></div>
@@ -306,50 +301,28 @@
                     <div class="h-1 sm:h-1.5 w-[48%] bg-[#333] rounded-full"></div>
                 </div>
 
-                <!-- Football Pitch (Perfect 16:9, Non-blurry, Centered Play, SUPER NITIDO) -->
                 <div class="relative w-full football-pitch-bg overflow-hidden shadow-[inset_0_0_60px_rgba(0,0,0,0.9)] border-t border-[#333]" style="aspect-ratio: 16/9;">
-                    
-                    <!-- HD SVG Field Lines (1600x900 base, shape-rendering crisp) -->
                     <svg viewBox="0 0 1600 900" class="absolute inset-0 w-full h-full" preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision" style="filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.7));">
-                        <!-- Utilizzo un bianco quasi puro e spessore aumentato per massima nitidezza sui display ad alta risoluzione -->
                         <g stroke="#ffffff" stroke-opacity="0.85" stroke-width="6" fill="none">
-                            <!-- Outer Boundary -->
                             <rect x="40" y="40" width="1520" height="820" />
-                            <!-- Center Line -->
                             <line x1="800" y1="40" x2="800" y2="860" />
-                            <!-- Center Circle -->
                             <circle cx="800" cy="450" r="140" />
-                            <!-- Left Penalty Box -->
                             <rect x="40" y="190" width="280" height="520" />
-                            <!-- Left Goal Area -->
                             <rect x="40" y="325" width="90" height="250" />
-                            <!-- Left Penalty Spot -->
                             <circle cx="200" cy="450" r="6" fill="#ffffff" fill-opacity="0.85" stroke="none" />
-                            <!-- Left Arc -->
                             <path d="M 320 340 A 140 140 0 0 1 320 560" />
-                            
-                            <!-- Right Penalty Box -->
                             <rect x="1280" y="190" width="280" height="520" />
-                            <!-- Right Goal Area -->
                             <rect x="1470" y="325" width="90" height="250" />
-                            <!-- Right Penalty Spot -->
                             <circle cx="1400" cy="450" r="6" fill="#ffffff" fill-opacity="0.85" stroke="none" />
-                            <!-- Right Arc -->
                             <path d="M 1280 340 A 140 140 0 0 0 1280 560" />
                         </g>
                     </svg>
-
-                    <!-- OVERLAY GRADIENT FOR READABILITY & HOVER EFFECT -->
                     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent backdrop-blur-[1px] transition-all duration-700 group-hover:from-black/95 group-hover:via-black/60 group-hover:to-black/30 group-hover:backdrop-blur-[3px] z-10"></div>
-                    
-                    <!-- ELEGANT CENTER PLAY BUTTON -->
                     <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-20 transition-transform duration-500 group-hover:scale-105">
                         <div class="w-16 h-16 sm:w-24 sm:h-24 rounded-full flex items-center justify-center cta-pulse-ring bg-black/40 backdrop-blur-md border-2 border-[#00ff80]/80 shadow-[0_0_30px_rgba(0,255,128,0.4)] cursor-pointer">
                             <svg class="w-8 h-8 sm:w-12 sm:h-12 text-[#00ff80] ml-1 sm:ml-2 drop-shadow-[0_0_15px_rgba(0,255,128,1)]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                     </div>
-
-                    <!-- CTA TEXT AT BOTTOM -->
                     <div class="absolute bottom-4 sm:bottom-8 left-0 right-0 z-20 flex flex-col items-center px-4 transform transition-transform duration-500 group-hover:-translate-y-1">
                         <span class="text-white font-black text-lg sm:text-3xl uppercase tracking-[0.25em] drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)] text-center" data-i18n="demoTitleCTA">AVVIA IL SIMULATORE</span>
                         <span class="text-[#00ff80] font-bold text-[9px] sm:text-xs mt-2 bg-black/80 px-4 sm:px-6 py-1.5 sm:py-2 rounded-full border border-gray-600/50 shadow-2xl uppercase tracking-widest text-center" data-i18n="demoSubCTA">Clicca per aprire la Demo Interattiva</span>
@@ -405,26 +378,16 @@
         </div>
     </div>
 
-    <!-- MODALE PODCAST -->
+    <!-- MODALE PODCAST OTTMIZZATA (LOADER RIMOSSO) -->
     <div id="podcast-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-4 opacity-0 transition-opacity duration-300">
         <div class="bg-[#1c242d] w-full max-w-md rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative" id="podcast-modal-content">
             <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-[#141b22] shrink-0">
                 <h3 class="text-[#00ff80] font-black uppercase tracking-widest text-sm flex items-center gap-2">📻 Podcast</h3>
                 <button onclick="PodcastManager.close()" class="text-gray-400 hover:text-white text-3xl leading-none px-2 rounded-lg active:scale-95 touch-manipulation">&times;</button>
             </div>
-            <div class="p-6 flex flex-col items-center text-center w-full min-h-[150px] justify-center relative">
-                <!-- Rotella elegante con logo -->
-                <div id="podcast-loading" class="absolute inset-0 flex flex-col items-center justify-center z-20 bg-[#1c242d] rounded-b-2xl">
-                    <div class="relative w-16 h-16 flex items-center justify-center">
-                        <div class="absolute inset-0 rounded-full border-2 border-transparent border-t-[#00ff80] border-r-[#00ff80] animate-spin"></div>
-                        <img src="logo-tondo.jpeg" class="w-12 h-12 rounded-full shadow-[0_0_15px_rgba(0,255,128,0.5)]" alt="Loading">
-                    </div>
-                    <span class="text-[#00ff80] text-[10px] mt-4 tracking-widest uppercase font-bold animate-pulse">Caricamento...</span>
-                </div>
-                
-                <div id="podcast-iframe-container" class="w-full hidden justify-center relative z-10 transition-opacity duration-300 opacity-0">
-                    <iframe id="spotify-player" src="" height="102px" width="100%" frameborder="0" scrolling="no" class="max-w-[400px] rounded-xl border border-gray-700 shadow-lg bg-[#282828]" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                </div>
+            <!-- L'iframe viene caricato direttamente, colorato col bg di Spotify per evitare il flash bianco -->
+            <div class="p-6 flex flex-col items-center text-center w-full justify-center relative">
+                <iframe id="spotify-player" src="" height="102px" width="100%" frameborder="0" scrolling="no" class="max-w-[400px] w-full rounded-xl border border-gray-700 shadow-lg bg-[#282828]" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             </div>
         </div>
     </div>
@@ -487,6 +450,7 @@
             setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = ''; }, 300);
         }
 
+        // --- SISTEMA PODCAST OTTIMIZZATO PER ESECUZIONE ISTANTANEA ---
         const PodcastManager = {
             urls: {
                 it: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/giorno-1-Zero-to-Hero-Academy-e3itmmb/a-ackqpt1",
@@ -495,22 +459,12 @@
                 pt: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/pt-1-Zero-to-Hero-Academy-e3iu53i/a-ackrebp"
             },
             init: function() {
+                // Pre-carichiamo silenziosamente il player Spotify nel DOM prima che l'utente clicchi!
+                const currentLang = document.documentElement.lang || 'it';
+                const targetSrc = this.urls[currentLang] || this.urls['en'];
                 const player = document.getElementById('spotify-player');
-                if(player) {
-                    player.onload = function() {
-                        const container = document.getElementById('podcast-iframe-container');
-                        const loader = document.getElementById('podcast-loading');
-                        if (loader && container) {
-                            loader.classList.add('hidden');
-                            loader.classList.remove('flex');
-                            container.classList.remove('hidden');
-                            container.classList.add('flex');
-                            setTimeout(() => {
-                                container.classList.remove('opacity-0');
-                                container.classList.add('opacity-100');
-                            }, 50);
-                        }
-                    };
+                if(player && !player.src) {
+                    player.src = targetSrc;
                 }
             },
             open: function() {
@@ -521,39 +475,32 @@
                 modal.classList.remove('opacity-0'); modal.classList.add('opacity-100');
                 document.getElementById('podcast-modal-content').classList.remove('scale-95'); document.getElementById('podcast-modal-content').classList.add('scale-100');
                 
+                // Se la lingua è cambiata, carichiamo la nuova url, altrimenti è GIÀ PRONTA
                 const currentLang = document.documentElement.lang || 'it';
                 this.switchLanguage(currentLang);
             },
             close: function() {
                 SoundEngine.click();
                 const modal = document.getElementById('podcast-modal');
-                
-                const player = document.getElementById('spotify-player');
-                if (player && player.src) {
-                    const currentSrc = player.src;
-                    player.src = '';
-                    setTimeout(() => { player.src = currentSrc; }, 100);
-                }
-
                 modal.classList.remove('opacity-100'); modal.classList.add('opacity-0');
                 document.getElementById('podcast-modal-content').classList.remove('scale-100'); document.getElementById('podcast-modal-content').classList.add('scale-95');
-                setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); }, 300);
+                
+                setTimeout(() => { 
+                    modal.classList.add('hidden'); modal.classList.remove('flex'); 
+                    // Fermiamo la riproduzione riassegnando l'src, in modo che ri-carichi silenziosamente in background.
+                    const player = document.getElementById('spotify-player');
+                    if (player && player.src) {
+                        const currentSrc = player.src;
+                        player.src = '';
+                        // Ricarica invisibile: sarà immediatamente pronto alla prossima apertura
+                        setTimeout(() => { player.src = currentSrc; }, 50);
+                    }
+                }, 300);
             },
             switchLanguage: function(lang) {
                 const targetSrc = this.urls[lang] || this.urls['en'];
                 const player = document.getElementById('spotify-player');
-                
                 if (player && player.src !== targetSrc) {
-                    const container = document.getElementById('podcast-iframe-container');
-                    const loader = document.getElementById('podcast-loading');
-                    if(loader && container) {
-                        loader.classList.remove('hidden');
-                        loader.classList.add('flex');
-                        container.classList.add('hidden');
-                        container.classList.remove('flex');
-                        container.classList.remove('opacity-100');
-                        container.classList.add('opacity-0');
-                    }
                     player.src = targetSrc;
                 }
             }
@@ -576,7 +523,7 @@
 
         const RoomApp = (function() {
             const CONFIG = { STORAGE_KEY: 'bx_academy_demo_hd' }; 
-            const footerLogoHTML = `<div class="mt-12 text-center pt-8"><img src="logo-tondo.jpeg" class="w-12 h-12 mx-auto rounded-full opacity-30 grayscale mix-blend-screen" alt="Global Exchange Academy"></div>`;
+            const footerLogoHTML = `<div class="mt-12 text-center pt-8"><img src="logo-tondo.jpeg" class="w-12 h-12 mx-auto rounded-full opacity-30 grayscale mix-blend-screen" alt="Global Exchange Academy" loading="lazy"></div>`;
 
             const quizzesData = {
                 it: [
@@ -1048,15 +995,10 @@
                 State.currentQuizStep = 0;
                 State.quizCompleted = false;
                 
-                // Sottraiamo gli XP guadagnati durante il quiz per non farli accumulare all'infinito ripetendolo. (5 domande x 100 XP = 500 XP)
-                if (State.xp >= 500) {
-                    State.xp -= 500;
-                } else {
-                    State.xp = 0;
-                }
+                if (State.xp >= 500) { State.xp -= 500; } else { State.xp = 0; }
+                
                 UIManager.updateDashboards();
                 Gamification.renderQuiz();
-
                 try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ lang: State.lang, xp: State.xp, currentQuizStep: State.currentQuizStep, quizCompleted: State.quizCompleted })); } catch(e){}
             };
 
