@@ -336,15 +336,17 @@
         </div>
     </div>
 
-    <!-- MODALE PODCAST -->
-    <div id="podcast-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-4 opacity-0 transition-opacity duration-300">
-        <div class="bg-[#1c242d] w-full max-w-md rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative" id="podcast-modal-content">
-            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-[#141b22] shrink-0">
+    <!-- MODALE PODCAST (MODIFICATO PER IMPEDIRE CONDIVISIONE E AUTO-DIMENSIONARE) -->
+    <div id="podcast-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-2 sm:p-6 opacity-0 transition-opacity duration-300">
+        <div class="bg-[#1c242d] w-full max-w-3xl rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative" id="podcast-modal-content">
+            <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-[#141b22] shrink-0 z-10">
                 <h3 class="text-[#00ff80] font-black uppercase tracking-widest text-sm flex items-center gap-2">📻 Podcast</h3>
                 <button onclick="PodcastManager.close()" class="text-gray-400 hover:text-white text-3xl leading-none px-2 rounded-lg active:scale-95 touch-manipulation">&times;</button>
             </div>
-            <div class="p-6 flex flex-col items-center text-center w-full justify-center relative">
-                <iframe id="spotify-player" src="" height="102px" width="100%" frameborder="0" scrolling="no" class="max-w-[400px] w-full rounded-xl border border-gray-700 shadow-lg bg-[#282828]" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+            <!-- Contenitore con altezza dinamica e min-height per il player Spotify -->
+            <div class="p-3 sm:p-6 flex flex-col items-center text-center w-full justify-center relative h-[60vh] min-h-[350px] max-h-[500px]">
+                <!-- Rimozione "clipboard-write" per inibire il tasto di condivisione integrato -->
+                <iframe id="spotify-player" src="" width="100%" height="100%" style="min-height: 100%; border-radius: 12px;" frameborder="0" scrolling="no" class="w-full h-full shadow-lg bg-[#282828]" allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
             </div>
         </div>
     </div>
