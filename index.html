@@ -64,9 +64,6 @@
         }
         .sub-warning { animation: pulse-sub 3s infinite ease-in-out; border: 1px solid; transition: all 0.3s ease; }
 
-        .telegram-panel-container { max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out, margin-top 0.3s ease-out; margin-top: 0; will-change: max-height, opacity; }
-        .telegram-panel-container.expanded { max-height: 1000px; opacity: 1; margin-top: 1rem; overflow: visible; }
-
         @keyframes joystickNeon {
             0% { filter: drop-shadow(0 0 10px rgba(0, 255, 128, 0.5)); transform: scale(1); }
             50% { filter: drop-shadow(0 0 35px rgba(0, 255, 128, 1)); transform: scale(1.15); }
@@ -101,7 +98,7 @@
         .animate-fade-in-up { animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
     </style>
 </head>
-<body class="text-gray-200 pb-12 selection:bg-green-500 selection:text-white antialiased relative">
+<body class="text-gray-200 pb-12 selection:bg-[#00ff80] selection:text-black antialiased relative">
 
     <header class="sticky top-0 z-40 glass-panel border-b-0 border-t-0 border-x-0 border-b border-[#00ff80]/20 px-3 sm:px-4 py-2 sm:py-3 flex justify-between items-center transform-gpu">
         <div class="flex items-center gap-2 sm:gap-3 flex-shrink min-w-0">
@@ -139,70 +136,39 @@
         <section class="glass-panel rounded-2xl p-2 sm:p-6 mt-4 sm:mt-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
             <h3 class="font-black text-sm sm:text-lg mb-2 sm:mb-4 ml-2 sm:ml-0 flex items-center text-white uppercase tracking-wider">
                 <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-[#00ff80]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                <span data-i18n="coreTitle">Fase 1: Theorum & Praxis</span>
+                <span data-i18n="coreTitle">Fase 1</span>
             </h3>
             
-            <div id="video-wrapper" class="relative w-full aspect-video bg-black rounded-xl overflow-hidden border border-gray-800 shadow-xl ring-1 ring-white/5 cursor-pointer group" onclick="playMainVideo()">
-                <img id="video-thumbnail" src="https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Video Preview" loading="lazy">
-                <div class="play-btn-overlay absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
-                    <div class="w-12 h-12 sm:w-20 sm:h-20 bg-red-600/90 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(225,29,72,0.6)] group-hover:scale-110 transition-transform backdrop-blur-sm">
-                        <span class="text-white text-xl sm:text-3xl ml-1 drop-shadow-md">▶</span>
+            <div id="video-wrapper" class="relative w-full aspect-video bg-[#0a140f] rounded-xl overflow-hidden border border-gray-800 shadow-xl ring-1 ring-white/5 cursor-pointer group" onclick="playMainVideo()">
+                <img id="video-thumbnail" src="campo-demo.jpeg" class="absolute inset-0 w-full h-full object-cover opacity-80 transition-transform duration-700 group-hover:scale-105" alt="Video Preview" loading="lazy">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60"></div>
+                <div class="play-btn-overlay absolute inset-0 transition-colors flex items-center justify-center">
+                    <div class="w-16 h-16 sm:w-24 sm:h-24 bg-black/40 border-2 border-white/20 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,255,128,0.2)] group-hover:bg-[#00ff80]/20 group-hover:border-[#00ff80]/60 group-hover:shadow-[0_0_50px_rgba(0,255,128,0.5)] transition-all duration-300 backdrop-blur-md transform group-hover:scale-110">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white group-hover:text-[#00ff80] transition-colors ml-1.5 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
                 <!-- Il src viene popolato solo al click per massimizzare la velocità della pagina -->
-                <iframe id="main-video" class="absolute inset-0 w-full h-full hidden" src="about:blank" data-src="https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe id="main-video" class="absolute inset-0 w-full h-full hidden z-10" src="about:blank" data-src="https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             
-            <div class="grid grid-cols-3 gap-1.5 sm:gap-3 mt-2 sm:mt-4">
-                <button onclick="PodcastManager.open()" class="flex items-center justify-center p-2 sm:p-4 bg-gray-900/80 hover:bg-gray-800 border border-gray-700/50 rounded-lg sm:rounded-xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation">
-                    <span class="text-base sm:text-2xl sm:mr-3 mb-1 sm:mb-0 group-hover:scale-110 transition-transform">📻</span>
-                    <span class="font-bold text-[8px] sm:text-xs tracking-wider uppercase text-gray-200" data-i18n="btnPodcast">Podcast</span>
+            <div class="grid grid-cols-2 gap-2 sm:gap-4 mt-3 sm:mt-5 max-w-2xl mx-auto">
+                <button onclick="PodcastManager.open()" class="flex items-center justify-center p-3 sm:p-5 bg-gray-900/80 hover:bg-gray-800 border border-gray-700/50 rounded-xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation">
+                    <span class="text-xl sm:text-2xl sm:mr-3 mb-1 sm:mb-0 group-hover:scale-110 transition-transform">📻</span>
+                    <span class="font-bold text-[10px] sm:text-sm tracking-wider uppercase text-gray-200" data-i18n="btnPodcast">Podcast</span>
                 </button>
-                <button onclick="openEbookModal()" class="flex items-center justify-center p-2 sm:p-4 bg-gray-900/80 hover:bg-[#00ff80]/20 hover:border-[#00ff80]/50 hover:text-[#00ff80] border border-gray-700/50 rounded-lg sm:rounded-xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation">
-                    <span class="text-base sm:text-2xl sm:mr-3 mb-1 sm:mb-0 group-hover:scale-110 transition-transform">📖</span>
-                    <span class="font-bold text-[8px] sm:text-xs tracking-wider uppercase text-gray-200 group-hover:text-[#00ff80] transition-colors" data-i18n="btnEbook">E-Book</span>
-                </button>
-                <button onclick="toggleTelegramPanel()" class="flex items-center justify-center p-2 sm:p-4 bg-[#24A1DE]/10 border border-[#24A1DE]/30 hover:bg-[#24A1DE]/20 rounded-lg sm:rounded-xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation">
-                    <svg class="w-4 h-4 sm:w-6 sm:h-6 sm:mr-3 mb-1 sm:mb-0 group-hover:scale-110 transition-transform drop-shadow" fill="#24A1DE" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.31-.346-.116l-6.405 4.032-2.766-.865c-.6-.188-.614-.602.126-.893l10.811-4.17c.504-.188.948.112.86.85z"/>
-                    </svg>
-                    <span class="font-bold text-[8px] sm:text-xs text-white uppercase tracking-widest" data-i18n="btnTelegram">Lezione</span>
+                <button onclick="openEbookModal()" class="flex items-center justify-center p-3 sm:p-5 bg-gray-900/80 hover:bg-[#00ff80]/20 hover:border-[#00ff80]/50 hover:text-[#00ff80] border border-gray-700/50 rounded-xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation">
+                    <span class="text-xl sm:text-2xl sm:mr-3 mb-1 sm:mb-0 group-hover:scale-110 transition-transform">📖</span>
+                    <span class="font-bold text-[10px] sm:text-sm tracking-wider uppercase text-gray-200 group-hover:text-[#00ff80] transition-colors" data-i18n="btnEbook">E-Book</span>
                 </button>
             </div>
 
-            <div id="telegram-wrapper" class="telegram-panel-container">
-                <div class="rounded-xl overflow-hidden shadow-2xl border border-gray-800 mt-2 sm:mt-4">
-                    <div class="bg-[#1c242d] px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between shadow-md relative z-20">
-                        <div class="flex items-center gap-2 sm:gap-3">
-                            <img src="logo-tondo.jpeg" onerror="this.src='https://ui-avatars.com/api/?name=BE+R&background=050a05&color=00ff80'" class="w-7 h-7 sm:w-10 sm:h-10 rounded-full object-cover border border-[#24A1DE]/30" loading="lazy">
-                            <div>
-                                <h4 class="text-white font-bold text-[10px] sm:text-[13px] leading-tight tracking-tight uppercase">BETTING EXCHANGE ROOM</h4>
-                                <span class="text-[#24A1DE] text-[8px] sm:text-[10px] font-bold uppercase tracking-[0.2em]">Official Channel</span>
-                            </div>
-                        </div>
-                        <button onclick="toggleTelegramPanel()" class="text-gray-500 hover:text-white p-1 sm:p-2 text-sm">✕</button>
-                    </div>
-                    
-                    <div class="bg-[#0e1621] p-2 sm:p-4 h-[350px] sm:h-[550px] overflow-y-auto tg-scrollbar flex flex-col relative" style="background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); background-blend-mode: overlay; background-color: #0e1621;">
-                        <div class="text-center mb-3 sm:mb-6 sticky top-0 z-10"><span class="bg-[#182533]/95 backdrop-blur-md text-gray-400 text-[8px] sm:text-[10px] px-2 sm:px-4 py-1 sm:py-1.5 rounded-full font-bold uppercase tracking-widest shadow-sm" data-i18n="tgDate">Oggi</span></div>
-                        
-                        <div class="bg-[#182533] rounded-xl rounded-tl-none p-3 sm:p-5 max-w-[95%] sm:max-w-[85%] border border-[#1c242d] shadow-lg relative self-start mb-2 sm:mb-4">
-                            <div class="text-[11px] sm:text-[14px] text-[#e4e4e4] leading-[1.5] sm:leading-[1.7] font-sans break-words whitespace-pre-line" data-i18n-html="tgMessage"></div>
-                            <div class="text-right mt-1.5 sm:mt-3 text-[8px] sm:text-[10px] text-[#6b7b8c] font-bold flex justify-end items-center gap-1 uppercase">
-                                <span>15:30</span>
-                                <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#50a2e9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <!-- FASE 2: QUIZ 5 STEP -->
         <section class="glass-panel rounded-2xl p-3 sm:p-6 lg:col-span-1 h-fit mt-4 sm:mt-8 relative overflow-hidden" id="quiz-section">
             <h3 class="font-black text-sm sm:text-lg mb-2 sm:mb-5 text-white flex items-center tracking-wider uppercase">
                 <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <span data-i18n="quizTitle">Check-Point</span>
+                <span data-i18n="quizTitle">Fase 2</span>
             </h3>
             
             <div id="quiz-container" class="space-y-3 sm:space-y-4 relative z-10">
@@ -236,7 +202,7 @@
         <section class="glass-panel rounded-2xl p-2 sm:p-6 mt-4 sm:mt-8" style="content-visibility: auto;">
             <h3 class="font-black text-sm sm:text-lg mb-4 ml-2 sm:ml-0 flex items-center text-white uppercase tracking-wider">
                 <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-[#00ff80]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
-                <span data-i18n="demoTitle">Fase 3: Simulatore Trading</span>
+                <span data-i18n="demoTitle">Fase 3</span>
             </h3>
 
             <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="block group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.8)] border border-[#333] hover:border-[#00ff80] transition-all duration-300 transform hover:-translate-y-1 cursor-pointer bg-[#121212]" onclick="SoundEngine.click()">
@@ -337,16 +303,8 @@
             <p class="text-[11px] sm:text-base text-gray-300 font-medium italic leading-relaxed text-center md:text-left">"<span data-i18n="finQuote">Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.</span>"</p>
         </section>
 
-        <!-- TELEGRAM SIGNALS BUTTON -->
-        <div class="flex justify-center mt-6 sm:mt-10 mb-2">
-            <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-[#24A1DE] hover:bg-[#1d82b3] text-white font-black px-6 sm:px-10 py-3 sm:py-4 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_rgba(36,161,222,0.4)] active:scale-95 flex items-center justify-center gap-3 touch-manipulation">
-                <svg class="w-6 h-6 sm:w-8 sm:h-8" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.68c.223-.198-.054-.31-.346-.116l-6.405 4.032-2.766-.865c-.6-.188-.614-.602.126-.893l10.811-4.17c.504-.188.948.112.86.85z"/></svg>
-                <span class="text-xs sm:text-base uppercase tracking-[0.15em] drop-shadow-sm" data-i18n="btnTelegramRoom">ENTRA NELLA SALA SEGNALI</span>
-            </a>
-        </div>
-
         <!-- FOOTER NAV -->
-        <div class="flex justify-end items-center py-4 sm:py-6 border-t border-gray-800/50 mt-2 relative min-h-[60px] sm:min-h-[80px]">
+        <div class="flex justify-end items-center py-4 sm:py-6 border-t border-gray-800/50 mt-6 relative min-h-[60px] sm:min-h-[80px]">
             <button id="btn-next-lesson" onclick="showSubWarning()" class="text-black bg-[#00ff80] font-black px-6 sm:px-8 py-3 rounded-md hover:bg-white transition-all text-[10px] sm:text-xs uppercase tracking-[0.2em] shadow-[0_0_15px_rgba(0,255,128,0.4)] touch-manipulation active:scale-95 flex items-center gap-2 z-10">
                 <span data-i18n="navNextLesson">PROSSIMA LEZIONE</span> <span>→</span>
             </button>
@@ -378,14 +336,13 @@
         </div>
     </div>
 
-    <!-- MODALE PODCAST OTTMIZZATA (LOADER RIMOSSO) -->
+    <!-- MODALE PODCAST -->
     <div id="podcast-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-4 opacity-0 transition-opacity duration-300">
         <div class="bg-[#1c242d] w-full max-w-md rounded-2xl border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative" id="podcast-modal-content">
             <div class="flex justify-between items-center p-4 border-b border-gray-800 bg-[#141b22] shrink-0">
                 <h3 class="text-[#00ff80] font-black uppercase tracking-widest text-sm flex items-center gap-2">📻 Podcast</h3>
                 <button onclick="PodcastManager.close()" class="text-gray-400 hover:text-white text-3xl leading-none px-2 rounded-lg active:scale-95 touch-manipulation">&times;</button>
             </div>
-            <!-- L'iframe viene caricato direttamente, colorato col bg di Spotify per evitare il flash bianco -->
             <div class="p-6 flex flex-col items-center text-center w-full justify-center relative">
                 <iframe id="spotify-player" src="" height="102px" width="100%" frameborder="0" scrolling="no" class="max-w-[400px] w-full rounded-xl border border-gray-700 shadow-lg bg-[#282828]" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
             </div>
@@ -429,6 +386,9 @@
                 iframe.classList.remove('hidden');
                 wrapper.querySelector('img').classList.add('hidden');
                 wrapper.querySelector('.play-btn-overlay').classList.add('hidden');
+                // Nascondi anche l'overlay sfumato se presente
+                const bgGradient = wrapper.querySelector('.bg-gradient-to-t');
+                if(bgGradient) bgGradient.classList.add('hidden');
             }
         };
 
@@ -450,7 +410,6 @@
             setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = ''; }, 300);
         }
 
-        // --- SISTEMA PODCAST OTTIMIZZATO PER ESECUZIONE ISTANTANEA ---
         const PodcastManager = {
             urls: {
                 it: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/giorno-1-Zero-to-Hero-Academy-e3itmmb/a-ackqpt1",
@@ -459,7 +418,6 @@
                 pt: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/pt-1-Zero-to-Hero-Academy-e3iu53i/a-ackrebp"
             },
             init: function() {
-                // Pre-carichiamo silenziosamente il player Spotify nel DOM prima che l'utente clicchi!
                 const currentLang = document.documentElement.lang || 'it';
                 const targetSrc = this.urls[currentLang] || this.urls['en'];
                 const player = document.getElementById('spotify-player');
@@ -475,7 +433,6 @@
                 modal.classList.remove('opacity-0'); modal.classList.add('opacity-100');
                 document.getElementById('podcast-modal-content').classList.remove('scale-95'); document.getElementById('podcast-modal-content').classList.add('scale-100');
                 
-                // Se la lingua è cambiata, carichiamo la nuova url, altrimenti è GIÀ PRONTA
                 const currentLang = document.documentElement.lang || 'it';
                 this.switchLanguage(currentLang);
             },
@@ -487,12 +444,10 @@
                 
                 setTimeout(() => { 
                     modal.classList.add('hidden'); modal.classList.remove('flex'); 
-                    // Fermiamo la riproduzione riassegnando l'src, in modo che ri-carichi silenziosamente in background.
                     const player = document.getElementById('spotify-player');
                     if (player && player.src) {
                         const currentSrc = player.src;
                         player.src = '';
-                        // Ricarica invisibile: sarà immediatamente pronto alla prossima apertura
                         setTimeout(() => { player.src = currentSrc; }, 50);
                     }
                 }, 300);
@@ -505,13 +460,6 @@
                 }
             }
         };
-
-        function toggleTelegramPanel() {
-            SoundEngine.click();
-            const panel = document.getElementById('telegram-wrapper');
-            if (panel.classList.contains('expanded')) { panel.classList.remove('expanded'); } 
-            else { panel.classList.add('expanded'); setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'start' }), 150); }
-        }
 
         window.showSubWarning = function() {
             SoundEngine.error();
@@ -560,12 +508,10 @@
                 it: {
                     moduleTitle: "MODULO 1 • GIORNO 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
                     finLabel: "PILLOLA FINANZIARIA", finQuote: "Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.",
-                    coreTitle: "Fase 1: Theorum & Praxis", demoTitle: "Fase 3: Simulatore Trading", demoTitleCTA: "AVVIA IL SIMULATORE", demoSubCTA: "Clicca per aprire la Demo Interattiva",
-                    btnPodcast: "Podcast", btnTelegram: "Lezione", btnEbook: "E-Book", quizTitle: "Fase 2: Check-Point", btnRetryQuiz: "Ripeti il test",
+                    coreTitle: "Fase 1", demoTitle: "Fase 3", demoTitleCTA: "AVVIA IL SIMULATORE", demoSubCTA: "Clicca per aprire la Demo Interattiva",
+                    btnPodcast: "Podcast", btnEbook: "E-Book", quizTitle: "Fase 2", btnRetryQuiz: "Ripeti il test",
                     navNextLesson: "PROSSIMA LEZIONE", tgDate: "Oggi", subNotActive: "ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE",
-                    btnTelegramRoom: "ENTRA NELLA SALA SEGNALI",
-                    videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg",
-                    tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Giorno 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFFERENZA STRUTTURALE: BOOKMAKER VS EXCHANGE</strong>\n\nIl Bookmaker è la tua controparte: se tu vinci, lui perde. Per questo limita i profittevoli. \n\nNell'Exchange, tu operi in un mercato <em>peer-to-peer</em>: la piattaforma è solo un intermediario che incassa una commissione sulle vincite. Qui non scommetti contro un banco, ma scambi quote con altri utenti.\n\n📐 <strong>FORMULA GENERALE (PUNTA):</strong>\nProfitto Netto = (Stake * (Quota - 1)) * (1 - Commissione)\n\n<strong>LEGENDA TECNICA:</strong>\n🔹 Stake: Capitale puntato.\n🔹 Liability: Il rischio effettivo quando "banchi" (fai il banco).\n🔹 Commissione: Fee (es. 5%) pagata all'Exchange solo sulla vincita netta.\n\n🧮 <strong>ESEMPIO PRACTICO (REALE):</strong>\n<em>Evento: Juventus vs Inter. Quota Punta (Back) @2.10. Stake: 100€. Comm: 5%.</em>\n\n🪄 <strong>CALCOLO:</strong>\n• Profitto Lordo: 100€ * (2.10 - 1) = 110€\n• Commissione: 110€ * 0.05 = 5.50€\n• Profitto Netto: 104.50€\n\n⚠️ <strong>GUBBING & LIMITAZIONI:</strong>\nIl Gubbing (chiusura/limitazione conto) NON esiste nell'Exchange. Poiché la piattaforma guadagna dalle tue commissioni, più sei bravo e vinci, più l'Exchange guadagna. Il rischio di limitazione resta esclusivo dei Bookmaker tradizionali.\n\n✅ <strong>AZIONE DEL GIORNO:</strong>\nApri un Exchange (Betfair/Betflag), scegli un match di Serie A o Premier League e osserva il book per 30 minuti. Nota come lo spread (differenza tra Punta e Banca) si stringe dove c'è più denaro (liquidità).\n\n🧘‍♂️ <strong>IL MANTRA:</strong> <em>"Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DEL #1</strong>\nIl trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <em>size</em> è troppo grande. La matematica non ha battito cardiaco, segui quella.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidità è il tuo paracadute. Senza volumi, non c'è trading, solo gioco d'azzardo.</em>`,
+                    videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1", videoThumb: "campo-demo.jpeg",
                     ebookContent: `
                         <div class="animate-fade-in-up">
                             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 p-6 sm:p-10 mb-8 sm:mb-12 shadow-[0_0_30px_rgba(0,255,128,0.1)] text-center">
@@ -638,12 +584,10 @@
                 en: {
                     moduleTitle: "MODULE 1 • DAY 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "No gambling. Only math, risk management, and emotional detachment.",
                     finLabel: "FINANCIAL PILL", finQuote: "Money on the Exchange isn't yours until you withdraw it. Use the separated accounts system: your bankroll is business capital, not a personal ATM.",
-                    coreTitle: "Phase 1: Theorum & Praxis", demoTitle: "Phase 3: Trading Simulator", demoTitleCTA: "START SIMULATOR", demoSubCTA: "Click here to enter the Arena",
-                    btnPodcast: "Podcast", btnTelegram: "Lesson", btnEbook: "E-Book", quizTitle: "Phase 2: Check-Point", btnRetryQuiz: "Retry Test",
+                    coreTitle: "Phase 1", demoTitle: "Phase 3", demoTitleCTA: "START SIMULATOR", demoSubCTA: "Click here to enter the Arena",
+                    btnPodcast: "Podcast", btnEbook: "E-Book", quizTitle: "Phase 2", btnRetryQuiz: "Retry Test",
                     navNextLesson: "NEXT LESSON", tgDate: "Today", subNotActive: "SUBSCRIPTION NOT ACTIVE! CONTACT YOUR REFERENT",
-                    btnTelegramRoom: "JOIN THE SIGNALS ROOM",
-                    videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
-                    tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Day 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>STRUCTURAL DIFFERENCE: BOOKMAKER VS EXCHANGE</strong>\n\nThe Bookmaker is your counterparty: if you win, they lose. This is why they limit profitable players. \n\nIn an Exchange, you operate in a <em>peer-to-peer</em> market: the platform is merely an intermediary charging a commission on winnings. Here, you aren't betting against "the house", but swapping odds with other users.\n\n📐 <strong>GENERAL FORMULA (BACKING):</strong>\nNet Profit = (Stake * (Odds - 1)) * (1 - Commission)\n\n<strong>TECHNICAL KEY:</strong>\n🔹 Stake: The capital placed.\n🔹 Liability: The actual risk when you "Lay" (act as the bookie).\n🔹 Commission: Fee (e.g. 5%) paid only on net winnings.\n\n🧮 <strong>PRACTICAL EXAMPLE:</strong>\n<em>Event: Juventus vs Inter. Back Odds @2.10. Stake: £100. Comm: 5%.</em>\n\n🪄 <strong>CALCULATION:</strong>\n• Gross Profit: £100 * (2.10 - 1) = £110\n• Commission: £110 * 0.05 = £5.50\n• Net Profit: £104.50\n\n⚠️ <strong>GUBBING & LIMITATIONS:</strong>\nGubbing (account restriction) DOES NOT exist in the Exchange. Since the platform profits from your commissions, the more you win, the more they earn. Account limits are a problem exclusive to traditional Bookmakers.\n\n✅ <strong>ACTION OF THE DAY:</strong>\nOpen an Exchange (Betfair/Betflag), pick a Serie A or Premier League match and observe the Order Book for 30 minutes. Notice how the Spread (gap between Back and Lay) narrows where there is more Liquidity.\n\n🧘‍♂️ <strong>THE MANTRA:</strong> <em>"The market has no opinions, only prices; the trader follows the liquidity, the punter follows the team."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET OF THE #1</strong>\nThe trader doesn't support a team: they exploit inefficiency. If your heart is racing, your size is too big. Mathematics doesn't have a heartbeat—follow the math.\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>Liquidity is your parachute. Without volume, there is no trading, only gambling.</em>`,
+                    videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "campo-demo.jpeg",
                     ebookContent: `
                         <div class="animate-fade-in-up">
                             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 p-6 sm:p-10 mb-8 sm:mb-12 shadow-[0_0_30px_rgba(0,255,128,0.1)] text-center">
@@ -716,12 +660,10 @@
                 es: {
                     moduleTitle: "MÓDULO 1 • DÍA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Cero apuestas. Solo matemáticas, gestión del riesgo y desapego emocional.",
                     finLabel: "PÍLDORA FINANCIERA", finQuote: "El dinero en el Exchange no es tuyo hasta que lo retiras haciendo Cash Out. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.",
-                    coreTitle: "Fase 1: Theorum & Praxis", demoTitle: "Fase 3: Simulador de Trading", demoTitleCTA: "INICIAR SIMULADOR", demoSubCTA: "Haz clic para abrir la Demo Interactiva",
-                    btnPodcast: "Podcast", btnTelegram: "Lección", btnEbook: "E-Book", quizTitle: "Fase 2: Check-Point", btnRetryQuiz: "Repetir Test",
+                    coreTitle: "Fase 1", demoTitle: "Fase 3", demoTitleCTA: "INICIAR SIMULADOR", demoSubCTA: "Haz clic para abrir la Demo Interactiva",
+                    btnPodcast: "Podcast", btnEbook: "E-Book", quizTitle: "Fase 2", btnRetryQuiz: "Repetir Test",
                     navNextLesson: "PRÓXIMA LECCIÓN", tgDate: "Hoy", subNotActive: "¡SUSCRIPCIÓN NO ACTIVA! CONTACTA A TU REFERENTE",
-                    btnTelegramRoom: "ÚNETE A LA SALA DE SEÑALES",
-                    videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
-                    tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Día 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFERENCIA ESTRUCTURAL: BOOKMAKER VS EXCHANGE</strong>\n\nEl Bookmaker es tu contraparte: si tú ganas, él pierde. Por eso limitan a los que son rentables. \n\nEn el Exchange, tú operas en un mercado <em>peer-to-peer</em>: la plataforma es solo un intermediario que cobra una comisión sobre las ganancias. Aquí no apuestas contra un banco, sino que intercambias cuotas con otros usuarios.\n\n📐 <strong>FÓRMULA GENERAL (BACK):</strong>\nBeneficio Neto = (Stake * (Cuota - 1)) * (1 - Comisión)\n\n<strong>LEYENDA TÉCNICA:</strong>\n🔹 Stake: Capital apostado.\n🔹 Liability: El riesgo efectivo cuando haces "Lay" (haces de banco).\n🔹 Comisión: Tarifa (ej. 5%) pagada al Exchange solo sobre la ganancia neta.\n\n🧮 <strong>EJEMPLO PRÁCTICO (REAL):</strong>\n<em>Evento: Juventus vs Inter. Cuota Back @2.10. Stake: 100€. Com: 5%.</em>\n\n🪄 <strong>CÁLCULO:</strong>\n• Beneficio Bruto: 100€ * (2.10 - 1) = 110€\n• Comisión: 110€ * 0.05 = 5.50€\n• Beneficio Neto: 104.50€\n\n⚠️ <strong>GUBBING & LIMITACIONES:</strong>\nEl Gubbing (cierre/limitación de cuenta) NO existe en el Exchange. Como la plataforma gana de tus comisiones, cuanto más bueno seas y ganes, más gana el Exchange. El riesgo de limitación es exclusivo de los Bookmakers tradicionales.\n\n✅ <strong>ACCIÓN DEL DÍA:</strong>\nAbre un Exchange (Betfair/Betflag), elige un partido de Serie A o Premier League y observa el Order Book por 30 minutos. Nota cómo el Spread (diferencia entre Back y Lay) se estrecha donde hay más dinero (Liquididad).\n\n🧘‍♂️ <strong>EL MANTRA:</strong> <em>"El mercado no tiene opiniones, solo tiene precios; el trader sigue la liquidez, el apostador sigue la afición."</em>\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DEL #1</strong>\nEl trader no es un aficionado: explota la ineficiencia. Si el corazón te late fuerte, tu <em>size</em> es demasiado grande. Las matemáticas no tienen ritmo cardíaco, síguelas a ellas.\n▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>La liquidez es tu paracaídas. Sin volúmenes, no hay trading, solo juego de azar.</em>`,
+                    videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "campo-demo.jpeg",
                     ebookContent: `
                         <div class="animate-fade-in-up">
                             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 p-6 sm:p-10 mb-8 sm:mb-12 shadow-[0_0_30px_rgba(0,255,128,0.1)] text-center">
@@ -794,12 +736,10 @@
                 pt: {
                     moduleTitle: "MÓDULO 1 • DIA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero apostas. Apenas matemática, gestão de risco e desapego emocional.",
                     finLabel: "PÍLULA FINANCEIRA", finQuote: "O dinheiro na Exchange não é seu até que você faça o Cash Out. Use o sistema de contas separadas: o bankroll é capital de giro corporativo, não o seu multibanco pessoal.",
-                    coreTitle: "Fase 1: Theorum & Praxis", demoTitle: "Fase 3: Simulador de Scalping", demoTitleCTA: "INICIAR SIMULADOR", demoSubCTA: "Clique aqui para entrar na Arena Interactiva",
-                    btnPodcast: "Podcast", btnTelegram: "Lição", btnEbook: "E-Book", quizTitle: "Fase 2: Ponto de Controle", btnRetryQuiz: "Repetir Teste",
+                    coreTitle: "Fase 1", demoTitle: "Fase 3", demoTitleCTA: "INICIAR SIMULADOR", demoSubCTA: "Clique aqui para entrar na Arena Interactiva",
+                    btnPodcast: "Podcast", btnEbook: "E-Book", quizTitle: "Fase 2", btnRetryQuiz: "Repetir Teste",
                     navNextLesson: "PRÓXIMA LIÇÃO", tgDate: "Hoje", subNotActive: "ASSINATURA INATIVA! CONTATE SEU REFERENTE",
-                    btnTelegramRoom: "ENTRE NA SALA DE SINAIS",
-                    videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
-                    tgMessage: `🌑 <strong>ZERO TO HERO academy</strong> [Dia 1/30]\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🔍 <strong>DIFERENÇA ESTRUTURAL: CASA DE APOSTAS VS EXCHANGE</strong>\n\nA Casa de Apostas (Bookmaker) é sua contraparte: se você ganha, eles perdem. É por isso que eles limitam jogadores lucrativos. \n\nNo Exchange, você opera em um mercado <em>peer-to-peer</em> (ponto a ponto): a plataforma é apenas uma intermediária que cobra uma comissão sobre os lucros. Aqui, você não aposta contra "a casa", mas troca odds com outros usuários.\n\n📐 <strong>FÓRMULA GERAL (BACK):</strong>\nLucro Líquido = (Stake * (Odds - 1)) * (1 - Comissão)\n\n<strong>CHAVE TÉCNICA:</strong>\n🔹 Stake: O capital investido.\n🔹 Liability (Responsabilidade): O risco real quando você faz um "Lay" (age como a casa).\n🔹 Comissão: Taxa (ex: 5%) paga apenas sobre os lucros líquidos.\n\n🧮 <strong>EXEMPLO PRÁCTICO (REAL):</strong>\n<em>Evento: Juventus vs Inter. Odds Back @2.10. Stake: 100€. Comissão: 5%.</em>\n\n🪄 <strong>CÁLCULO:</strong>\n• Lucro Bruto: 100€ * (2.10 - 1) = 110€\n• Comissão: 110€ * 0.05 = 5.50€\n• Lucro Líquido: 104.50€\n\n⚠️ <strong>LIMITAÇÃO (GUBBING):</strong>\nO "Gubbing" (restrição de conta) NÃO existe no Exchange. Como a plataforma lucra com suas comissões, quanto mais você ganha, mais eles faturam. Limites de conta são um problema exclusivo das Casas de Apostas tradicionais.\n\n✅ <strong>AÇÃO DO DIA:</strong>\nAbra um Exchange (Betfair/Betdaq), escolha um jogo da Série A ou Premier League e observe o Order Book (Livro de Ofertas) por 30 minutos. Note como o Spread (diferença entre o Back e o Lay) diminui onde há mais Liquidez.\n\n🧘‍♂️ <strong>O MANTRA:</strong> "O mercado não tem opiniões, apenas preços; o trader segue a liquidez, o apostador segue o time."\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n🧠 <strong>MINDSET DO #1</strong>\nO trader não torce para um time: ele explora a ineficiência. Se o seu coração está acelerado, o seu stake está alto demais. A matemática não tem batimentos cardíacos — siga a matemática.\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n📍 <em>Liquidez é o seu paraquedas. Sem volume não há trading, apenas aposta comum.</em>`,
+                    videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "campo-demo.jpeg",
                     ebookContent: `
                         <div class="animate-fade-in-up">
                             <div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#00ff80]/20 p-6 sm:p-10 mb-8 sm:mb-12 shadow-[0_0_30px_rgba(0,255,128,0.1)] text-center">
@@ -898,6 +838,11 @@
                         videoIframe.classList.add('hidden'); videoIframe.src = "about:blank"; 
                         const overlay = document.getElementById('video-wrapper').querySelector('.play-btn-overlay');
                         if(overlay) overlay.classList.remove('hidden');
+                        
+                        // Ripristina l'overlay sfumato se è stato nascosto precedentemente
+                        const bgGradient = document.getElementById('video-wrapper').querySelector('.bg-gradient-to-t');
+                        if(bgGradient) bgGradient.classList.remove('hidden');
+
                         videoThumb.classList.remove('hidden');
                     }
                     
