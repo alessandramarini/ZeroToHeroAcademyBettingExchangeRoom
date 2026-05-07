@@ -121,17 +121,13 @@
 
         <!-- FASE 1: LEZIONE & RISORSE -->
         <section class="glass-panel rounded-2xl p-2 sm:p-6 mt-4 sm:mt-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
-            <h3 class="font-black text-sm sm:text-lg mb-2 sm:mb-4 ml-2 sm:ml-0 flex items-center text-white uppercase tracking-wider">
-                <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-[#99E814]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477-4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                <span data-i18n="coreTitle">Fase 1</span>
-            </h3>
             
             <!-- Video YouTube: Cover Originale e Tasto Rosso -->
             <div id="video-wrapper" class="relative w-full aspect-video bg-[#0a140f] rounded-xl overflow-hidden border border-gray-800 shadow-xl ring-1 ring-white/5 cursor-pointer group" onclick="playMainVideo()">
                 <img id="video-thumbnail" src="https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Video Preview" loading="lazy">
                 <div class="play-btn-overlay absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center z-10">
-                    <div class="w-12 h-12 sm:w-20 sm:h-20 bg-red-600/90 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(225,29,72,0.6)] group-hover:scale-110 transition-transform backdrop-blur-sm">
-                        <span class="text-white text-xl sm:text-3xl ml-1 drop-shadow-md">▶</span>
+                    <div class="w-16 h-11 sm:w-24 sm:h-16 bg-[#FF0000] rounded-xl sm:rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(255,0,0,0.6)] group-hover:scale-110 transition-transform duration-300">
+                        <svg class="w-8 h-8 sm:w-10 sm:h-10 text-white ml-1 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
                 <iframe id="main-video" class="absolute inset-0 w-full h-full hidden z-20" src="about:blank" data-src="https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -152,10 +148,6 @@
 
         <!-- FASE 2: QUIZ 5 STEP -->
         <section class="glass-panel rounded-2xl p-3 sm:p-6 lg:col-span-1 h-fit mt-4 sm:mt-8 relative overflow-hidden" id="quiz-section">
-            <h3 class="font-black text-sm sm:text-lg mb-2 sm:mb-5 text-white flex items-center tracking-wider uppercase">
-                <svg class="w-6 h-6 sm:w-8 sm:h-8 mr-2 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                <span data-i18n="quizTitle">Fase 2</span>
-            </h3>
             
             <div id="quiz-container" class="space-y-3 sm:space-y-4 relative z-10">
                 <div class="flex justify-between items-center mb-2">
@@ -185,44 +177,38 @@
         </section>
 
         <!-- FASE 3: BANNER SIMULATORE ELEGANTE -->
-        <section class="glass-panel rounded-2xl p-4 sm:p-8 mt-4 sm:mt-8 flex flex-col items-center justify-center relative overflow-hidden" style="content-visibility: auto;">
-            <!-- Effetto Glow di sfondo -->
-            <div class="absolute inset-0 bg-[#99E814] opacity-[0.03] blur-3xl pointer-events-none"></div>
+        <section class="glass-panel rounded-2xl p-4 sm:p-6 mt-4 sm:mt-8 flex flex-col items-center justify-center relative overflow-hidden" style="content-visibility: auto;">
+            <!-- Effetto Glow di sfondo leggero e neutro -->
+            <div class="absolute inset-0 bg-gray-600 opacity-[0.02] blur-3xl pointer-events-none"></div>
 
-            <!-- Badge Superiore -->
-            <div class="border border-[#99E814]/30 rounded-full px-4 py-1.5 mb-6 sm:mb-8 bg-black/40 flex items-center gap-2 shadow-[0_0_15px_rgba(153,232,20,0.1)] relative z-10">
-                <div class="w-2.5 h-2.5 rounded-full bg-[#99E814] shadow-[0_0_8px_rgba(153,232,20,0.8)] animate-pulse"></div>
-                <span class="text-[#99E814] text-[9px] sm:text-[11px] font-bold tracking-widest uppercase" data-i18n="demoBadge">DEMO LIVE INTERATTIVA</span>
-            </div>
+            <!-- Immagine Demo con Tasto Play Elegante (Centrato) -->
+            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-700 cursor-pointer bg-[#050a05]" onclick="SoundEngine.click()">
+                
+                <!-- Badge "DEMO INTERATTIVA" integrato e minimale -->
+                <div class="absolute top-4 left-4 sm:top-6 sm:left-6 z-30">
+                    <div class="border border-white/10 rounded-full px-3 py-1.5 bg-black/50 backdrop-blur-md flex items-center gap-2 shadow-lg">
+                        <div class="w-1.5 h-1.5 rounded-full bg-[#99E814] shadow-[0_0_5px_rgba(153,232,20,0.8)] animate-pulse"></div>
+                        <span class="text-gray-200 text-[8px] sm:text-[10px] font-bold tracking-[0.2em] uppercase" data-i18n="demoBadge">DEMO INTERATTIVA</span>
+                    </div>
+                </div>
 
-            <!-- Titolo Principale a forte impatto -->
-            <h2 class="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white text-center uppercase tracking-tighter leading-[1.1] mb-8 sm:mb-10 drop-shadow-2xl relative z-10">
-                <span data-i18n="demoHeadline1">IL TUO VANTAGGIO</span><br>
-                <span class="text-[#99E814]" data-i18n="demoHeadline2">MATEMATICO</span>
-            </h2>
-
-            <!-- Immagine Demo con Tasto Play in Basso a Destra -->
-            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="block group relative w-full max-w-4xl mx-auto rounded-2xl sm:rounded-[2rem] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.7)] border border-gray-800 hover:border-[#99E814]/50 transition-all duration-500 transform hover:-translate-y-2 cursor-pointer bg-[#0a0a0a]" onclick="SoundEngine.click()">
-                <div class="relative w-full overflow-hidden" style="aspect-ratio: 16/9;">
-                    <img src="campo-demo.jpeg" alt="Campo Demo" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-700 group-hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent z-10 transition-opacity duration-500 group-hover:opacity-80"></div>
+                <div class="relative w-full overflow-hidden" style="aspect-ratio: 21/9;">
+                    <img src="campo-demo.jpeg" alt="Campo Demo" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-1000 group-hover:scale-105 opacity-60 group-hover:opacity-80">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30 z-10 transition-opacity duration-700"></div>
                     
-                    <!-- Tasto Play fluttuante angolo inferiore destro -->
-                    <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 z-20">
-                        <div class="w-14 h-14 sm:w-20 sm:h-20 bg-black/80 border-2 border-[#99E814] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(153,232,20,0.4)] group-hover:shadow-[0_0_40px_rgba(153,232,20,0.8)] transition-all duration-300 backdrop-blur-md transform group-hover:scale-110">
-                            <svg class="w-6 h-6 sm:w-10 sm:h-10 text-[#99E814] ml-1.5 drop-shadow-[0_0_10px_rgba(153,232,20,0.8)]" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <!-- Tasto Play Elegante (Centrato, Effetto Vetro) -->
+                    <div class="absolute inset-0 flex items-center justify-center z-20">
+                        <div class="w-16 h-16 sm:w-24 sm:h-24 bg-white/5 border border-white/10 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(0,0,0,0.5)] backdrop-blur-md transform group-hover:scale-110 transition-all duration-500 ease-out group-hover:bg-white/10 group-hover:border-white/20">
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8 text-white ml-1.5 opacity-80 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
+                    </div>
+
+                    <!-- Testo hover minimale -->
+                    <div class="absolute bottom-6 left-0 w-full text-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0">
+                        <span class="text-white text-[10px] sm:text-xs font-medium tracking-[0.3em] uppercase drop-shadow-md" data-i18n="startSimulator">AVVIA SIMULATORE</span>
                     </div>
                 </div>
             </a>
-
-            <!-- Grande Bottone Verde Call to Action -->
-            <div class="w-full max-w-4xl mx-auto mt-6 sm:mt-10 flex flex-col items-center relative z-10">
-                <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="w-full bg-[#99E814] hover:bg-[#b0ff26] text-black font-black text-sm sm:text-xl md:text-2xl uppercase tracking-[0.15em] py-4 sm:py-6 rounded-xl sm:rounded-2xl text-center shadow-[0_0_20px_rgba(153,232,20,0.3)] hover:shadow-[0_0_40px_rgba(153,232,20,0.6)] transition-all duration-300 transform active:scale-95" onclick="SoundEngine.click()">
-                    <span data-i18n="demoButton">INIZIA ORA GRATIS</span>
-                </a>
-                <p class="mt-4 text-[9px] sm:text-xs text-gray-400 font-bold tracking-widest uppercase" data-i18n="demoSub">SOLO PER OGGI • NESSUNA CARTA RICHIESTA</p>
-            </div>
         </section>
         
         <!-- FASE FINALE: PILLOLA FINANZIARIA -->
@@ -434,9 +420,8 @@
                 it: {
                     moduleTitle: "MODULO 1 • GIORNO 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
                     finLabel: "PILLOLA FINANZIARIA", finQuote: "Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.",
-                    coreTitle: "Fase 1", 
-                    demoBadge: "DEMO LIVE INTERATTIVA", demoHeadline1: "IL TUO VANTAGGIO", demoHeadline2: "MATEMATICO", demoButton: "INIZIA ORA GRATIS", demoSub: "SOLO PER OGGI • NESSUNA CARTA RICHIESTA",
-                    btnPodcast: "Podcast", btnEbook: "E-Book", quizTitle: "Fase 2", btnRetryQuiz: "Ripeti il test",
+                    demoBadge: "DEMO INTERATTIVA", startSimulator: "AVVIA SIMULATORE",
+                    btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Ripeti il test",
                     navNextLesson: "PROSSIMA LEZIONE", tgDate: "Oggi", subNotActive: "ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE",
                     quizCompletedTitle: "Check-Point Superato!", quizCompletedDesc: "Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.",
                     videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg",
@@ -512,9 +497,8 @@
                 en: {
                     moduleTitle: "MODULE 1 • DAY 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "No gambling. Only math, risk management, and emotional detachment.",
                     finLabel: "FINANCIAL PILL", finQuote: "Money on the Exchange isn't yours until you withdraw it. Use the separated accounts system: your bankroll is business capital, not a personal ATM.",
-                    coreTitle: "Phase 1", 
-                    demoBadge: "LIVE INTERACTIVE DEMO", demoHeadline1: "YOUR MATHEMATICAL", demoHeadline2: "ADVANTAGE", demoButton: "START NOW FOR FREE", demoSub: "ONLY TODAY • NO CARD REQUIRED",
-                    btnPodcast: "Podcast", btnEbook: "E-Book", quizTitle: "Phase 2", btnRetryQuiz: "Retry Test",
+                    demoBadge: "INTERACTIVE DEMO", startSimulator: "START SIMULATOR",
+                    btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Retry Test",
                     navNextLesson: "NEXT LESSON", tgDate: "Today", subNotActive: "SUBSCRIPTION NOT ACTIVE! CONTACT YOUR REFERENT",
                     quizCompletedTitle: "Check-Point Passed!", quizCompletedDesc: "You unlocked 500 XP. You are ready to proceed with practice.",
                     videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
@@ -590,9 +574,8 @@
                 es: {
                     moduleTitle: "MÓDULO 1 • DÍA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Cero apuestas. Solo matemáticas, gestión del riesgo y desapego emocional.",
                     finLabel: "PÍLDORA FINANCIERA", finQuote: "El dinero en el Exchange no es tuyo hasta que lo retiras haciendo Cash Out. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.",
-                    coreTitle: "Fase 1", 
-                    demoBadge: "DEMO EN VIVO", demoHeadline1: "TU VENTAJA", demoHeadline2: "MATEMÁTICA", demoButton: "COMIENZA GRATIS AHORA", demoSub: "SOLO HOY • SIN TARJETA REQUERIDA",
-                    btnPodcast: "Podcast", btnEbook: "E-Book", quizTitle: "Fase 2", btnRetryQuiz: "Repetir Test",
+                    demoBadge: "DEMO INTERACTIVA", startSimulator: "INICIAR SIMULADOR",
+                    btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Test",
                     navNextLesson: "PRÓXIMA LECCIÓN", tgDate: "Hoy", subNotActive: "¡SUSCRIPCIÓN NO ACTIVA! CONTACTA A TU REFERENTE",
                     quizCompletedTitle: "¡Check-Point Superado!", quizCompletedDesc: "Has desbloqueado 500 XP. Estás listo para continuar con la práctica.",
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
@@ -668,9 +651,8 @@
                 pt: {
                     moduleTitle: "MÓDULO 1 • DIA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero apostas. Apenas matemática, gestão de risco e desapego emocional.",
                     finLabel: "PÍLULA FINANCEIRA", finQuote: "O dinheiro na Exchange não é seu até que você faça o Cash Out. Use o sistema de contas separadas: o bankroll é capital de giro corporativo, não o seu multibanco pessoal.",
-                    coreTitle: "Fase 1", 
-                    demoBadge: "DEMO INTERATIVA", demoHeadline1: "SUA VANTAGEM", demoHeadline2: "MATEMÁTICA", demoButton: "COMECE AGORA GRÁTIS", demoSub: "SÓ HOJE • NENHUM CARTÃO NECESSÁRIO",
-                    btnPodcast: "Podcast", btnEbook: "E-Book", quizTitle: "Fase 2", btnRetryQuiz: "Repetir Teste",
+                    demoBadge: "DEMO INTERATIVA", startSimulator: "INICIAR SIMULADOR",
+                    btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Teste",
                     navNextLesson: "PRÓXIMA LIÇÃO", tgDate: "Hoje", subNotActive: "ASSINATURA INATIVA! CONTATE SEU REFERENTE",
                     quizCompletedTitle: "Check-Point Superado!", quizCompletedDesc: "Você desbloqueou 500 XP. Está pronto para prosseguir com a prática.",
                     videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
@@ -786,6 +768,11 @@
                     PodcastManager.switchLanguage(targetLang);
 
                     Gamification.renderQuiz();
+                    
+                    // Aggiorna i link della demo con la lingua corrente
+                    document.querySelectorAll('.demo-link').forEach(link => {
+                        link.href = `https://demo-betting-exchange.vercel.app/?lang=${targetLang}`;
+                    });
 
                     try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ lang: State.lang, xp: State.xp, currentQuizStep: State.currentQuizStep, quizCompleted: State.quizCompleted })); } catch(e){}
                 },
