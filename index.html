@@ -80,9 +80,9 @@
         .joystick-pulse { animation: joystickNeon 2.5s ease-in-out infinite; display: inline-block; cursor: pointer; will-change: transform, filter; }
 
         @keyframes play-shadow-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.2), 0 8px 32px rgba(0,0,0,0.5); }
-            70% { box-shadow: 0 0 0 20px rgba(255, 255, 255, 0), 0 8px 32px rgba(0,0,0,0.5); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0), 0 8px 32px rgba(0,0,0,0.5); }
+            0% { box-shadow: 0 0 0 0 rgba(153, 232, 20, 0.4), 0 8px 32px rgba(0,0,0,0.5); }
+            70% { box-shadow: 0 0 0 20px rgba(153, 232, 20, 0), 0 8px 32px rgba(0,0,0,0.5); }
+            100% { box-shadow: 0 0 0 0 rgba(153, 232, 20, 0), 0 8px 32px rgba(0,0,0,0.5); }
         }
         .play-pulse { animation: play-shadow-pulse 2.5s infinite cubic-bezier(0.66, 0, 0, 1); transform: translateZ(0); }
 
@@ -160,7 +160,7 @@
             
             <div id="quiz-container" class="space-y-4 sm:space-y-6 relative z-10">
                 <div class="flex justify-between items-center mb-2">
-                    <div class="bg-gray-800 text-gray-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Domanda <span id="quiz-step-current">1</span> di 5</div>
+                    <div class="bg-gray-800 text-gray-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest" id="quiz-progress-text">Domanda 1 di 5</div>
                     <div class="flex gap-1.5" id="quiz-dots"></div>
                 </div>
                 <p id="quiz-question-text" class="text-sm sm:text-base md:text-lg text-white font-bold leading-relaxed mb-4 border-l-4 border-[#99E814] pl-4"></p>
@@ -190,34 +190,31 @@
             <!-- Effetto Glow di sfondo leggero e neutro -->
             <div class="absolute inset-0 bg-gray-600 opacity-[0.02] blur-3xl pointer-events-none"></div>
 
-            <!-- Immagine Demo Nitida con Tasto Play Elegante e Pulsante (Centrato) -->
-            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-white/5 hover:border-white/10 transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
-                
-                <!-- Badge "DEMO INTERATTIVA" integrato e minimale -->
-                <div class="absolute top-4 left-4 sm:top-6 sm:left-6 z-30 pointer-events-none">
-                    <div class="border border-white/10 rounded-full px-3 py-1.5 md:px-4 md:py-2 bg-black/50 backdrop-blur-md flex items-center gap-2 shadow-lg">
-                        <div class="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-[#99E814] shadow-[0_0_5px_rgba(153,232,20,0.8)] animate-pulse"></div>
-                        <span class="text-gray-200 text-[8px] sm:text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase" data-i18n="demoBadge">DEMO INTERATTIVA</span>
-                    </div>
-                </div>
+            <!-- Badge "DEMO INTERATTIVA" posizionato come la domanda del quiz -->
+            <div class="w-full max-w-4xl mx-auto flex justify-start items-center mb-3 md:mb-5 relative z-10">
+                <div class="bg-gray-800 text-gray-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest" data-i18n="demoBadge">DEMO INTERATTIVA</div>
+            </div>
 
+            <!-- Immagine Demo Nitida con Tasto Play Elegante e Pulsante (Centrato) -->
+            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-gray-800 hover:border-[#99E814]/50 transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
+                
                 <div class="relative w-full overflow-hidden" style="aspect-ratio: 16/9;">
                     <!-- Immagine decodificata asincronamente per massime prestazioni -->
                     <img src="demo-odds.jpeg" alt="Demo Odds" decoding="async" class="absolute inset-0 w-full h-full object-cover object-top z-0 transition-transform duration-1000 group-hover:scale-105 opacity-100">
                     
-                    <!-- Gradiente delicato per facilitare la lettura del badge superiore e oscurare dolcemente l'immagine al passaggio del mouse per far spiccare il play -->
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/20 z-10 transition-opacity duration-700 opacity-60 group-hover:opacity-80 pointer-events-none"></div>
+                    <!-- Gradiente delicato per oscurare dolcemente l'immagine al passaggio del mouse per far spiccare il play -->
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 z-10 transition-opacity duration-700 opacity-60 group-hover:opacity-80 pointer-events-none"></div>
                     
-                    <!-- Tasto Play Elegante (Centrato, Effetto Vetro, Pulsante) -->
+                    <!-- Tasto Play Elegante (Centrato, Verde Logo, Pulsante) -->
                     <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-                        <div class="play-pulse w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-white/10 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-md transform group-hover:scale-110 transition-all duration-500 ease-out group-hover:bg-white/20 group-hover:border-white/40 pointer-events-auto">
-                            <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-white ml-1.5 opacity-90 group-hover:opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <div class="play-pulse w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-[#99E814] border-2 border-[#99E814] rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(153,232,20,0.4)] transform group-hover:scale-110 transition-all duration-500 ease-out group-hover:bg-[#b0ff26] group-hover:shadow-[0_0_40px_rgba(153,232,20,0.6)] pointer-events-auto">
+                            <svg class="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#050a05] ml-1.5 opacity-100 transition-opacity" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                         </div>
                     </div>
 
                     <!-- Testo hover minimale -->
                     <div class="absolute bottom-6 md:bottom-8 left-0 w-full text-center z-20 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-2 group-hover:translate-y-0 pointer-events-none">
-                        <span class="text-white text-[10px] sm:text-xs md:text-sm font-medium tracking-[0.3em] uppercase drop-shadow-md" data-i18n="startSimulator">AVVIA SIMULATORE</span>
+                        <span class="text-black bg-[#99E814] px-4 py-1.5 rounded-full text-[10px] sm:text-xs md:text-sm font-black tracking-[0.2em] uppercase shadow-md" data-i18n="startSimulator">AVVIA SIMULATORE</span>
                     </div>
                 </div>
             </a>
@@ -433,6 +430,7 @@
                     moduleTitle: "MODULO 1 • GIORNO 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
                     finLabel: "PILLOLA FINANZIARIA", finQuote: "Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.",
                     demoBadge: "DEMO INTERATTIVA", startSimulator: "AVVIA SIMULATORE",
+                    quizProgress: "Domanda {step} di 5",
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Ripeti il test",
                     navNextLesson: "PROSSIMA LEZIONE", tgDate: "Oggi", subNotActive: "ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE",
                     quizCompletedTitle: "Check-Point Superato!", quizCompletedDesc: "Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.",
@@ -510,6 +508,7 @@
                     moduleTitle: "MODULE 1 • DAY 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "No gambling. Only math, risk management, and emotional detachment.",
                     finLabel: "FINANCIAL PILL", finQuote: "Money on the Exchange isn't yours until you withdraw it. Use the separated accounts system: your bankroll is business capital, not a personal ATM.",
                     demoBadge: "INTERACTIVE DEMO", startSimulator: "START SIMULATOR",
+                    quizProgress: "Question {step} of 5",
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Retry Test",
                     navNextLesson: "NEXT LESSON", tgDate: "Today", subNotActive: "SUBSCRIPTION NOT ACTIVE! CONTACT YOUR REFERENT",
                     quizCompletedTitle: "Check-Point Passed!", quizCompletedDesc: "You unlocked 500 XP. You are ready to proceed with practice.",
@@ -587,6 +586,7 @@
                     moduleTitle: "MÓDULO 1 • DÍA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Cero apuestas. Solo matemáticas, gestión del riesgo y desapego emocional.",
                     finLabel: "PÍLDORA FINANCIERA", finQuote: "El dinero en el Exchange no es tuyo hasta que lo retiras haciendo Cash Out. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.",
                     demoBadge: "DEMO INTERACTIVA", startSimulator: "INICIAR SIMULADOR",
+                    quizProgress: "Pregunta {step} de 5",
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Test",
                     navNextLesson: "PRÓXIMA LECCIÓN", tgDate: "Hoy", subNotActive: "¡SUSCRIPCIÓN NO ACTIVA! CONTACTA A TU REFERENTE",
                     quizCompletedTitle: "¡Check-Point Superado!", quizCompletedDesc: "Has desbloqueado 500 XP. Estás listo para continuar con la práctica.",
@@ -653,7 +653,7 @@
                                 <div class="absolute -top-4 -right-4 md:-top-8 md:-right-8 text-7xl md:text-9xl text-[#99E814]/10 font-serif leading-none">"</div>
                                 <p class="text-gray-300 italic text-sm sm:text-base md:text-xl leading-relaxed font-medium relative z-10 text-center">
                                     El mercado no tiene opiniones, solo tiene precios; el trader sigue la liquidez, el apostador sigue la pasión.<br><br>
-                                    <span class="text-[#99E814] font-bold">La liquidez es tu paracaídas: sin volumen en el Order Book no hay trading, solo azar.</span>
+                                    <span class="text-[#99E814] font-bold">La liquidez es tu paracaídas: sem volumen en el Order Book no hay trading, solo azar.</span>
                                 </p>
                             </blockquote>
                             ${footerLogoHTML}
@@ -664,6 +664,7 @@
                     moduleTitle: "MÓDULO 1 • DIA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero apostas. Apenas matemática, gestão de risco e desapego emocional.",
                     finLabel: "PÍLULA FINANCEIRA", finQuote: "O dinheiro na Exchange não é seu até que você faça o Cash Out. Use o sistema de contas separadas: o bankroll é capital de giro corporativo, não o seu multibanco pessoal.",
                     demoBadge: "DEMO INTERATIVA", startSimulator: "INICIAR SIMULADOR",
+                    quizProgress: "Pergunta {step} de 5",
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Teste",
                     navNextLesson: "PRÓXIMA LIÇÃO", tgDate: "Hoje", subNotActive: "ASSINATURA INATIVA! CONTATE SEU REFERENTE",
                     quizCompletedTitle: "Check-Point Superado!", quizCompletedDesc: "Você desbloqueou 500 XP. Está pronto para prosseguir com a prática.",
@@ -808,7 +809,9 @@
                     }
 
                     const qData = quizzesData[State.lang][State.currentQuizStep];
-                    document.getElementById('quiz-step-current').innerText = State.currentQuizStep + 1;
+                    
+                    const progressTemplate = dict[State.lang].quizProgress || dict['en'].quizProgress;
+                    document.getElementById('quiz-progress-text').innerText = progressTemplate.replace('{step}', State.currentQuizStep + 1);
                     
                     let dotsHtml = '';
                     for(let i=0; i<5; i++) {
