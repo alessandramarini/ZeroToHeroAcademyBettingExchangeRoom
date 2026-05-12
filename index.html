@@ -92,6 +92,16 @@
         }
         .animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; will-change: transform, opacity; }
 
+        /* Animazione personalizzata Onde Audio Podcast */
+        @keyframes audioWave {
+            0%, 100% { transform: scaleY(0.3); }
+            50% { transform: scaleY(1); }
+        }
+        .audio-wave {
+            animation: audioWave 1.2s ease-in-out infinite;
+            transform-origin: bottom;
+        }
+
         /* STILE "CHI VUOL ESSERE MILIONARIO" PREMIUM */
         .wwtbam-container {
             background: radial-gradient(circle at center, #1a1b41 0%, #0a0a1a 100%);
@@ -314,53 +324,46 @@
         </div>
     </div>
 
-    <!-- MODALE PODCAST WHITE PREMIUM -->
+    <!-- MODALE PODCAST WHITE PREMIUM BLINDATO -->
     <div id="podcast-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-4 opacity-0 transition-opacity duration-300">
-        <!-- Card Bianca ed elegante -->
+        <!-- Card Bianca ed elegante (Sfondo super bianco, nessuna immagine) -->
         <div class="w-full max-w-[340px] flex flex-col items-center transform scale-95 transition-transform duration-300 relative bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,229,255,0.15)] border border-gray-100 p-8" id="podcast-modal-content">
             
+            <!-- Intestazione -->
             <h3 class="text-gray-900 font-black uppercase tracking-widest text-sm md:text-base flex items-center gap-2 mb-8 w-full justify-center">
                 <svg class="w-5 h-5 text-[#00e5ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                 <span data-i18n="podcastTitle" class="truncate">Podcast Player</span>
             </h3>
 
-            <!-- Player Core: Centered Layout, White Background -->
+            <!-- Area Interattiva del Player -->
             <div class="flex flex-col items-center w-full mb-4">
                 
-                <!-- Isolated Play Button Wrapper. 80x80 container acts as a physical window -->
-                <div class="relative w-[80px] h-[80px] shrink-0 overflow-hidden flex items-center justify-center rounded-full bg-gray-50 shadow-[0_8px_20px_rgba(0,0,0,0.08)] border border-gray-100 mb-6">
+                <!-- Finestra Fisica di Click: Dimensioni fisse per garantire l'allineamento su TUTTI i dispositivi -->
+                <div id="podcast-click-area" class="relative w-[110px] h-[110px] shrink-0 overflow-hidden flex items-center justify-center rounded-full bg-white shadow-[0_5px_15px_rgba(0,0,0,0.05)] border border-gray-100 mb-6 cursor-pointer">
                     
-                    <!-- Pulsing Icon (Visible UI, behind the invisible iframe) -->
-                    <div id="custom-play-btn" class="absolute z-10 w-[70px] h-[70px] bg-gradient-to-tr from-[#00e5ff] to-[#0088cc] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] animate-pulse transition-all duration-300">
-                        <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    <!-- Icona Play Animata (Totalmente non cliccabile per far passare il click all'iframe) -->
+                    <div id="custom-play-btn" class="absolute z-10 w-[86px] h-[86px] bg-gradient-to-tr from-[#00e5ff] to-[#0088cc] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] animate-pulse transition-all duration-300 pointer-events-none">
+                        <svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
 
-                    <!-- Invisible Native Iframe (Click Target) -->
-                    <!-- Posizionato strategicamente per avere il vero tasto Spotify sotto il custom button -->
-                    <div class="absolute z-50 w-[300px] h-[152px]" style="top: -36px; left: 0px;">
+                    <!-- Il trucco definitivo: L'iframe è posizionato in modo che il suo tasto Play nativo (che si trova a X=76, Y=76 in un riquadro 152x152) 
+                         cada ESATTAMENTE al centro della nostra finestra 110x110. Il click è quindi reale e sblocca Telegram e iOS. -->
+                    <div class="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[152px] h-[152px]">
+                        <!-- Opacità 0.01 per renderlo invisibile ma cliccabile -->
                         <iframe id="spotify-player" src="" class="w-full h-full opacity-[0.01]" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media"></iframe>
-                    </div>
-
-                    <!-- Loading overlay (Copre finché non è pronto) -->
-                    <div id="podcast-loading" class="absolute inset-0 bg-white z-[60] flex items-center justify-center transition-opacity duration-500 rounded-full pointer-events-none">
-                        <svg class="animate-spin h-6 w-6 text-[#00e5ff]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
                     </div>
                 </div>
 
-                <!-- Clean Text Info (Niente immagini, sfondo super bianco) -->
-                <div class="flex flex-col items-center text-center w-full px-2">
-                    <span id="podcast-status-text" class="text-[#00b3cc] text-[10px] sm:text-xs font-black tracking-[0.2em] uppercase mb-2 transition-all duration-300" data-i18n="clickToPlay">Clicca per Avviare</span>
-                    <span class="text-gray-900 text-sm sm:text-base font-black truncate w-full" data-i18n="moduleTitle">MODULO 1 • GIORNO 1/30</span>
-                    <span class="text-gray-400 text-[10px] sm:text-xs font-bold mt-1 uppercase tracking-widest truncate w-full">Zero to Hero Academy</span>
+                <!-- Testi (Puliti e Armonizzati su sfondo bianco) -->
+                <div class="flex flex-col items-center text-center w-full px-2 min-h-[60px]">
+                    <span id="podcast-status-text" class="text-[#00b3cc] text-[11px] sm:text-xs font-black tracking-[0.2em] uppercase mb-2 transition-all duration-300" data-i18n="clickToPlay">Clicca per Avviare</span>
+                    <span id="podcast-subtitle" class="text-gray-900 text-sm sm:text-base font-black truncate w-full transition-all duration-300" data-i18n="moduleTitle">MODULO 1 • GIORNO 1/30</span>
                 </div>
 
             </div>
 
-            <!-- Close Button Tradotto -->
-            <button onclick="PodcastManager.close()" class="mt-8 text-gray-500 hover:text-white bg-gray-100 hover:bg-gray-900 border border-gray-200 hover:border-gray-900 w-full px-8 py-3.5 rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all active:scale-95 touch-manipulation min-h-[44px]">
+            <!-- Tasto Esci Tradotto e Responsivo -->
+            <button onclick="PodcastManager.close()" class="mt-6 text-gray-500 hover:text-white bg-gray-100 hover:bg-gray-900 border border-gray-200 hover:border-gray-900 w-full px-8 py-3.5 rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all active:scale-95 touch-manipulation min-h-[44px]">
                 <span data-i18n="closePlayer">Chiudi Player</span>
             </button>
         </div>
@@ -432,39 +435,95 @@
                 pt: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/pt-1-Zero-to-Hero-Academy-e3iu53i/a-ackrebp"
             },
             init: function() {
-                // Ascoltatore Blur ultra-affidabile per il Click sull'iframe di Spotify
+                // Evento universale per catturare il click sull'Iframe invisibile
                 window.addEventListener('blur', () => {
                     setTimeout(() => {
                         if (document.activeElement && document.activeElement.id === 'spotify-player') {
-                            const btn = document.getElementById('custom-play-btn');
-                            if(btn) {
-                                btn.classList.remove('animate-pulse');
-                                btn.classList.add('scale-95', 'opacity-90', 'shadow-inner');
-                                btn.classList.remove('shadow-[0_0_20px_rgba(0,229,255,0.4)]');
-                                
+                            const clickArea = document.getElementById('podcast-click-area');
+                            
+                            // Se non è già in riproduzione o caricamento, avviamo il flow
+                            if (clickArea && !clickArea.classList.contains('is-playing') && !clickArea.classList.contains('is-loading')) {
+                                clickArea.classList.add('is-loading');
+
+                                const btn = document.getElementById('custom-play-btn');
                                 const statusText = document.getElementById('podcast-status-text');
-                                if(statusText && window.RoomApp) {
-                                    statusText.innerText = window.RoomApp.getDictStr('nowPlaying');
+                                const subtitleText = document.getElementById('podcast-subtitle');
+
+                                // --- FASE 1: SCARICAMENTO/BUFFERING ---
+                                if(btn) {
+                                    btn.className = 'absolute z-10 w-[86px] h-[86px] bg-white border-4 border-[#00e5ff] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.2)] transition-all duration-300 pointer-events-none';
+                                    btn.innerHTML = `<svg class="animate-spin h-8 w-8 text-[#00e5ff]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>`;
                                 }
+
+                                if (statusText) {
+                                    statusText.innerText = window.RoomApp.getDictStr('syncing');
+                                    statusText.className = 'text-orange-500 text-[10px] sm:text-[11px] font-black tracking-[0.15em] uppercase mb-2 transition-all duration-300 animate-pulse';
+                                }
+                                if (subtitleText) {
+                                    subtitleText.innerText = window.RoomApp.getDictStr('wait');
+                                    subtitleText.className = 'text-gray-500 text-[11px] sm:text-xs font-bold truncate w-full transition-all duration-300';
+                                }
+
+                                // --- FASE 2: RIPRODUZIONE (Dopo attesa) ---
+                                setTimeout(() => {
+                                    clickArea.classList.remove('is-loading');
+                                    clickArea.classList.add('is-playing');
+
+                                    if(btn) {
+                                        btn.className = 'absolute z-10 w-[86px] h-[86px] bg-gradient-to-tr from-[#00e5ff] to-[#0088cc] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] transition-all duration-300 pointer-events-none';
+                                        btn.innerHTML = `
+                                            <div class="flex items-end justify-center gap-1.5 h-6">
+                                                <div class="w-1.5 bg-white rounded-full audio-wave" style="animation-delay: 0s"></div>
+                                                <div class="w-1.5 bg-white rounded-full audio-wave" style="animation-delay: 0.3s"></div>
+                                                <div class="w-1.5 bg-white rounded-full audio-wave" style="animation-delay: 0.1s"></div>
+                                            </div>`;
+                                    }
+
+                                    if (statusText) {
+                                        statusText.innerText = window.RoomApp.getDictStr('nowPlaying');
+                                        statusText.className = 'text-[#00b3cc] text-[11px] sm:text-xs font-black tracking-[0.2em] uppercase mb-2 transition-all duration-300';
+                                    }
+                                    if (subtitleText) {
+                                        subtitleText.innerText = window.RoomApp.getDictStr('moduleTitle');
+                                        subtitleText.className = 'text-gray-900 text-sm sm:text-base font-black truncate w-full transition-all duration-300';
+                                    }
+
+                                    window.focus(); // Rende l'iframe nuovamente "cliccabile" (se l'utente vuole mettere in pausa)
+                                }, 2500); 
+
+                            } else {
+                                window.focus(); // Assicura che ri-click sull'iframe venga registrato dal browser
                             }
                         }
                     }, 100);
                 });
             },
+            resetUI: function() {
+                const clickArea = document.getElementById('podcast-click-area');
+                const btn = document.getElementById('custom-play-btn');
+                const statusText = document.getElementById('podcast-status-text');
+                const subtitleText = document.getElementById('podcast-subtitle');
+
+                if (clickArea) {
+                    clickArea.classList.remove('is-playing', 'is-loading');
+                }
+                if (btn) {
+                    btn.className = 'absolute z-10 w-[86px] h-[86px] bg-gradient-to-tr from-[#00e5ff] to-[#0088cc] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.4)] animate-pulse transition-all duration-300 pointer-events-none';
+                    btn.innerHTML = `<svg class="w-10 h-10 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>`;
+                }
+                if (statusText && window.RoomApp) {
+                    statusText.innerText = window.RoomApp.getDictStr('clickToPlay');
+                    statusText.className = 'text-[#00b3cc] text-[11px] sm:text-xs font-black tracking-[0.2em] uppercase mb-2 transition-all duration-300';
+                }
+                if (subtitleText && window.RoomApp) {
+                    subtitleText.innerText = window.RoomApp.getDictStr('moduleTitle');
+                    subtitleText.className = 'text-gray-900 text-sm sm:text-base font-black truncate w-full transition-all duration-300';
+                }
+            },
             open: function() {
                 SoundEngine.click();
                 const modal = document.getElementById('podcast-modal');
-                
-                // Resetta lo stato visivo per far pulsare di nuovo l'icona ogni volta che si apre
-                const btn = document.getElementById('custom-play-btn');
-                if(btn) {
-                    btn.classList.add('animate-pulse', 'shadow-[0_0_20px_rgba(0,229,255,0.4)]');
-                    btn.classList.remove('scale-95', 'opacity-90', 'shadow-inner');
-                }
-                const statusText = document.getElementById('podcast-status-text');
-                if(statusText && window.RoomApp) {
-                    statusText.innerText = window.RoomApp.getDictStr('clickToPlay');
-                }
+                this.resetUI();
 
                 modal.classList.remove('hidden'); modal.classList.add('flex');
                 void modal.offsetWidth; 
@@ -483,29 +542,14 @@
                 setTimeout(() => { 
                     modal.classList.add('hidden'); modal.classList.remove('flex'); 
                     const player = document.getElementById('spotify-player');
-                    if (player) {
-                        player.src = ''; // Blocca l'audio rimuovendo l'URL
-                    }
+                    if (player) player.src = ''; // Blocca l'audio all'uscita
                 }, 300);
             },
             switchLanguage: function(lang) {
                 const targetSrc = this.urls[lang] || this.urls['en'];
                 const player = document.getElementById('spotify-player');
-                const loader = document.getElementById('podcast-loading');
-                
                 if (player && player.src !== targetSrc) {
-                    loader.classList.remove('hidden', 'opacity-0');
-                    loader.classList.add('flex', 'opacity-100');
-                    
-                    player.onload = function() {
-                        loader.classList.remove('opacity-100');
-                        loader.classList.add('opacity-0');
-                        setTimeout(() => {
-                            loader.classList.remove('flex');
-                            loader.classList.add('hidden');
-                        }, 500);
-                    };
-                    
+                    this.resetUI();
                     player.src = targetSrc;
                 }
             }
@@ -524,7 +568,7 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Ripeti il test",
                     navNextLesson: "PROSSIMA LEZIONE", tgDate: "Oggi", subNotActive: "ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE",
                     quizCompletedTitle: "Check-Point Superato!", quizCompletedDesc: "Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.",
-                    podcastTitle: "Podcast Player", clickToPlay: "Clicca per Avviare", nowPlaying: "In Riproduzione", syncing: "Sincronizzazione...", closePlayer: "Chiudi Player",
+                    podcastTitle: "Podcast Player", clickToPlay: "Clicca per Avviare", syncing: "Scaricamento in corso...", wait: "Attendere l'avvio dell'audio...", nowPlaying: "In Riproduzione", closePlayer: "Chiudi Player",
                     videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg",
                     quizData: [
                         { q: "Nel mercato Exchange, chi è la tua controparte quando 'Banchi' una quota?", opts: ["Il Bookmaker tradizionale", "Altri utenti che hanno 'Puntato'", "La piattaforma stessa"], correct: 1, successMsg: "Esatto! Scommetti sempre contro una persona fisica.", failMsg: "Errore. Non è il bookmaker né la piattaforma. Riprova." },
@@ -610,7 +654,7 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Retry Test",
                     navNextLesson: "NEXT LESSON", tgDate: "Today", subNotActive: "SUBSCRIPTION INACTIVE! CONTACT REFERENT",
                     quizCompletedTitle: "Check-Point Passed!", quizCompletedDesc: "You unlocked 500 XP. You are ready to proceed.",
-                    podcastTitle: "Podcast Player", clickToPlay: "Click to Play", nowPlaying: "Now Playing", syncing: "Syncing...", closePlayer: "Close Player",
+                    podcastTitle: "Podcast Player", clickToPlay: "Click to Play", syncing: "Downloading Audio...", wait: "Please wait for playback...", nowPlaying: "Now Playing", closePlayer: "Close Player",
                     videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
                     quizData: [
                         { q: "In the Exchange market, who is your counterparty when you 'Lay'?", opts: ["The traditional Bookmaker", "Other users who have 'Backed'", "The platform itself"], correct: 1, successMsg: "Exactly! You bet against real people.", failMsg: "Error. It's not the bookmaker. Try again." },
@@ -696,7 +740,7 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Test",
                     navNextLesson: "PRÓXIMA LECCIÓN", tgDate: "Hoy", subNotActive: "¡SUSCRIPCIÓN NO ACTIVA!",
                     quizCompletedTitle: "¡Check-Point Superado!", quizCompletedDesc: "Has desbloqueado 500 XP. Estás listo para continuar.",
-                    podcastTitle: "Reproductor Podcast", clickToPlay: "Haz clic para Iniciar", nowPlaying: "Reproduciendo", syncing: "Sincronizando...", closePlayer: "Cerrar Audio",
+                    podcastTitle: "Reproductor Podcast", clickToPlay: "Haz clic para Iniciar", syncing: "Descargando Audio...", wait: "Por favor espera...", nowPlaying: "Reproduciendo", closePlayer: "Cerrar Audio",
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
                     quizData: [
                         { q: "En el mercado Exchange, ¿quién es tu contraparte cuando haces 'Lay' a una cuota?", opts: ["El Bookmaker tradicional", "Otros usuarios que han hecho 'Back'", "La propia plataforma"], correct: 1, successMsg: "¡Exacto! Siempre apuestas contra una persona física.", failMsg: "Error. No es el bookmaker ni la plataforma. Inténtalo de nuevo." },
@@ -782,7 +826,7 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Teste",
                     navNextLesson: "PRÓXIMA LIÇÃO", tgDate: "Hoje", subNotActive: "ASSINATURA INATIVA! CONTATE SEU REFERENTE",
                     quizCompletedTitle: "Check-Point Superado!", quizCompletedDesc: "Você desbloqueou 500 XP. Está pronto para prosseguir.",
-                    podcastTitle: "Podcast Player", clickToPlay: "Clique para Tocar", nowPlaying: "Reproduzindo", syncing: "Sincronizando...", closePlayer: "Fechar Áudio",
+                    podcastTitle: "Podcast Player", clickToPlay: "Clique para Tocar", syncing: "Baixando Áudio...", wait: "Por favor aguarde...", nowPlaying: "Reproduzindo", closePlayer: "Fechar Áudio",
                     videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
                     quizData: [
                         { q: "No mercado Exchange, quem é a sua contraparte quando faz 'Lay' a uma odd?", opts: ["O Bookmaker tradicional", "Outros utilizadores que fizeram 'Back'", "A própria plataforma"], correct: 1, successMsg: "Exato! Você aposta sempre contra uma pessoa física.", failMsg: "Erro. Não é o bookmaker nem a plataforma. Tente novamente." },
