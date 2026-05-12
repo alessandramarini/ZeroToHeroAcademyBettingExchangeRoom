@@ -178,7 +178,7 @@
             </div>
             
             <div class="grid grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6 w-full max-w-3xl mx-auto">
-                <button onclick="PodcastManager.open()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
+                <button onclick="RoomApp.openPodcast()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
                     <svg class="w-7 h-7 sm:w-8 sm:h-8 sm:mr-3 mb-2 sm:mb-0 text-[#00e5ff] group-hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                     <span class="font-black text-[11px] sm:text-sm md:text-base tracking-wider uppercase text-[#00e5ff] break-words leading-tight" data-i18n="btnPodcast">Podcast</span>
                 </button>
@@ -290,30 +290,6 @@
         </div>
     </div>
 
-    <!-- MODALE PODCAST WHITE PREMIUM (Nativo e Infallibile) -->
-    <div id="podcast-modal" class="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-4 transition-all duration-300 opacity-0 pointer-events-none translate-y-10">
-        
-        <div class="w-full max-w-[380px] flex flex-col items-center transform scale-95 transition-transform duration-300 relative bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,229,255,0.15)] border border-gray-100 p-6 sm:p-8" id="podcast-modal-content">
-            
-            <!-- Intestazione -->
-            <h3 class="text-gray-900 font-black uppercase tracking-widest text-sm md:text-base flex items-center gap-2 mb-6 w-full justify-center">
-                <svg class="w-5 h-5 text-[#00e5ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
-                <span id="ui-podcast-title" class="truncate" data-i18n="podcastTitle">Podcast Player</span>
-            </h3>
-
-            <!-- NATIVE SPOTIFY IFRAME DIRETTAMENTE CLICCABILE E VISIBILE -->
-            <!-- Questo garantisce il funzionamento senza blocchi autoplay da Telegram o Browser su tutti i device -->
-            <div class="w-full mb-4 rounded-2xl overflow-hidden shadow-md border border-gray-200 bg-gray-50 flex items-center justify-center">
-                <iframe id="spotify-player" src="" width="100%" height="152" frameborder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-            </div>
-
-            <!-- Tasto Esci Tradotto e Responsivo -->
-            <button onclick="PodcastManager.close()" class="mt-4 text-gray-500 hover:text-white bg-gray-100 hover:bg-gray-900 border border-gray-200 hover:border-gray-900 w-full px-8 py-3.5 rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all active:scale-95 touch-manipulation min-h-[44px]">
-                <span data-i18n="closePlayer">Chiudi Player</span>
-            </button>
-        </div>
-    </div>
-
     <script>
         const SoundEngine = {
             ctx: null, unlocked: false,
@@ -360,59 +336,6 @@
             setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = ''; }, 300);
         }
 
-        const PodcastManager = {
-            urls: {
-                it: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/giorno-1-Zero-to-Hero-Academy-e3itmmb/a-ackqpt1",
-                en: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/en---1-Zero-to-Hero-Academy-e3itlbr/a-ackraqe",
-                es: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/es-1-Zero-to-Hero-Academy-e3iu4me/a-ackrdqm",
-                pt: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/pt-1-Zero-to-Hero-Academy-e3iu53i/a-ackrebp"
-            },
-            init: function() {
-                // Il podcast viene pre-scaricato in background non appena si imposta la lingua, 
-                // in questo modo l'Iframe è sempre pronto e reattivo al click utente.
-            },
-            open: function() {
-                SoundEngine.click();
-                const modal = document.getElementById('podcast-modal');
-                const content = document.getElementById('podcast-modal-content');
-
-                modal.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-10');
-                modal.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
-                
-                content.classList.remove('scale-95');
-                content.classList.add('scale-100');
-            },
-            close: function() {
-                SoundEngine.click();
-                const modal = document.getElementById('podcast-modal');
-                const content = document.getElementById('podcast-modal-content');
-                
-                modal.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
-                modal.classList.add('opacity-0', 'pointer-events-none', 'translate-y-10');
-                
-                content.classList.remove('scale-100');
-                content.classList.add('scale-95');
-                
-                // Mette in pausa l'audio ricaricando delicatamente la src, senza spezzare l'UI
-                setTimeout(() => { 
-                    const player = document.getElementById('spotify-player');
-                    if (player) {
-                        const currentSrc = player.src;
-                        player.src = '';
-                        setTimeout(() => { player.src = currentSrc; }, 50);
-                    }
-                }, 300);
-            },
-            switchLanguage: function(lang) {
-                const targetSrc = this.urls[lang] || this.urls['en'];
-                const player = document.getElementById('spotify-player');
-                
-                if (player && player.src !== targetSrc) {
-                    player.src = targetSrc; // Pre-scarica l'audio in background immediatamente per la lingua scelta
-                }
-            }
-        };
-
         window.RoomApp = (function() {
             const CONFIG = { STORAGE_KEY: 'bx_academy_demo_hd' }; 
             const footerLogoHTML = `<div class="mt-12 md:mt-16 text-center pt-8 w-full"><img src="logo-tondo.jpeg" class="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full opacity-30 grayscale mix-blend-screen" alt="Global Exchange Academy" loading="lazy" decoding="async"></div>`;
@@ -426,7 +349,6 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Ripeti il test",
                     navNextLesson: "PROSSIMA LEZIONE", tgDate: "Oggi", subNotActive: "ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE",
                     quizCompletedTitle: "Check-Point Superato!", quizCompletedDesc: "Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.",
-                    podcastTitle: "Podcast Player", closePlayer: "Chiudi Player",
                     videoUrl: "https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/8kjONb-eUt0/maxresdefault.jpg",
                     quizData: [
                         { q: "Nel mercato Exchange, chi è la tua controparte quando 'Banchi' una quota?", opts: ["Il Bookmaker tradizionale", "Altri utenti che hanno 'Puntato'", "La piattaforma stessa"], correct: 1, successMsg: "Esatto! Scommetti sempre contro una persona fisica.", failMsg: "Errore. Non è il bookmaker né la piattaforma. Riprova." },
@@ -512,7 +434,6 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Retry Test",
                     navNextLesson: "NEXT LESSON", tgDate: "Today", subNotActive: "SUBSCRIPTION INACTIVE! CONTACT REFERENT",
                     quizCompletedTitle: "Check-Point Passed!", quizCompletedDesc: "You unlocked 500 XP. You are ready to proceed.",
-                    podcastTitle: "Podcast Player", closePlayer: "Close Player",
                     videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
                     quizData: [
                         { q: "In the Exchange market, who is your counterparty when you 'Lay'?", opts: ["The traditional Bookmaker", "Other users who have 'Backed'", "The platform itself"], correct: 1, successMsg: "Exactly! You bet against real people.", failMsg: "Error. It's not the bookmaker. Try again." },
@@ -598,7 +519,6 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Test",
                     navNextLesson: "PRÓXIMA LECCIÓN", tgDate: "Hoy", subNotActive: "¡SUSCRIPCIÓN NO ACTIVA!",
                     quizCompletedTitle: "¡Check-Point Superado!", quizCompletedDesc: "Has desbloqueado 500 XP. Estás listo para continuar.",
-                    podcastTitle: "Reproductor Podcast", closePlayer: "Cerrar Audio",
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
                     quizData: [
                         { q: "En el mercado Exchange, ¿quién es tu contraparte cuando haces 'Lay' a una cuota?", opts: ["El Bookmaker tradicional", "Otros usuarios que han hecho 'Back'", "La propia plataforma"], correct: 1, successMsg: "¡Exacto! Siempre apuestas contra una persona física.", failMsg: "Error. No es el bookmaker ni la plataforma. Inténtalo de nuevo." },
@@ -684,7 +604,6 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Teste",
                     navNextLesson: "PRÓXIMA LIÇÃO", tgDate: "Hoje", subNotActive: "ASSINATURA INATIVA! CONTATE SEU REFERENTE",
                     quizCompletedTitle: "Check-Point Superado!", quizCompletedDesc: "Você desbloqueou 500 XP. Está pronto para prosseguir.",
-                    podcastTitle: "Podcast Player", closePlayer: "Fechar Áudio",
                     videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
                     quizData: [
                         { q: "No mercado Exchange, quem é a sua contraparte quando faz 'Lay' a uma odd?", opts: ["O Bookmaker tradicional", "Outros utilizadores que fizeram 'Back'", "A própria plataforma"], correct: 1, successMsg: "Exato! Você aposta sempre contra uma pessoa física.", failMsg: "Erro. Não é o bookmaker nem a plataforma. Tente novamente." },
@@ -790,8 +709,6 @@
                     
                     const ebookContainer = document.getElementById('ebook-content-container');
                     if(ebookContainer) ebookContainer.innerHTML = dict[targetLang].ebookContent || dict['en'].ebookContent;
-
-                    PodcastManager.switchLanguage(targetLang);
 
                     Gamification.renderQuiz();
                     
@@ -943,18 +860,26 @@
                     document.body.addEventListener('touchstart', unlockAudio, { once: true });
                 },
                 triggerQuiz: Gamification.checkQuiz,
-                getDictStr: (key) => dict[State.lang][key] || dict['en'][key]
+                getDictStr: (key) => dict[State.lang][key] || dict['en'][key],
+                openPodcast: () => {
+                    SoundEngine.click();
+                    const urls = {
+                        it: "https://open.spotify.com/episode/2QDRZoYRQk8Gg1JqvXAuVU?si=c2uBoC8TSW-fFqQ5--EJJA",
+                        en: "https://open.spotify.com/episode/6O2YicZuJbitsqlJ2VyhoM?si=jnDKia2EQI-5gXE8LkLewg",
+                        es: "https://open.spotify.com/episode/3cPHNB0pKR0yW4ZqyRacID?si=TVGBO9EKQ-OrhxN8u4TIwg",
+                        pt: "https://open.spotify.com/episode/7mEi7eq8P1IPzjrgPeWo90?si=X7fWHgriSWGP3N9a90N3CQ"
+                    };
+                    window.open(urls[State.lang] || urls['en'], '_blank', 'noopener,noreferrer');
+                }
             };
         })();
 
         if (document.readyState === 'loading') { 
             document.addEventListener('DOMContentLoaded', () => {
-                PodcastManager.init();
                 RoomApp.init();
             }); 
         } 
         else { 
-            PodcastManager.init();
             RoomApp.init(); 
         }
 
