@@ -10,7 +10,7 @@
     <title>Room AI | Global Exchange Academy</title>
     <meta name="description" content="Academy interattiva per il Betting Exchange. Impara la matematica e la gestione del rischio.">
 
-    <!-- Ottimizzazione DNS e connessioni -->
+    <!-- Ottimizzazione DNS e connessioni per prestazioni da "scheggia" su Vercel/GitHub -->
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -172,16 +172,17 @@
         <!-- FASE 1: LEZIONE & RISORSE -->
         <section class="glass-panel w-full rounded-2xl md:rounded-[2rem] p-3 sm:p-6 md:p-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
             
-            <!-- Video YouTube NATIVO E DIRETTO (Senza trucchi/overlay che si bloccano) -->
+            <!-- Video YouTube NATIVO -->
             <div id="video-wrapper" class="relative w-full aspect-video bg-[#0a140f] rounded-xl md:rounded-2xl overflow-hidden border border-gray-800 shadow-xl ring-1 ring-white/5 transform-gpu">
                 <iframe id="main-video" class="absolute inset-0 w-full h-full z-20" src="https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             
             <div class="grid grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6 w-full max-w-3xl mx-auto">
-                <button onclick="RoomApp.openPodcast()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
+                <!-- FIX PODCAST: Convertito in tag <a> nativo per aggirare i blocchi dei browser in-app (Telegram/IG) -->
+                <a id="btn-podcast" href="#" target="_blank" rel="noopener noreferrer" onclick="SoundEngine.click()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
                     <svg class="w-7 h-7 sm:w-8 sm:h-8 sm:mr-3 mb-2 sm:mb-0 text-[#00e5ff] group-hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                     <span class="font-black text-[11px] sm:text-sm md:text-base tracking-wider uppercase text-[#00e5ff] break-words leading-tight" data-i18n="btnPodcast">Podcast</span>
-                </button>
+                </a>
                 <button onclick="openEbookModal()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#ffb703]/10 hover:border-[#ffb703]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
                     <svg class="w-7 h-7 sm:w-8 sm:h-8 sm:mr-3 mb-2 sm:mb-0 text-[#ffb703] group-hover:drop-shadow-[0_0_8px_rgba(255,183,3,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     <span class="font-black text-[11px] sm:text-sm md:text-base tracking-wider uppercase text-[#ffb703] transition-colors break-words leading-tight" data-i18n="btnEbook">E-Book</span>
@@ -261,14 +262,25 @@
             <div id="sub-warning-msg" class="hidden absolute inset-0 md:static sub-warning px-4 sm:px-8 py-3.5 sm:py-4 rounded-xl text-[10px] sm:text-xs md:text-sm font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-center w-full md:w-auto items-center justify-center gap-2 z-20 break-words">
                 <span data-i18n="subNotActive">ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE</span>
             </div>
-            <button id="btn-next-lesson" onclick="SoundEngine.click(); window.location.href='https://tutorial-betting-exchange-room.vercel.app/'" class="text-black bg-[#99E814] font-black w-full md:w-auto justify-center px-6 sm:px-10 py-4 rounded-xl hover:bg-white transition-all text-[11px] sm:text-sm md:text-base uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(153,232,20,0.4)] touch-manipulation active:scale-95 flex items-center gap-2 md:gap-3 z-10 transform-gpu min-h-[50px]">
+            <!-- FIX PROSSIMA LEZIONE: Convertito in tag <a> nativo -->
+            <a id="btn-next-lesson" href="https://tutorial-betting-exchange-room.vercel.app/" onclick="SoundEngine.click()" class="text-black bg-[#99E814] font-black w-full md:w-auto justify-center px-6 sm:px-10 py-4 rounded-xl hover:bg-white transition-all text-[11px] sm:text-sm md:text-base uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(153,232,20,0.4)] touch-manipulation active:scale-95 flex items-center gap-2 md:gap-3 z-10 transform-gpu min-h-[50px]">
                 <span data-i18n="navNextLesson" class="truncate">PROSSIMA LEZIONE</span> <span class="text-lg shrink-0">→</span>
-            </button>
+            </a>
         </div>
         
-        <div class="flex justify-center pb-8 md:pb-12 w-full">
-            <a href="https://penalties-zero-to-hero-academy.vercel.app/" target="_blank" class="text-4xl sm:text-5xl md:text-6xl hover:scale-110 transition-transform touch-manipulation joystick-pulse transform-gpu shrink-0" title="Play Penalties Live">
+        <div class="flex justify-center pb-8 w-full">
+            <a href="https://penalties-zero-to-hero-academy.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-4xl sm:text-5xl md:text-6xl hover:scale-110 transition-transform touch-manipulation joystick-pulse transform-gpu shrink-0" title="Play Penalties Live">
                 🎮
+            </a>
+        </div>
+
+        <!-- NEW: PULSANTE TELEGRAM UFFICIALE SALA SEGNALI -->
+        <div class="flex justify-center w-full px-4 mb-8">
+            <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 sm:gap-4 bg-[#24A1DE] hover:bg-[#1d82b3] text-white font-black text-[13px] sm:text-base md:text-lg px-6 sm:px-10 py-4 sm:py-5 rounded-2xl shadow-[0_0_20px_rgba(36,161,222,0.4)] hover:shadow-[0_0_30px_rgba(36,161,222,0.7)] transition-all duration-300 transform-gpu hover:-translate-y-1 active:scale-95 w-full max-w-3xl mx-auto border border-[#24A1DE]/40 group touch-manipulation">
+                <svg class="w-6 h-6 sm:w-8 sm:h-8 fill-current group-hover:rotate-12 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+                </svg>
+                <span class="tracking-[0.05em] sm:tracking-[0.15em] uppercase truncate">SALA SEGNALI GRATUITI</span>
             </a>
         </div>
 
@@ -339,6 +351,14 @@
         window.RoomApp = (function() {
             const CONFIG = { STORAGE_KEY: 'bx_academy_demo_hd' }; 
             const footerLogoHTML = `<div class="mt-12 md:mt-16 text-center pt-8 w-full"><img src="logo-tondo.jpeg" class="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full opacity-30 grayscale mix-blend-screen" alt="Global Exchange Academy" loading="lazy" decoding="async"></div>`;
+
+            // Mappatura URL dei podcast
+            const podcastUrls = {
+                it: "https://open.spotify.com/episode/2QDRZoYRQk8Gg1JqvXAuVU?si=c2uBoC8TSW-fFqQ5--EJJA",
+                en: "https://open.spotify.com/episode/6O2YicZuJbitsqlJ2VyhoM?si=jnDKia2EQI-5gXE8LkLewg",
+                es: "https://open.spotify.com/episode/3cPHNB0pKR0yW4ZqyRacID?si=TVGBO9EKQ-OrhxN8u4TIwg",
+                pt: "https://open.spotify.com/episode/7mEi7eq8P1IPzjrgPeWo90?si=X7fWHgriSWGP3N9a90N3CQ"
+            };
 
             const dict = {
                 it: {
@@ -710,6 +730,10 @@
                     const ebookContainer = document.getElementById('ebook-content-container');
                     if(ebookContainer) ebookContainer.innerHTML = dict[targetLang].ebookContent || dict['en'].ebookContent;
 
+                    // FIX PODCAST: Aggiornamento dinamico dell'href per garantire compatibilità con tutti i webview
+                    const podcastLink = document.getElementById('btn-podcast');
+                    if (podcastLink) podcastLink.href = podcastUrls[targetLang] || podcastUrls['en'];
+
                     Gamification.renderQuiz();
                     
                     document.querySelectorAll('.demo-link').forEach(link => {
@@ -860,17 +884,7 @@
                     document.body.addEventListener('touchstart', unlockAudio, { once: true });
                 },
                 triggerQuiz: Gamification.checkQuiz,
-                getDictStr: (key) => dict[State.lang][key] || dict['en'][key],
-                openPodcast: () => {
-                    SoundEngine.click();
-                    const urls = {
-                        it: "https://open.spotify.com/episode/2QDRZoYRQk8Gg1JqvXAuVU?si=c2uBoC8TSW-fFqQ5--EJJA",
-                        en: "https://open.spotify.com/episode/6O2YicZuJbitsqlJ2VyhoM?si=jnDKia2EQI-5gXE8LkLewg",
-                        es: "https://open.spotify.com/episode/3cPHNB0pKR0yW4ZqyRacID?si=TVGBO9EKQ-OrhxN8u4TIwg",
-                        pt: "https://open.spotify.com/episode/7mEi7eq8P1IPzjrgPeWo90?si=X7fWHgriSWGP3N9a90N3CQ"
-                    };
-                    window.open(urls[State.lang] || urls['en'], '_blank', 'noopener,noreferrer');
-                }
+                getDictStr: (key) => dict[State.lang][key] || dict['en'][key]
             };
         })();
 
