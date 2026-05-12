@@ -102,64 +102,71 @@
             transform-origin: bottom;
         }
 
-        /* STILE "CHI VUOL ESSERE MILIONARIO" PREMIUM */
+        /* STILE "CHI VUOL ESSERE MILIONARIO" ELITE PREMIUM */
         .wwtbam-container {
-            background: radial-gradient(circle at center, #1a1b41 0%, #0a0a1a 100%);
-            border: 2px solid #b38822;
-            box-shadow: 0 0 40px rgba(0, 0, 50, 0.9), inset 0 0 30px rgba(179, 136, 34, 0.15);
+            background: radial-gradient(ellipse at top, #0d1b2a 0%, #020617 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
             position: relative;
         }
         .wwtbam-container::before {
             content: ''; position: absolute; inset: 0;
-            background: radial-gradient(circle at top, rgba(255,255,255,0.05) 0%, transparent 60%);
+            background: radial-gradient(circle at top, rgba(212,175,55,0.03) 0%, transparent 70%);
             pointer-events: none;
         }
         .wwtbam-question-box {
-            background: linear-gradient(180deg, #05051a 0%, #11113a 50%, #05051a 100%);
-            border-top: 2px solid #d4af37;
-            border-bottom: 2px solid #d4af37;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.6), inset 0 0 10px rgba(212,175,55,0.1);
+            background: linear-gradient(180deg, rgba(15,23,42,0.8) 0%, rgba(2,6,23,0.95) 100%);
+            border-top: 1px solid rgba(212, 175, 55, 0.6);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.6);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
             position: relative;
             width: 100%;
         }
         .wwtbam-btn {
-            background: linear-gradient(180deg, #05051a 0%, #0a0a2a 50%, #05051a 100%);
-            border: 2px solid #b38822;
+            background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
+            border: 1px solid rgba(212, 175, 55, 0.4);
             border-radius: 9999px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
-            transition: all 0.2s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
             min-height: 3.5rem;
             word-wrap: break-word;
         }
         .wwtbam-btn::before {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 45%;
-            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+            background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, transparent 100%);
             pointer-events: none;
         }
         .wwtbam-btn:hover:not(:disabled) {
-            background: linear-gradient(180deg, #0a0a2a 0%, #1a1a4a 50%, #0a0a2a 100%);
-            border-color: #ffd700;
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.1);
-            transform: translateY(-2px);
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            border-color: #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), inset 0 0 10px rgba(212, 175, 55, 0.1);
+            transform: translateY(-1px);
         }
         .wwtbam-btn.correct {
-            background: linear-gradient(180deg, #004d00 0%, #008800 50%, #004d00 100%) !important;
-            border-color: #00ff00 !important;
-            box-shadow: 0 0 25px rgba(0, 255, 0, 0.5) !important;
+            background: linear-gradient(180deg, #064e3b 0%, #022c22 100%) !important;
+            border-color: #10b981 !important;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.3) !important;
             color: #ffffff !important;
-            animation: pulse-correct 1s infinite alternate;
         }
         .wwtbam-btn.wrong {
-            background: linear-gradient(180deg, #4d0000 0%, #990000 50%, #4d0000 100%) !important;
-            border-color: #ff3333 !important;
-            box-shadow: 0 0 25px rgba(255, 51, 51, 0.5) !important;
+            background: linear-gradient(180deg, #7f1d1d 0%, #450a0a 100%) !important;
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.3) !important;
             color: #ffffff !important;
         }
-        @keyframes pulse-correct {
-            0% { box-shadow: 0 0 15px rgba(0,255,0,0.4); }
-            100% { box-shadow: 0 0 35px rgba(0,255,0,0.8); }
+
+        /* Stili Speciali Podcast Player */
+        .is-playing .play-icon-btn {
+            animation: none !important;
+            transform: scale(0.9);
+            box-shadow: 0 0 5px rgba(0,229,255,0.2) !important;
+            opacity: 0.8;
+        }
+        .is-playing .play-overlay-bg {
+            background-color: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(2px);
         }
     </style>
 </head>
@@ -202,13 +209,13 @@
             
             <!-- Video YouTube -->
             <div id="video-wrapper" class="relative w-full aspect-video bg-[#0a140f] rounded-xl md:rounded-2xl overflow-hidden border border-gray-800 shadow-xl ring-1 ring-white/5 cursor-pointer group transform-gpu" onclick="playMainVideo()">
-                <img id="video-thumbnail" decoding="async" src="https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Video Preview" loading="lazy">
+                <img id="video-thumbnail" decoding="async" src="https://img.youtube.com/vi/8kjONb-eUt0/maxresdefault.jpg" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Video Preview" loading="lazy">
                 <div class="play-btn-overlay absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center z-10 pointer-events-none">
                     <div class="w-16 h-11 sm:w-24 sm:h-16 md:w-28 md:h-20 bg-[#FF0000] rounded-xl sm:rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(255,0,0,0.6)] group-hover:scale-110 transition-transform duration-300 pointer-events-auto">
                         <svg class="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 text-white ml-1 drop-shadow-md" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                     </div>
                 </div>
-                <iframe id="main-video" class="absolute inset-0 w-full h-full hidden z-20" src="about:blank" data-src="https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe id="main-video" class="absolute inset-0 w-full h-full hidden z-20" src="about:blank" data-src="https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             
             <div class="grid grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6 w-full max-w-3xl mx-auto">
@@ -349,8 +356,8 @@
                     <!-- Il trucco definitivo: L'iframe è posizionato in modo che il suo tasto Play nativo (che si trova a X=76, Y=76 in un riquadro 152x152) 
                          cada ESATTAMENTE al centro della nostra finestra 110x110. Il click è quindi reale e sblocca Telegram e iOS. -->
                     <div class="absolute z-50 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[152px] h-[152px]">
-                        <!-- Opacità 0.01 per renderlo invisibile ma cliccabile -->
-                        <iframe id="spotify-player" src="" class="w-full h-full opacity-[0.01]" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media"></iframe>
+                        <!-- Opacità leggerissima per renderlo invisibile ma cliccabile garantito -->
+                        <iframe id="spotify-player" src="" class="w-full h-full opacity-[0.02]" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media"></iframe>
                     </div>
                 </div>
 
@@ -464,7 +471,7 @@
                                     subtitleText.className = 'text-gray-500 text-[11px] sm:text-xs font-bold truncate w-full transition-all duration-300';
                                 }
 
-                                // --- FASE 2: RIPRODUZIONE (Dopo attesa) ---
+                                // --- FASE 2: RIPRODUZIONE (Dopo attesa maggiorata per sicurezza buffer) ---
                                 setTimeout(() => {
                                     clickArea.classList.remove('is-loading');
                                     clickArea.classList.add('is-playing');
@@ -489,7 +496,7 @@
                                     }
 
                                     window.focus(); // Rende l'iframe nuovamente "cliccabile" (se l'utente vuole mettere in pausa)
-                                }, 2500); 
+                                }, 4500); // 4.5 secondi per dare ampio margine allo scaricamento audio
 
                             } else {
                                 window.focus(); // Assicura che ri-click sull'iframe venga registrato dal browser
@@ -568,8 +575,8 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Ripeti il test",
                     navNextLesson: "PROSSIMA LEZIONE", tgDate: "Oggi", subNotActive: "ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE",
                     quizCompletedTitle: "Check-Point Superato!", quizCompletedDesc: "Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.",
-                    podcastTitle: "Podcast Player", clickToPlay: "Clicca per Avviare", syncing: "Scaricamento in corso...", wait: "Attendere l'avvio dell'audio...", nowPlaying: "In Riproduzione", closePlayer: "Chiudi Player",
-                    videoUrl: "https://www.youtube.com/embed/YLzWSAYfODM?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/YLzWSAYfODM/maxresdefault.jpg",
+                    podcastTitle: "Podcast Player", clickToPlay: "Clicca per Avviare", syncing: "Connessione audio...", wait: "Buffering in corso...", nowPlaying: "In Riproduzione", closePlayer: "Chiudi Player",
+                    videoUrl: "https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/8kjONb-eUt0/maxresdefault.jpg",
                     quizData: [
                         { q: "Nel mercato Exchange, chi è la tua controparte quando 'Banchi' una quota?", opts: ["Il Bookmaker tradizionale", "Altri utenti che hanno 'Puntato'", "La piattaforma stessa"], correct: 1, successMsg: "Esatto! Scommetti sempre contro una persona fisica.", failMsg: "Errore. Non è il bookmaker né la piattaforma. Riprova." },
                         { q: "Qual è il vantaggio principale del Betting Exchange?", opts: ["Quote fisse garantite per sempre", "Bonus di benvenuto altissimi", "Assenza di limitazioni sui conti vincenti (No Gubbing)"], correct: 2, successMsg: "Corretto! Più vinci, più l'Exchange guadagna sulle commissioni.", failMsg: "Attenzione, le quote non sono fisse e i bonus non sono il vantaggio chiave. Riprova." },
@@ -654,8 +661,8 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Retry Test",
                     navNextLesson: "NEXT LESSON", tgDate: "Today", subNotActive: "SUBSCRIPTION INACTIVE! CONTACT REFERENT",
                     quizCompletedTitle: "Check-Point Passed!", quizCompletedDesc: "You unlocked 500 XP. You are ready to proceed.",
-                    podcastTitle: "Podcast Player", clickToPlay: "Click to Play", syncing: "Downloading Audio...", wait: "Please wait for playback...", nowPlaying: "Now Playing", closePlayer: "Close Player",
-                    videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
+                    podcastTitle: "Podcast Player", clickToPlay: "Click to Play", syncing: "Connecting...", wait: "Buffering audio...", nowPlaying: "Now Playing", closePlayer: "Close Player",
+                    videoUrl: "https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/8kjONb-eUt0/maxresdefault.jpg",
                     quizData: [
                         { q: "In the Exchange market, who is your counterparty when you 'Lay'?", opts: ["The traditional Bookmaker", "Other users who have 'Backed'", "The platform itself"], correct: 1, successMsg: "Exactly! You bet against real people.", failMsg: "Error. It's not the bookmaker. Try again." },
                         { q: "What's the main advantage of the Exchange?", opts: ["Fixed odds forever", "Huge welcome bonuses", "No limitations on winning accounts"], correct: 2, successMsg: "Correct! The more you win, the more they earn.", failMsg: "Wrong. Focus on account limitations. Try again." },
@@ -740,8 +747,8 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Test",
                     navNextLesson: "PRÓXIMA LECCIÓN", tgDate: "Hoy", subNotActive: "¡SUSCRIPCIÓN NO ACTIVA!",
                     quizCompletedTitle: "¡Check-Point Superado!", quizCompletedDesc: "Has desbloqueado 500 XP. Estás listo para continuar.",
-                    podcastTitle: "Reproductor Podcast", clickToPlay: "Haz clic para Iniciar", syncing: "Descargando Audio...", wait: "Por favor espera...", nowPlaying: "Reproduciendo", closePlayer: "Cerrar Audio",
-                    videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
+                    podcastTitle: "Reproductor Podcast", clickToPlay: "Haz clic para Iniciar", syncing: "Conectando...", wait: "Buffering de audio...", nowPlaying: "Reproduciendo", closePlayer: "Cerrar Audio",
+                    videoUrl: "https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/8kjONb-eUt0/maxresdefault.jpg",
                     quizData: [
                         { q: "En el mercado Exchange, ¿quién es tu contraparte cuando haces 'Lay' a una cuota?", opts: ["El Bookmaker tradicional", "Otros usuarios que han hecho 'Back'", "La propia plataforma"], correct: 1, successMsg: "¡Exacto! Siempre apuestas contra una persona física.", failMsg: "Error. No es el bookmaker ni la plataforma. Inténtalo de nuevo." },
                         { q: "¿Cuál es la ventaja principal del Betting Exchange?", opts: ["Cuotas fijas garantizadas para siempre", "Bonos de bienvenida altísimos", "Ausencia de limitaciones en cuentas ganadoras"], correct: 2, successMsg: "¡Correcto! Cuanto más ganas, más gana el Exchange.", failMsg: "Cuidado, no son las cuotas ni los bonos. Inténtalo de nuevo." },
@@ -826,8 +833,8 @@
                     btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Teste",
                     navNextLesson: "PRÓXIMA LIÇÃO", tgDate: "Hoje", subNotActive: "ASSINATURA INATIVA! CONTATE SEU REFERENTE",
                     quizCompletedTitle: "Check-Point Superado!", quizCompletedDesc: "Você desbloqueou 500 XP. Está pronto para prosseguir.",
-                    podcastTitle: "Podcast Player", clickToPlay: "Clique para Tocar", syncing: "Baixando Áudio...", wait: "Por favor aguarde...", nowPlaying: "Reproduzindo", closePlayer: "Fechar Áudio",
-                    videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
+                    podcastTitle: "Podcast Player", clickToPlay: "Clique para Tocar", syncing: "Conectando...", wait: "Buffering áudio...", nowPlaying: "Reproduzindo", closePlayer: "Fechar Áudio",
+                    videoUrl: "https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/8kjONb-eUt0/maxresdefault.jpg",
                     quizData: [
                         { q: "No mercado Exchange, quem é a sua contraparte quando faz 'Lay' a uma odd?", opts: ["O Bookmaker tradicional", "Outros utilizadores que fizeram 'Back'", "A própria plataforma"], correct: 1, successMsg: "Exato! Você aposta sempre contra uma pessoa física.", failMsg: "Erro. Não é o bookmaker nem a plataforma. Tente novamente." },
                         { q: "Qual é a principal vantagem do Betting Exchange?", opts: ["Odds fixas garantidas para sempre", "Bónus de boas-vindas altíssimos", "Ausência de limitações em contas vencedoras"], correct: 2, successMsg: "Correto! Quanto mais ganha, mais a Exchange lucra.", failMsg: "Atenção, não são as odds nem os bónus. Tente novamente." },
