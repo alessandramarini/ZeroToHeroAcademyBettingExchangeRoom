@@ -330,38 +330,47 @@
         </div>
     </div>
 
-    <!-- MODALE PODCAST COMPATTO E BLINDATO -->
+    <!-- MODALE PODCAST IBRIDO E BLINDATO -->
     <div id="podcast-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-4 opacity-0 transition-opacity duration-300">
-        <div class="w-full max-w-xs flex flex-col items-center transform scale-95 transition-transform duration-300 relative" id="podcast-modal-content">
+        <div class="w-full max-w-sm flex flex-col items-center transform scale-95 transition-transform duration-300 relative" id="podcast-modal-content">
             
-            <h3 class="text-[#00e5ff] font-black uppercase tracking-widest text-sm md:text-base flex items-center gap-2 mb-6">
+            <h3 class="text-[#00e5ff] font-black uppercase tracking-widest text-sm md:text-base flex items-center gap-2 mb-6 drop-shadow-md">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                 Podcast Player
             </h3>
 
-            <!-- Modulo Iframe Ultra-Ridotto: visibile SOLO il Tasto Play -->
-            <div class="relative w-[280px] h-[90px] bg-[#0a140f] rounded-2xl overflow-hidden border border-[#00e5ff]/30 shadow-[0_0_30px_rgba(0,229,255,0.2)] flex items-center">
+            <!-- Modulo Iframe ibrido: nativo a sinistra, coperto a destra per bloccare condivisione -->
+            <div class="relative w-full h-[152px] bg-[#0a140f] rounded-2xl overflow-hidden border border-[#00e5ff]/30 shadow-[0_0_30px_rgba(0,229,255,0.2)]">
                 
-                <!-- Maschera del tasto play (dimensione esatta per svelare l'azione Spotify) -->
-                <div class="relative w-[90px] h-full overflow-hidden shrink-0 pointer-events-auto bg-[#282828]">
-                    <!-- L'iframe viene forzato ad avere una larghezza di 400px per renderizzare correttamente la UI, ma il contenitore ne mostra solo i primi 90px -->
-                    <iframe id="spotify-player" src="" class="absolute top-1/2 left-0 -translate-y-1/2" style="width: 400px; height: 160px;" frameborder="0" scrolling="no" allow="autoplay; encrypted-media" loading="lazy"></iframe>
-                </div>
+                <!-- Iframe Spotify Nativo (100% width, espone il vero tasto play per funzionare su WebView Telegram/iOS) -->
+                <iframe id="spotify-player" src="" class="absolute inset-0 w-full h-full z-0" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
                 
-                <!-- Overlay Oscurante: copre il resto dell'iframe bloccando condivisione e link esterni -->
-                <div class="flex-1 h-full bg-gradient-to-r from-[#0a140f] to-[#141b22] relative z-10 border-l border-[#00e5ff]/20 flex flex-col justify-center items-start pl-4 pointer-events-auto shadow-[-10px_0_15px_rgba(10,20,15,1)]">
-                    <span class="text-[#00e5ff] text-[9px] font-black tracking-[0.2em] uppercase mb-2">In Riproduzione</span>
-                    <div class="flex gap-1.5 items-end h-4 w-full px-1">
+                <!-- Overlay Oscurante Blindato: Blocca fisicamente i click su Titolo e Condivisione -->
+                <div class="absolute inset-y-0 right-0 left-[140px] z-10 bg-gradient-to-r from-[#0a140f] to-[#141b22] border-l border-[#00e5ff]/20 flex flex-col justify-center items-start pl-5 pointer-events-auto">
+                    <span class="text-[#00e5ff] text-[10px] font-black tracking-[0.2em] uppercase mb-1.5 drop-shadow-md">Lezione Audio</span>
+                    <span class="text-white text-xs font-bold mb-3 truncate w-full pr-4" data-i18n="moduleTitle">MODULO 1 • GIORNO 1/30</span>
+                    
+                    <div class="flex gap-1.5 items-end h-5 w-full px-1">
                         <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0s"></div>
                         <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0.3s"></div>
                         <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0.1s"></div>
                         <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0.4s"></div>
+                        <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0.2s"></div>
                     </div>
+                </div>
+
+                <!-- Overlay di Caricamento (Scompare quando il player è caricato per evitare click prematuri) -->
+                <div id="podcast-loading" class="absolute inset-0 bg-[#0a140f]/95 backdrop-blur-sm z-20 flex flex-col items-center justify-center transition-opacity duration-500">
+                    <svg class="animate-spin h-8 w-8 text-[#00e5ff] mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span class="text-[#00e5ff] text-[10px] font-black uppercase tracking-[0.2em] animate-pulse">Sincronizzazione...</span>
                 </div>
 
             </div>
 
-            <!-- Tasto Esci Personalizzato -->
+            <!-- Tasto Esci -->
             <button onclick="PodcastManager.close()" class="mt-8 text-[#00e5ff] hover:text-white bg-gray-900/80 hover:bg-red-500/20 border border-[#00e5ff]/50 hover:border-red-500/50 px-8 py-3 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all active:scale-95 touch-manipulation">
                 Chiudi Player
             </button>
@@ -434,12 +443,7 @@
                 pt: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/pt-1-Zero-to-Hero-Academy-e3iu53i/a-ackrebp"
             },
             init: function() {
-                const currentLang = document.documentElement.lang || 'it';
-                const targetSrc = this.urls[currentLang] || this.urls['en'];
-                const player = document.getElementById('spotify-player');
-                if(player && !player.src) {
-                    player.src = targetSrc;
-                }
+                // Non carichiamo nulla in background per evitare sprechi di risorse/conflitti
             },
             open: function() {
                 SoundEngine.click();
@@ -461,17 +465,31 @@
                 setTimeout(() => { 
                     modal.classList.add('hidden'); modal.classList.remove('flex'); 
                     const player = document.getElementById('spotify-player');
-                    if (player && player.src) {
-                        const currentSrc = player.src;
-                        player.src = '';
-                        setTimeout(() => { player.src = currentSrc; }, 50);
+                    if (player) {
+                        player.src = ''; // Blocca l'audio disconnettendo la sorgente in chiusura
                     }
                 }, 300);
             },
             switchLanguage: function(lang) {
                 const targetSrc = this.urls[lang] || this.urls['en'];
                 const player = document.getElementById('spotify-player');
+                const loader = document.getElementById('podcast-loading');
+                
                 if (player && player.src !== targetSrc) {
+                    // Mostra l'overlay di caricamento
+                    loader.classList.remove('hidden', 'opacity-0');
+                    loader.classList.add('flex', 'opacity-100');
+                    
+                    // Rimuove l'overlay solo quando il pulsante nativo è pronto
+                    player.onload = function() {
+                        loader.classList.remove('opacity-100');
+                        loader.classList.add('opacity-0');
+                        setTimeout(() => {
+                            loader.classList.remove('flex');
+                            loader.classList.add('hidden');
+                        }, 500);
+                    };
+                    
                     player.src = targetSrc;
                 }
             }
