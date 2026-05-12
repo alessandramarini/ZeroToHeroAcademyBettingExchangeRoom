@@ -92,16 +92,6 @@
         }
         .animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; will-change: transform, opacity; }
 
-        /* Animazione personalizzata Onde Audio Podcast */
-        @keyframes audioWave {
-            0%, 100% { transform: scaleY(0.3); }
-            50% { transform: scaleY(1); }
-        }
-        .audio-wave {
-            animation: audioWave 1.2s ease-in-out infinite;
-            transform-origin: bottom;
-        }
-
         /* STILE "CHI VUOL ESSERE MILIONARIO" PREMIUM */
         .wwtbam-container {
             background: radial-gradient(circle at center, #1a1b41 0%, #0a0a1a 100%);
@@ -161,6 +151,18 @@
             0% { box-shadow: 0 0 15px rgba(0,255,0,0.4); }
             100% { box-shadow: 0 0 35px rgba(0,255,0,0.8); }
         }
+
+        /* Stili Speciali Podcast Player */
+        .is-playing .play-icon-btn {
+            animation: none !important;
+            transform: scale(0.9);
+            box-shadow: 0 0 5px rgba(0,229,255,0.2) !important;
+            opacity: 0.8;
+        }
+        .is-playing .play-overlay-bg {
+            background-color: rgba(255, 255, 255, 0.5); /* Lascia intravedere leggermente durante il play per feedback */
+            backdrop-filter: blur(2px);
+        }
     </style>
 </head>
 <body class="text-gray-200 pb-12 selection:bg-[#99E814] selection:text-black antialiased relative">
@@ -213,12 +215,10 @@
             
             <div class="grid grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6 w-full max-w-3xl mx-auto">
                 <button onclick="PodcastManager.open()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
-                    <!-- Icona Professionale Podcast (Colorata Ciano Neon) -->
                     <svg class="w-7 h-7 sm:w-8 sm:h-8 sm:mr-3 mb-2 sm:mb-0 text-[#00e5ff] group-hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                     <span class="font-black text-[11px] sm:text-sm md:text-base tracking-wider uppercase text-[#00e5ff] break-words leading-tight" data-i18n="btnPodcast">Podcast</span>
                 </button>
                 <button onclick="openEbookModal()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#ffb703]/10 hover:border-[#ffb703]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
-                    <!-- Icona Professionale E-Book (Colorata Ambra Oro) -->
                     <svg class="w-7 h-7 sm:w-8 sm:h-8 sm:mr-3 mb-2 sm:mb-0 text-[#ffb703] group-hover:drop-shadow-[0_0_8px_rgba(255,183,3,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
                     <span class="font-black text-[11px] sm:text-sm md:text-base tracking-wider uppercase text-[#ffb703] transition-colors break-words leading-tight" data-i18n="btnEbook">E-Book</span>
                 </button>
@@ -231,29 +231,24 @@
             
             <div id="quiz-container" class="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center">
                 
-                <!-- Progresso e Header -->
                 <div class="w-full flex flex-wrap justify-between items-center mb-6 sm:mb-8 px-2 gap-2">
                     <div class="text-[#d4af37] text-[10px] sm:text-xs font-black uppercase tracking-widest bg-[#d4af37]/10 px-3 py-1 rounded-full border border-[#d4af37]/30 whitespace-nowrap" id="quiz-progress-text">Domanda 1 di 5</div>
                     <div class="flex gap-1.5 shrink-0" id="quiz-dots"></div>
                 </div>
                 
-                <!-- Box Domanda -->
                 <div class="wwtbam-question-box px-4 sm:px-6 py-8 sm:py-10 rounded-xl text-center mb-8 sm:mb-10 w-full">
                     <p id="quiz-question-text" class="text-[15px] sm:text-lg md:text-xl text-white font-black leading-relaxed drop-shadow-md break-words"></p>
                 </div>
 
-                <!-- Opzioni -->
                 <div id="quiz-options-container" class="space-y-3 sm:space-y-4 w-full"></div>
             </div>
             
-            <!-- Feedback WWTBAM Integrato -->
             <div id="quiz-feedback" class="hidden w-full max-w-2xl mx-auto p-4 sm:p-6 md:p-8 rounded-xl md:rounded-2xl text-center shadow-2xl mt-8 transition-all duration-500 transform-gpu relative overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none"></div>
                 <div id="quiz-feedback-icon" class="text-3xl sm:text-5xl mb-3 relative z-10 drop-shadow-lg">🏆</div>
                 <p id="quiz-feedback-text" class="font-black text-[11px] sm:text-sm md:text-base uppercase tracking-[0.15em] leading-relaxed relative z-10 break-words"></p>
             </div>
 
-            <!-- Schermata completamento Quiz Premium -->
             <div id="quiz-completed-screen" class="hidden flex-col items-center justify-center py-10 md:py-16 text-center transition-all duration-500 w-full">
                 <div class="w-20 h-20 sm:w-24 sm:h-24 bg-[#d4af37]/10 rounded-full flex items-center justify-center mb-6 border-2 border-[#d4af37] shadow-[0_0_30px_rgba(212,175,55,0.4)] shrink-0">
                     <span class="text-4xl sm:text-5xl drop-shadow-lg">🏆</span>
@@ -275,15 +270,12 @@
                 <div class="bg-gray-800 text-gray-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest break-words" data-i18n="demoBadge">DEMO INTERATTIVA</div>
             </div>
 
-            <!-- Immagine Demo con Tasto di Avvio Professionale -->
             <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-gray-800 hover:border-[#99E814]/50 transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
                 
                 <div class="relative w-full overflow-hidden" style="aspect-ratio: 16/9;">
                     <img src="demo-odds.jpeg" alt="Demo Odds" decoding="async" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top z-0 transition-transform duration-1000 group-hover:scale-105 opacity-100">
-                    
                     <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10 transition-opacity duration-700 opacity-80 group-hover:opacity-90 pointer-events-none"></div>
                     
-                    <!-- Tasto CTA Professionale (Design Dashboard Hi-Tech) -->
                     <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none px-2">
                         <div class="play-pulse px-4 py-3 sm:px-8 sm:py-4 bg-[#99E814] border border-[#99E814] rounded-lg sm:rounded-xl flex items-center justify-center shadow-[0_0_30px_rgba(153,232,20,0.5)] transform group-hover:scale-105 transition-all duration-500 ease-out group-hover:bg-[#b0ff26] group-hover:shadow-[0_0_40px_rgba(153,232,20,0.7)] pointer-events-auto gap-2 sm:gap-3 backdrop-blur-sm max-w-[90%]">
                             <svg class="w-4 h-4 sm:w-6 sm:h-6 text-[#050a05] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
@@ -334,48 +326,57 @@
         </div>
     </div>
 
-    <!-- MODALE PODCAST IBRIDO E BLINDATO -->
+    <!-- MODALE PODCAST WHITE PREMIUM -->
     <div id="podcast-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-4 opacity-0 transition-opacity duration-300">
-        <div class="w-full max-w-[340px] flex flex-col items-center transform scale-95 transition-transform duration-300 relative" id="podcast-modal-content">
+        <!-- Card Bianca ed elegante -->
+        <div class="w-full max-w-[360px] flex flex-col items-center transform scale-95 transition-transform duration-300 relative bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(0,229,255,0.15)] border border-gray-100 p-6" id="podcast-modal-content">
             
-            <h3 class="text-[#00e5ff] font-black uppercase tracking-widest text-sm md:text-base flex items-center gap-2 mb-6 drop-shadow-md w-full justify-center">
-                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+            <h3 class="text-gray-900 font-black uppercase tracking-widest text-sm md:text-base flex items-center gap-2 mb-6 w-full justify-center">
+                <svg class="w-5 h-5 text-[#00e5ff]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
                 <span data-i18n="podcastTitle" class="truncate">Podcast Player</span>
             </h3>
 
-            <!-- Modulo Iframe ibrido: fluido, si adatta e copre sempre la destra -->
-            <div class="relative w-full h-[152px] bg-[#0a140f] rounded-2xl overflow-hidden border border-[#00e5ff]/30 shadow-[0_0_30px_rgba(0,229,255,0.2)]">
+            <!-- Modulo Iframe ibrido: bloccato e mascherato al millimetro -->
+            <div class="flex flex-row items-center w-full bg-gray-50 rounded-2xl p-2 border border-gray-200 shadow-inner mb-2">
                 
-                <!-- Iframe Spotify (Larghezza fissa per forzare il layout Spotify, ma contenuto nel div overflow-hidden) -->
-                <iframe id="spotify-player" src="" class="absolute top-0 left-0 w-[400px] h-full z-0" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-                
-                <!-- Overlay Oscurante Blindato: Calcolato per coprire sempre il resto e mostrare solo il Play button -->
-                <div class="absolute inset-y-0 right-0 left-[100px] sm:left-[110px] z-10 bg-gradient-to-r from-[#0a140f] to-[#141b22] border-l border-[#00e5ff]/20 flex flex-col justify-center items-start pl-4 sm:pl-5 pointer-events-auto">
-                    <span class="text-[#00e5ff] text-[9px] sm:text-[10px] font-black tracking-[0.2em] uppercase mb-1.5 drop-shadow-md truncate w-full" data-i18n="nowPlaying">In Riproduzione</span>
-                    <span class="text-white text-[10px] sm:text-xs font-bold mb-3 truncate w-full pr-2" data-i18n="moduleTitle">MODULO 1 • GIORNO 1/30</span>
+                <!-- Box interattivo 120x120 fisso per incorniciare il tasto play di Spotify e nascondere il resto -->
+                <div id="podcast-click-area" class="relative w-[120px] h-[120px] shrink-0 overflow-hidden rounded-[1.25rem] bg-white shadow-md border border-gray-100 cursor-pointer" onmousedown="this.classList.add('is-playing')" ontouchstart="this.classList.add('is-playing')">
                     
-                    <div class="flex gap-1.5 items-end h-4 sm:h-5 w-full px-1">
-                        <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0s"></div>
-                        <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0.3s"></div>
-                        <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0.1s"></div>
-                        <div class="w-1.5 bg-[#00e5ff] h-full audio-wave" style="animation-delay: 0.4s"></div>
-                        <div class="w-1.5 bg-[#00e5ff] h-full audio-wave hidden sm:block" style="animation-delay: 0.2s"></div>
+                    <!-- L'iframe Spotify standard è alto 152px. Il suo play button è a x=76, y=76. 
+                         Posizionandolo a -16px all'interno di un box 120x120, il tasto play nativo risulta ESATTAMENTE al centro (60px, 60px). -->
+                    <div class="absolute -top-[16px] -left-[16px] w-[400px] h-[152px] z-0">
+                        <iframe id="spotify-player" src="" class="w-full h-full" frameborder="0" scrolling="no" allow="autoplay; clipboard-write; encrypted-media"></iframe>
+                    </div>
+
+                    <!-- Overlay Bianco Vetro che oscura l'immagine. pointer-events-none permette il click attraverso di esso! -->
+                    <div class="absolute inset-0 bg-white/95 backdrop-blur-sm z-10 pointer-events-none flex items-center justify-center transition-colors duration-300 play-overlay-bg">
+                        <!-- Tasto Play Personalizzato che pulsa (Animazione CSS personalizzata) -->
+                        <div class="w-14 h-14 bg-gradient-to-tr from-[#00e5ff] to-[#0088cc] rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(0,229,255,0.5)] animate-pulse play-icon-btn transition-all duration-300">
+                            <svg class="w-6 h-6 text-white ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+
+                    <!-- Overlay di Sincronizzazione Bianco Pulito -->
+                    <div id="podcast-loading" class="absolute inset-0 bg-white/100 z-20 flex flex-col items-center justify-center transition-opacity duration-500">
+                        <svg class="animate-spin h-8 w-8 text-[#00e5ff] mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span class="text-[#00b3cc] text-[8px] font-black uppercase tracking-[0.2em] animate-pulse truncate px-1 text-center w-full" data-i18n="syncing">Sincronizzazione...</span>
                     </div>
                 </div>
 
-                <!-- Overlay di Sincronizzazione -->
-                <div id="podcast-loading" class="absolute inset-0 bg-[#0a140f]/95 backdrop-blur-sm z-20 flex flex-col items-center justify-center transition-opacity duration-500">
-                    <svg class="animate-spin h-8 w-8 text-[#00e5ff] mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    <span class="text-[#00e5ff] text-[10px] font-black uppercase tracking-[0.2em] animate-pulse truncate px-2 text-center w-full" data-i18n="syncing">Sincronizzazione...</span>
+                <!-- Dettagli testuali ripuliti senza onde -->
+                <div class="flex flex-col justify-center pl-4 w-full overflow-hidden">
+                    <span class="text-[#00b3cc] text-[9px] sm:text-[10px] font-black tracking-[0.2em] uppercase mb-1 truncate w-full" data-i18n="nowPlaying">In Riproduzione</span>
+                    <span class="text-gray-900 text-xs sm:text-sm font-bold truncate w-full leading-tight" data-i18n="moduleTitle">MODULO 1 • GIORNO 1/30</span>
+                    <span class="text-gray-500 text-[10px] sm:text-xs font-medium mt-1 truncate w-full">Zero to Hero Academy</span>
                 </div>
 
             </div>
 
-            <!-- Tasto Esci Responsivo -->
-            <button onclick="PodcastManager.close()" class="mt-6 sm:mt-8 text-[#00e5ff] hover:text-white bg-gray-900/80 hover:bg-red-500/20 border border-[#00e5ff]/50 hover:border-red-500/50 w-full sm:w-auto px-8 py-3.5 rounded-full font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all active:scale-95 touch-manipulation min-h-[44px]">
+            <!-- Tasto Esci Dinamico (Tradotto) -->
+            <button onclick="PodcastManager.close()" class="mt-6 text-gray-600 hover:text-white bg-gray-100 hover:bg-gray-900 border border-gray-200 hover:border-gray-900 w-full px-8 py-3.5 rounded-xl font-bold uppercase tracking-[0.2em] text-[10px] sm:text-xs transition-all active:scale-95 touch-manipulation min-h-[44px]">
                 <span data-i18n="closePlayer">Chiudi Player</span>
             </button>
         </div>
@@ -447,11 +448,16 @@
                 pt: "https://creators.spotify.com/pod/profile/alessandra-marini/embed/episodes/pt-1-Zero-to-Hero-Academy-e3iu53i/a-ackrebp"
             },
             init: function() {
-                // Nessun caricamento background, salviamo risorse per la modalità "scheggia"
+                // Nessun caricamento background
             },
             open: function() {
                 SoundEngine.click();
                 const modal = document.getElementById('podcast-modal');
+                
+                // Resetta lo stato di riproduzione visivo per far pulsare di nuovo l'icona
+                const clickArea = document.getElementById('podcast-click-area');
+                if (clickArea) clickArea.classList.remove('is-playing');
+
                 modal.classList.remove('hidden'); modal.classList.add('flex');
                 void modal.offsetWidth; 
                 modal.classList.remove('opacity-0'); modal.classList.add('opacity-100');
@@ -470,7 +476,7 @@
                     modal.classList.add('hidden'); modal.classList.remove('flex'); 
                     const player = document.getElementById('spotify-player');
                     if (player) {
-                        player.src = ''; // Blocca audio chiudendo l'iframe
+                        player.src = ''; // Blocca l'audio rimuovendo l'URL
                     }
                 }, 300);
             },
@@ -501,7 +507,6 @@
             const CONFIG = { STORAGE_KEY: 'bx_academy_demo_hd' }; 
             const footerLogoHTML = `<div class="mt-12 md:mt-16 text-center pt-8 w-full"><img src="logo-tondo.jpeg" class="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full opacity-30 grayscale mix-blend-screen" alt="Global Exchange Academy" loading="lazy" decoding="async"></div>`;
 
-            // Dizionario Unificato per tutte le lingue. Evita duplicazioni e centralizza le traduzioni.
             const dict = {
                 it: {
                     moduleTitle: "MODULO 1 • GIORNO 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
