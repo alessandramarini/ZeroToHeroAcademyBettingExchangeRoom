@@ -10,7 +10,6 @@
     <title>Room AI | Global Exchange Academy</title>
     <meta name="description" content="Academy interattiva per il Betting Exchange. Impara la matematica e la gestione del rischio.">
 
-    <!-- Ottimizzazione DNS e connessioni -->
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -77,9 +76,9 @@
         .joystick-pulse { animation: joystickNeon 2.5s ease-in-out infinite; display: inline-block; cursor: pointer; will-change: transform, filter; }
 
         @keyframes play-shadow-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6), 0 8px 32px rgba(0,0,0,0.5); }
-            70% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0), 0 8px 32px rgba(0,0,0,0.5); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0), 0 8px 32px rgba(0,0,0,0.5); }
+            0% { box-shadow: 0 0 0 0 rgba(153, 232, 20, 0.6), 0 8px 32px rgba(0,0,0,0.5); }
+            70% { box-shadow: 0 0 0 20px rgba(153, 232, 20, 0), 0 8px 32px rgba(0,0,0,0.5); }
+            100% { box-shadow: 0 0 0 0 rgba(153, 232, 20, 0), 0 8px 32px rgba(0,0,0,0.5); }
         }
         .play-pulse { animation: play-shadow-pulse 2.5s infinite cubic-bezier(0.66, 0, 0, 1); transform: translateZ(0); }
 
@@ -89,7 +88,6 @@
         }
         .animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; will-change: transform, opacity; }
 
-        /* STILE GENERICO CARDS ELITE */
         .premium-card {
             background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
             border-radius: 24px;
@@ -117,11 +115,11 @@
             background: linear-gradient(135deg, #041419 0%, #08222a 100%);
         }
 
-        /* Tema Smeraldo (Simulatore Demo) */
-        .frame-emerald {
-            border: 2px solid #10b981;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(16, 185, 129, 0.15);
-            background: linear-gradient(135deg, #021a10 0%, #063120 100%);
+        /* Tema Verde Neon (Simulatore Demo Aziendale) */
+        .frame-neon {
+            border: 2px solid #99E814;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(153, 232, 20, 0.15);
+            background: linear-gradient(135deg, #0a140f 0%, #112211 100%);
         }
 
         /* Tema Viola/Ametista (Pillola Finanziaria) */
@@ -138,7 +136,6 @@
             background: linear-gradient(135deg, #05101a 0%, #0a2133 100%);
         }
 
-        /* Bottoni Stile Milionario */
         .wwtbam-btn {
             background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
             border: 1px solid rgba(197, 160, 89, 0.5);
@@ -169,7 +166,7 @@
             color: #ffffff !important;
         }
 
-        /* Bandierine Lingua (Nuova Posizione Centro Alto) */
+        /* Bandierine Lingua */
         .lang-flag {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
@@ -206,10 +203,6 @@
         </div>
         
         <div class="flex items-center gap-2 sm:gap-4 shrink-0">
-            <div class="flex items-center bg-black/60 border border-gray-700 px-3 py-1.5 rounded-full shadow-inner" id="bankroll-badge">
-                <span class="text-[#99E814] text-xs mr-2">💰</span>
-                <span id="bankroll-counter" class="font-mono font-bold text-sm text-white tabular-nums">€ 100.00</span>
-            </div>
             <div class="flex items-center bg-black/60 border border-gray-700 px-2.5 py-1.5 sm:px-3 rounded-full shadow-inner" id="xp-badge">
                 <span class="text-yellow-400 text-[10px] sm:text-xs mr-1.5">⚡</span>
                 <span id="xp-counter" class="font-mono font-bold text-[11px] sm:text-sm text-white tabular-nums">0 XP</span>
@@ -306,23 +299,23 @@
             </div>
         </section>
 
-        <section class="premium-card frame-emerald w-full p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden" style="content-visibility: auto;">
+        <section class="premium-card frame-neon w-full p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden" style="content-visibility: auto;">
             <div class="absolute inset-0 bg-gray-600 opacity-[0.02] blur-3xl pointer-events-none"></div>
 
             <div class="w-full max-w-4xl mx-auto flex justify-start items-center mb-3 md:mb-5 relative z-10">
-                <div class="bg-gray-900 text-emerald-400 border border-emerald-500/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest break-words" data-i18n="demoBadge">DEMO INTERATTIVA</div>
+                <div class="bg-gray-900 text-[#99E814] border border-[#99E814]/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest break-words" data-i18n="demoBadge">DEMO INTERATTIVA</div>
             </div>
 
-            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-[#10b981]/30 hover:border-[#10b981] transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
+            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-[#99E814]/30 hover:border-[#99E814] transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
                 
                 <div class="relative w-full overflow-hidden" style="aspect-ratio: 16/9;">
                     <img src="demo-odds.jpeg" alt="Demo Odds" decoding="async" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top z-0 transition-transform duration-1000 group-hover:scale-105 opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-[#063120]/80 z-10 transition-opacity duration-700 opacity-80 group-hover:opacity-90 pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-[#0a140f]/80 z-10 transition-opacity duration-700 opacity-80 group-hover:opacity-90 pointer-events-none"></div>
                     
                     <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none px-2">
-                        <div class="play-pulse px-4 py-3 sm:px-8 sm:py-4 bg-[#10b981] border border-[#10b981] rounded-lg sm:rounded-xl flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.5)] transform group-hover:scale-105 transition-all duration-500 ease-out group-hover:bg-[#34d399] group-hover:shadow-[0_0_40px_rgba(16,185,129,0.7)] pointer-events-auto gap-2 sm:gap-3 backdrop-blur-sm max-w-[90%]">
-                            <svg class="w-4 h-4 sm:w-6 sm:h-6 text-[#021a10] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                            <span class="text-[#021a10] font-black text-[10px] sm:text-sm md:text-base tracking-[0.1em] sm:tracking-[0.2em] uppercase truncate" data-i18n="startSimulator">Avvia Simulatore</span>
+                        <div class="play-pulse px-4 py-3 sm:px-8 sm:py-4 bg-[#99E814] border border-[#99E814] rounded-lg sm:rounded-xl flex items-center justify-center shadow-[0_0_30px_rgba(153,232,20,0.5)] transform group-hover:scale-105 transition-all duration-500 ease-out group-hover:bg-[#b3ff33] group-hover:shadow-[0_0_40px_rgba(153,232,20,0.7)] pointer-events-auto gap-2 sm:gap-3 backdrop-blur-sm max-w-[90%]">
+                            <svg class="w-4 h-4 sm:w-6 sm:h-6 text-[#050a05] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            <span class="text-[#050a05] font-black text-[10px] sm:text-sm md:text-base tracking-[0.1em] sm:tracking-[0.2em] uppercase truncate" data-i18n="startSimulator">Avvia Simulatore</span>
                         </div>
                     </div>
                 </div>
@@ -350,7 +343,7 @@
                 <span data-i18n="subNotActive">ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE</span>
             </div>
             
-            <a id="btn-next-lesson" href="https://tutorial-betting-exchange-room.vercel.app/" onclick="SoundEngine.click()" class="text-black bg-[#99E814] font-black w-full max-w-md mx-auto justify-center px-6 sm:px-10 py-5 rounded-2xl hover:bg-white transition-all text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(153,232,20,0.4)] hover:shadow-[0_0_40px_rgba(153,232,20,0.7)] touch-manipulation active:scale-95 flex items-center gap-3 z-10 transform-gpu group">
+            <a id="btn-next-lesson" href="https://tutorial-betting-exchange-room.vercel.app/" onclick="SoundEngine.click()" class="bg-gradient-to-b from-[#0a140f] to-[#050a05] text-[#99E814] border-2 border-[#99E814] font-black w-full max-w-md mx-auto justify-center px-6 sm:px-10 py-5 rounded-2xl hover:bg-[#99E814] hover:text-[#050a05] transition-all duration-300 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(153,232,20,0.2)] hover:shadow-[0_0_40px_rgba(153,232,20,0.6)] touch-manipulation active:scale-95 flex items-center gap-3 z-10 transform-gpu group">
                 <span data-i18n="navNextLesson" class="truncate">PROSSIMA LEZIONE</span> 
                 <span class="text-xl sm:text-2xl group-hover:translate-x-2 transition-transform duration-300 shrink-0">→</span>
             </a>
@@ -613,7 +606,7 @@
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
                     quizData: [
                         { q: "En el mercado Exchange, ¿quién es tu contraparte cuando haces 'Lay' a una cuota?", opts: ["El Bookmaker tradicional", "Otros usuarios que han hecho 'Back'", "La propia plataforma"], correct: 1, successMsg: "¡Exacto! Siempre apuestas contra una persona física.", failMsg: "Error. No es el bookmaker ni la plataforma. Inténtalo de nuevo." },
-                        { q: "¿Cuál es la ventaja principal del Betting Exchange?", opts: ["Cuotas fijas garantizadas para siempre", "Bonos de bienvenida altísimos", "Ausencia de limitaciones en cuentas ganadoras"], correct: 2, successMsg: "¡Correcto! Cuanto más ganas, más gana el Exchange.", failMsg: "Cuidado, no son las cuotas ni los bonos. Inténtalo de nuevo." },
+                        { q: "¿Cuál es la ventaja principal del Betting Exchange?", opts: ["Cuotas fijas garantidas para siempre", "Bonos de bienvenida altísimos", "Ausencia de limitaciones en cuentas ganadoras"], correct: 2, successMsg: "¡Correcto! Cuanto más ganas, más gana el Exchange.", failMsg: "Cuidado, no son las cuotas ni los bonos. Inténtalo de nuevo." },
                         { q: "¿Qué significa 'Liability'?", opts: ["El riesgo real/capital bloqueado cuando haces Lay", "El impuesto pagado a la plataforma", "El beneficio neto que esperas"], correct: 0, successMsg: "Exacto. La Liability es cuánto arriesgas realmente al hacer Lay.", failMsg: "Equivocado. No es un impuesto ni el beneficio. Inténtalo de nuevo." },
                         { q: "¿Cómo gana dinero la plataforma Exchange?", opts: ["Reteniendo los depósitos iniciales", "Con una comisión sobre las ganancias netas", "Tomando dinero cuando los usuarios pierden"], correct: 1, successMsg: "¡Correcto! Si pierdes, el dinero va a otro usuario, no a la plataforma.", failMsg: "No, la plataforma es neutral. Inténtalo de nuevo." },
                         { q: "¿Por qué la 'Liquididad' es fundamental?", opts: ["Aumenta la diversión del juego", "Sin volumen en el Order Book no puedes cerrar los trades", "Te hace ganar automáticamente"], correct: 1, successMsg: "¡Perfecto! Sin liquidez = No hay Trading.", failMsg: "Equivocado. La liquidez es esencial para el volumen. Inténtalo de nuevo." }
