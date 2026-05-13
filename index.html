@@ -10,12 +10,12 @@
     <title>Room AI | Global Exchange Academy</title>
     <meta name="description" content="Academy interattiva per il Betting Exchange. Impara la matematica e la gestione del rischio.">
 
-    <!-- Ottimizzazione DNS e connessioni per prestazioni da "scheggia" su Vercel/GitHub -->
+    <!-- Ottimizzazione DNS e connessioni -->
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
-    <!-- Preload Immagini Critiche (LCP) -->
+    <!-- Preload Immagini Critiche -->
     <link rel="preload" href="logo-tondo.jpeg" as="image">
     <link rel="preload" href="demo-odds.jpeg" as="image">
     
@@ -70,16 +70,16 @@
         .sub-warning { animation: pulse-sub 3s infinite ease-in-out; border: 1px solid; transition: all 0.3s ease; transform: translateZ(0); }
 
         @keyframes joystickNeon {
-            0% { filter: drop-shadow(0 0 10px rgba(153, 232, 20, 0.5)); transform: scale(1) translateZ(0); }
-            50% { filter: drop-shadow(0 0 35px rgba(153, 232, 20, 1)); transform: scale(1.15) translateZ(0); }
-            100% { filter: drop-shadow(0 0 10px rgba(153, 232, 20, 0.5)); transform: scale(1) translateZ(0); }
+            0% { filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5)); transform: scale(1) translateZ(0); }
+            50% { filter: drop-shadow(0 0 35px rgba(59, 130, 246, 1)); transform: scale(1.15) translateZ(0); }
+            100% { filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5)); transform: scale(1) translateZ(0); }
         }
         .joystick-pulse { animation: joystickNeon 2.5s ease-in-out infinite; display: inline-block; cursor: pointer; will-change: transform, filter; }
 
         @keyframes play-shadow-pulse {
-            0% { box-shadow: 0 0 0 0 rgba(153, 232, 20, 0.4), 0 8px 32px rgba(0,0,0,0.5); }
-            70% { box-shadow: 0 0 0 20px rgba(153, 232, 20, 0), 0 8px 32px rgba(0,0,0,0.5); }
-            100% { box-shadow: 0 0 0 0 rgba(153, 232, 20, 0), 0 8px 32px rgba(0,0,0,0.5); }
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6), 0 8px 32px rgba(0,0,0,0.5); }
+            70% { box-shadow: 0 0 0 20px rgba(16, 185, 129, 0), 0 8px 32px rgba(0,0,0,0.5); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0), 0 8px 32px rgba(0,0,0,0.5); }
         }
         .play-pulse { animation: play-shadow-pulse 2.5s infinite cubic-bezier(0.66, 0, 0, 1); transform: translateZ(0); }
 
@@ -89,13 +89,18 @@
         }
         .animate-fade-in-up { animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards; will-change: transform, opacity; }
 
-        /* STILE "CHI VUOL ESSERE MILIONARIO" PREMIUM ELITE */
-        .wwtbam-container {
+        /* STILE GENERICO CARDS ELITE */
+        .premium-card {
             background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
-            border: 2px solid #c5a059;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(197, 160, 89, 0.15);
             border-radius: 24px;
             position: relative;
+            transform: translateZ(0);
+        }
+        
+        /* Tema Oro (Quiz) */
+        .frame-gold {
+            border: 2px solid #c5a059;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(197, 160, 89, 0.15);
         }
         .wwtbam-question-box {
             background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.95) 0%, rgba(2, 6, 23, 0.95) 100%);
@@ -104,6 +109,36 @@
             position: relative;
             width: 100%;
         }
+
+        /* Tema Argento/Ciano (Video e Risorse) */
+        .frame-cyan {
+            border: 2px solid #00e5ff;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 229, 255, 0.15);
+            background: linear-gradient(135deg, #041419 0%, #08222a 100%);
+        }
+
+        /* Tema Smeraldo (Simulatore Demo) */
+        .frame-emerald {
+            border: 2px solid #10b981;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(16, 185, 129, 0.15);
+            background: linear-gradient(135deg, #021a10 0%, #063120 100%);
+        }
+
+        /* Tema Viola/Ametista (Pillola Finanziaria) */
+        .frame-purple {
+            border: 2px solid #a855f7;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(168, 85, 247, 0.15);
+            background: linear-gradient(135deg, #13051a 0%, #260a33 100%);
+        }
+
+        /* Tema Zaffiro/Blu (Gioco Educativo) */
+        .frame-blue {
+            border: 2px solid #3b82f6;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(59, 130, 246, 0.15);
+            background: linear-gradient(135deg, #05101a 0%, #0a2133 100%);
+        }
+
+        /* Bottoni Stile Milionario */
         .wwtbam-btn {
             background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
             border: 1px solid rgba(197, 160, 89, 0.5);
@@ -133,6 +168,33 @@
             box-shadow: 0 0 25px rgba(239, 68, 68, 0.3) !important;
             color: #ffffff !important;
         }
+
+        /* Bandierine Lingua (Nuova Posizione Centro Alto) */
+        .lang-flag {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border-radius: 6px;
+        }
+        .lang-flag.active {
+            opacity: 1;
+            transform: scale(1.15) translateY(-2px);
+            border-color: #99E814;
+            box-shadow: 0 6px 12px rgba(153, 232, 20, 0.3), 0 0 0 2px rgba(153, 232, 20, 0.5);
+            filter: grayscale(0%);
+            z-index: 10;
+        }
+        .lang-flag.inactive {
+            opacity: 0.6;
+            filter: grayscale(60%) contrast(1.2);
+            border-color: transparent;
+            transform: scale(1);
+        }
+        .lang-flag.inactive:hover {
+            opacity: 0.9;
+            filter: grayscale(20%);
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body class="text-gray-200 pb-12 selection:bg-[#99E814] selection:text-black antialiased relative">
@@ -144,7 +206,7 @@
         </div>
         
         <div class="flex items-center gap-2 sm:gap-4 shrink-0">
-            <div class="hidden sm:flex items-center bg-black/60 border border-gray-700 px-3 py-1.5 rounded-full shadow-inner" id="bankroll-badge">
+            <div class="flex items-center bg-black/60 border border-gray-700 px-3 py-1.5 rounded-full shadow-inner" id="bankroll-badge">
                 <span class="text-[#99E814] text-xs mr-2">💰</span>
                 <span id="bankroll-counter" class="font-mono font-bold text-sm text-white tabular-nums">€ 100.00</span>
             </div>
@@ -152,16 +214,28 @@
                 <span class="text-yellow-400 text-[10px] sm:text-xs mr-1.5">⚡</span>
                 <span id="xp-counter" class="font-mono font-bold text-[11px] sm:text-sm text-white tabular-nums">0 XP</span>
             </div>
-            <select id="lang-switcher" class="bg-gray-900/90 text-white text-[10px] sm:text-xs font-bold uppercase p-2 md:p-2.5 rounded cursor-pointer border border-[#99E814]/40 focus:outline-none focus:ring-1 focus:ring-[#99E814] appearance-none shadow-lg">
-                <option value="it">🇮🇹 IT</option>
-                <option value="en">🇬🇧 EN</option>
-                <option value="es">🇪🇸 ES</option>
-                <option value="pt">🇧🇷 PT</option>
-            </select>
         </div>
     </header>
 
-    <main class="w-full max-w-5xl mx-auto px-3 sm:px-6 mt-6 md:mt-10 space-y-6 md:space-y-10">
+    <main class="w-full max-w-5xl mx-auto px-3 sm:px-6 mt-4 md:mt-8 space-y-6 md:space-y-10">
+
+        <!-- Selettore Lingue Premium - Posizione Centrale -->
+        <div class="flex justify-center w-full px-4 mb-4 animate-fade-in-up">
+            <div class="flex items-center justify-center gap-3 sm:gap-5 bg-gradient-to-r from-gray-900/40 via-gray-900/80 to-gray-900/40 border border-[#99E814]/20 py-2.5 px-6 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
+                <button onclick="window.changeLang('it')" class="lang-flag active border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none" data-lang="it" aria-label="Italiano">
+                    <img src="https://flagcdn.com/w40/it.png" alt="IT" class="w-full h-full object-cover">
+                </button>
+                <button onclick="window.changeLang('en')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none" data-lang="en" aria-label="English">
+                    <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-full h-full object-cover">
+                </button>
+                <button onclick="window.changeLang('es')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none" data-lang="es" aria-label="Español">
+                    <img src="https://flagcdn.com/w40/es.png" alt="ES" class="w-full h-full object-cover">
+                </button>
+                <button onclick="window.changeLang('pt')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none" data-lang="pt" aria-label="Português">
+                    <img src="https://flagcdn.com/w40/br.png" alt="PT" class="w-full h-full object-cover">
+                </button>
+            </div>
+        </div>
 
         <div class="flex justify-center w-full px-4 mb-2 animate-fade-in-up">
             <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 sm:gap-4 bg-[#24A1DE] hover:bg-[#1d82b3] text-white font-black text-[13px] sm:text-base md:text-lg px-6 sm:px-10 py-4 sm:py-5 rounded-2xl shadow-[0_0_20px_rgba(36,161,222,0.4)] hover:shadow-[0_0_30px_rgba(36,161,222,0.7)] transition-all duration-300 transform-gpu hover:-translate-y-1 active:scale-95 w-full max-w-3xl mx-auto border border-[#24A1DE]/40 group touch-manipulation">
@@ -178,30 +252,26 @@
             <p class="text-gray-400 max-w-2xl mx-auto text-xs sm:text-sm md:text-base font-bold leading-relaxed mt-2" data-i18n="lessonDesc">Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.</p>
         </div>
 
-        <!-- FASE 1: LEZIONE & RISORSE -->
-        <section class="glass-panel w-full rounded-2xl md:rounded-[2rem] p-3 sm:p-6 md:p-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
+        <section class="premium-card frame-cyan w-full p-3 sm:p-6 md:p-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
             
-            <!-- Video YouTube NATIVO -->
-            <div id="video-wrapper" class="relative w-full aspect-video bg-[#0a140f] rounded-xl md:rounded-2xl overflow-hidden border border-gray-800 shadow-xl ring-1 ring-white/5 transform-gpu">
+            <div id="video-wrapper" class="relative w-full aspect-video bg-[#0a140f] rounded-xl md:rounded-2xl overflow-hidden border border-[#00e5ff]/30 shadow-xl ring-1 ring-white/5 transform-gpu">
                 <iframe id="main-video" class="absolute inset-0 w-full h-full z-20" src="https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             
-            <div class="grid grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6 w-full max-w-3xl mx-auto">
-                <!-- FIX PODCAST: Convertito in tag <a> nativo per aggirare i blocchi dei browser in-app (Telegram/IG) -->
-                <a id="btn-podcast" href="#" target="_blank" rel="noopener noreferrer" onclick="SoundEngine.click()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
-                    <svg class="w-7 h-7 sm:w-8 sm:h-8 sm:mr-3 mb-2 sm:mb-0 text-[#00e5ff] group-hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
-                    <span class="font-black text-[11px] sm:text-sm md:text-base tracking-wider uppercase text-[#00e5ff] break-words leading-tight" data-i18n="btnPodcast">Podcast</span>
+            <div class="grid grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6 w-full max-w-4xl mx-auto">
+                <a id="btn-podcast" href="#" target="_blank" rel="noopener noreferrer" onclick="SoundEngine.click()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col md:flex-row touch-manipulation transform-gpu min-h-[90px]">
+                    <svg class="w-7 h-7 sm:w-8 sm:h-8 md:mr-3 mb-2 md:mb-0 text-[#00e5ff] group-hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
+                    <span class="font-black text-[10px] sm:text-xs md:text-sm tracking-widest uppercase text-[#00e5ff] break-words leading-tight" data-i18n="btnPodcast">ASCOLTA IL PODCAST</span>
                 </a>
-                <button onclick="openEbookModal()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#ffb703]/10 hover:border-[#ffb703]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col sm:flex-row touch-manipulation transform-gpu min-h-[80px]">
-                    <svg class="w-7 h-7 sm:w-8 sm:h-8 sm:mr-3 mb-2 sm:mb-0 text-[#ffb703] group-hover:drop-shadow-[0_0_8px_rgba(255,183,3,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    <span class="font-black text-[11px] sm:text-sm md:text-base tracking-wider uppercase text-[#ffb703] transition-colors break-words leading-tight" data-i18n="btnEbook">E-Book</span>
+                <button onclick="openEbookModal()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#ffb703]/10 hover:border-[#ffb703]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col md:flex-row touch-manipulation transform-gpu min-h-[90px]">
+                    <svg class="w-7 h-7 sm:w-8 sm:h-8 md:mr-3 mb-2 md:mb-0 text-[#ffb703] group-hover:drop-shadow-[0_0_8px_rgba(255,183,3,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    <span class="font-black text-[10px] sm:text-xs md:text-sm tracking-widest uppercase text-[#ffb703] transition-colors break-words leading-tight" data-i18n="btnEbook">VISUALIZZA IL MANUALE</span>
                 </button>
             </div>
 
         </section>
 
-        <!-- FASE 2: QUIZ WWTBAM PREMIUM ELITE -->
-        <section class="wwtbam-container w-full p-4 sm:p-6 md:p-10 lg:col-span-1 h-fit" id="quiz-section">
+        <section class="premium-card frame-gold w-full p-4 sm:p-6 md:p-10 lg:col-span-1 h-fit" id="quiz-section">
             
             <div id="quiz-container" class="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center">
                 
@@ -236,49 +306,45 @@
             </div>
         </section>
 
-        <!-- FASE 3: BANNER SIMULATORE ELEGANTE -->
-        <section class="glass-panel w-full rounded-2xl md:rounded-[2rem] p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden" style="content-visibility: auto;">
+        <section class="premium-card frame-emerald w-full p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden" style="content-visibility: auto;">
             <div class="absolute inset-0 bg-gray-600 opacity-[0.02] blur-3xl pointer-events-none"></div>
 
             <div class="w-full max-w-4xl mx-auto flex justify-start items-center mb-3 md:mb-5 relative z-10">
-                <div class="bg-gray-800 text-gray-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest break-words" data-i18n="demoBadge">DEMO INTERATTIVA</div>
+                <div class="bg-gray-900 text-emerald-400 border border-emerald-500/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest break-words" data-i18n="demoBadge">DEMO INTERATTIVA</div>
             </div>
 
-            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-gray-800 hover:border-[#99E814]/50 transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
+            <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-[#10b981]/30 hover:border-[#10b981] transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
                 
                 <div class="relative w-full overflow-hidden" style="aspect-ratio: 16/9;">
                     <img src="demo-odds.jpeg" alt="Demo Odds" decoding="async" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top z-0 transition-transform duration-1000 group-hover:scale-105 opacity-100">
-                    <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10 transition-opacity duration-700 opacity-80 group-hover:opacity-90 pointer-events-none"></div>
+                    <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-[#063120]/80 z-10 transition-opacity duration-700 opacity-80 group-hover:opacity-90 pointer-events-none"></div>
                     
                     <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none px-2">
-                        <div class="play-pulse px-4 py-3 sm:px-8 sm:py-4 bg-[#99E814] border border-[#99E814] rounded-lg sm:rounded-xl flex items-center justify-center shadow-[0_0_30px_rgba(153,232,20,0.5)] transform group-hover:scale-105 transition-all duration-500 ease-out group-hover:bg-[#b0ff26] group-hover:shadow-[0_0_40px_rgba(153,232,20,0.7)] pointer-events-auto gap-2 sm:gap-3 backdrop-blur-sm max-w-[90%]">
-                            <svg class="w-4 h-4 sm:w-6 sm:h-6 text-[#050a05] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                            <span class="text-[#050a05] font-black text-[10px] sm:text-sm md:text-base tracking-[0.1em] sm:tracking-[0.2em] uppercase truncate" data-i18n="startSimulator">Avvia Simulatore</span>
+                        <div class="play-pulse px-4 py-3 sm:px-8 sm:py-4 bg-[#10b981] border border-[#10b981] rounded-lg sm:rounded-xl flex items-center justify-center shadow-[0_0_30px_rgba(16,185,129,0.5)] transform group-hover:scale-105 transition-all duration-500 ease-out group-hover:bg-[#34d399] group-hover:shadow-[0_0_40px_rgba(16,185,129,0.7)] pointer-events-auto gap-2 sm:gap-3 backdrop-blur-sm max-w-[90%]">
+                            <svg class="w-4 h-4 sm:w-6 sm:h-6 text-[#021a10] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                            <span class="text-[#021a10] font-black text-[10px] sm:text-sm md:text-base tracking-[0.1em] sm:tracking-[0.2em] uppercase truncate" data-i18n="startSimulator">Avvia Simulatore</span>
                         </div>
                     </div>
                 </div>
             </a>
         </section>
         
-        <!-- FASE FINALE: PILLOLA FINANZIARIA -->
-        <section class="glass-panel w-full rounded-2xl md:rounded-[2rem] p-5 sm:p-8 relative overflow-hidden transform-gpu border-t-4 border-t-[#99E814]" style="content-visibility: auto;">
-            <p class="text-[9px] sm:text-[11px] md:text-xs text-[#99E814] font-black mb-2 sm:mb-4 tracking-[0.2em] uppercase text-center md:text-left break-words" data-i18n="finLabel">PILLOLA FINANZIARIA</p>
+        <section class="premium-card frame-purple w-full p-5 sm:p-8 relative overflow-hidden transform-gpu" style="content-visibility: auto;">
+            <p class="text-[9px] sm:text-[11px] md:text-xs text-[#a855f7] font-black mb-2 sm:mb-4 tracking-[0.2em] uppercase text-center md:text-left break-words" data-i18n="finLabel">PILLOLA FINANZIARIA</p>
             <p class="text-xs sm:text-base md:text-lg text-gray-300 font-medium italic leading-relaxed text-center md:text-left break-words w-full">"<span data-i18n="finQuote">Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.</span>"</p>
         </section>
 
-        <!-- JOYSTICK CTA (MARKETING ELITE) -->
-        <div class="flex flex-col items-center justify-center pt-12 pb-4 w-full relative">
-            <div class="text-center space-y-3 mb-6 px-4 animate-fade-in-up">
-                <h4 class="text-[#24A1DE] font-black text-lg sm:text-xl md:text-2xl tracking-[0.2em] uppercase drop-shadow-[0_0_15px_rgba(36,161,222,0.5)]" data-i18n="penaltiesTitle">GIOCO EDUCATIVO</h4>
+        <section class="premium-card frame-blue w-full p-6 sm:p-10 flex flex-col items-center justify-center relative transform-gpu">
+            <div class="text-center space-y-3 mb-6 px-4 animate-fade-in-up relative z-10">
+                <h4 class="text-[#3b82f6] font-black text-lg sm:text-xl md:text-2xl tracking-[0.2em] uppercase drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" data-i18n="penaltiesTitle">GIOCO EDUCATIVO</h4>
                 <p class="text-gray-300 text-xs sm:text-sm md:text-base font-medium max-w-lg mx-auto leading-relaxed" data-i18n="penaltiesDesc">Clicca il joystick per scommettere sui rigori.</p>
             </div>
-            <a href="https://penalties-zero-to-hero-academy.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-6xl sm:text-7xl md:text-8xl hover:scale-125 transition-transform duration-500 touch-manipulation joystick-pulse transform-gpu shrink-0 relative z-10" title="Play Penalties Live" onclick="SoundEngine.click()">
+            <a href="https://penalties-zero-to-hero-academy.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-6xl sm:text-7xl md:text-8xl hover:scale-125 transition-transform duration-500 touch-manipulation joystick-pulse transform-gpu shrink-0 relative z-10 mt-4" title="Play Penalties Live" onclick="SoundEngine.click()">
                 🎮
-                <div class="absolute inset-0 bg-[#99E814] rounded-full blur-[50px] opacity-10 -z-10"></div>
+                <div class="absolute inset-0 bg-[#3b82f6] rounded-full blur-[50px] opacity-20 -z-10"></div>
             </a>
-        </div>
+        </section>
 
-        <!-- FOOTER NAV SPOSTATO IN FONDO -->
         <div class="flex flex-col justify-center items-center pt-8 pb-4 border-t border-gray-800/50 relative gap-4 w-full">
             <div id="sub-warning-msg" class="hidden absolute inset-0 md:static sub-warning px-4 sm:px-8 py-3.5 sm:py-4 rounded-xl text-[10px] sm:text-xs md:text-sm font-black uppercase tracking-[0.15em] sm:tracking-[0.2em] text-center w-full items-center justify-center gap-2 z-20 break-words">
                 <span data-i18n="subNotActive">ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE</span>
@@ -292,13 +358,12 @@
 
     </main>
 
-    <!-- MODALE EBOOK -->
     <div id="ebook-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-0 sm:p-4 md:p-6 opacity-0 transition-opacity duration-300">
         <div class="bg-[#050a05] w-full max-w-4xl h-full sm:h-auto sm:max-h-[95vh] rounded-none sm:rounded-3xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative modern-ebook" id="ebook-modal-content">
             <div class="flex justify-between items-center p-4 md:p-6 border-b border-gray-800 bg-[#050a05] shrink-0 z-10 w-full">
                 <h3 class="text-[#99E814] font-black uppercase tracking-widest text-[11px] sm:text-sm md:text-base flex items-center gap-2 truncate">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#ffb703] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg> 
-                    <span class="text-[#ffb703] truncate" data-i18n="btnEbook">E-Book</span>
+                    <span class="text-[#ffb703] truncate" data-i18n="btnEbookTitle">MANUALE</span>
                 </h3>
                 <button onclick="closeEbookModal()" class="text-gray-400 hover:text-white text-3xl md:text-4xl leading-none px-3 py-1 rounded-lg active:scale-95 touch-manipulation transition-colors shrink-0">&times;</button>
             </div>
@@ -373,8 +438,8 @@
                     demoBadge: "DEMO INTERATTIVA", startSimulator: "AVVIA SIMULATORE",
                     penaltiesTitle: "GIOCO EDUCATIVO", penaltiesDesc: "Clicca il joystick per scommettere sui rigori.",
                     quizProgress: "Domanda {step} di 5",
-                    btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Ripeti il test",
-                    btnTelegram: "SALA SEGNALI GRATUITI",
+                    btnPodcast: "ASCOLTA IL PODCAST", btnEbook: "VISUALIZZA IL MANUALE", btnEbookTitle: "MANUALE", btnRetryQuiz: "Ripeti il test",
+                    btnTelegram: "SALA SEGNALI GRATUITI", navNextLesson: "PROSSIMA LEZIONE",
                     videoUrl: "https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/8kjONb-eUt0/maxresdefault.jpg",
                     quizData: [
                         { q: "Nel mercato Exchange, chi è la tua controparte quando 'Banchi' una quota?", opts: ["Il Bookmaker tradizionale", "Altri utenti che hanno 'Puntato'", "La piattaforma stessa"], correct: 1, successMsg: "Esatto! Scommetti sempre contro una persona fisica.", failMsg: "Errore. Non è il bookmaker né la piattaforma. Riprova." },
@@ -458,8 +523,8 @@
                     demoBadge: "INTERACTIVE DEMO", startSimulator: "START SIMULATOR",
                     penaltiesTitle: "EDUCATIONAL GAME", penaltiesDesc: "Click the joystick to bet on penalties.",
                     quizProgress: "Question {step} of 5",
-                    btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Retry Test",
-                    btnTelegram: "FREE SIGNALS ROOM",
+                    btnPodcast: "LISTEN TO THE PODCAST", btnEbook: "VIEW THE MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Retry Test",
+                    btnTelegram: "FREE SIGNALS ROOM", navNextLesson: "NEXT LESSON",
                     videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
                     quizData: [
                         { q: "In the Exchange market, who is your counterparty when you 'Lay'?", opts: ["The traditional Bookmaker", "Other users who have 'Backed'", "The platform itself"], correct: 1, successMsg: "Exactly! You bet against real people.", failMsg: "Error. It's not the bookmaker. Try again." },
@@ -543,8 +608,8 @@
                     demoBadge: "DEMO INTERACTIVA", startSimulator: "INICIAR SIMULADOR",
                     penaltiesTitle: "JUEGO EDUCATIVO", penaltiesDesc: "Haz clic en el joystick para apostar en los penaltis.",
                     quizProgress: "Pregunta {step} de 5",
-                    btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Test",
-                    btnTelegram: "SALA DE SEÑALES GRATIS",
+                    btnPodcast: "ESCUCHA EL PODCAST", btnEbook: "VER EL MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Repetir Test",
+                    btnTelegram: "SALA DE SEÑALES GRATIS", navNextLesson: "PRÓXIMA LECCIÓN",
                     videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
                     quizData: [
                         { q: "En el mercado Exchange, ¿quién es tu contraparte cuando haces 'Lay' a una cuota?", opts: ["El Bookmaker tradicional", "Otros usuarios que han hecho 'Back'", "La propia plataforma"], correct: 1, successMsg: "¡Exacto! Siempre apuestas contra una persona física.", failMsg: "Error. No es el bookmaker ni la plataforma. Inténtalo de nuevo." },
@@ -628,8 +693,8 @@
                     demoBadge: "DEMO INTERATIVA", startSimulator: "INICIAR SIMULADOR",
                     penaltiesTitle: "JOGO EDUCATIVO", penaltiesDesc: "Clique no joystick para apostar nos pênaltis.",
                     quizProgress: "Pergunta {step} de 5",
-                    btnPodcast: "Podcast", btnEbook: "E-Book", btnRetryQuiz: "Repetir Teste",
-                    btnTelegram: "SALA DE SINAIS GRÁTIS",
+                    btnPodcast: "OUÇA O PODCAST", btnEbook: "VER O MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Repetir Teste",
+                    btnTelegram: "SALA DE SINAIS GRÁTIS", navNextLesson: "PRÓXIMA LIÇÃO",
                     videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
                     quizData: [
                         { q: "No mercado Exchange, quem é a sua contraparte quando faz 'Lay' a uma odd?", opts: ["O Bookmaker tradicional", "Outros utilizadores que fizeram 'Back'", "A própria plataforma"], correct: 1, successMsg: "Exato! Você aposta sempre contra uma pessoa física.", failMsg: "Erro. Não é o bookmaker nem a plataforma. Tente novamente." },
@@ -716,8 +781,17 @@
                     const targetLang = dict[lang] ? lang : 'en';
                     State.lang = targetLang;
                     document.documentElement.lang = targetLang;
-                    const select = document.getElementById('lang-switcher');
-                    if(select) select.value = targetLang;
+                    
+                    // Aggiorna lo stato visivo delle bandiere
+                    document.querySelectorAll('.lang-flag').forEach(btn => {
+                        if(btn.getAttribute('data-lang') === targetLang) {
+                            btn.classList.add('active');
+                            btn.classList.remove('inactive');
+                        } else {
+                            btn.classList.add('inactive');
+                            btn.classList.remove('active');
+                        }
+                    });
                     
                     document.querySelectorAll('[data-i18n]').forEach(el => {
                         const key = el.getAttribute('data-i18n');
@@ -736,7 +810,6 @@
                     const ebookContainer = document.getElementById('ebook-content-container');
                     if(ebookContainer) ebookContainer.innerHTML = dict[targetLang].ebookContent || dict['en'].ebookContent;
 
-                    // FIX PODCAST: Aggiornamento dinamico dell'href per garantire compatibilità con tutti i webview
                     const podcastLink = document.getElementById('btn-podcast');
                     if (podcastLink) podcastLink.href = podcastUrls[targetLang] || podcastUrls['en'];
 
@@ -860,6 +933,11 @@
                 Gamification.renderQuiz();
                 try { localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ lang: State.lang, xp: State.xp, currentQuizStep: State.currentQuizStep, quizCompleted: State.quizCompleted })); } catch(e){}
             };
+            
+            window.changeLang = function(l) { 
+                SoundEngine.click(); 
+                UIManager.setLanguage(l); 
+            };
 
             return {
                 init: () => {
@@ -877,10 +955,6 @@
                     UIManager.setLanguage(initialLang);
                     UIManager.updateDashboards();
                     
-                    document.getElementById('lang-switcher').addEventListener('change', (e) => {
-                        SoundEngine.click(); UIManager.setLanguage(e.target.value);
-                    });
-                    
                     const unlockAudio = () => {
                         SoundEngine.init(); 
                         document.body.removeEventListener('click', unlockAudio);
@@ -889,8 +963,7 @@
                     document.body.addEventListener('click', unlockAudio, { once: true });
                     document.body.addEventListener('touchstart', unlockAudio, { once: true });
                 },
-                triggerQuiz: Gamification.checkQuiz,
-                getDictStr: (key) => dict[State.lang][key] || dict['en'][key]
+                triggerQuiz: Gamification.checkQuiz
             };
         })();
 
