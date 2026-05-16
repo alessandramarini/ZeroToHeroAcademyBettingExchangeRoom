@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
@@ -8,7 +8,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Room AI | Global Exchange Academy</title>
-    <meta name="description" content="Academy interattiva per il Betting Exchange. Impara la matematica e la gestione del rischio.">
+    <meta name="description" content="Interactive Betting Exchange Academy. Learn math and risk management.">
 
     <link rel="dns-prefetch" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -95,11 +95,7 @@
             transform: translateZ(0);
         }
         
-        /* Tema Oro (Quiz) */
-        .frame-gold {
-            border: 2px solid #c5a059;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(197, 160, 89, 0.15);
-        }
+        .frame-gold { border: 2px solid #c5a059; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(197, 160, 89, 0.15); }
         .wwtbam-question-box {
             background: radial-gradient(ellipse at center, rgba(30, 41, 59, 0.95) 0%, rgba(2, 6, 23, 0.95) 100%);
             border: 1px solid #d4af37;
@@ -108,33 +104,10 @@
             width: 100%;
         }
 
-        /* Tema Argento/Ciano (Video e Risorse) */
-        .frame-cyan {
-            border: 2px solid #00e5ff;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 229, 255, 0.15);
-            background: linear-gradient(135deg, #041419 0%, #08222a 100%);
-        }
-
-        /* Tema Verde Neon (Simulatore Demo Aziendale) */
-        .frame-neon {
-            border: 2px solid #99E814;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(153, 232, 20, 0.15);
-            background: linear-gradient(135deg, #0a140f 0%, #112211 100%);
-        }
-
-        /* Tema Viola/Ametista (Pillola Finanziaria) */
-        .frame-purple {
-            border: 2px solid #a855f7;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(168, 85, 247, 0.15);
-            background: linear-gradient(135deg, #13051a 0%, #260a33 100%);
-        }
-
-        /* Tema Zaffiro/Blu (Gioco Educativo) */
-        .frame-blue {
-            border: 2px solid #3b82f6;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(59, 130, 246, 0.15);
-            background: linear-gradient(135deg, #05101a 0%, #0a2133 100%);
-        }
+        .frame-cyan { border: 2px solid #00e5ff; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 229, 255, 0.15); background: linear-gradient(135deg, #041419 0%, #08222a 100%); }
+        .frame-neon { border: 2px solid #99E814; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(153, 232, 20, 0.15); background: linear-gradient(135deg, #0a140f 0%, #112211 100%); }
+        .frame-purple { border: 2px solid #a855f7; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(168, 85, 247, 0.15); background: linear-gradient(135deg, #13051a 0%, #260a33 100%); }
+        .frame-blue { border: 2px solid #3b82f6; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(59, 130, 246, 0.15); background: linear-gradient(135deg, #05101a 0%, #0a2133 100%); }
 
         .wwtbam-btn {
             background: linear-gradient(180deg, #0f172a 0%, #020617 100%);
@@ -146,6 +119,7 @@
             overflow: hidden;
             min-height: 3.5rem;
             word-wrap: break-word;
+            height: auto;
         }
         .wwtbam-btn:hover:not(:disabled) {
             background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
@@ -153,45 +127,13 @@
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.4), inset 0 0 10px rgba(212, 175, 55, 0.2);
             transform: translateY(-1px);
         }
-        .wwtbam-btn.correct {
-            background: linear-gradient(180deg, #064e3b 0%, #022c22 100%) !important;
-            border-color: #10b981 !important;
-            box-shadow: 0 0 25px rgba(16, 185, 129, 0.3) !important;
-            color: #ffffff !important;
-        }
-        .wwtbam-btn.wrong {
-            background: linear-gradient(180deg, #7f1d1d 0%, #450a0a 100%) !important;
-            border-color: #ef4444 !important;
-            box-shadow: 0 0 25px rgba(239, 68, 68, 0.3) !important;
-            color: #ffffff !important;
-        }
+        .wwtbam-btn.correct { background: linear-gradient(180deg, #064e3b 0%, #022c22 100%) !important; border-color: #10b981 !important; box-shadow: 0 0 25px rgba(16, 185, 129, 0.3) !important; color: #ffffff !important; }
+        .wwtbam-btn.wrong { background: linear-gradient(180deg, #7f1d1d 0%, #450a0a 100%) !important; border-color: #ef4444 !important; box-shadow: 0 0 25px rgba(239, 68, 68, 0.3) !important; color: #ffffff !important; }
 
-        /* Bandierine Lingua */
-        .lang-flag {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            border-radius: 6px;
-        }
-        .lang-flag.active {
-            opacity: 1;
-            transform: scale(1.15) translateY(-2px);
-            border-color: #99E814;
-            box-shadow: 0 6px 12px rgba(153, 232, 20, 0.3), 0 0 0 2px rgba(153, 232, 20, 0.5);
-            filter: grayscale(0%);
-            z-index: 10;
-        }
-        .lang-flag.inactive {
-            opacity: 0.6;
-            filter: grayscale(60%) contrast(1.2);
-            border-color: transparent;
-            transform: scale(1);
-        }
-        .lang-flag.inactive:hover {
-            opacity: 0.9;
-            filter: grayscale(20%);
-            transform: scale(1.05);
-        }
+        .lang-flag { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden; border-radius: 6px; }
+        .lang-flag.active { opacity: 1; transform: scale(1.15) translateY(-2px); border-color: #99E814; box-shadow: 0 6px 12px rgba(153, 232, 20, 0.3), 0 0 0 2px rgba(153, 232, 20, 0.5); filter: grayscale(0%); z-index: 10; }
+        .lang-flag.inactive { opacity: 0.6; filter: grayscale(60%) contrast(1.2); border-color: transparent; transform: scale(1); }
+        .lang-flag.inactive:hover { opacity: 0.9; filter: grayscale(20%); transform: scale(1.05); }
     </style>
 </head>
 <body class="text-gray-200 pb-12 selection:bg-[#99E814] selection:text-black antialiased relative">
@@ -212,30 +154,29 @@
 
     <main class="w-full max-w-5xl mx-auto px-3 sm:px-6 mt-4 md:mt-8 space-y-6 md:space-y-10">
 
-        <!-- Selettore Lingue Premium - Posizione Centrale -->
         <div class="flex justify-center w-full px-4 mb-4 animate-fade-in-up">
-            <div class="flex items-center justify-center gap-3 sm:gap-5 bg-gradient-to-r from-gray-900/40 via-gray-900/80 to-gray-900/40 border border-[#99E814]/20 py-2.5 px-6 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md">
-                <button onclick="window.changeLang('it')" class="lang-flag active border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none" data-lang="it" aria-label="Italiano">
-                    <img src="https://flagcdn.com/w40/it.png" alt="IT" class="w-full h-full object-cover">
-                </button>
-                <button onclick="window.changeLang('en')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none" data-lang="en" aria-label="English">
+            <div class="flex items-center justify-center gap-3 sm:gap-5 bg-gradient-to-r from-gray-900/40 via-gray-900/80 to-gray-900/40 border border-[#99E814]/20 py-2.5 px-6 rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md flex-wrap">
+                <button onclick="window.changeLang('en')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none shrink-0" data-lang="en" aria-label="English">
                     <img src="https://flagcdn.com/w40/gb.png" alt="EN" class="w-full h-full object-cover">
                 </button>
-                <button onclick="window.changeLang('es')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none" data-lang="es" aria-label="Español">
+                <button onclick="window.changeLang('es')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none shrink-0" data-lang="es" aria-label="Español">
                     <img src="https://flagcdn.com/w40/es.png" alt="ES" class="w-full h-full object-cover">
                 </button>
-                <button onclick="window.changeLang('pt')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none" data-lang="pt" aria-label="Português">
+                <button onclick="window.changeLang('pt')" class="lang-flag inactive border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none shrink-0" data-lang="pt" aria-label="Português">
                     <img src="https://flagcdn.com/w40/br.png" alt="PT" class="w-full h-full object-cover">
+                </button>
+                <button onclick="window.changeLang('it')" class="lang-flag active border-2 w-8 h-6 sm:w-10 sm:h-7 flex items-center justify-center bg-gray-800 touch-manipulation focus:outline-none shrink-0" data-lang="it" aria-label="Italiano">
+                    <img src="https://flagcdn.com/w40/it.png" alt="IT" class="w-full h-full object-cover">
                 </button>
             </div>
         </div>
 
         <div class="flex justify-center w-full px-4 mb-2 animate-fade-in-up">
-            <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 sm:gap-4 bg-[#24A1DE] hover:bg-[#1d82b3] text-white font-black text-[13px] sm:text-base md:text-lg px-6 sm:px-10 py-4 sm:py-5 rounded-2xl shadow-[0_0_20px_rgba(36,161,222,0.4)] hover:shadow-[0_0_30px_rgba(36,161,222,0.7)] transition-all duration-300 transform-gpu hover:-translate-y-1 active:scale-95 w-full max-w-3xl mx-auto border border-[#24A1DE]/40 group touch-manipulation">
+            <a href="https://t.me/BettingExchangeRoomFree" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-3 sm:gap-4 bg-[#24A1DE] hover:bg-[#1d82b3] text-white font-black text-[13px] sm:text-base md:text-lg px-4 sm:px-10 py-4 sm:py-5 rounded-2xl shadow-[0_0_20px_rgba(36,161,222,0.4)] hover:shadow-[0_0_30px_rgba(36,161,222,0.7)] transition-all duration-300 transform-gpu hover:-translate-y-1 active:scale-95 w-full max-w-3xl mx-auto border border-[#24A1DE]/40 group touch-manipulation">
                 <svg class="w-6 h-6 sm:w-8 sm:h-8 fill-current group-hover:rotate-12 transition-transform duration-300 shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
                 </svg>
-                <span class="tracking-[0.05em] sm:tracking-[0.15em] uppercase truncate" data-i18n="btnTelegram">SALA SEGNALI GRATUITI</span>
+                <span class="tracking-[0.05em] sm:tracking-[0.15em] uppercase text-center break-words w-full" data-i18n="btnTelegram">SALA SEGNALI GRATUITI</span>
             </a>
         </div>
 
@@ -245,36 +186,32 @@
             <p class="text-gray-400 max-w-2xl mx-auto text-xs sm:text-sm md:text-base font-bold leading-relaxed mt-2" data-i18n="lessonDesc">Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.</p>
         </div>
 
-        <section class="premium-card frame-cyan w-full p-3 sm:p-6 md:p-8" style="content-visibility: auto; contain-intrinsic-size: 500px;">
-            
+        <section class="premium-card frame-cyan w-full p-3 sm:p-6 md:p-8">
             <div id="video-wrapper" class="relative w-full aspect-video bg-[#0a140f] rounded-xl md:rounded-2xl overflow-hidden border border-[#00e5ff]/30 shadow-xl ring-1 ring-white/5 transform-gpu">
                 <iframe id="main-video" class="absolute inset-0 w-full h-full z-20" src="https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
             
-            <div class="grid grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6 w-full max-w-4xl mx-auto">
-                <a id="btn-podcast" href="#" target="_blank" rel="noopener noreferrer" onclick="SoundEngine.click()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col md:flex-row touch-manipulation transform-gpu min-h-[90px]">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-6 mt-4 sm:mt-6 w-full max-w-4xl mx-auto">
+                <a id="btn-podcast" href="#" target="_blank" rel="noopener noreferrer" onclick="SoundEngine.click()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#00e5ff]/10 hover:border-[#00e5ff]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col md:flex-row touch-manipulation transform-gpu min-h-[90px] w-full">
                     <svg class="w-7 h-7 sm:w-8 sm:h-8 md:mr-3 mb-2 md:mb-0 text-[#00e5ff] group-hover:drop-shadow-[0_0_8px_rgba(0,229,255,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
-                    <span class="font-black text-[10px] sm:text-xs md:text-sm tracking-widest uppercase text-[#00e5ff] break-words leading-tight" data-i18n="btnPodcast">ASCOLTA IL PODCAST</span>
+                    <span class="font-black text-[10px] sm:text-xs md:text-sm tracking-widest uppercase text-[#00e5ff] break-words leading-tight w-full" data-i18n="btnPodcast">ASCOLTA IL PODCAST</span>
                 </a>
-                <button onclick="openEbookModal()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#ffb703]/10 hover:border-[#ffb703]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col md:flex-row touch-manipulation transform-gpu min-h-[90px]">
+                <button onclick="openEbookModal()" class="flex items-center justify-center p-3 sm:p-5 md:p-6 bg-gray-900/80 hover:bg-[#ffb703]/10 hover:border-[#ffb703]/50 border border-gray-700/50 rounded-xl md:rounded-2xl transition-all active:scale-95 group shadow-md text-center flex-col md:flex-row touch-manipulation transform-gpu min-h-[90px] w-full">
                     <svg class="w-7 h-7 sm:w-8 sm:h-8 md:mr-3 mb-2 md:mb-0 text-[#ffb703] group-hover:drop-shadow-[0_0_8px_rgba(255,183,3,0.8)] group-hover:scale-110 transition-all duration-300 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                    <span class="font-black text-[10px] sm:text-xs md:text-sm tracking-widest uppercase text-[#ffb703] transition-colors break-words leading-tight" data-i18n="btnEbook">VISUALIZZA IL MANUALE</span>
+                    <span class="font-black text-[10px] sm:text-xs md:text-sm tracking-widest uppercase text-[#ffb703] transition-colors break-words leading-tight w-full" data-i18n="btnEbook">VISUALIZZA IL MANUALE</span>
                 </button>
             </div>
-
         </section>
 
-        <section class="premium-card frame-gold w-full p-4 sm:p-6 md:p-10 lg:col-span-1 h-fit" id="quiz-section">
-            
+        <section class="premium-card frame-gold w-full p-4 sm:p-6 md:p-10 h-fit" id="quiz-section">
             <div id="quiz-container" class="relative z-10 w-full max-w-4xl mx-auto flex flex-col items-center">
-                
                 <div class="w-full flex flex-wrap justify-between items-center mb-6 sm:mb-8 px-2 gap-2">
                     <div class="text-[#d4af37] text-[10px] sm:text-xs font-black uppercase tracking-widest bg-[#d4af37]/10 px-3 py-1 rounded-full border border-[#d4af37]/40 whitespace-nowrap shadow-inner" id="quiz-progress-text">Domanda 1 di 5</div>
                     <div class="flex gap-1.5 shrink-0" id="quiz-dots"></div>
                 </div>
                 
                 <div class="wwtbam-question-box px-4 sm:px-6 py-8 sm:py-10 rounded-xl text-center mb-8 sm:mb-10 w-full">
-                    <p id="quiz-question-text" class="text-[15px] sm:text-lg md:text-xl text-white font-black leading-relaxed drop-shadow-md break-words"></p>
+                    <p id="quiz-question-text" class="text-[14px] sm:text-lg md:text-xl text-white font-black leading-relaxed drop-shadow-md break-words"></p>
                 </div>
 
                 <div id="quiz-options-container" class="space-y-3 sm:space-y-4 w-full"></div>
@@ -294,20 +231,19 @@
                 <p class="text-gray-200 text-sm md:text-base font-medium mb-10 max-w-md mx-auto px-4 break-words" data-i18n="quizCompletedDesc">Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.</p>
                 <button onclick="resetQuiz()" class="wwtbam-btn px-6 sm:px-10 py-3 sm:py-4 text-[10px] sm:text-xs md:text-sm font-black uppercase tracking-[0.2em] text-[#d4af37] hover:text-white flex items-center justify-center gap-2 sm:gap-3 group max-w-full">
                     <span class="group-hover:-rotate-180 transition-transform duration-500 text-base sm:text-lg shrink-0">🔄</span> 
-                    <span data-i18n="btnRetryQuiz" class="truncate">Ripeti il test</span>
+                    <span data-i18n="btnRetryQuiz" class="truncate text-center break-words w-full">Ripeti il test</span>
                 </button>
             </div>
         </section>
 
-        <section class="premium-card frame-neon w-full p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden" style="content-visibility: auto;">
+        <section class="premium-card frame-neon w-full p-4 sm:p-6 md:p-8 flex flex-col items-center justify-center relative overflow-hidden">
             <div class="absolute inset-0 bg-gray-600 opacity-[0.02] blur-3xl pointer-events-none"></div>
 
             <div class="w-full max-w-4xl mx-auto flex justify-start items-center mb-3 md:mb-5 relative z-10">
-                <div class="bg-gray-900 text-[#99E814] border border-[#99E814]/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest break-words" data-i18n="demoBadge">DEMO INTERATTIVA</div>
+                <div class="bg-gray-900 text-[#99E814] border border-[#99E814]/30 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest break-words text-center" data-i18n="demoBadge">DEMO INTERATTIVA</div>
             </div>
 
             <a href="https://demo-betting-exchange.vercel.app/" target="_blank" class="demo-link block group relative w-full max-w-4xl mx-auto rounded-xl sm:rounded-2xl md:rounded-[2rem] overflow-hidden shadow-2xl border border-[#99E814]/30 hover:border-[#99E814] transition-all duration-700 cursor-pointer bg-[#050a05] transform-gpu hover:-translate-y-1" onclick="SoundEngine.click()">
-                
                 <div class="relative w-full overflow-hidden" style="aspect-ratio: 16/9;">
                     <img src="demo-odds.jpeg" alt="Demo Odds" decoding="async" loading="lazy" class="absolute inset-0 w-full h-full object-cover object-top z-0 transition-transform duration-1000 group-hover:scale-105 opacity-100">
                     <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-[#0a140f]/80 z-10 transition-opacity duration-700 opacity-80 group-hover:opacity-90 pointer-events-none"></div>
@@ -315,22 +251,22 @@
                     <div class="absolute inset-0 flex items-center justify-center z-20 pointer-events-none px-2">
                         <div class="play-pulse px-4 py-3 sm:px-8 sm:py-4 bg-[#99E814] border border-[#99E814] rounded-lg sm:rounded-xl flex items-center justify-center shadow-[0_0_30px_rgba(153,232,20,0.5)] transform group-hover:scale-105 transition-all duration-500 ease-out group-hover:bg-[#b3ff33] group-hover:shadow-[0_0_40px_rgba(153,232,20,0.7)] pointer-events-auto gap-2 sm:gap-3 backdrop-blur-sm max-w-[90%]">
                             <svg class="w-4 h-4 sm:w-6 sm:h-6 text-[#050a05] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
-                            <span class="text-[#050a05] font-black text-[10px] sm:text-sm md:text-base tracking-[0.1em] sm:tracking-[0.2em] uppercase truncate" data-i18n="startSimulator">Avvia Simulatore</span>
+                            <span class="text-[#050a05] font-black text-[10px] sm:text-sm md:text-base tracking-[0.1em] sm:tracking-[0.2em] uppercase text-center break-words w-full" data-i18n="startSimulator">Avvia Simulatore</span>
                         </div>
                     </div>
                 </div>
             </a>
         </section>
         
-        <section class="premium-card frame-purple w-full p-5 sm:p-8 relative overflow-hidden transform-gpu" style="content-visibility: auto;">
+        <section class="premium-card frame-purple w-full p-5 sm:p-8 relative overflow-hidden transform-gpu">
             <p class="text-[9px] sm:text-[11px] md:text-xs text-[#a855f7] font-black mb-2 sm:mb-4 tracking-[0.2em] uppercase text-center md:text-left break-words" data-i18n="finLabel">PILLOLA FINANZIARIA</p>
-            <p class="text-xs sm:text-base md:text-lg text-gray-300 font-medium italic leading-relaxed text-center md:text-left break-words w-full">"<span data-i18n="finQuote">Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.</span>"</p>
+            <p class="text-xs sm:text-base md:text-lg text-gray-300 font-medium italic leading-relaxed text-center md:text-left break-words w-full" data-i18n="finQuote">"Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale."</p>
         </section>
 
         <section class="premium-card frame-blue w-full p-6 sm:p-10 flex flex-col items-center justify-center relative transform-gpu">
-            <div class="text-center space-y-3 mb-6 px-4 animate-fade-in-up relative z-10">
-                <h4 class="text-[#3b82f6] font-black text-lg sm:text-xl md:text-2xl tracking-[0.2em] uppercase drop-shadow-[0_0_15px_rgba(59,130,246,0.5)]" data-i18n="penaltiesTitle">GIOCO EDUCATIVO</h4>
-                <p class="text-gray-300 text-xs sm:text-sm md:text-base font-medium max-w-lg mx-auto leading-relaxed" data-i18n="penaltiesDesc">Clicca il joystick per scommettere sui rigori.</p>
+            <div class="text-center space-y-3 mb-6 px-4 animate-fade-in-up relative z-10 w-full">
+                <h4 class="text-[#3b82f6] font-black text-lg sm:text-xl md:text-2xl tracking-[0.2em] uppercase drop-shadow-[0_0_15px_rgba(59,130,246,0.5)] break-words" data-i18n="penaltiesTitle">GIOCO EDUCATIVO</h4>
+                <p class="text-gray-300 text-xs sm:text-sm md:text-base font-medium max-w-lg mx-auto leading-relaxed break-words" data-i18n="penaltiesDesc">Clicca il joystick per scommettere sui rigori.</p>
             </div>
             <a href="https://penalties-zero-to-hero-academy.vercel.app/" target="_blank" rel="noopener noreferrer" class="text-6xl sm:text-7xl md:text-8xl hover:scale-125 transition-transform duration-500 touch-manipulation joystick-pulse transform-gpu shrink-0 relative z-10 mt-4" title="Play Penalties Live" onclick="SoundEngine.click()">
                 🎮
@@ -343,16 +279,15 @@
                 <span data-i18n="subNotActive">ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE</span>
             </div>
             
-            <a id="btn-next-lesson" href="https://tutorial-betting-exchange-room.vercel.app/" onclick="SoundEngine.click()" class="bg-gradient-to-b from-[#0a140f] to-[#050a05] text-[#99E814] border-2 border-[#99E814] font-black w-full max-w-md mx-auto justify-center px-6 sm:px-10 py-5 rounded-2xl hover:bg-[#99E814] hover:text-[#050a05] transition-all duration-300 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(153,232,20,0.2)] hover:shadow-[0_0_40px_rgba(153,232,20,0.6)] touch-manipulation active:scale-95 flex items-center gap-3 z-10 transform-gpu group">
-                <span data-i18n="navNextLesson" class="truncate">PROSSIMA LEZIONE</span> 
-                <span class="text-xl sm:text-2xl group-hover:translate-x-2 transition-transform duration-300 shrink-0">→</span>
+            <a id="btn-next-lesson" href="https://tutorial-betting-exchange-room.vercel.app/" onclick="SoundEngine.click()" class="bg-gradient-to-b from-[#0a140f] to-[#050a05] text-[#99E814] border-2 border-[#99E814] font-black w-full max-w-md mx-auto justify-center px-4 sm:px-10 py-5 rounded-2xl hover:from-[#99E814] hover:to-[#99E814] hover:text-[#050a05] transition-all duration-300 text-xs sm:text-sm md:text-base uppercase tracking-[0.2em] shadow-[0_0_20px_rgba(153,232,20,0.2)] hover:shadow-[0_0_40px_rgba(153,232,20,0.6)] touch-manipulation active:scale-95 flex items-center gap-2 sm:gap-3 z-10 transform-gpu group">
+                <span data-i18n="navNextLesson" class="text-center break-words w-full group-hover:text-[#050a05] transition-colors duration-300">PROSSIMA LEZIONE</span> 
+                <span class="text-xl sm:text-2xl group-hover:translate-x-2 group-hover:text-[#050a05] transition-all duration-300 shrink-0">→</span>
             </a>
         </div>
-
     </main>
 
     <div id="ebook-modal" class="fixed inset-0 z-[100] hidden flex-col items-center justify-center bg-[#050a05]/95 backdrop-blur-md p-0 sm:p-4 md:p-6 opacity-0 transition-opacity duration-300">
-        <div class="bg-[#050a05] w-full max-w-4xl h-full sm:h-auto sm:max-h-[95vh] rounded-none sm:rounded-3xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative modern-ebook" id="ebook-modal-content">
+        <div class="bg-[#050a05] w-full max-w-4xl h-full sm:h-auto sm:max-h-[90vh] rounded-none sm:rounded-3xl border-0 sm:border border-gray-700 flex flex-col overflow-hidden shadow-2xl transform scale-95 transition-transform duration-300 relative modern-ebook" id="ebook-modal-content">
             <div class="flex justify-between items-center p-4 md:p-6 border-b border-gray-800 bg-[#050a05] shrink-0 z-10 w-full">
                 <h3 class="text-[#99E814] font-black uppercase tracking-widest text-[11px] sm:text-sm md:text-base flex items-center gap-2 truncate">
                     <svg class="w-5 h-5 sm:w-6 sm:h-6 text-[#ffb703] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg> 
@@ -416,109 +351,25 @@
             const CONFIG = { STORAGE_KEY: 'bx_academy_demo_hd' }; 
             const footerLogoHTML = `<div class="mt-12 md:mt-16 text-center pt-8 w-full"><img src="logo-tondo.jpeg" class="w-12 h-12 md:w-16 md:h-16 mx-auto rounded-full opacity-30 grayscale mix-blend-screen" alt="Global Exchange Academy" loading="lazy" decoding="async"></div>`;
 
-            // Mappatura URL dei podcast
             const podcastUrls = {
-                it: "https://open.spotify.com/episode/2QDRZoYRQk8Gg1JqvXAuVU?si=c2uBoC8TSW-fFqQ5--EJJA",
                 en: "https://open.spotify.com/episode/6O2YicZuJbitsqlJ2VyhoM?si=jnDKia2EQI-5gXE8LkLewg",
                 es: "https://open.spotify.com/episode/3cPHNB0pKR0yW4ZqyRacID?si=TVGBO9EKQ-OrhxN8u4TIwg",
-                pt: "https://open.spotify.com/episode/7mEi7eq8P1IPzjrgPeWo90?si=X7fWHgriSWGP3N9a90N3CQ"
+                pt: "https://open.spotify.com/episode/7mEi7eq8P1IPzjrgPeWo90?si=X7fWHgriSWGP3N9a90N3CQ",
+                it: "https://open.spotify.com/episode/2QDRZoYRQk8Gg1JqvXAuVU?si=c2uBoC8TSW-fFqQ5--EJJA"
             };
 
             const dict = {
-                it: {
-                    moduleTitle: "GIORNO 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
-                    finLabel: "PILLOLA FINANZIARIA", finQuote: "Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.",
-                    demoBadge: "DEMO INTERATTIVA", startSimulator: "AVVIA SIMULATORE",
-                    penaltiesTitle: "GIOCO EDUCATIVO", penaltiesDesc: "Clicca il joystick per scommettere sui rigori.",
-                    quizProgress: "Domanda {step} di 5",
-                    btnPodcast: "ASCOLTA IL PODCAST", btnEbook: "VISUALIZZA IL MANUALE", btnEbookTitle: "MANUALE", btnRetryQuiz: "Ripeti il test",
-                    btnTelegram: "SALA SEGNALI GRATUITI", navNextLesson: "PROSSIMA LEZIONE",
-                    videoUrl: "https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/8kjONb-eUt0/maxresdefault.jpg",
-                    quizData: [
-                        { q: "Nel mercato Exchange, chi è la tua controparte quando 'Banchi' una quota?", opts: ["Il Bookmaker tradizionale", "Altri utenti che hanno 'Puntato'", "La piattaforma stessa"], correct: 1, successMsg: "Esatto! Scommetti sempre contro una persona fisica.", failMsg: "Errore. Non è il bookmaker né la piattaforma. Riprova." },
-                        { q: "Qual è il vantaggio principale del Betting Exchange?", opts: ["Quote fisse garantite per sempre", "Bonus di benvenuto altissimi", "Assenza di limitazioni sui conti vincenti (No Gubbing)"], correct: 2, successMsg: "Corretto! Più vinci, più l'Exchange guadagna sulle commissioni.", failMsg: "Attenzione, le quote non sono fisse e i bonus non sono il vantaggio chiave. Riprova." },
-                        { q: "Cosa significa 'Liability'?", opts: ["Il rischio reale/capitale bloccato quando banchi", "La tassa pagata alla piattaforma", "Il profitto netto che ti aspetti"], correct: 0, successMsg: "Esatto. La Liability è quanto rischi realmente bancando.", failMsg: "Sbagliato. Non è una tassa né il profitto. Riprova." },
-                        { q: "Come guadagna la piattaforma Exchange?", opts: ["Trattenendo i depositi iniziali", "Con una commissione sulle vincite nette", "Prendendo soldi quando gli utenti perdono"], correct: 1, successMsg: "Giusto! Se perdi, i soldi vanno all'altro utente, non alla piattaforma.", failMsg: "No, la piattaforma è neutra, non guadagna dalle tue perdite. Riprova." },
-                        { q: "Perché la 'Liquidità' è fondamentale?", opts: ["Aumenta il divertimento del gioco", "Senza soldi nel mercato non puoi chiudere i trade", "Ti fa vincere automaticamente"], correct: 1, successMsg: "Perfetto! Nessun volume = Niente Trading.", failMsg: "Sbagliato. La liquidità serve a far scambiare i soldi. Riprova." }
-                    ],
-                    ebookContent: `
-                        <div class="animate-fade-in-up w-full">
-                            <div class="relative overflow-hidden rounded-2xl md:rounded-[2rem] bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#99E814]/20 p-6 sm:p-10 md:p-12 mb-8 md:mb-14 shadow-[0_0_30px_rgba(153,232,20,0.1)] text-center break-words">
-                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#99E814] to-transparent opacity-50"></div>
-                                <span class="inline-block py-1 px-4 md:px-5 rounded-full bg-[#99E814]/10 text-[#99E814] border border-[#99E814]/20 font-mono text-[9px] sm:text-xs md:text-sm tracking-widest uppercase mb-4 md:mb-6">Giorno 1</span>
-                                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter text-white mb-2 md:mb-4 drop-shadow-md leading-tight">Differenza <br class="block sm:hidden"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#99E814] to-[#7bbd10]">Strutturale</span></h1>
-                                <p class="text-[#24A1DE] font-bold text-xs sm:text-sm md:text-base tracking-widest uppercase mt-4">Bookmaker vs Exchange</p>
-                            </div>
-
-                            <div class="space-y-4 sm:space-y-6 md:space-y-8 text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose">
-                                <p>Il Bookmaker tradizionale agisce come tua controparte diretta: se tu vinci, lui perde. Questo genera un conflitto di interessi intrinseco, motivo per cui i giocatori profittevoli vengono sistematicamente limitati (pratica nota come <span class="text-[#24A1DE] font-bold bg-[#24A1DE]/10 px-1.5 py-0.5 rounded break-keep">Gubbing</span>).</p>
-                                <p>Nell'Exchange, al contrario, si opera in un mercato <span class="text-[#99E814] font-bold bg-[#99E814]/10 px-1.5 py-0.5 rounded break-keep">peer-to-peer</span>. La piattaforma funge da intermediario neutrale, trattenendo una piccola commissione unicamente sulle vincite nette. In questo ecosistema, non si scommette contro un banco, ma si scambiano quote direttamente con altri utenti globali.</p>
-                            </div>
-
-                            <div class="my-10 md:my-16 relative p-[1px] rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-[#99E814]/40 via-[#99E814]/5 to-transparent w-full">
-                                <div class="bg-[#050a05] rounded-[15px] md:rounded-[31px] p-6 sm:p-8 md:p-12 flex flex-col items-center justify-center w-full">
-                                    <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#99E814]/10 flex items-center justify-center mb-4 md:mb-6 border border-[#99E814]/30 shadow-[0_0_15px_rgba(153,232,20,0.2)] shrink-0">
-                                        <span class="text-xl md:text-2xl">🧮</span>
-                                    </div>
-                                    <h3 class="font-black text-white text-sm sm:text-lg md:text-xl tracking-widest uppercase mb-4 md:mb-6 text-center w-full break-words">La Formula (Punta)</h3>
-                                    <div class="bg-[#0a140f] border border-[#99E814]/20 px-3 sm:px-5 md:px-8 py-4 md:py-6 rounded-xl shadow-inner w-full text-center overflow-x-auto">
-                                        <code class="text-[#99E814] font-mono font-bold text-xs sm:text-[15px] md:text-lg whitespace-nowrap block w-full text-center">Netto = [ Stake × (Quota - 1) ] × (1 - Comm.)</code>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-10 md:mb-16 w-full">
-                                <h4 class="flex items-center justify-center md:justify-start text-white font-black text-sm sm:text-lg md:text-xl uppercase tracking-widest mb-6 md:mb-8 w-full break-words">
-                                    <span class="w-1.5 h-6 md:h-8 bg-[#24A1DE] mr-3 rounded-sm shadow-[0_0_10px_rgba(36,161,222,0.5)] shrink-0"></span> Legenda Tecnica
-                                </h4>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 w-full">
-                                    <div class="flex flex-row md:flex-col items-center md:items-center p-4 sm:p-5 md:p-6 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#99E814]/30 transition-colors duration-300">
-                                        <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#99E814]/10 flex items-center justify-center shrink-0 mr-4 md:mr-0 md:mb-4 border border-[#99E814]/20 text-lg md:text-xl">💰</div>
-                                        <div class="text-left md:text-center w-full">
-                                            <strong class="text-[#99E814] block text-[10px] sm:text-xs md:text-sm uppercase tracking-widest mb-1.5">Stake</strong>
-                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Il capitale puntato e immesso a mercato.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-row md:flex-col items-center md:items-center p-4 sm:p-5 md:p-6 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-red-500/30 transition-colors duration-300">
-                                        <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mr-4 md:mr-0 md:mb-4 border border-red-500/20 text-lg md:text-xl">⚖️</div>
-                                        <div class="text-left md:text-center w-full">
-                                            <strong class="text-red-400 block text-[10px] sm:text-xs md:text-sm uppercase tracking-widest mb-1.5">Liability</strong>
-                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Il rischio effettivo come creatore del mercato.</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-row md:flex-col items-center md:items-center p-4 sm:p-5 md:p-6 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#24A1DE]/30 transition-colors duration-300">
-                                        <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#24A1DE]/10 flex items-center justify-center shrink-0 mr-4 md:mr-0 md:mb-4 border border-[#24A1DE]/20 text-lg md:text-xl">📊</div>
-                                        <div class="text-left md:text-center w-full">
-                                            <strong class="text-[#24A1DE] block text-[10px] sm:text-xs md:text-sm uppercase tracking-widest mb-1.5">Commissione</strong>
-                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">La fee pagata, applicata solo sulle vincite nette.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <h3 class="text-lg sm:text-xl md:text-2xl font-black mt-12 md:mt-20 mb-6 text-center uppercase tracking-widest text-white w-full break-words">Mindset del Trader</h3>
-                            <p class="text-justify md:text-center leading-relaxed mb-8 md:mb-12 text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto">Il trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <span class="text-[#24A1DE] font-bold">size</span> è troppo grande. La matematica non ha battito cardiaco.</p>
-
-                            <blockquote class="relative p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-[2rem] bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#99E814]/20 my-8 md:my-12 shadow-2xl overflow-hidden w-full">
-                                <div class="absolute -top-4 -right-4 md:-top-8 md:-right-8 text-7xl md:text-9xl text-[#99E814]/10 font-serif leading-none">"</div>
-                                <p class="text-gray-300 italic text-sm sm:text-base md:text-xl leading-relaxed font-medium relative z-10 text-center break-words">
-                                    Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità, lo scommettitore segue il tifo.<br><br>
-                                    <span class="text-[#99E814] font-bold">Senza volumi non vi è trading, ma solo azzardo.</span>
-                                </p>
-                            </blockquote>
-                            ${footerLogoHTML}
-                        </div>
-                    `
-                },
                 en: {
                     moduleTitle: "DAY 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "No gambling. Only math, risk management, and emotional detachment.",
-                    finLabel: "FINANCIAL PILL", finQuote: "Money on the Exchange isn't yours until you withdraw it. Your bankroll is business capital, not a personal ATM.",
+                    finLabel: "FINANCIAL PILL", finQuote: "\"Money on the Exchange isn't yours until you withdraw it. Your bankroll is business capital, not a personal ATM.\"",
                     demoBadge: "INTERACTIVE DEMO", startSimulator: "START SIMULATOR",
                     penaltiesTitle: "EDUCATIONAL GAME", penaltiesDesc: "Click the joystick to bet on penalties.",
                     quizProgress: "Question {step} of 5",
-                    btnPodcast: "LISTEN TO THE PODCAST", btnEbook: "VIEW THE MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Retry Test",
+                    btnPodcast: "LISTEN TO PODCAST", btnEbook: "VIEW MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "RETRY TEST",
                     btnTelegram: "FREE SIGNALS ROOM", navNextLesson: "NEXT LESSON",
-                    videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/DPnyy3L_TFg/maxresdefault.jpg",
+                    quizCompletedTitle: "Checkpoint Passed!", quizCompletedDesc: "You unlocked 500 XP. You are ready to proceed with practice.",
+                    subNotActive: "SUBSCRIPTION NOT ACTIVE! CONTACT YOUR REFERRER",
+                    videoUrl: "https://www.youtube.com/embed/DPnyy3L_TFg?rel=0&modestbranding=1", 
                     quizData: [
                         { q: "In the Exchange market, who is your counterparty when you 'Lay'?", opts: ["The traditional Bookmaker", "Other users who have 'Backed'", "The platform itself"], correct: 1, successMsg: "Exactly! You bet against real people.", failMsg: "Error. It's not the bookmaker. Try again." },
                         { q: "What's the main advantage of the Exchange?", opts: ["Fixed odds forever", "Huge welcome bonuses", "No limitations on winning accounts"], correct: 2, successMsg: "Correct! The more you win, the more they earn.", failMsg: "Wrong. Focus on account limitations. Try again." },
@@ -597,18 +448,20 @@
                 },
                 es: {
                     moduleTitle: "DÍA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Cero apuestas. Solo matemáticas, gestión del riesgo y desapego emocional.",
-                    finLabel: "PÍLDORA FINANCIERA", finQuote: "El dinero en el Exchange no es tuyo hasta que lo retiras. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.",
+                    finLabel: "PÍLDORA FINANCIERA", finQuote: "\"El dinero en el Exchange no es tuyo hasta que lo retiras. Usa el sistema de cuentas separadas: el bankroll es capital de trabajo, no tu cajero personal.\"",
                     demoBadge: "DEMO INTERACTIVA", startSimulator: "INICIAR SIMULADOR",
                     penaltiesTitle: "JUEGO EDUCATIVO", penaltiesDesc: "Haz clic en el joystick para apostar en los penaltis.",
                     quizProgress: "Pregunta {step} de 5",
-                    btnPodcast: "ESCUCHA EL PODCAST", btnEbook: "VER EL MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Repetir Test",
+                    btnPodcast: "ESCUCHA EL PODCAST", btnEbook: "VER MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "REPETIR TEST",
                     btnTelegram: "SALA DE SEÑALES GRATIS", navNextLesson: "PRÓXIMA LECCIÓN",
-                    videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/BsA4QmFVyZo/maxresdefault.jpg",
+                    quizCompletedTitle: "¡Check-Point Superado!", quizCompletedDesc: "Has desbloqueado 500 XP. Estás listo para proceder con la práctica.",
+                    subNotActive: "¡SUSCRIPCIÓN NO ACTIVA! CONTACTA A TU REFERENTE",
+                    videoUrl: "https://www.youtube.com/embed/BsA4QmFVyZo?rel=0&modestbranding=1", 
                     quizData: [
                         { q: "En el mercado Exchange, ¿quién es tu contraparte cuando haces 'Lay' a una cuota?", opts: ["El Bookmaker tradicional", "Otros usuarios que han hecho 'Back'", "La propia plataforma"], correct: 1, successMsg: "¡Exacto! Siempre apuestas contra una persona física.", failMsg: "Error. No es el bookmaker ni la plataforma. Inténtalo de nuevo." },
                         { q: "¿Cuál es la ventaja principal del Betting Exchange?", opts: ["Cuotas fijas garantidas para siempre", "Bonos de bienvenida altísimos", "Ausencia de limitaciones en cuentas ganadoras"], correct: 2, successMsg: "¡Correcto! Cuanto más ganas, más gana el Exchange.", failMsg: "Cuidado, no son las cuotas ni los bonos. Inténtalo de nuevo." },
                         { q: "¿Qué significa 'Liability'?", opts: ["El riesgo real/capital bloqueado cuando haces Lay", "El impuesto pagado a la plataforma", "El beneficio neto que esperas"], correct: 0, successMsg: "Exacto. La Liability es cuánto arriesgas realmente al hacer Lay.", failMsg: "Equivocado. No es un impuesto ni el beneficio. Inténtalo de nuevo." },
-                        { q: "¿Cómo gana dinero la plataforma Exchange?", opts: ["Reteniendo los depósitos iniciales", "Con una comisión sobre las ganancias netas", "Tomando dinero cuando los usuarios pierden"], correct: 1, successMsg: "¡Correcto! Si pierdes, el dinero va a otro usuario, no a la plataforma.", failMsg: "No, la plataforma es neutral. Inténtalo de nuevo." },
+                        { q: "¿Cómo gana dinero la plataforma Exchange?", opts: ["Reteniendo los depósitos iniciales", "Con una comisión sobre las ganancias netas", "Tomando dinero cuando los usuarios pierden"], correct: 1, successMsg: "¡Correcto! Si pierdes, el dinero va a otro usuario.", failMsg: "No, la plataforma es neutral. Inténtalo de nuevo." },
                         { q: "¿Por qué la 'Liquididad' es fundamental?", opts: ["Aumenta la diversión del juego", "Sin volumen en el Order Book no puedes cerrar los trades", "Te hace ganar automáticamente"], correct: 1, successMsg: "¡Perfecto! Sin liquidez = No hay Trading.", failMsg: "Equivocado. La liquidez es esencial para el volumen. Inténtalo de nuevo." }
                     ],
                     ebookContent: `
@@ -682,17 +535,19 @@
                 },
                 pt: {
                     moduleTitle: "DIA 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero apostas. Apenas matemática, gestão de risco e desapego emocional.",
-                    finLabel: "PÍLULA FINANCEIRA", finQuote: "O dinheiro na Exchange não é seu até que você faça o Cash Out. Use o sistema de contas separadas: o bankroll é capital.",
+                    finLabel: "PÍLULA FINANCEIRA", finQuote: "\"O dinheiro na Exchange não é seu até que você faça o Cash Out. Use o sistema de contas separadas: o bankroll é capital de trabalho.\"",
                     demoBadge: "DEMO INTERATIVA", startSimulator: "INICIAR SIMULADOR",
                     penaltiesTitle: "JOGO EDUCATIVO", penaltiesDesc: "Clique no joystick para apostar nos pênaltis.",
                     quizProgress: "Pergunta {step} de 5",
-                    btnPodcast: "OUÇA O PODCAST", btnEbook: "VER O MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "Repetir Teste",
+                    btnPodcast: "OUÇA O PODCAST", btnEbook: "VER MANUAL", btnEbookTitle: "MANUAL", btnRetryQuiz: "REPETIR TESTE",
                     btnTelegram: "SALA DE SINAIS GRÁTIS", navNextLesson: "PRÓXIMA LIÇÃO",
-                    videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", videoThumb: "https://img.youtube.com/vi/1cUveYReQgI/maxresdefault.jpg",
+                    quizCompletedTitle: "Check-Point Superado!", quizCompletedDesc: "Desbloqueou 500 XP. Está pronto para avançar com a prática.",
+                    subNotActive: "ASSINATURA INATIVA! CONTATE SEU REFERENTE",
+                    videoUrl: "https://www.youtube.com/embed/1cUveYReQgI?rel=0&modestbranding=1", 
                     quizData: [
                         { q: "No mercado Exchange, quem é a sua contraparte quando faz 'Lay' a uma odd?", opts: ["O Bookmaker tradicional", "Outros utilizadores que fizeram 'Back'", "A própria plataforma"], correct: 1, successMsg: "Exato! Você aposta sempre contra uma pessoa física.", failMsg: "Erro. Não é o bookmaker nem a plataforma. Tente novamente." },
                         { q: "Qual é a principal vantagem do Betting Exchange?", opts: ["Odds fixas garantidas para sempre", "Bónus de boas-vindas altíssimos", "Ausência de limitações em contas vencedoras"], correct: 2, successMsg: "Correto! Quanto mais ganha, mais a Exchange lucra.", failMsg: "Atenção, não são as odds nem os bónus. Tente novamente." },
-                        { q: "O que significa 'Liability'?", opts: ["O risco real/capital bloqueado quando se faz Lay", "A taxa paga à plataforma", "O lucro líquido esperado"], correct: 0, successMsg: "Exato. A Liability é o quanto você arrisca realmente ao fazer Lay.", failMsg: "Errado. Não é uma taxa nem o lucro. Tente novamente." },
+                        { q: "O que significa 'Liability'?", opts: ["O risco real/capital bloqueado quando se faz Lay", "A taxa paga à plataforma", "O lucro líquido esperado"], correct: 0, successMsg: "Exato. A Liability é o quanto você arrisca realmente.", failMsg: "Errado. Não é uma taxa nem o lucro. Tente novamente." },
                         { q: "Como a plataforma Exchange ganha dinheiro?", opts: ["Retendo os depósitos iniciais", "Com uma comissão sobre os lucros líquidos", "Ficando com o dinheiro quando os utilizadores perdem"], correct: 1, successMsg: "Certo! A plataforma ganha apenas sobre o líquido.", failMsg: "Não, a plataforma é neutra. Tente novamente." },
                         { q: "Por que a 'Liquidez' é fundamental?", opts: ["Aumenta a diversão do jogo", "Sem dinheiro no Order Book não é possível fechar os trades", "Faz você ganhar automaticamente"], correct: 1, successMsg: "Perfeito! Sem volume = Sem Trading.", failMsg: "Errado. A liquidez serve para cruzar as apostas. Tente novamente." }
                     ],
@@ -738,21 +593,21 @@
                                         <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mr-4 md:mr-0 md:mb-4 border border-red-500/20 text-lg md:text-xl">⚖️</div>
                                         <div class="text-left md:text-center w-full">
                                             <strong class="text-red-400 block text-[10px] sm:text-xs md:text-sm uppercase tracking-widest mb-1.5">Liability</strong>
-                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">O risco real quando você assume o papel no mercado.</p>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">O risco real quando você assume o papel.</p>
                                         </div>
                                     </div>
                                     <div class="flex flex-row md:flex-col items-center md:items-center p-4 sm:p-5 md:p-6 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#99E814]/30 transition-colors duration-300">
                                         <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#99E814]/10 flex items-center justify-center shrink-0 mr-4 md:mr-0 md:mb-4 border border-[#99E814]/20 text-lg md:text-xl">📊</div>
                                         <div class="text-left md:text-center w-full">
                                             <strong class="text-[#99E814] block text-[10px] sm:text-xs md:text-sm uppercase tracking-widest mb-1.5">Comissão</strong>
-                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">A taxa paga, aplicada exclusivamente sobre os lucros líquidos.</p>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">A taxa paga, aplicada sobre os lucros líquidos.</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
                             <h3 class="text-lg sm:text-xl md:text-2xl font-black mt-12 md:mt-20 mb-6 text-center uppercase tracking-widest text-white w-full break-words">Mindset do Trader</h3>
-                            <p class="text-justify md:text-center leading-relaxed mb-8 md:mb-12 text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto">O trader não torce por uma equipe: ele explora a ineficiência. Se o seu coração está acelerado, a sua <span class="text-[#24A1DE] font-bold">size</span> é demasiado grande. A matemática não tem batimentos cardíacos.</p>
+                            <p class="text-justify md:text-center leading-relaxed mb-8 md:mb-12 text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto">O trader não torce por uma equipe: ele explora a ineficiência. Se o seu coração está acelerado, a sua <span class="text-[#24A1DE] font-bold">size</span> é demasiado grande.</p>
 
                             <blockquote class="relative p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-[2rem] bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#99E814]/20 my-8 md:my-12 shadow-2xl overflow-hidden w-full">
                                 <div class="absolute -top-4 -right-4 md:-top-8 md:-right-8 text-7xl md:text-9xl text-[#99E814]/10 font-serif leading-none">"</div>
@@ -764,10 +619,97 @@
                             ${footerLogoHTML}
                         </div>
                     `
+                },
+                it: {
+                    moduleTitle: "GIORNO 1/30", lessonTitle: "ZERO TO HERO academy", lessonDesc: "Zero scommesse. Solo matematica, gestione del rischio e distacco emotivo.",
+                    finLabel: "PILLOLA FINANZIARIA", finQuote: "\"Il denaro sull'Exchange non è tuo finché non lo prelevi. Usa il sistema dei conti separati: il bankroll è un capitale aziendale, non il tuo bancomat personale.\"",
+                    demoBadge: "DEMO INTERATTIVA", startSimulator: "AVVIA SIMULATORE",
+                    penaltiesTitle: "GIOCO EDUCATIVO", penaltiesDesc: "Clicca il joystick per scommettere sui rigori.",
+                    quizProgress: "Domanda {step} di 5",
+                    btnPodcast: "ASCOLTA IL PODCAST", btnEbook: "VISUALIZZA IL MANUALE", btnEbookTitle: "MANUALE", btnRetryQuiz: "RIPETI IL TEST",
+                    btnTelegram: "SALA SEGNALI GRATUITI", navNextLesson: "PROSSIMA LEZIONE",
+                    quizCompletedTitle: "Check-Point Superato!", quizCompletedDesc: "Hai sbloccato 500 XP. Sei pronto per proseguire con la pratica.",
+                    subNotActive: "ABBONAMENTO NON ATTIVO! CONTATTA IL TUO REFERENTE",
+                    videoUrl: "https://www.youtube.com/embed/8kjONb-eUt0?rel=0&modestbranding=1", 
+                    quizData: [
+                        { q: "Nel mercato Exchange, chi è la tua controparte quando 'Banchi' una quota?", opts: ["Il Bookmaker tradizionale", "Altri utenti che hanno 'Puntato'", "La piattaforma stessa"], correct: 1, successMsg: "Esatto! Scommetti sempre contro una persona fisica.", failMsg: "Errore. Non è il bookmaker né la piattaforma. Riprova." },
+                        { q: "Qual è il vantaggio principale del Betting Exchange?", opts: ["Quote fisse garantite per sempre", "Bonus di benvenuto altissimi", "Assenza di limitazioni sui conti vincenti (No Gubbing)"], correct: 2, successMsg: "Corretto! Più vinci, più l'Exchange guadagna sulle commissioni.", failMsg: "Attenzione, le quote non sono fisse e i bonus non sono il vantaggio chiave. Riprova." },
+                        { q: "Cosa significa 'Liability'?", opts: ["Il rischio reale/capitale bloccato quando banchi", "La tassa pagata alla piattaforma", "Il profitto netto che ti aspetti"], correct: 0, successMsg: "Esatto. La Liability è quanto rischi realmente bancando.", failMsg: "Sbagliato. Non è una tassa né il profitto. Riprova." },
+                        { q: "Come guadagna la piattaforma Exchange?", opts: ["Trattenendo i depositi iniziali", "Con una commissione sulle vincite nette", "Prendendo soldi quando gli utenti perdono"], correct: 1, successMsg: "Giusto! Se perdi, i soldi vanno all'altro utente, non alla piattaforma.", failMsg: "No, la piattaforma è neutra, non guadagna dalle tue perdite. Riprova." },
+                        { q: "Perché la 'Liquidità' è fondamentale?", opts: ["Aumenta il divertimento del gioco", "Senza soldi nel mercato non puoi chiudere i trade", "Ti fa vincere automaticamente"], correct: 1, successMsg: "Perfetto! Nessun volume = Niente Trading.", failMsg: "Sbagliato. La liquidità serve a far scambiare i soldi. Riprova." }
+                    ],
+                    ebookContent: `
+                        <div class="animate-fade-in-up w-full">
+                            <div class="relative overflow-hidden rounded-2xl md:rounded-[2rem] bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#99E814]/20 p-6 sm:p-10 md:p-12 mb-8 md:mb-14 shadow-[0_0_30px_rgba(153,232,20,0.1)] text-center break-words">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#99E814] to-transparent opacity-50"></div>
+                                <span class="inline-block py-1 px-4 md:px-5 rounded-full bg-[#99E814]/10 text-[#99E814] border border-[#99E814]/20 font-mono text-[9px] sm:text-xs md:text-sm tracking-widest uppercase mb-4 md:mb-6">Giorno 1</span>
+                                <h1 class="text-3xl sm:text-5xl md:text-6xl font-black uppercase tracking-tighter text-white mb-2 md:mb-4 drop-shadow-md leading-tight">Differenza <br class="block sm:hidden"><span class="text-transparent bg-clip-text bg-gradient-to-r from-[#99E814] to-[#7bbd10]">Strutturale</span></h1>
+                                <p class="text-[#24A1DE] font-bold text-xs sm:text-sm md:text-base tracking-widest uppercase mt-4">Bookmaker vs Exchange</p>
+                            </div>
+
+                            <div class="space-y-4 sm:space-y-6 md:space-y-8 text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed sm:leading-loose">
+                                <p>Il Bookmaker tradizionale agisce come tua controparte diretta: se tu vinci, lui perde. Questo genera un conflitto di interessi intrinseco, motivo per cui i giocatori profittevoli vengono sistematicamente limitati (pratica nota come <span class="text-[#24A1DE] font-bold bg-[#24A1DE]/10 px-1.5 py-0.5 rounded break-keep">Gubbing</span>).</p>
+                                <p>Nell'Exchange, al contrario, si opera in un mercato <span class="text-[#99E814] font-bold bg-[#99E814]/10 px-1.5 py-0.5 rounded break-keep">peer-to-peer</span>. La piattaforma funge da intermediario neutrale, trattenendo una piccola commissione unicamente sulle vincite nette.</p>
+                            </div>
+
+                            <div class="my-10 md:my-16 relative p-[1px] rounded-2xl md:rounded-[2rem] bg-gradient-to-b from-[#99E814]/40 via-[#99E814]/5 to-transparent w-full">
+                                <div class="bg-[#050a05] rounded-[15px] md:rounded-[31px] p-6 sm:p-8 md:p-12 flex flex-col items-center justify-center w-full">
+                                    <div class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-[#99E814]/10 flex items-center justify-center mb-4 md:mb-6 border border-[#99E814]/30 shadow-[0_0_15px_rgba(153,232,20,0.2)] shrink-0">
+                                        <span class="text-xl md:text-2xl">🧮</span>
+                                    </div>
+                                    <h3 class="font-black text-white text-sm sm:text-lg md:text-xl tracking-widest uppercase mb-4 md:mb-6 text-center w-full break-words">La Formula (Punta)</h3>
+                                    <div class="bg-[#0a140f] border border-[#99E814]/20 px-3 sm:px-5 md:px-8 py-4 md:py-6 rounded-xl shadow-inner w-full text-center overflow-x-auto">
+                                        <code class="text-[#99E814] font-mono font-bold text-xs sm:text-[15px] md:text-lg whitespace-nowrap block w-full text-center">Netto = [ Stake × (Quota - 1) ] × (1 - Comm.)</code>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-10 md:mb-16 w-full">
+                                <h4 class="flex items-center justify-center md:justify-start text-white font-black text-sm sm:text-lg md:text-xl uppercase tracking-widest mb-6 md:mb-8 w-full break-words">
+                                    <span class="w-1.5 h-6 md:h-8 bg-[#24A1DE] mr-3 rounded-sm shadow-[0_0_10px_rgba(36,161,222,0.5)] shrink-0"></span> Legenda Tecnica
+                                </h4>
+                                <div class="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 w-full">
+                                    <div class="flex flex-row md:flex-col items-center md:items-center p-4 sm:p-5 md:p-6 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#99E814]/30 transition-colors duration-300">
+                                        <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#99E814]/10 flex items-center justify-center shrink-0 mr-4 md:mr-0 md:mb-4 border border-[#99E814]/20 text-lg md:text-xl">💰</div>
+                                        <div class="text-left md:text-center w-full">
+                                            <strong class="text-[#99E814] block text-[10px] sm:text-xs md:text-sm uppercase tracking-widest mb-1.5">Stake</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Il capitale puntato e immesso a mercato.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row md:flex-col items-center md:items-center p-4 sm:p-5 md:p-6 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-red-500/30 transition-colors duration-300">
+                                        <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-red-500/10 flex items-center justify-center shrink-0 mr-4 md:mr-0 md:mb-4 border border-red-500/20 text-lg md:text-xl">⚖️</div>
+                                        <div class="text-left md:text-center w-full">
+                                            <strong class="text-red-400 block text-[10px] sm:text-xs md:text-sm uppercase tracking-widest mb-1.5">Liability</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">Il rischio effettivo come creatore del mercato.</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row md:flex-col items-center md:items-center p-4 sm:p-5 md:p-6 bg-[#0a110a] border border-[#112211] rounded-xl hover:border-[#24A1DE]/30 transition-colors duration-300">
+                                        <div class="w-10 h-10 md:w-14 md:h-14 rounded-full bg-[#24A1DE]/10 flex items-center justify-center shrink-0 mr-4 md:mr-0 md:mb-4 border border-[#24A1DE]/20 text-lg md:text-xl">📊</div>
+                                        <div class="text-left md:text-center w-full">
+                                            <strong class="text-[#24A1DE] block text-[10px] sm:text-xs md:text-sm uppercase tracking-widest mb-1.5">Commissione</strong>
+                                            <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">La fee pagata, applicata solo sulle vincite nette.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3 class="text-lg sm:text-xl md:text-2xl font-black mt-12 md:mt-20 mb-6 text-center uppercase tracking-widest text-white w-full break-words">Mindset del Trader</h3>
+                            <p class="text-justify md:text-center leading-relaxed mb-8 md:mb-12 text-sm sm:text-base md:text-lg text-gray-300 max-w-3xl mx-auto">Il trader non tifa: sfrutta l'inefficienza. Se il cuore batte forte, la tua <span class="text-[#24A1DE] font-bold">size</span> è troppo grande. La matematica non ha battito cardiaco.</p>
+
+                            <blockquote class="relative p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-[2rem] bg-gradient-to-br from-[#0a140f] to-[#050a05] border border-[#99E814]/20 my-8 md:my-12 shadow-2xl overflow-hidden w-full">
+                                <div class="absolute -top-4 -right-4 md:-top-8 md:-right-8 text-7xl md:text-9xl text-[#99E814]/10 font-serif leading-none">"</div>
+                                <p class="text-gray-300 italic text-sm sm:text-base md:text-xl leading-relaxed font-medium relative z-10 text-center break-words">
+                                    Il mercato non ha opinioni, ha solo prezzi; il trader segue la liquidità.<br><br>
+                                    <span class="text-[#99E814] font-bold">Senza volumi non vi è trading, ma solo azzardo.</span>
+                                </p>
+                            </blockquote>
+                            ${footerLogoHTML}
+                        </div>
+                    `
                 }
             };
 
-            let State = { lang: 'it', xp: 0, currentQuizStep: 0, quizCompleted: false };
+            let State = { lang: 'en', xp: 0, currentQuizStep: 0, quizCompleted: false };
 
             const UIManager = {
                 setLanguage: (lang) => {
@@ -775,7 +717,6 @@
                     State.lang = targetLang;
                     document.documentElement.lang = targetLang;
                     
-                    // Aggiorna lo stato visivo delle bandiere
                     document.querySelectorAll('.lang-flag').forEach(btn => {
                         if(btn.getAttribute('data-lang') === targetLang) {
                             btn.classList.add('active');
@@ -850,7 +791,7 @@
                     const letters = ['A', 'B', 'C'];
                     qData.opts.forEach((opt, index) => {
                         optsHtml += `
-                        <button id="quiz-opt-${index}" onclick="checkAnswer(${index})" class="wwtbam-btn w-full p-4 sm:p-5 text-left flex items-center text-[13px] sm:text-sm md:text-base font-bold text-gray-200 touch-manipulation group min-h-[60px]">
+                        <button id="quiz-opt-${index}" onclick="checkAnswer(${index})" class="wwtbam-btn w-full p-4 sm:p-5 text-left flex items-center text-[13px] sm:text-sm md:text-base font-bold text-gray-200 touch-manipulation group min-h-[60px] h-auto">
                             <span class="text-[#d4af37] text-lg sm:text-xl mr-3 sm:mr-4 font-black w-6 text-center drop-shadow-[0_0_5px_rgba(212,175,55,0.5)] shrink-0">${letters[index]}:</span> 
                             <span class="flex-1 drop-shadow-md group-hover:text-white transition-colors leading-snug break-words">${opt}</span>
                         </button>`;
@@ -934,11 +875,17 @@
 
             return {
                 init: () => {
-                    let initialLang = 'it';
+                    const supportedLangs = ['en', 'es', 'pt', 'it'];
+                    
+                    // 1. Legge la lingua del browser
+                    let browserLang = (navigator.language || navigator.userLanguage).substring(0, 2).toLowerCase();
+                    let initialLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
+
+                    // 2. Controlla se c'è un salvataggio precedente (sovrascrive il browser se l'utente l'ha cambiata manualmente prima)
                     try { 
                         const savedData = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY));
                         if (savedData) {
-                            if (savedData.lang) initialLang = savedData.lang;
+                            if (savedData.lang && supportedLangs.includes(savedData.lang)) initialLang = savedData.lang;
                             if (savedData.xp) State.xp = savedData.xp;
                             if (savedData.currentQuizStep) State.currentQuizStep = savedData.currentQuizStep;
                             if (savedData.quizCompleted) State.quizCompleted = savedData.quizCompleted;
